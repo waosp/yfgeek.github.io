@@ -3,47 +3,14 @@
 <head>
     <meta charset="utf-8">
     
-    <title>这是一个测试 | Hexo</title>
+    <title>Tag:  - 转载 - Tool | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="#介绍
-这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。
-#依赖
-
-Adafruit_DHT
-Adafruit_CharLCD
-Nginx/Apache (请自行提前安装)
-
-###安装依赖
-123456789sudo apt-get updatesudo apt-get install build-essential python-dev python-sm">
-<meta property="og:type" content="article">
-<meta property="og:title" content="这是一个测试">
-<meta property="og:url" content="http://yoursite.com/2016/09/11/这是一个测试/index.html">
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Hexo">
+<meta property="og:url" content="http://yoursite.com/tags/转载-Tool/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#介绍
-这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。
-#依赖
-
-Adafruit_DHT
-Adafruit_CharLCD
-Nginx/Apache (请自行提前安装)
-
-###安装依赖
-123456789sudo apt-get updatesudo apt-get install build-essential python-dev python-sm">
-<meta property="og:image" content="http://log.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg">
-<meta property="og:updated_time" content="2016-09-11T14:38:00.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="这是一个测试">
-<meta name="twitter:description" content="#介绍
-这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。
-#依赖
-
-Adafruit_DHT
-Adafruit_CharLCD
-Nginx/Apache (请自行提前安装)
-
-###安装依赖
-123456789sudo apt-get updatesudo apt-get install build-essential python-dev python-sm">
-<meta name="twitter:image" content="http://log.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg">
+<meta name="twitter:title" content="Hexo">
     
 
     
@@ -236,166 +203,107 @@ Nginx/Apache (请自行提前安装)
 </aside>
 
             
-            <section id="main"><article id="post-这是一个测试" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
+            <section id="main">
+<div class="timeline timeline-wrap">
+    <div class="timeline-row timeline-row-major">
+        <span class="node"><i class="fa fa-tag"></i></span>
+        <h1 class="title"># - 转载 - Tool</h1>
+    </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
                 
     
-        <h1 class="article-title" itemprop="name">
-            这是一个测试
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2016/07/29/emacs-da-quan/">Emacs 命令大全</a>
         </h1>
     
 
-                
-                    <div class="article-meta">
-                        
+                <div class="article-meta">
+                    
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2016/09/11/这是一个测试/">
-            <time datetime="2016-09-11T14:15:49.000Z" itemprop="datePublished">2016-09-11</time>
+        <a href="/2016/07/29/emacs-da-quan/">
+            <time datetime="2016-07-28T18:10:07.000Z" itemprop="datePublished">2016-07-29</time>
         </a>
     </div>
 
 
-                        
-                        
-                    </div>
-                
-            </header>
-        
-        
-        <div class="article-entry" itemprop="articleBody">
-        
-            
-            <p>#介绍</p>
-<p>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。</p>
-<p>#依赖</p>
-<ul>
-<li>Adafruit_DHT</li>
-<li>Adafruit_CharLCD</li>
-<li>Nginx/Apache (请自行提前安装)</li>
-</ul>
-<p>###安装依赖</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install build-essential python-dev python-smbus python-pip</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_DHT.git</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_DHT</div><div class="line">sudo python setup.py install</div><div class="line">sudo pip install RPi.GPIO</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_CharLCD</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_CharLCD</div><div class="line">sudo python setup.py install</div></pre></td></tr></table></figure>
-<p>#安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html</div><div class="line">git <span class="built_in">clone</span>  https://github.com/yfgeek/rpi-TempRuntime.git</div></pre></td></tr></table></figure>
-<p>#运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html/rpi-TempRuntime</div><div class="line">python LCD.py</div></pre></td></tr></table></figure>
-<p>#截图</p>
-<p><img src="http://log.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg" alt=""></p>
+                    
+                    
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/转载-Tool/"> - 转载 - Tool</a>
+    </div>
 
-        
+                </div>
+            </div>
         </div>
-        <footer class="article-footer">
-            <div class="share-container">
-
-
-
-</div>
-
-    <a data-url="http://yoursite.com/2016/09/11/这是一个测试/" data-id="cisyqaz8x000o5vs5o9o8khi6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
     
-        <a href="http://yoursite.com/2016/09/11/这是一个测试/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/这是一个测试/">Comments</a>
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
+                
+    
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2016/07/28/vimda-quan/">Vim 命令大全</a>
+        </h1>
     
 
-        </footer>
-    </div>
-    
-        
-<nav id="article-nav">
-    
-    
-        <a href="/2016/09/11/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Hello World</div>
+                <div class="article-meta">
+                    
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/07/28/vimda-quan/">
+            <time datetime="2016-07-28T02:16:13.000Z" itemprop="datePublished">2016-07-28</time>
         </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    <section id="comments">
-    
-        
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
     </div>
 
-    
-    </section>
 
+                    
+                    
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/转载-Tool/"> - 转载 - Tool</a>
+    </div>
+
+                </div>
+            </div>
+        </div>
+    
+        <div class="timeline-row">
+            <span class="node"></span>
+            <div class="content">
+                
+    
+        <h1 itemprop="name">
+            <a class="timeline-article-title" href="/2016/07/28/iterm2-mei-hua-quan-guo-cheng/">iTerm2 美化全过程</a>
+        </h1>
+    
+
+                <div class="article-meta">
+                    
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/07/28/iterm2-mei-hua-quan-guo-cheng/">
+            <time datetime="2016-07-28T01:49:20.000Z" itemprop="datePublished">2016-07-28</time>
+        </a>
+    </div>
+
+
+                    
+                    
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/转载-Tool/"> - 转载 - Tool</a>
+    </div>
+
+                </div>
+            </div>
+        </div>
+    
+</div>
 </section>
             
                 <aside id="sidebar">
@@ -568,13 +476,11 @@ Nginx/Apache (请自行提前安装)
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'http://yoursite.com/2016/09/11/这是一个测试/';
-        
-        this.page.identifier = '这是一个测试';
+        this.page.identifier = 'undefined';
     };
     (function() { 
         var d = document, s = d.createElement('script');  
-        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/count.js';
         s.setAttribute('data-timestamp', +new Date());
         (d.head || d.body).appendChild(s);
     })();

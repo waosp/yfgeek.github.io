@@ -3,47 +3,51 @@
 <head>
     <meta charset="utf-8">
     
-    <title>这是一个测试 | Hexo</title>
+    <title>用树莓派把蓝牙音响变成Airplay音响 | Hexo</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="#介绍
-这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。
-#依赖
+    <meta name="description" content="#前言最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。于是萌生了一个想法，正好手上有个树莓派，能不能这样：
 
-Adafruit_DHT
-Adafruit_CharLCD
-Nginx/Apache (请自行提前安装)
+iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱
 
-###安装依赖
-123456789sudo apt-get updatesudo apt-get install build-essential python-dev python-sm">
+
+因此这个问题可以分为两个部分：
+
+1.树莓派蓝牙音频配置部分
+2.树莓派Airplay播放部分
+
+在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="这是一个测试">
-<meta property="og:url" content="http://yoursite.com/2016/09/11/这是一个测试/index.html">
+<meta property="og:title" content="用树莓派把蓝牙音响变成Airplay音响">
+<meta property="og:url" content="http://yoursite.com/2016/08/07/airplay/index.html">
 <meta property="og:site_name" content="Hexo">
-<meta property="og:description" content="#介绍
-这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。
-#依赖
+<meta property="og:description" content="#前言最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。于是萌生了一个想法，正好手上有个树莓派，能不能这样：
 
-Adafruit_DHT
-Adafruit_CharLCD
-Nginx/Apache (请自行提前安装)
+iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱
 
-###安装依赖
-123456789sudo apt-get updatesudo apt-get install build-essential python-dev python-sm">
-<meta property="og:image" content="http://log.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg">
-<meta property="og:updated_time" content="2016-09-11T14:38:00.000Z">
+
+因此这个问题可以分为两个部分：
+
+1.树莓派蓝牙音频配置部分
+2.树莓派Airplay播放部分
+
+在">
+<meta property="og:image" content="http://yoursite.com/content/images/2016/08/DSC07326-5.JPG">
+<meta property="og:image" content="http://yoursite.com/content/images/2016/08/IMG_0635.PNG">
+<meta property="og:updated_time" content="2016-08-07T15:28:30.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="这是一个测试">
-<meta name="twitter:description" content="#介绍
-这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。
-#依赖
+<meta name="twitter:title" content="用树莓派把蓝牙音响变成Airplay音响">
+<meta name="twitter:description" content="#前言最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。于是萌生了一个想法，正好手上有个树莓派，能不能这样：
 
-Adafruit_DHT
-Adafruit_CharLCD
-Nginx/Apache (请自行提前安装)
+iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱
 
-###安装依赖
-123456789sudo apt-get updatesudo apt-get install build-essential python-dev python-sm">
-<meta name="twitter:image" content="http://log.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg">
+
+因此这个问题可以分为两个部分：
+
+1.树莓派蓝牙音频配置部分
+2.树莓派Airplay播放部分
+
+在">
+<meta name="twitter:image" content="http://yoursite.com/content/images/2016/08/DSC07326-5.JPG">
     
 
     
@@ -236,7 +240,7 @@ Nginx/Apache (请自行提前安装)
 </aside>
 
             
-            <section id="main"><article id="post-这是一个测试" class="article article-type-post" itemscope itemprop="blogPost">
+            <section id="main"><article id="post-airplay" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -244,7 +248,7 @@ Nginx/Apache (请自行提前安装)
                 
     
         <h1 class="article-title" itemprop="name">
-            这是一个测试
+            用树莓派把蓝牙音响变成Airplay音响
         </h1>
     
 
@@ -253,14 +257,19 @@ Nginx/Apache (请自行提前安装)
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2016/09/11/这是一个测试/">
-            <time datetime="2016-09-11T14:15:49.000Z" itemprop="datePublished">2016-09-11</time>
+        <a href="/2016/08/07/airplay/">
+            <time datetime="2016-08-07T13:23:56.000Z" itemprop="datePublished">2016-08-07</time>
         </a>
     </div>
 
 
                         
                         
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/原创-树莓派/"> - 原创 - 树莓派</a>
+    </div>
+
                     </div>
                 
             </header>
@@ -269,22 +278,61 @@ Nginx/Apache (请自行提前安装)
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>#介绍</p>
-<p>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。</p>
-<p>#依赖</p>
+            <p><img data-url="/content/images/2016/08/DSC07326-5.JPG" class="lazy cover" alt="cover"></p>
+<p>#前言<br>最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。<br>于是萌生了一个想法，正好手上有个树莓派，能不能这样：</p>
+<blockquote>
+<p>iOS设备-&gt;Airplay-&gt;树莓派-&gt;蓝牙-&gt;小米蓝牙音箱</p>
+</blockquote>
+<p><img src="/content/images/2016/08/DSC07326-5.JPG" alt=""></p>
+<p>因此这个问题可以分为两个部分：</p>
 <ul>
-<li>Adafruit_DHT</li>
-<li>Adafruit_CharLCD</li>
-<li>Nginx/Apache (请自行提前安装)</li>
+<li>1.树莓派蓝牙音频配置部分</li>
+<li>2.树莓派Airplay播放部分</li>
 </ul>
-<p>###安装依赖</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install build-essential python-dev python-smbus python-pip</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_DHT.git</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_DHT</div><div class="line">sudo python setup.py install</div><div class="line">sudo pip install RPi.GPIO</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_CharLCD</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_CharLCD</div><div class="line">sudo python setup.py install</div></pre></td></tr></table></figure>
-<p>#安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html</div><div class="line">git <span class="built_in">clone</span>  https://github.com/yfgeek/rpi-TempRuntime.git</div></pre></td></tr></table></figure>
-<p>#运行</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html/rpi-TempRuntime</div><div class="line">python LCD.py</div></pre></td></tr></table></figure>
-<p>#截图</p>
-<p><img src="http://log.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg" alt=""></p>
+<p>在解决这个问题的时候，我走了不少弯路，错路，目前网上没有完整的这个问题的解决方案，此文目的正是填补网络空白。</p>
+<p>#原料</p>
+<ul>
+<li>树莓派3</li>
+<li>小米蓝牙音箱</li>
+<li>iOS设备</li>
+</ul>
+<p>#开始</p>
+<p>##树莓派安装Shairport Sync<br>Shairport Sync实际上是Shairport的修改版，负责让树莓派发射出稳定的Airplay，之前我一直在使用Shairport，偶然间发现这个神器，让Shairport更加稳定好用，而且加入到系统进程，开机即打开Airplay。<br>安装前请确认是否安装以下依赖包：</p>
+<ul>
+<li><code>apt-get install build-essential git</code></li>
+<li><code>apt-get install autoconf automake libtool libdaemon-dev libasound2-dev libpopt-dev libconfig-dev</code></li>
+<li><code>apt-get install avahi-daemon libavahi-client-dev</code> </li>
+<li><code>apt-get install libssl-dev</code> </li>
+<li><code>apt-get install libpolarssl-dev</code> </li>
+<li><code>apt-get install libsoxr-dev</code> </li>
+</ul>
+<p>随后下载Shairport Sync：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/mikebrady/shairport-sync.git</div></pre></td></tr></table></figure></p>
+<p>然后<code>cd</code>到相应目录，执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">autoreconf -i <span class="_">-f</span></div></pre></td></tr></table></figure></p>
+<p>随后执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd</div></pre></td></tr></table></figure></p>
+<p>如果没问题的话，可以make了，此时该去洗手间去洗手间，该睡觉睡觉：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make</div></pre></td></tr></table></figure></p>
+<p>创建开机启动：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">getent group shairport-sync &amp;&gt;/dev/null || sudo groupadd -r shairport-sync &gt;/dev/null</div><div class="line"></div><div class="line">getent passwd shairport-sync &amp;&gt; /dev/null || sudo useradd -r -M -g shairport-sync <span class="_">-s</span> /usr/bin/nologin -G audio shairport-sync &gt;/dev/null</div></pre></td></tr></table></figure></p>
+<p>然后运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<p>最后输入，完成安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo update-rc.d shairport-sync defaults 90 10</div></pre></td></tr></table></figure></p>
+<p>##树莓派安装蓝牙<br>打开终端，用普通用户权限执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get updgrade -y</div><div class="line">sudo apt-get dist-upgrade -y</div></pre></td></tr></table></figure></p>
+<p>随后安装蓝牙及管理软件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pi-bluetooth bluez bluez-firmware blueman</div></pre></td></tr></table></figure></p>
+<p>将pi用户添加到蓝牙组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo usermod -G bluetooth <span class="_">-a</span> pi</div></pre></td></tr></table></figure></p>
+<p>还有很<strong>重要</strong>的一条，安装蓝牙音频配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pulseaudio pulseaudio-module-bluetooth</div></pre></td></tr></table></figure></p>
+<p>随后重启一次树莓派，开机，在图形化界面中配对蓝牙，操作比较简单，记得在配对成功后对设备进行连接，省略。<br>也可通过bluetoothctl或hictool命令进行配对。<br>随后记下蓝牙设备的地址，XX:XX:XX:XX:XX:XX格式。</p>
+<p><strong>在此步，务必通过测试音频是否能够正常与蓝牙设备通信，记得软件中要勾选蓝牙设备，否则将从3.5mm端口输出音频。推荐使用vlc播放器。</strong></p>
+<p>##配置蓝牙音频及Shariport Sync<br>安装依赖包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install libdbus-1-dev</div><div class="line">sudo apt-get install libglib2.0-dev</div><div class="line">apt-cache search libasound</div><div class="line">sudo apt-get install libasound2-dev</div></pre></td></tr></table></figure></p>
+<p>配置及重新安装最新版bluez，此刻可以去洗手间和睡觉觉：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://www.kernel.org/pub/linux/bluetooth/bluez-4.101.tar.xz</div><div class="line">tar -xvf bluez-4.101.tar.xz</div><div class="line"><span class="built_in">cd</span> bluez-4.101</div><div class="line">./configure --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var --libexecdir=/lib</div><div class="line">make</div><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<p>复制配置文件到目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo cp /home/pi/bluez-4.101/<span class="built_in">test</span>/simple-agent /usr/bin/bluez-simple-agent</div><div class="line">sudo cp /home/pi/bluez-4.101/<span class="built_in">test</span>/<span class="built_in">test</span>-device /usr/bin/bluez-test-device</div><div class="line">sudo cp /home/pi/bluez-4.101/<span class="built_in">test</span>/<span class="built_in">test</span>-audio /usr/bin/bluez-test-audio</div><div class="line">sudo cp /home/pi/bluez-4.101/audio/audio.conf /etc/bluetooth/</div></pre></td></tr></table></figure></p>
+<p>接着运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install python-dbus</div><div class="line">sudo apt-get install python-gobject</div><div class="line">sudo cp /usr/lib/alsa-lib/libasound_module_pcm_bluetooth.so /usr/lib/arm-linux-gnueabihf/alsa-lib/</div></pre></td></tr></table></figure></p>
+<p>编辑audio.conf文件使shariport的音频从蓝牙设备输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/bluetooth/audio.conf</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在[General]区域添加:</span></div><div class="line">Enable=Sink,Socket</div><div class="line"><span class="comment"># 取消[A2DP]注释，并加入:</span></div><div class="line">Maxconnections=4</div></pre></td></tr></table></figure>
+<p>打开蓝牙自启动:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl <span class="built_in">enable</span> bluetooth</div></pre></td></tr></table></figure></p>
+<p>重启设备后，继续配置，打开asund.conf文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/asound.conf</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">pcm.bt_canz &#123;</div><div class="line">type plug</div><div class="line">slave &#123;</div><div class="line">pcm &#123;</div><div class="line">type bluetooth</div><div class="line">device XX:XX:XX:XX:XX:XX</div><div class="line">profile <span class="string">"auto"</span></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">hint &#123;</div><div class="line">show on</div><div class="line">description <span class="string">"Mi Speaker"</span></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">ctl.bt_canz &#123;</div><div class="line">type bluetooth</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试bluez能否使用：<code>sudo bluez-simple-agent</code>，如果正常，按ctrl+c停止。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo bluez-simple-agent hci0 XX:XX:XX:XX:XX:XX</div><div class="line">sudo bluez-test-audio connect XX:XX:XX:XX:XX:XX</div></pre></td></tr></table></figure></p>
+<p>测试是否连通：<code>speaker-test -c 2 -D bt_canz</code></p>
+<p>再次重启设备。<br>开启后编辑<code>/etc/shairport-sync.conf</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/shairport-sync.conf</div><div class="line"><span class="comment">#去掉下面的注释，并加入bt_canz</span></div><div class="line">output_device = bt_canz</div></pre></td></tr></table></figure></p>
+<p>保存！重启！开机即可用。<br><img src="/content/images/2016/08/IMG_0635.PNG" alt=""></p>
+<p>#参考文章<br><a href="https://github.com/mikebrady/shairport-sync/issues/200" target="_blank" rel="external">https://github.com/mikebrady/shairport-sync/issues/200</a><br><a href="https://github.com/mikebrady/shairport-sync" target="_blank" rel="external">https://github.com/mikebrady/shairport-sync</a><br><a href="http://shumeipai.nxez.com/2014/12/10/raspberry-pi-using-airplay-wireless-audio-playback-achieve-even-putting-wifi.html" target="_blank" rel="external">http://shumeipai.nxez.com/2014/12/10/raspberry-pi-using-airplay-wireless-audio-playback-achieve-even-putting-wifi.html</a><br><a href="http://wangye.org/blog/archives/921/" target="_blank" rel="external">http://wangye.org/blog/archives/921/</a><br><a href="http://blog.csdn.net/huayucong/article/details/51376461" target="_blank" rel="external">http://blog.csdn.net/huayucong/article/details/51376461</a><br><a href="http://blog.csdn.net/zhaoqi_0612/article/details/47731821" target="_blank" rel="external">http://blog.csdn.net/zhaoqi_0612/article/details/47731821</a><br><a href="http://blog.csdn.net/techtitan/article/details/6165116" target="_blank" rel="external">http://blog.csdn.net/techtitan/article/details/6165116</a><br><a href="http://www.eeboard.com/bbs/forum.php?mod=viewthread&amp;tid=45040&amp;page=1" target="_blank" rel="external">http://www.eeboard.com/bbs/forum.php?mod=viewthread&amp;tid=45040&amp;page=1</a></p>
 
         
         </div>
@@ -295,7 +343,7 @@ Nginx/Apache (请自行提前安装)
 
 </div>
 
-    <a data-url="http://yoursite.com/2016/09/11/这是一个测试/" data-id="cisyqaz8x000o5vs5o9o8khi6" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2016/08/07/airplay/" data-id="cisyqaz8y000q5vs5czz6jrro" class="article-share-link"><i class="fa fa-share"></i>Share</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -363,7 +411,7 @@ Nginx/Apache (请自行提前安装)
 
             
     
-        <a href="http://yoursite.com/2016/09/11/这是一个测试/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/这是一个测试/">Comments</a>
+        <a href="http://yoursite.com/2016/08/07/airplay/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/08/07/airplay/">Comments</a>
     
 
         </footer>
@@ -372,10 +420,19 @@ Nginx/Apache (请自行提前安装)
         
 <nav id="article-nav">
     
+        <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" id="article-nav-newer" class="article-nav-link-wrap">
+            <strong class="article-nav-caption">Newer</strong>
+            <div class="article-nav-title">
+                
+                    海外App生存指南
+                
+            </div>
+        </a>
     
-        <a href="/2016/09/11/hello-world/" id="article-nav-older" class="article-nav-link-wrap">
+    
+        <a href="/2016/08/06/bash/" id="article-nav-older" class="article-nav-link-wrap">
             <strong class="article-nav-caption">Older</strong>
-            <div class="article-nav-title">Hello World</div>
+            <div class="article-nav-title">常用Bash命令总结</div>
         </a>
     
 </nav>
@@ -568,9 +625,9 @@ Nginx/Apache (请自行提前安装)
     <script>
     var disqus_config = function () {
         
-            this.page.url = 'http://yoursite.com/2016/09/11/这是一个测试/';
+            this.page.url = 'http://yoursite.com/2016/08/07/airplay/';
         
-        this.page.identifier = '这是一个测试';
+        this.page.identifier = 'airplay';
     };
     (function() { 
         var d = document, s = d.createElement('script');  

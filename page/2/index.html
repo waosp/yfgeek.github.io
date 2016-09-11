@@ -241,113 +241,10 @@
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <p><img data-url="" class="lazy cover" alt="cover"><br><strong>emacs命令</strong>是由GNU组织的创始人Richard Stallman开发的一个功能强大的全屏文本编辑器，它支持多种编程语言，具有很多优良的特性。有众多的系统管理员和软件开发者使用emacs。</p>
-<h3 id="语法"><a href="#语法" class="headerlink" title="语法"></a>语法</h3><p>emacs(选项)(参数)</p>
-<p>###选项</p>
-<pre>+&lt;行号&gt;：启动emacs编辑器，并将光标移动到制定行号的行；
--q：启动emacs编辑器，而不加载初始化文件；
--u&lt;用户&gt;：启动emacs编辑器时，加载指定用户的初始化文件；
--t&lt;文件&gt;：启动emacs编辑器时，把指定的文件作为中端，不适用标准输入（stdin）与标准输出（stdout）；
--f&lt;函数&gt;：执行指定lisp（广泛应用于人工智能领域的编程语言）函数；
--l&lt;lisp代码文件&gt;：加载指定的lisp代码文件；
--<span class="wp_keywordlink">[batch](http://man.linuxde.net/batch "batch命令")：以批处理模式运行emacs编辑器。</span></pre>
-
-<p>###参数<br>    文件：指定要编辑的文本文件。</p>
-<p>###emacs命令操作大全</p>
-<p>基本命令</p>
-<pre>C-x C-c : 退出Emacs
-C-x C-f : 打开一个文件，如果文件不存在，则创建一个文件
-C-g : 取消未完成的命令</pre>
-
-<p>编辑</p>
-<pre>C-z (redefined): Undo；原来C-z是挂起Emacs（然后用<span class="wp_keywordlink">[fg](http://man.linuxde.net/fg "fg命令")</span>命令调出）；C-x u 是默认的命令； 移动一下光标，再C-z就可以redo
-M-d : 删除光标后的词语</pre>
-
-<p>移动光标</p>
-<pre>C-v : 向前翻页
-M-v : 向后翻页
-M-r : 将光标移动到屏幕中间那行
-C-a : 移到行首
-M-a : 移到句首，从行首到句首之间可能有空格
-C-e : 移到行尾
-M-e : 移到句尾
-M-{ : 向上移动一段
-M-} : 向下移动一段
-C-right : 向前移动一个单词
-C-left : 向后移动一个单词
-C-up : 向前移动一段
-C-down : 向后移动一段
-M-&lt; : 移到整个文本开头
-M-&gt; : 移到整个文本末尾
-C-u 数字 命令 : 执行多次(数字表示次数)该命令；"M-数字 命令" 也可以
-M-x goto-line : 移动到某一行
-C-l : 重绘屏幕，效果就是当前编辑行移动窗口中央</pre>
-
-<p>Buffer 相关</p>
-<pre>C-x k : 关闭当前buffer
-C-x b : 切换到前一个编辑的buffer
-C-x C-b : 列出当前所有buffer
-C-x C-s : 保存当前buffer
-C-x s : 保存所有未保存的buffer，会提示你是否需要保存
-C-x C-<span class="wp_keywordlink">[w](http://man.linuxde.net/w "w命令")</span> : 文件另存为</pre>
-
-<p>拷贝与粘贴</p>
-<pre>M-space (redefined): 设置mark; C-@ 是默认命令
-C-w (redefined) : 剪切一块区域；如果没有设置mark，则是剪切一行
-M-w (redefined) : 拷贝一块区域；如果没有设置mark, 则是拷贝一行
-C-k : 从当前位置剪切到行尾
-C-y : 粘贴
-M-y : 用C-y拉回最近被除去的文本后，换成 M-y可以拉回以前被除去的文本。键入多次的M-y可以拉回更早以前被除去的文本。
-C-x r k : 执行矩形区域的剪切
-C-x r y : 执行矩形区域的粘贴</pre>
-<pre>窗口操作
-C-x 0 : 关闭当前窗口
-C-x 1 : 将当前窗口最大化
-C-x 2 : 垂直分割窗口
-C-x 3 : 水平分割窗口
-M-o (redefined) : 在窗口之间切换; C-x o 是默认命令
-C-x 5 1/2/3/0 : 对frame类似的操作
-C-x &lt; : 窗口内容右卷
-C-x &gt; : 窗口内容左卷（这两个命令在垂直分割窗口后比较有用）
-(C-u) C-x ^ : 加高当前窗口，如果有C-u，则每次加高4行
-(C-u) C-x } : 加宽当前窗口
-(C-u) C-x { : 压窄当前窗口
-ESC C-v : 在其它窗口进行卷屏操作</pre>
-
-<p>搜索和替换</p>
-<pre>C-s : 向前搜索（增量式搜索）；连续C-s，跳到下一个搜索到的目标
-C-s RET : 普通搜索
-C-r : 向前搜索
-C-s RET C-w : 按单词查询
-M-% : 查询替换，也就是替换前会询问一下
-M-x replace-string : 普通替换</pre>
-
-<p>Tags</p>
-<pre>M-! etags .c .h : 创建TAGS文件
-M-. : 跳到tag所在位置
-M-x list-tags : 列出tags</pre>
-
-<p>书签</p>
-<pre>C-x r m : 设置书签bookmark
-C-x r b : 跳到bookmark处</pre>
-
-<p>帮助</p>
-<pre>C-h ? : 查看帮助信息
-C-h f : 查看一个函数
-C-h v : 查看一个变量
-C-h k : 查看一个键绑定 (C－h c 也是查看键绑定，但是信息较简略)
-C-h C-f : 查看一个函数的<span class="wp_keywordlink">[info](http://man.linuxde.net/info "info命令")</span>，非常有用
-C-h i : 看Info</pre>
-
-<p>其它</p>
-<pre>C-M-\ : 对选中区域，按照某种格式(比如C程序)进行格式化
-C-x h : 全部选中
-M-! : 执行外部shell命令
-M-x shell : 模拟shell的buffer
-M-x term : 模拟terminal, C-c k 关闭terminal
-C-x C-q : 修改buffer的只读属性</pre>
-
+            <p><p><strong>emacs命令</strong>是由GNU组织的创始人Richard Stallman开发的一个功能强大的全屏文本编辑器，它支持多种编程语言，具有很多优良的特性。有众多的系统管理员和软件开发者使用emacs。<br></p>
+            <p class="article-more-link">
+                <a href="/2016/07/29/emacs-da-quan/#more">查看更多</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -357,7 +254,7 @@ C-x C-q : 修改buffer的只读属性</pre>
 
 </div>
 
-    <a data-url="http://my.yfgeek.com/2016/07/29/emacs-da-quan/" data-id="cisys7mp60002its5e37v8ju9" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://my.yfgeek.com/2016/07/29/emacs-da-quan/" data-id="cisysg8la0001kls5bzi07cou" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -472,82 +369,10 @@ C-x C-q : 修改buffer的只读属性</pre>
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <p><img data-url="/content/images/2016/07/stock-photo-132346157.jpg" class="lazy cover" alt="cover"><br>本文主要介绍了如何将一个虚拟机系统全局使用TOR技术，笔者所用操作系统为OS X EI Capitan 10.11.5，虚拟机系统为VMware Fusion专业版 8.1.1 (3771013)。</p>
-<p>声明！</p>
-<p>==本文原创，技术无罪，笔者即将身处海外，本文撰写目的<strong>仅为防止美国棱镜计划侵犯本人隐私安全，无其它任何用途</strong>。==</p>
-<p>==使用TOR技术请在遵守当地法律的前提下使用！本软件在中国大陆地区已被封锁，按照相关法律法规，禁止使用本软件。由于相关政策法律原因，<strong>不允许任何形式私自转载</strong>，本文只进行对TOR相关<strong>技术探讨</strong>，不涉及任何违法违规行为，请勿用于非法用途（如渗透服务器、非法扫描网段、不受监控的网络言论、不受监控的非法互联网通讯等），如出现上述等违法行为，请自负法律责任！==</p>
-<p><strong>准备条件</strong></p>
-<ul>
-<li><p>1.一个隧道(ssh,shadowsocks,socket5,http,vpn都可以)可以连接到真正的互联网，如果身处海外请无视此条。</p>
-</li>
-<li><p>2.最新版Vidalia <a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">下载地址</a>（需完整互联网）</p>
-</li>
-<li><p>3.Vmware Fusion/Vmware workstation/Oracle VirtualBox</p>
-</li>
-<li><p>4.一个完整版的虚拟机操作系统</p>
-</li>
-</ul>
-<p><strong>笔者环境</strong></p>
-<p>操作系统：OS X EI Capitan 10.11.5</p>
-<p>虚拟机软件：VMware Fusion专业版 8.1.1 (3771013)</p>
-<p>虚拟机操作系统：Windows xp sp2 或 Kali linux</p>
-<p>隧道软件：lantern 或 shadowsockets</p>
-<h3 id="Vidalia部分"><a href="#Vidalia部分" class="headerlink" title="Vidalia部分"></a>Vidalia部分</h3><p><em>如果你的网络未进行封锁，请忽略前2步，请跑步进入第3步。</em><br><img src="/content/images/2016/07/1-1.png" width="500px"><br><strong>1.建立您的隧道网络</strong></p>
-<p>笔者以shadowsocks为例，开启shadowsocks配置好信息后，无需做任何操作。shadowsocks的默认对外端口为1080。</p>
-<p><strong>2.在Vidalia中设置代理连接</strong></p>
-<p>打开Vidalia-设置-网络：我使用代理服务器连接网络</p>
-<p>地址：127.0.0.1 端口：1080（用户定义）</p>
-<p>类型：SOCKS 5<br><img src="/content/images/2016/07/1-2.png" alt=""></p>
-<p><strong>3.继续设置，转发出外网端口</strong></p>
-<p>Vidalia-设置-高级-编辑当前torrc：<br><img src="/content/images/2016/07/1-3.png" alt=""><br>确认socksport为9050，也可以定义为其他端口。<br>同时添加<code>SocksListenAddress 0.0.0.0:9050</code>到底部<br>保存</p>
-<p>笔者配置文件如下，仅供参考，不可复制：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># This file was generated by Tor; if you edit it, comments will not be preserved</span></div><div class="line"><span class="comment"># The old torrc file was renamed to torrc.orig.1 or similar, and Tor will ignore it</span></div><div class="line"></div><div class="line">ControlPort 9051</div><div class="line">DataDirectory /Users/ivan/.tor</div><div class="line">DirReqStatistics 0</div><div class="line">HashedControlPassword 16:此处隐藏</div><div class="line">Socks5Proxy 127.0.0.1:1080</div><div class="line">Log notice stdout</div><div class="line">SocksListenAddress 0.0.0.0:9050</div><div class="line">SocksPort 9050</div></pre></td></tr></table></figure>
-<p><br><img src="/content/images/2016/07/1-4.png" alt=""><br><strong>4.Vidalia启动TOR</strong></p>
-<p>稍等片刻，需要建立Tor回路，五分钟后，便会提示你连接成功。<br><img src="/content/images/2016/07/1-5.png" alt=""><br>随后可以通过使用Chrome的网络代理插件测试，通过ip测试可判断是否成功。如果ip地址每几分钟自动更新一次，且都是不同国家的，则说明TOR回路建立成功。<br><img src="/content/images/2016/07/2-2.png" alt=""><br><img src="/content/images/2016/07/2-1.png" alt=""></p>
-<h3 id="Vmware部分"><a href="#Vmware部分" class="headerlink" title="Vmware部分"></a>Vmware部分</h3><p><strong>1.设置Vmware，添加虚拟网卡</strong></p>
-<p>进入Vmware的偏好设置-网络，先点小锁，把功能解锁。</p>
-<p>然后点+，新建一个网络，<strong>警告：请勿勾选NAT</strong>。</p>
-<p><strong>勾选 将MAC主机连入该网络</strong></p>
-<p>同时设置 <strong>通过DHCP在该网络提供网络地址</strong>：</p>
-<pre>
-子网ip：172.16.225.0
-
-子网掩码：255.255.255.0
-</pre>
-
-<p><img src="/content/images/2016/07/1.jpg" alt=""><br><strong>2.在虚拟机系统的配置中，将网络适配器的上网方式改为vmnet2</strong></p>
-<p>虚拟机-设置-网络适配器-vmnet2，请再次确保无其他上网方式以保证绝对安全。<br><img src="/content/images/2016/07/2.jpg" alt=""></p>
-<h3 id="虚拟机部分-Win"><a href="#虚拟机部分-Win" class="headerlink" title="虚拟机部分(Win)"></a><strong>虚拟机部分(Win)</strong></h3><p><strong>1.进入操作系统</strong></p>
-<p>建议重新安装操作系统，以保证系统纯净性。<br><img src="/content/images/2016/07/4-1.jpg" alt=""><br><img src="/content/images/2016/07/5-pic_hd.jpg" alt=""></p>
-<p><strong>2.寻找宿主机ip</strong></p>
-<p>经过笔者的简单测试，宿主机ip为172.16.225.1<br><img src="/content/images/2016/07/6-pic_hd.jpg" alt=""><br>如果实在找不到，可用啊D工具箱或nmap等工具进行查找。</p>
-<p><strong>3.确认系统当前状态下不能上网，甚至局域网也不可通，检查网络连接中的网络适配器，禁用一切，仅保留本地连接</strong></p>
-<p><strong>4.安装Proxifier</strong></p>
-<p>Proxifier是一个全局代理软件，将socket端口流量转发到系统全局，十分好用稳定，值得推荐。</p>
-<p><strong>5.配置Proxifer</strong></p>
-<p>打开Proxifier-Profile-Proxy Servers，点击Add…<br><img src="/content/images/2016/07/7-pic_hd.jpg" alt=""></p>
-<p>随后保存并设置而为默认</p>
-<p><strong>6.测试网络</strong></p>
-<p>打开浏览器，对当前ip进行查询，ip会随着时间随机切换，不同国家。<br><img src="/content/images/2016/07/9-pic_hd.jpg" alt=""><br><img src="/content/images/2016/07/8-pic_hd.jpg" alt=""></p>
-<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>为了保证用户隐私的绝对安全，建议做到以下几点：</p>
-<ul>
-<li>在虚拟机系统下不要留下任何痕迹：<ul>
-<li>虚拟机操作系统系统语言设置为英语，地区为美国。</li>
-<li>虚拟机下的浏览器建议使用friefox或chrome，安装https everywhere、noscript等插件，在浏览器相关设置中设置禁止追踪等查看隐私行为。</li>
-<li>关机前清除系统隐私记录，养成良好习惯。</li>
-<li>能设置不保留记录的软件均设置如此。</li>
-<li>不要安装使用任何国产软件，尤其是任何国产音乐播放器、任何国产视频播放器，严禁使用360等任何管家、QQ、搜狗输入法、各种国产云盘，否则一定会前功尽弃。</li>
-<li>不要使用任何私人账户登录任何网站、任何软件，如有必要，建议现场注册新号码，不要自作聪明使用尘封已久的小号。</li>
-</ul>
-</li>
-<li>将虚拟机操作系统放在Truecrypt等加密软件的虚拟磁盘里，如果是Windows，建议开启Bitlocker，如果是MacOS，建议开启FileVault，同时将系统密码设置为与自己隐私无关的高强度密码。</li>
-<li>设置宿主机的BIOS密码，防止设备被盗隐私丢失，同时建议写好一键远程删除虚拟磁盘的sh脚本，以防重要文件泄露。</li>
-<li>进入TOR网络后，您将面临更大的网络威胁，因为TOR的网域中深藏全球各地的极客、大黑客、恐怖分子等危险人物，请更加注意保护虚拟机子系统安全以及文件安全。</li>
-</ul>
-<p><strong>特别鸣谢</strong></p>
-<p>感谢几年前@safe121提供的无私技术帮助</p>
-
+            <p><p>本文主要介绍了如何将一个虚拟机系统全局使用TOR技术，笔者所用操作系统为OS X EI Capitan 10.11.5，虚拟机系统为VMware Fusion专业版 8.1.1 (3771013)。<br></p>
+            <p class="article-more-link">
+                <a href="/2016/07/28/tor/#more">查看更多</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -557,7 +382,7 @@ C-x C-q : 修改buffer的只读属性</pre>
 
 </div>
 
-    <a data-url="http://my.yfgeek.com/2016/07/28/tor/" data-id="cisys7mpk0009its550v7fnpk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://my.yfgeek.com/2016/07/28/tor/" data-id="cisysg8li0004kls5eneyhdf0" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -673,7 +498,7 @@ C-x C-q : 修改buffer的只读属性</pre>
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p><img data-url="" class="lazy cover" alt="cover"></p>
+            <a id="more"></a> 
 <p>##<br><strong>进入vi的命令</strong></p>
 <p>vi filename :打开或新建文件，并将光标置于第一行首</p>
 <p>vi +n filename ：打开文件，并将光标置于第n行首</p>
@@ -771,7 +596,7 @@ C-x C-q : 修改buffer的只读属性</pre>
 
 </div>
 
-    <a data-url="http://my.yfgeek.com/2016/07/28/vimda-quan/" data-id="cisys7mph0006its5ghihtumu" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://my.yfgeek.com/2016/07/28/vimda-quan/" data-id="cisysg8ll0005kls5xgo4de8q" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -886,43 +711,10 @@ C-x C-q : 修改buffer的只读属性</pre>
         
         <div class="article-entry" itemprop="articleBody">
         
-            
-            <p><img data-url="" class="lazy cover" alt="cover"><br>本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。</p>
-<h3 id="1-首先下载-iTerm-2"><a href="#1-首先下载-iTerm-2" class="headerlink" title="1.首先下载 iTerm 2"></a>1.首先下载 iTerm 2</h3><h3 id="2-打开iTerm-2"><a href="#2-打开iTerm-2" class="headerlink" title="2.打开iTerm 2"></a>2.打开iTerm 2</h3><h3 id="3-输入下面指令安装oh-my-zsh"><a href="#3-输入下面指令安装oh-my-zsh" class="headerlink" title="3.输入下面指令安装oh-my-zsh"></a>3.输入下面指令安装oh-my-zsh</h3><p><code>curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh</code></p>
-<h3 id="4-接下来安装Powerline"><a href="#4-接下来安装Powerline" class="headerlink" title="4.接下来安装Powerline"></a>4.接下来安装Powerline</h3><p>在官网有教程，我们只需要执行官网第一条安装指令就行<br>如果你的终端能够正常执行pip指令，那么直接执行下面的指令可以完成安装</p>
-<p><code>pip install powerline-status</code></p>
-<p>如果没有，则先执行安装pip指令</p>
-<p><code>sudo easy_install pip</code></p>
-<h3 id="5-下载、安装库字体库"><a href="#5-下载、安装库字体库" class="headerlink" title="5.下载、安装库字体库"></a>5.下载、安装库字体库</h3><p>1）将工程下载下来后cd到<code>install.sh</code>文件所在目录<br>2）执行指令安装字体库</p>
-<p>执行<code>./install.sh</code>指令安装所有Powerline字体</p>
-<p>安装完成后提示所有字体均已下载到<code>/Users/superdanny/Library/Fonts</code>路径下<br><code>All Powerline fonts installed to /Users/superdanny/Library/Fonts</code></p>
-<h3 id="6-设置iTerm-2的Regular-Font-和-Non-ASCII-Font"><a href="#6-设置iTerm-2的Regular-Font-和-Non-ASCII-Font" class="headerlink" title="6. 设置iTerm 2的Regular Font 和 Non-ASCII Font"></a>6. 设置iTerm 2的Regular Font 和 Non-ASCII Font</h3><p>安装完字体库之后，把iTerm 2的设置里的Profile中的Text 选项卡中里的Regular Font和Non-ASCII Font的字体都设置成 Powerline的字体，我这里设置的字体是12pt Meslo LG S DZ Regular for Powerline</p>
-<h3 id="7-配色方案"><a href="#7-配色方案" class="headerlink" title="7. 配色方案"></a>7. 配色方案</h3><p>1）安装配色方案<br>进入刚刚下载的工程的solarized/iterm2-colors-solarized 下双击 Solarized Dark.itermcolors 和 Solarized Light.itermcolors 两个文件就可以把配置文件导入到 iTerm2 里</p>
-<p>2）配置配色方案<br>通过load presets选择刚刚安装的配色主题即可</p>
-<h3 id="8-使用agnoster主题"><a href="#8-使用agnoster主题" class="headerlink" title="8. 使用agnoster主题"></a>8. 使用agnoster主题</h3><p>1）下载agnoster主题<br>到下载的工程里面运行install文件,主题将安装到<code>~/.oh-my-zsh/themes</code>目录下</p>
-<p>2）设置该主题<br>进入~/.zshrc打开.zshrc文件，然后将<code>ZSH_THEME</code>后面的字段改为<code>agnoster</code>。<code>ZSH_THEME=&quot;agnoster&quot;</code>（agnoster即为要设置的主题）</p>
-<h3 id="9-增加指令高亮效果——zsh-syntax-highlighting"><a href="#9-增加指令高亮效果——zsh-syntax-highlighting" class="headerlink" title="9. 增加指令高亮效果——zsh-syntax-highlighting"></a>9. 增加指令高亮效果——zsh-syntax-highlighting</h3><p>指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮</p>
-<p>1）cd到.zshrc所在目录</p>
-<p>2）执行指令将工程克隆到当前目录</p>
-<p><code>git clone git://github.com/zsh-users/zsh-syntax-highlighting.git</code></p>
-<p>3）打开.zshrc文件，在最后添加下面内容</p>
-<p><code>source XXX/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh</code></p>
-<p>保存文件。</p>
-<p>注意：xxx代表<code>.zshrc</code>所在目录</p>
-<p>4）<code>cd ~/.oh-my-zsh/custom/plugins</code></p>
-<p>5）再次打开<code>.zshrc</code>文件，在最后面添加下面内容<code>plugins=(zsh-syntax-highlighting)</code>保存文件。</p>
-<p><strong>启动iTerm 2 默认使用dash改用zsh解决方法：</strong><br><code>chsh -s /bin/zsh</code></p>
-<h3 id="Vim"><a href="#Vim" class="headerlink" title="Vim"></a>Vim</h3><p><code>$ cd solarized
-$ cd vim-colors-solarized/colors
-$ mkdir -p ~/.vim/colors
-$ cp solarized.vim ~/.vim/colors/</code><br><code>$ vi ~/.vimrc
-syntax enable
-set background=dark
-colorscheme solarized</code></p>
-<h3 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h3><p>Mac OS X 是基于 FreeBSD 的，所以一些工具 ls, top 等都是 BSD 那一套，ls 不是 GNU ls，所以即使 Terminal/iTerm2 配置了颜色，但是在 Mac 上敲入 ls 命令也不会显示高亮，可以通过安装 coreutils 来解决（<code>brew install coreutils</code>），不过如果对 ls 颜色不挑剔的话有个简单办法就是在 .bash_profile 里输出 CLICOLOR=1：</p>
-<p><code>$ vi ~/.bash_profile
-export CLICOLOR=1</code></p>
-
+            <p><p>本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。<br></p>
+            <p class="article-more-link">
+                <a href="/2016/07/28/iterm2-mei-hua-quan-guo-cheng/#more">查看更多</a>
+            </p>
         
         </div>
         <footer class="article-footer">
@@ -932,7 +724,7 @@ export CLICOLOR=1</code></p>
 
 </div>
 
-    <a data-url="http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/" data-id="cisys7mpe0005its5uq8m6dwb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/" data-id="cisysg8ly0008kls5fbj2rp2g" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

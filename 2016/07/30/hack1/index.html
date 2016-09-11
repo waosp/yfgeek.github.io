@@ -266,7 +266,7 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p><img data-url="/content/images/2016/07/1-1.jpg" class="lazy cover" alt="cover"><br>记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：</p>
+            <p>记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：</p>
 <blockquote>
 <p>进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探</p>
 <p>爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！</p>
@@ -275,7 +275,7 @@
 <blockquote>
 <p>信息收集阶段-&gt;漏洞检测阶段-&gt;漏洞利用阶段-&gt;持久化后门阶段</p>
 </blockquote>
-<p>最近借了本好书《高度安全环境下的高级渗透测试》，这本书内容浅显易懂，但却很实用，虽然很多内容都知道，但是不成系统，这本书总结工作做得非常好，总结一下读书笔记。</p>
+<p>最近借了本好书《高度安全环境下的高级渗透测试》，这本书内容浅显易懂，但却很实用，虽然很多内容都知道，但是不成系统，这本书总结工作做得非常好，总结一下读书笔记。<br><a id="more"></a> </p>
 <h1 id="信息收集阶段"><a href="#信息收集阶段" class="headerlink" title="信息收集阶段"></a>信息收集阶段</h1><h2 id="DNS信息"><a href="#DNS信息" class="headerlink" title="DNS信息"></a>DNS信息</h2><p>其实DNS信息收集阶段用两个Linux系统自带工具即可完成。</p>
 <h3 id="nslookup"><a href="#nslookup" class="headerlink" title="nslookup"></a>nslookup</h3><p>此命令，可以快速查处ip地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> ✘ ivan@Ivan~ nslookup zhihu.com</div><div class="line">Server:		114.114.114.114</div><div class="line">Address:	114.114.114.114<span class="comment">#53</span></div><div class="line"></div><div class="line">Non-authoritative answer:</div><div class="line">Name:	zhihu.com</div><div class="line">Address: 54.223.189.245</div></pre></td></tr></table></figure></p>
 <p>当然也可以指定dns查询服务器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ivan@Ivan ~ nslookup -type=ns zhihu.com 8.8.8.8</div><div class="line">Server:		8.8.8.8</div><div class="line">Address:	8.8.8.8<span class="comment">#53</span></div><div class="line"></div><div class="line">Non-authoritative answer:</div><div class="line">zhihu.com	nameserver = ns3.dnsv4.com.</div><div class="line">zhihu.com	nameserver = ns4.dnsv4.com.</div><div class="line"></div><div class="line">Authoritative answers can be found from:</div></pre></td></tr></table></figure></p>
@@ -294,7 +294,7 @@
 
 </div>
 
-    <a data-url="http://my.yfgeek.com/2016/07/30/hack1/" data-id="cisys7mp00000its5esyywxt1" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://my.yfgeek.com/2016/07/30/hack1/" data-id="cisysg8lg0003kls59czviabj" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

@@ -74,7 +74,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Rechercher" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -93,9 +93,9 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Posts',
+            POSTS: 'Articles',
             PAGES: 'Pages',
-            CATEGORIES: 'Categories',
+            CATEGORIES: 'Catégories',
             TAGS: 'Tags',
             UNTITLED: '(Untitled)',
         },
@@ -127,7 +127,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Search" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Rechercher" />
     </div>
 
                 </td>
@@ -147,16 +147,16 @@
             <h2 id="name">一凡</h2>
             <h3 id="title">Web 前端 &amp; 网络安全</h3>
             <span id="location"><i class="fa fa-map-marker"></i>UK</span>
-            <a id="follow" target="_blank" href="https://github.com/yfgeek/">FOLLOW</a>
+            <a id="follow" target="_blank" href="https://github.com/yfgeek/">SUIVRE</a>
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
                 2
-                <span>posts</span>
+                <span>Articles</span>
             </div>
             <div class="article-info-block">
                 0
-                <span>tag</span>
+                <span>Tag</span>
             </div>
         </div>
         
@@ -237,18 +237,22 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p><img data-url="/content/images/2016/08/wallhaven-408428.jpg" class="lazy cover" alt="cover"></p>
-<p>#介绍<br>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。</p>
+            <p>#介绍</p>
+<p>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。</p>
 <p>#依赖</p>
 <ul>
 <li>Adafruit_DHT</li>
 <li>Adafruit_CharLCD</li>
 <li>Nginx/Apache (请自行提前安装)</li>
 </ul>
-<p>###安装依赖<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install build-essential python-dev python-smbus python-pip</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_DHT.git</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_DHT</div><div class="line">sudo python setup.py install</div><div class="line">sudo pip install RPi.GPIO</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_CharLCD</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_CharLCD</div><div class="line">sudo python setup.py install</div></pre></td></tr></table></figure></p>
-<p>#安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html</div><div class="line">git <span class="built_in">clone</span>  https://github.com/yfgeek/rpi-TempRuntime.git</div></pre></td></tr></table></figure></p>
-<p>#运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html/rpi-TempRuntime</div><div class="line">python LCD.py</div></pre></td></tr></table></figure></p>
-<p>#截图<br><img src="/content/images/2016/08/WechatIMG10.jpeg" alt=""></p>
+<p>###安装依赖</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install build-essential python-dev python-smbus python-pip</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_DHT.git</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_DHT</div><div class="line">sudo python setup.py install</div><div class="line">sudo pip install RPi.GPIO</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_CharLCD</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_CharLCD</div><div class="line">sudo python setup.py install</div></pre></td></tr></table></figure>
+<p>#安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html</div><div class="line">git <span class="built_in">clone</span>  https://github.com/yfgeek/rpi-TempRuntime.git</div></pre></td></tr></table></figure>
+<p>#运行</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html/rpi-TempRuntime</div><div class="line">python LCD.py</div></pre></td></tr></table></figure>
+<p>#截图</p>
+<p><img src="http://log.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg" alt=""></p>
 
         
         </div>
@@ -259,7 +263,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2016/09/11/这是一个测试/" data-id="cisyq1a67000139s5o7opxtou" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2016/09/11/这是一个测试/" data-id="cisyq6lgg00004ds5a1ukzoh3" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -327,7 +331,7 @@
 
             
     
-        <a href="http://yoursite.com/2016/09/11/这是一个测试/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/这是一个测试/">Comments</a>
+        <a href="http://yoursite.com/2016/09/11/这是一个测试/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/这是一个测试/">Commentaires</a>
     
 
         </footer>
@@ -389,7 +393,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2016/09/11/hello-world/" data-id="cisyq1a62000039s5h2nsdgnp" class="article-share-link"><i class="fa fa-share"></i>Share</a>
+    <a data-url="http://yoursite.com/2016/09/11/hello-world/" data-id="cisyq6lgl00014ds5ompq73yc" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -457,7 +461,7 @@
 
             
     
-        <a href="http://yoursite.com/2016/09/11/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/hello-world/">Comments</a>
+        <a href="http://yoursite.com/2016/09/11/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/hello-world/">Commentaires</a>
     
 
         </footer>
@@ -472,7 +476,7 @@
    
         
     <div class="widget-wrap">
-        <h3 class="widget-title">recent</h3>
+        <h3 class="widget-title">Récents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
                 
@@ -523,7 +527,7 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">archives</h3>
+        <h3 class="widget-title">Archives</h3>
         <div class="widget">
             <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">2</span></li></ul>
         </div>
@@ -536,7 +540,7 @@
     
         
     <div class="widget-wrap widget-list">
-        <h3 class="widget-title">links</h3>
+        <h3 class="widget-title">Liens</h3>
         <div class="widget">
             <ul>
                 

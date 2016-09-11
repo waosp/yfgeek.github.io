@@ -247,8 +247,7 @@
             
             <p>自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：</p>
 <a id="more"></a> 
-<p>##日常</p>
-<ul>
+<h2 id="日常"><a href="#日常" class="headerlink" title="日常"></a>日常</h2><ul>
 <li><code>ctrl + a</code> #命令跳转到句首</li>
 <li><code>ctrl + r</code> #命令搜索模式</li>
 <li><code>TAB</code> #命令自动补全</li>
@@ -262,8 +261,7 @@
 <li><code>which</code> #查看目录</li>
 <li><code>locate</code> #快速搜索</li>
 </ul>
-<p>##安全</p>
-<ul>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><ul>
 <li><code>who</code> #当前登录情况</li>
 <li><code>last</code> #最近登录情况</li>
 <li><code>cat /etc/passwd |awk -F \: &#39;{print $1}&#39;</code> #系统所有用户</li>
@@ -272,10 +270,9 @@
 <li><code>uptime</code> #系统开机多久了</li>
 <li><code>sudo iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT</code> #允许访问 80 端口</li>
 </ul>
-<p>##一句话命令<br>脚本中切换用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - <span class="built_in">test</span> -c <span class="string">"pwd"</span></div></pre></td></tr></table></figure></p>
+<h2 id="一句话命令"><a href="#一句话命令" class="headerlink" title="一句话命令"></a>一句话命令</h2><p>脚本中切换用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - <span class="built_in">test</span> -c <span class="string">"pwd"</span></div></pre></td></tr></table></figure></p>
 <p>连接到你服务器端口的ip<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -tun|grep 7890|sort|awk <span class="string">'&#123;print $5&#125;'</span>|cut <span class="_">-d</span> : <span class="_">-f</span> 1|uniq</div></pre></td></tr></table></figure></p>
-<p>##常用功能</p>
-<p>###定时任务<br>使用-l参数列出crontab文件:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crontab <span class="_">-l</span></div></pre></td></tr></table></figure></p>
+<h2 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h2><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="#定时任务"></a>#定时任务</h2><p>使用-l参数列出crontab文件:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crontab <span class="_">-l</span></div></pre></td></tr></table></figure></p>
 <p>编辑crontab文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crontab <span class="_">-e</span></div></pre></td></tr></table></figure></p>
 <p>实例1：每1分钟执行一次myCommand<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* * * * * myCommand</div></pre></td></tr></table></figure></p>
 <p>实例2：每小时的第3和第15分钟执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3,15 * * * * myCommand</div></pre></td></tr></table></figure></p>
@@ -289,7 +286,7 @@
 <p>实例10：每星期六的晚上11 : 00 pm重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0 23 * * 6 /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
 <p>实例11：每一小时重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* */1 * * * /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
 <p>实例12：晚上11点到早上7点之间，每隔一小时重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 23-7/1 * * * /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
-<p>###scp<br>实例1：从远处复制文件到本地目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp root@10.6.159.147:/opt/soft/demo.tar /opt/soft/</div></pre></td></tr></table></figure></p>
+<h2 id="scp"><a href="#scp" class="headerlink" title="#scp"></a>#scp</h2><p>实例1：从远处复制文件到本地目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp root@10.6.159.147:/opt/soft/demo.tar /opt/soft/</div></pre></td></tr></table></figure></p>
 <p>说明：从10.6.159.147机器上的/opt/soft/的目录中下载demo.tar 文件到本地/opt/soft/目录中</p>
 <p>实例2：从远处复制到本地<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r root@10.6.159.147:/opt/soft/<span class="built_in">test</span> /opt/soft/</div></pre></td></tr></table></figure></p>
 <p>说明：从10.6.159.147机器上的/opt/soft/中下载test目录到本地的/opt/soft/目录来。</p>
@@ -307,7 +304,7 @@
 
 </div>
 
-    <a data-url="http://my.yfgeek.com/2016/08/06/bash/" data-id="cisytu6rp000e5ns5hbelsrkr" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+    <a data-url="http://my.yfgeek.com/2016/08/06/bash/" data-id="cisytz5gc000j6gs5hxjmp5re" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
 <script>
     (function ($) {
         // Prevent duplicate binding

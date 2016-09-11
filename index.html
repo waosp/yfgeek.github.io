@@ -74,7 +74,7 @@
             <div id="search-form-wrap">
 
     <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Rechercher" />
         <button type="submit" class="search-form-submit"></button>
     </form>
     <div class="ins-search">
@@ -93,10 +93,10 @@
 (function (window) {
     var INSIGHT_CONFIG = {
         TRANSLATION: {
-            POSTS: 'Entradas',
+            POSTS: 'Articles',
             PAGES: 'Pages',
-            CATEGORIES: 'Categorias',
-            TAGS: 'Etiquetas',
+            CATEGORIES: 'Catégories',
+            TAGS: 'Tags',
             UNTITLED: '(Untitled)',
         },
         ROOT_URL: '/',
@@ -127,7 +127,7 @@
                 <td>
                     
     <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="Buscar" />
+        <input type="text" class="ins-search-input search-form-input" placeholder="Rechercher" />
     </div>
 
                 </td>
@@ -147,16 +147,16 @@
             <h2 id="name">PPOffice</h2>
             <h3 id="title">Web Developer &amp; Designer</h3>
             <span id="location"><i class="fa fa-map-marker"></i>Harbin, China</span>
-            <a id="follow" target="_blank" href="https://github.com/ppoffice/">SEGUIR</a>
+            <a id="follow" target="_blank" href="https://github.com/ppoffice/">SUIVRE</a>
         </div>
         <div class="article-info profile-block">
             <div class="article-info-block">
-                1
-                <span>Entrada</span>
+                2
+                <span>Articles</span>
             </div>
             <div class="article-info-block">
                 0
-                <span>Etiqueta</span>
+                <span>Tag</span>
             </div>
         </div>
         
@@ -204,7 +204,7 @@
 
             
             <section id="main">
-    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-这是一个测试" class="article article-type-post" itemscope itemprop="blogPost">
     <div class="article-inner">
         
         
@@ -212,7 +212,7 @@
                 
     
         <h1 itemprop="name">
-            <a class="article-title" href="/2016/09/11/hello-world/">Hello World</a>
+            <a class="article-title" href="/2016/09/11/这是一个测试/">这是一个测试</a>
         </h1>
     
 
@@ -221,8 +221,8 @@
                         
     <div class="article-date">
         <i class="fa fa-calendar"></i>
-        <a href="/2016/09/11/hello-world/">
-            <time datetime="2016-09-11T13:10:27.000Z" itemprop="datePublished">2016-09-11</time>
+        <a href="/2016/09/11/这是一个测试/">
+            <time datetime="2016-09-11T14:15:49.000Z" itemprop="datePublished">2016-09-11</time>
         </a>
     </div>
 
@@ -237,15 +237,18 @@
         <div class="article-entry" itemprop="articleBody">
         
             
-            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+            <p><img data-url="/content/images/2016/08/wallhaven-408428.jpg" class="lazy cover" alt="cover"></p>
+<p>#介绍<br>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。</p>
+<p>#依赖</p>
+<ul>
+<li>Adafruit_DHT</li>
+<li>Adafruit_CharLCD</li>
+<li>Nginx/Apache (请自行提前安装)</li>
+</ul>
+<p>###安装依赖<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install build-essential python-dev python-smbus python-pip</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_DHT.git</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_DHT</div><div class="line">sudo python setup.py install</div><div class="line">sudo pip install RPi.GPIO</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_CharLCD</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_CharLCD</div><div class="line">sudo python setup.py install</div></pre></td></tr></table></figure></p>
+<p>#安装<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html</div><div class="line">git <span class="built_in">clone</span>  https://github.com/yfgeek/rpi-TempRuntime.git</div></pre></td></tr></table></figure></p>
+<p>#运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html/rpi-TempRuntime</div><div class="line">python LCD.py</div></pre></td></tr></table></figure></p>
+<p>#截图<br><img src="/content/images/2016/08/WechatIMG10.jpeg" alt=""></p>
 
         
         </div>
@@ -256,7 +259,7 @@
 
 </div>
 
-    <a data-url="http://yoursite.com/2016/09/11/hello-world/" data-id="cisyp3l6h0000sns5rwm2b16e" class="article-share-link"><i class="fa fa-share"></i>Compartir</a>
+    <a data-url="http://yoursite.com/2016/09/11/这是一个测试/" data-id="cisyphqkl0001ums5vxq13drv" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
 <script>
     (function ($) {
         // Prevent duplicate binding
@@ -324,7 +327,137 @@
 
             
     
-        <a href="http://yoursite.com/2016/09/11/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/hello-world/">Comentarios</a>
+        <a href="http://yoursite.com/2016/09/11/这是一个测试/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/这是一个测试/">Commentaires</a>
+    
+
+        </footer>
+    </div>
+    
+</article>
+
+
+
+    <article id="post-hello-world" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/09/11/hello-world/">Hello World</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/09/11/hello-world/">
+            <time datetime="2016-09-11T13:10:27.000Z" itemprop="datePublished">2016-09-11</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
+<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
+<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
+<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
+<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
+<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://yoursite.com/2016/09/11/hello-world/" data-id="cisyphqkg0000ums5rim4gl5q" class="article-share-link"><i class="fa fa-share"></i>Partager</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://yoursite.com/2016/09/11/hello-world/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://yoursite.com/2016/09/11/hello-world/">Commentaires</a>
     
 
         </footer>
@@ -339,9 +472,28 @@
    
         
     <div class="widget-wrap">
-        <h3 class="widget-title">Recientes</h3>
+        <h3 class="widget-title">Récents</h3>
         <div class="widget">
             <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/09/11/这是一个测试/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/09/11/这是一个测试/" class="title">这是一个测试</a></p>
+                            <p class="item-date"><time datetime="2016-09-11T14:15:49.000Z" itemprop="datePublished">2016-09-11</time></p>
+                        </div>
+                    </li>
                 
                     <li>
                         
@@ -371,9 +523,9 @@
     
         
     <div class="widget-wrap">
-        <h3 class="widget-title">Archivos</h3>
+        <h3 class="widget-title">Archives</h3>
         <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">1</span></li></ul>
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/09/">September 2016</a><span class="archive-list-count">2</span></li></ul>
         </div>
     </div>
 
@@ -384,7 +536,7 @@
     
         
     <div class="widget-wrap widget-list">
-        <h3 class="widget-title">Links</h3>
+        <h3 class="widget-title">Liens</h3>
         <div class="widget">
             <ul>
                 

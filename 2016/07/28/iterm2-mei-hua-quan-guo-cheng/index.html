@@ -1,90 +1,16 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
+  <title>iTerm2 美化全过程 | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content=" - 转载 - Tool," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。">
+  <meta name="keywords" content=" - 转载 - Tool">
+  <meta name="description" content="本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="iTerm2 美化全过程">
 <meta property="og:url" content="http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/index.html">
@@ -94,189 +20,191 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="iTerm2 美化全过程">
 <meta name="twitter:description" content="本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
-
-
-
-
-  <link rel="canonical" href="http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/"/>
-
-  <title> iTerm2 美化全过程 | Ivan's Blog </title>
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。&lt;br&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body>
+  <div id="loading" class="active"></div>
 
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Ivan's Blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+        <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+      </hgroup>
+    </div>
   </div>
-  <p class="site-subtitle">Thinking as a Geek</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
       
-
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yscoder" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/ysweb" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/404"  >
+              <i class="icon icon-lg icon-link"></i>
+              测试
+            </a>
+          </li>
       
     </ul>
-  
 
-  
-</nav>
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Ivan&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
 
- </div>
-    </header>
+  </div>
+</div>
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
-    
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">iTerm2 美化全过程</div>
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                iTerm2 美化全过程
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-28T09:49:20+08:00" content="2016-07-28">
-              2016-07-28
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
         </div>
-      </header>
-    
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">iTerm2 美化全过程</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-07-28T01:49:20.000Z" itemprop="datePublished" class="page-time">
+  2016-07-28
+</time>
 
 
-    <div class="post-body" itemprop="articleBody">
+        
+    </h5>
+  </div>
+</header>
 
-      
-      
+    <div class="container body-wrap">
+      <article id="post-iterm2-mei-hua-quan-guo-cheng" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/转载-Tool/"> - 转载 - Tool</a></li></ul>
 
-      
-        <p>本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。<br><a id="more"></a> </p>
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+            <div class="post-share" id="post-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#1-首先下载-iTerm-2"><span class="post-toc-text">1.首先下载 iTerm 2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#2-打开iTerm-2"><span class="post-toc-text">2.打开iTerm 2</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#3-输入下面指令安装oh-my-zsh"><span class="post-toc-text">3.输入下面指令安装oh-my-zsh</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#4-接下来安装Powerline"><span class="post-toc-text">4.接下来安装Powerline</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#5-下载、安装库字体库"><span class="post-toc-text">5.下载、安装库字体库</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#6-设置iTerm-2的Regular-Font-和-Non-ASCII-Font"><span class="post-toc-text">6. 设置iTerm 2的Regular Font 和 Non-ASCII Font</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#7-配色方案"><span class="post-toc-text">7. 配色方案</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#8-使用agnoster主题"><span class="post-toc-text">8. 使用agnoster主题</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#9-增加指令高亮效果——zsh-syntax-highlighting"><span class="post-toc-text">9. 增加指令高亮效果——zsh-syntax-highlighting</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vim"><span class="post-toc-text">Vim</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#ls"><span class="post-toc-text">ls</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。<br><a id="more"></a> </p>
 <h3 id="1-首先下载-iTerm-2"><a href="#1-首先下载-iTerm-2" class="headerlink" title="1.首先下载 iTerm 2"></a>1.首先下载 iTerm 2</h3><h3 id="2-打开iTerm-2"><a href="#2-打开iTerm-2" class="headerlink" title="2.打开iTerm 2"></a>2.打开iTerm 2</h3><h3 id="3-输入下面指令安装oh-my-zsh"><a href="#3-输入下面指令安装oh-my-zsh" class="headerlink" title="3.输入下面指令安装oh-my-zsh"></a>3.输入下面指令安装oh-my-zsh</h3><p><code>curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh</code></p>
 <h3 id="4-接下来安装Powerline"><a href="#4-接下来安装Powerline" class="headerlink" title="4.接下来安装Powerline"></a>4.接下来安装Powerline</h3><p>在官网有教程，我们只需要执行官网第一条安装指令就行<br>如果你的终端能够正常执行pip指令，那么直接执行下面的指令可以完成安装</p>
 <p><code>pip install powerline-status</code></p>
@@ -312,205 +240,164 @@ colorscheme solarized</code></p>
 <p><code>$ vi ~/.bash_profile
 export CLICOLOR=1</code></p>
 
-      
-    </div>
 
-    <div>
-      
-        
-
-      
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/转载-Tool/" rel="tag"># - 转载 - Tool</a>
-          
-        </div>
-      
-
-      
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
             
-          </div>
-
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/07/28/vimda-quan/" rel="prev" title="Vim 命令大全">
-                Vim 命令大全 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
-    </div>
-  </div>
-
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Ivan" />
-          <p class="site-author-name" itemprop="name">Ivan</p>
-          <p class="site-description motion-element" itemprop="description">Thinking as a Geek</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">13</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
+            <div class="post-reward">
+                <a id="rewardBtn" href="javascript:;" class="post-reward-btn waves-effect waves-circle waves-light">赏</a>
             </div>
-          
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/" target="_blank" rel="external">http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/</a>
+                </p>
+                <footer><cite><a href="http://my.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/07/28/vimda-quan/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Vim 命令大全</h4>
+      </a>
+    </div>
+  
 
-        </nav>
+  
+</nav>
 
-        
 
-        <div class="links-of-author motion-element">
-          
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="iterm2-mei-hua-quan-guo-cheng" data-title="iTerm2 美化全过程" data-url="http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ysblog"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
         </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-首先下载-iTerm-2"><span class="nav-number">1.</span> <span class="nav-text">1.首先下载 iTerm 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-打开iTerm-2"><span class="nav-number">2.</span> <span class="nav-text">2.打开iTerm 2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-输入下面指令安装oh-my-zsh"><span class="nav-number">3.</span> <span class="nav-text">3.输入下面指令安装oh-my-zsh</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-接下来安装Powerline"><span class="nav-number">4.</span> <span class="nav-text">4.接下来安装Powerline</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-下载、安装库字体库"><span class="nav-number">5.</span> <span class="nav-text">5.下载、安装库字体库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-设置iTerm-2的Regular-Font-和-Non-ASCII-Font"><span class="nav-number">6.</span> <span class="nav-text">6. 设置iTerm 2的Regular Font 和 Non-ASCII Font</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-配色方案"><span class="nav-number">7.</span> <span class="nav-text">7. 配色方案</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-使用agnoster主题"><span class="nav-number">8.</span> <span class="nav-text">8. 使用agnoster主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-增加指令高亮效果——zsh-syntax-highlighting"><span class="nav-number">9.</span> <span class="nav-text">9. 增加指令高亮效果——zsh-syntax-highlighting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vim"><span class="nav-number">10.</span> <span class="nav-text">Vim</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ls"><span class="nav-number">11.</span> <span class="nav-text">ls</span></a></li></ol></div>
-            
-          </div>
-        </section>
-      
-
     </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Ivan</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
+</article>
     </div>
-  </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
 
-  
+<script>
+var BLOG_SHARE = {
+    title: "iTerm2 美化全过程",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://my.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
+ </div>
 
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+
+
+
+<div id="reward" class="reward-lay">
+    <a class="reward-off" id="rewardOff" href="javascript:;"><i class="icon icon-close"></i></a>
+    <h3 class="reward-title">
+        <i class="icon icon-quote-left"></i>
+        谢谢大爷~
+        <i class="icon icon-quote-right"></i>
+    </h3>
+    <ul class="reward-items">
+        
+        <li>
+            <img src="/img/wechat.jpg" title="微信打赏二维码" alt="微信打赏二维码">
+            <p>微信</p>
+        </li>
+        
+
+        
+        <li>
+            <img src="/img/alipay.jpg" title="支付宝打赏二维码" alt="支付宝打赏二维码">
+            <p>支付宝</p>
+        </li>
+        
+    </ul>
+</div>
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
 </script>
 
+<script src="/js/search.js"></script>
 
 
 
@@ -519,78 +406,6 @@ export CLICOLOR=1</code></p>
 
 
 
-  
-
-
-
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
-
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
-
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

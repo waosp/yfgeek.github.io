@@ -1,90 +1,16 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next pisces use-motion">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
+  
+  <title>Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#3F51B5">
   
   
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Hexo, NexT" />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="Thinking as a Geek">
+  <meta name="keywords" content="undefined">
+  <meta name="description" content="Thinking as a Geek">
 <meta property="og:type" content="website">
 <meta property="og:title" content="Ivan's Blog">
 <meta property="og:url" content="http://my.yfgeek.com/index.html">
@@ -93,745 +19,423 @@
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ivan's Blog">
 <meta name="twitter:description" content="Thinking as a Geek">
-
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Pisces',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
-
-
-
-
-  <link rel="canonical" href="http://my.yfgeek.com/"/>
-
-  <title> Ivan's Blog </title>
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="Thinking as a Geek">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body>
+  <div id="loading" class="active"></div>
 
-  
-
-
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">Ivan's Blog</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
+  <nav id="menu"  >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+        <a href="mailto:634206017@qq.com" title="634206017@qq.com" class="mail">634206017@qq.com</a>
+      </hgroup>
+    </div>
   </div>
-  <p class="site-subtitle">Thinking as a Geek</p>
-</div>
-
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
       
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
+          <li class="waves-block waves-effect active">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
       
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
+          <li class="waves-block waves-effect">
+            <a href="/archives"  >
+              <i class="icon icon-lg icon-archives"></i>
+              Archives
+            </a>
+          </li>
       
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              Tags
+            </a>
+          </li>
       
-
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yscoder" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/ysweb" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/404"  >
+              <i class="icon icon-lg icon-link"></i>
+              测试
+            </a>
+          </li>
       
     </ul>
+
+    <footer class="footer">
+  <p><a rel="license" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Creative Commons License" style="border-width:0;vertical-align:middle;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAFAAAAAPCAMAAABEF7i9AAAAllBMVEUAAAD///+rsapERER3d3eIiIjMzMzu7u4iIiKUmZO6v7rKzsoODg4RERFVVVUNDQ0NDg0PEA8zMzNLTEtbXltmZmZydnF9gn2AgICPkI+ZmZmqqqq7u7vFxsXIzMgNDQwZGRkgICAhISEkJSMnKCcuMC4xMzE5Ozk7PTtBQkFCQkJDQ0Nna2eGhoaHh4ezuLLGysbd3d1wVGpAAAAA4UlEQVR42q2T1xqCMAyFk7QsBQeKA9x7j/d/OSm22CpX0nzcpA1/T05aAOuBVkMAScQFHLnEwoCo2f1TnQIGoVMewjZEjVFN4GH1Ue1Cn2jWqwfsOOj6wDwGvotsl/c8lv7KIq1eLOsT0HMFHMIE/RZyHnlphryT9zyV+8WH5e8yQw3wnQvgAFxPTKUVi555SHR/lOfLMgVTeDlSfN+TaoUsiTyeIm+bCkHvCA2FUKG48LDtYBZBknsYP/G8NTw0gaaHyuQf4H5pecrB/FYCT2sL9zAfy1Xyjou6L8X2W7YcLyBZCRtnq/zfAAAAAElFTkSuQmCC" /></a></p>
+  <p>Ivan&#39;s Blog &copy; 2016</p>
+  <p>Power by <a href="http://hexo.io/" target="_blank">Hexo</a> Theme
+  <a href="https://github.com/yscoder/hexo-theme-indigo" target="_blank">indigo</a></p>
+  <a href="/atom.xml" target="_blank" class="rss" title="rss"><i class="icon icon-2x icon-rss-square"></i></a>
+</footer>
+
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Ivan&#39;s Blog</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-share">
+            <i class="icon icon-lg icon-share-alt"></i>
+        </a>
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Ivan&#39;s Blog</h1>
+    <h5 class="subtitle">
+        
+        Thinking as a Geek
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <ul class="post-list">
   
+    <li class="post-list-item">
+        <article id="post-templcd"
+  class="article article-type-post" itemprop="blogPost">
+     
+
 
   
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/26/templcd/">树莓派实时温湿度监测进阶</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2016-08-26T07:19:14.000Z" itemprop="datePublished" class="post-time">
+  2016-08-26
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+         这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。 
+    
+    
+        <a href="/2016/08/26/templcd/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
+        <article id="post-ba-kalifang-dao-upan-li"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/25/ba-kalifang-dao-upan-li/">把KALI放到U盘里</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2016-08-25T11:26:45.000Z" itemprop="datePublished" class="post-time">
+  2016-08-25
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+         步骤1：进入 bios设置U盘启动，保存并启动电脑 
+ 步骤2：在启动选择画面中，选第一个“kali linux(686-pae)”。 
+    
+    
+        <a href="/2016/08/25/ba-kalifang-dao-upan-li/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Kali-转载/"> - Kali - 转载</a></li></ul>
+
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
+        <article id="post-rpi-tmp-hdt-platform"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/25/rpi-tmp-hdt-platform/">基于树莓派的实时温度湿度监测平台</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2016-08-25T05:39:08.000Z" itemprop="datePublished" class="post-time">
+  2016-08-25
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+         #前言 很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。 
+ 在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。 
+    
+    
+        <a href="/2016/08/25/rpi-tmp-hdt-platform/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/树莓派-原创/"> - 树莓派 - 原创</a></li></ul>
+
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
+        <article id="post-916"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/20/916/">我怀念的依旧是916</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2016-08-20T15:22:01.000Z" itemprop="datePublished" class="post-time">
+  2016-08-20
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+         本文是一个纪念性文章。前天看了一个微电影，忽然想起了母校，十分想念，最想念的，仍然是916。 
+ 所谓916，就是图书馆9楼916号，这是我大二大三的美好时光。 
+ 916桌子很多，却都是空位，但是有基友陪伴。 
+    
+    
+        <a href="/2016/08/20/916/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/"> - 原创</a></li></ul>
+
+</article>
+
+    </li>
+  
+    <li class="post-list-item">
+        <article id="post-hai-wai-appsheng-cun-zhi-nan"
+  class="article article-type-post" itemprop="blogPost">
+     
+
+
+  
+    <h3 class="post-title" itemprop="name">
+      <a class="post-title-link" href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/">海外App生存指南</a>
+    </h3>
+  
+
+
+
+    <div class="post-meta">
+        <time datetime="2016-08-12T15:13:34.000Z" itemprop="datePublished" class="post-time">
+  2016-08-12
+</time>
+
+        
+
+
+    </div>
+
+    <div class="post-content" id="post-content" itemprop="postContent" >
+
+    
+           
+   DNS/PAC大法    优酷土豆爱奇艺  在 iOS 的 Wi-Fi 设置当中，点进某个 Wi-Fi 的属性页面，拖到最下面设置「HTTP 代理」-「自动」为：       1      http://pac.uku.im/pac.pac       
+ DNS:       1      158.69.209.100       
+ 更新： https://github.com/
+    
+    
+        <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" class="post-more waves-effect waves-button">
+            阅读全文...
+        </a>
+    </div>
+    
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/原创/"> - 原创</a></li></ul>
+
+</article>
+
+    </li>
+  
+</ul>
+
+<nav id="page-nav">
+    <div class="inner">
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">下一页</a>
+    </div>
 </nav>
 
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+<script>
+var BLOG_SHARE = {
+    title: "Ivan's Blog",
+    pic: "/img/logo.jpg",
+    summary: document.getElementsByName('summary')[0].content,
+    url: "http://my.yfgeek.com/index.html"
+};
+</script>
+<div class="global-share" id="global-share">
+    <div class="tit">分享到：</div>
+    <ul class="reset share-icons">
+      <li>
+        <a class="weibo share-sns" href="javascript:;" data-title="微博" data-service="tsina">
+          <i class="icon icon-weibo"></i>
+        </a>
+      </li>
+      <li>
+        <a class="weixin share-sns" href="javascript:;" data-title="微信" data-service="weixin">
+          <i class="icon icon-weixin"></i>
+        </a>
+      </li>
+      <li>
+        <a class="qq share-sns" href="javascript:;" data-title=" QQ" data-service="cqq">
+          <i class="icon icon-qq"></i>
+        </a>
+      </li>
+      <li>
+        <a class="facebook share-sns" href="javascript:;" data-title=" Facebook" data-service="fb">
+          <i class="icon icon-facebook"></i>
+        </a>
+      </li>
+      <li>
+        <a class="twitter share-sns" href="javascript:;" data-title=" Twitter" data-service="twitter">
+          <i class="icon icon-twitter"></i>
+        </a>
+      </li>
+      <li>
+        <a class="douban share-sns" href="javascript:;" data-title="豆瓣" data-service="douban">
+          豆
+        </a>
+      </li>
+    </ul>
  </div>
-    </header>
 
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-  <section id="posts" class="posts-expand">
-    
-      
 
-  
-  
 
-  
-  
-  
 
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
 
-    
-      <header class="post-header">
+<script src="/js/main.js"></script>
 
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/26/templcd/" itemprop="url">
-                  树莓派实时温湿度监测进阶
-                </a>
-              
-            
-          </h1>
-        
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-26T15:19:14+08:00" content="2016-08-26">
-              2016-08-26
-            </time>
-          </span>
 
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。</p>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/26/templcd/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/25/ba-kalifang-dao-upan-li/" itemprop="url">
-                  把KALI放到U盘里
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-25T19:26:45+08:00" content="2016-08-25">
-              2016-08-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>步骤1：进入 bios设置U盘启动，保存并启动电脑</p>
-<p>步骤2：在启动选择画面中，选第一个“kali linux(686-pae)”。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/25/ba-kalifang-dao-upan-li/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/25/rpi-tmp-hdt-platform/" itemprop="url">
-                  基于树莓派的实时温度湿度监测平台
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-25T13:39:08+08:00" content="2016-08-25">
-              2016-08-25
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>#前言<br>很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。</p>
-<p>在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/25/rpi-tmp-hdt-platform/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/20/916/" itemprop="url">
-                  我怀念的依旧是916
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-20T23:22:01+08:00" content="2016-08-20">
-              2016-08-20
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>本文是一个纪念性文章。前天看了一个微电影，忽然想起了母校，十分想念，最想念的，仍然是916。</p>
-<p>所谓916，就是图书馆9楼916号，这是我大二大三的美好时光。</p>
-<p>916桌子很多，却都是空位，但是有基友陪伴。<br>
-          <div class="post-more-link text-center">
-            <a class="btn" href="/2016/08/20/916/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" itemprop="url">
-                  海外App生存指南
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-08-12T23:13:34+08:00" content="2016-08-12">
-              2016-08-12
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <a id="more"></a> 
-<h1 id="DNS-PAC大法"><a href="#DNS-PAC大法" class="headerlink" title="DNS/PAC大法"></a>DNS/PAC大法</h1><h2 id="优酷土豆爱奇艺"><a href="#优酷土豆爱奇艺" class="headerlink" title="优酷土豆爱奇艺"></a>优酷土豆爱奇艺</h2><p>在 iOS 的 Wi-Fi 设置当中，点进某个 Wi-Fi 的属性页面，拖到最下面设置「HTTP 代理」-「自动」为：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">http://pac.uku.im/pac.pac</div></pre></td></tr></table></figure></p>
-<p>DNS:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">158.69.209.100</div></pre></td></tr></table></figure></p>
-<p>更新：<a href="https://github.com/uku/Unblock-Youku/issues/618" target="_blank" rel="external">https://github.com/uku/Unblock-Youku/issues/618</a></p>
-<h1 id="替换hosts大法"><a href="#替换hosts大法" class="headerlink" title="替换hosts大法"></a>替换hosts大法</h1><h2 id="网易云音乐"><a href="#网易云音乐" class="headerlink" title="网易云音乐"></a>网易云音乐</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">104.236.189.178 http://music.163.com </div><div class="line">198.47.104.134 http://m1.music.126.net </div><div class="line">198.47.104.134 http://m2.music.126.net </div><div class="line">198.47.104.134 http://m3.music.126.net </div><div class="line">198.47.104.134 http://m4.music.126.net</div><div class="line">198.47.104.134 http://m5.music.126.net </div><div class="line">198.47.104.134 http://m6.music.126.net </div><div class="line">198.47.104.134 http://m7.music.126.net </div><div class="line">198.47.104.134 http://m8.music.126.net </div><div class="line">198.47.104.134 http://m9.music.126.net </div><div class="line">198.47.104.134 http://m10.music.126.net</div></pre></td></tr></table></figure>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
-
-
-          </div>
-          
-
-
-          
-
-        </div>
-        
-          
-  
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-
-      <section class="site-overview sidebar-panel  sidebar-panel-active ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/avatar.gif"
-               alt="Ivan" />
-          <p class="site-author-name" itemprop="name">Ivan</p>
-          <p class="site-description motion-element" itemprop="description">Thinking as a Geek</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">13</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">7</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
             </div>
-          
-
-        </nav>
-
-        
-
-        <div class="links-of-author motion-element">
-          
+            <time class="flex-col time">{date}</time>
         </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-
-    </div>
-  </aside>
-
-
-        
-      </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
-  
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">Ivan</span>
-</div>
-
-<div class="powered-by">
-  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
-</div>
-
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Pisces
-  </a>
-</div>
-
-        
-
-        
-      </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
-    </div>
-  </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+    </a>
+</li>
 </script>
 
+<script src="/js/search.js"></script>
 
 
 
@@ -840,74 +444,6 @@
 
 
 
-  
-
-
-
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
-
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
-
-
-
-  
-  
-
-
-  <script type="text/javascript" src="/js/src/affix.js?v=5.0.1"></script>
-
-  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.0.1"></script>
-
-
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-
-  
-  
-
-  
-
-  
-
-  
 
 </body>
 </html>

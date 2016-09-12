@@ -10,13 +10,13 @@
   
   
   <meta name="keywords" content=" - 树莓派 - 原创">
-  <meta name="description" content="#前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
+  <meta name="description" content="前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
 在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="基于树莓派的实时温度湿度监测平台">
 <meta property="og:url" content="http://my.yfgeek.com/2016/08/25/rpi-tmp-hdt-platform/index.html">
 <meta property="og:site_name" content="Ivan's Blog">
-<meta property="og:description" content="#前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
+<meta property="og:description" content="前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
 在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。">
 <meta property="og:image" content="http://my.yfgeek.com/content/images/2016/08/GPIO.png">
 <meta property="og:image" content="http://my.yfgeek.com/content/images/2016/08/LCD1602--.jpg">
@@ -26,13 +26,13 @@
 <meta property="og:updated_time" content="2016-08-25T11:28:59.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="基于树莓派的实时温度湿度监测平台">
-<meta name="twitter:description" content="#前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
+<meta name="twitter:description" content="前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
 在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。">
 <meta name="twitter:image" content="http://my.yfgeek.com/content/images/2016/08/GPIO.png">
   
     <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
   
-  <meta name="summary" content="&lt;p&gt;#前言&lt;br&gt;很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。&lt;/p&gt;
+  <meta name="summary" content="&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。&lt;/p&gt;
 &lt;p&gt;在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。&lt;br&gt;">
   <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
@@ -199,7 +199,7 @@
 
             
             <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#知识储备"><span class="post-toc-text">知识储备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原料"><span class="post-toc-text">原料</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#语言"><span class="post-toc-text">语言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#组件"><span class="post-toc-text">组件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接线"><span class="post-toc-text">接线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2K-电阻如何连接到电路"><span class="post-toc-text">2K 电阻如何连接到电路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LCD1602-接线方案"><span class="post-toc-text">LCD1602 接线方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LCD1602-开机测试"><span class="post-toc-text">LCD1602 开机测试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DHT11-接线方案"><span class="post-toc-text">DHT11 接线方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运行效果"><span class="post-toc-text">运行效果</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-text">参考资料</span></a></li></ol>
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#知识储备"><span class="post-toc-text">知识储备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原料"><span class="post-toc-text">原料</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#语言"><span class="post-toc-text">语言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#组件"><span class="post-toc-text">组件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接线"><span class="post-toc-text">接线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2K-电阻如何连接到电路"><span class="post-toc-text">2K 电阻如何连接到电路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LCD1602-接线方案"><span class="post-toc-text">LCD1602 接线方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LCD1602-开机测试"><span class="post-toc-text">LCD1602 开机测试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DHT11-接线方案"><span class="post-toc-text">DHT11 接线方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运行效果"><span class="post-toc-text">运行效果</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-text">参考资料</span></a></li></ol>
             </nav>
             
         </aside>
@@ -207,7 +207,7 @@
         <div class="post-main">
 
             <div class="post-content" id="post-content" itemprop="postContent">
-            <p>#前言<br>很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。</p>
 <p>在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。<br><a id="more"></a> </p>
 <h1 id="知识储备"><a href="#知识储备" class="headerlink" title="知识储备"></a>知识储备</h1><ul>
 <li>数字电子技术基础</li>

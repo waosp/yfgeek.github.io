@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>GHOST搬迁到HEXO(Github Pages)指南 | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#2196f3">
+  
+  
+  <meta name="keywords" content="Web">
+  <meta name="description" content="前言想了很长时间，权衡了一下利弊，还是觉得Github Pages平台会好一些，虽然可能我用了几天就会被和谐掉。
+但是GHOST还需要找专门能够运行Node的平台，在这方面，全静态的HEXO绝对是博客的首选。
+前提在搬家之前，首先你要有一个Github，或者Gitlab，本文不过多叙述：
+
+安装HEXO
+配置Github
+
+搬家第一步Ghost导出数据json：实验室-导出，下载好json
+第二步">
+<meta property="og:type" content="article">
+<meta property="og:title" content="GHOST搬迁到HEXO(Github Pages)指南">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="前言想了很长时间，权衡了一下利弊，还是觉得Github Pages平台会好一些，虽然可能我用了几天就会被和谐掉。
+但是GHOST还需要找专门能够运行Node的平台，在这方面，全静态的HEXO绝对是博客的首选。
+前提在搬家之前，首先你要有一个Github，或者Gitlab，本文不过多叙述：
+
+安装HEXO
+配置Github
+
+搬家第一步Ghost导出数据json：实验室-导出，下载好json
+第二步">
+<meta property="og:updated_time" content="2016-09-12T13:57:43.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="GHOST搬迁到HEXO(Github Pages)指南">
+<meta name="twitter:description" content="前言想了很长时间，权衡了一下利弊，还是觉得Github Pages平台会好一些，虽然可能我用了几天就会被和谐掉。
+但是GHOST还需要找专门能够运行Node的平台，在这方面，全静态的HEXO绝对是博客的首选。
+前提在搬家之前，首先你要有一个Github，或者Gitlab，本文不过多叙述：
+
+安装HEXO
+配置Github
+
+搬家第一步Ghost导出数据json：实验室-导出，下载好json
+第二步">
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="Thinking as a Geek">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://www.zhihu.com/people/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              知乎
+            </a>
+          </li>
+      
+    </ul>
+
+    
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">GHOST搬迁到HEXO(Github Pages)指南</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">GHOST搬迁到HEXO(Github Pages)指南</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-09-12T13:41:59.000Z" itemprop="datePublished" class="page-time">
+  2016-09-12
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web/">Web</a></li></ul>
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-GHOST搬迁到HEXO-Github-Pages-指南" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前提"><span class="post-toc-text">前提</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#搬家"><span class="post-toc-text">搬家</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第一步"><span class="post-toc-text">第一步</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第二步"><span class="post-toc-text">第二步</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第三步"><span class="post-toc-text">第三步</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#第四步"><span class="post-toc-text">第四步</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#注意"><span class="post-toc-text">注意</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>想了很长时间，权衡了一下利弊，还是觉得Github Pages平台会好一些，虽然可能我用了几天就会被和谐掉。</p>
+<p>但是GHOST还需要找专门能够运行Node的平台，在这方面，全静态的HEXO绝对是博客的首选。</p>
+<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>在搬家之前，首先你要有一个Github，或者Gitlab，本文不过多叙述：</p>
+<ul>
+<li>安装HEXO</li>
+<li>配置Github</li>
+</ul>
+<h1 id="搬家"><a href="#搬家" class="headerlink" title="搬家"></a>搬家</h1><h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>Ghost导出数据json：实验室-导出，下载好json</p>
+<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>安装搬家工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i hexo-migrator-ghost --save</div></pre></td></tr></table></figure></p>
+<h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p>修改<code>./scaffolds/post.md</code>文件内容为：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: &#123;&#123; title &#125;&#125;  </div><div class="line">date: &#123;&#123; date &#125;&#125;  </div><div class="line">tags: &#123;&#123; tags &#125;&#125;  </div><div class="line">---</div></pre></td></tr></table></figure>
+<h2 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h2><p>将json文件放到根目录，并且执行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo migrate ghost source.json  </div><div class="line">hexo clean ; hexo d -g</div></pre></td></tr></table></figure>
+<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>经过以上步骤，基本上是搬家完毕了，但是仍有一些需要注意的：</p>
+<ul>
+<li>HEXO的Markdown语法比较严谨，所以倒入进来会存在问题，需要进一步修正，比如#如果前面不空格是不解析标题的</li>
+<li>tag可能会出问题，会自动加–，请自行删除，或者批量删除</li>
+</ul>
+
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://blog.yfgeek.com/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/" target="_blank" rel="external">http://blog.yfgeek.com/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/</a>
+                </p>
+                <footer><cite><a href="http://blog.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/08/26/runtimelcd/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">树莓派实时温度湿度监测进阶</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="GHOST搬迁到HEXO-Github-Pages-指南" data-title="GHOST搬迁到HEXO(Github Pages)指南" data-url="http://blog.yfgeek.com/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

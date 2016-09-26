@@ -6,6 +6,8 @@
   <title>Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#2196f3">
+  
   
   <meta name="keywords" content="undefined">
   <meta name="description" content="Thinking as a Geek">
@@ -18,8 +20,10 @@
 <meta name="twitter:title" content="Ivan's Blog">
 <meta name="twitter:description" content="Thinking as a Geek">
   
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
   <meta name="summary" content="Thinking as a Geek">
-  <link rel="shortcut icon" href="/">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -33,7 +37,7 @@
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="undefined"></a>
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -41,6 +45,48 @@
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
       
     </ul>
 
@@ -56,6 +102,16 @@
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">Ivan&#39;s Blog</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
         
         
     </div>
@@ -107,15 +163,11 @@
  Adafruit_CharLCD 
  Nginx/Apache (请自行提前安装) 
  
-   安装依赖       1  2  3  4  5  6  7  8  9      sudo apt-get update  sudo apt-get install build-essential python-dev python-smbus python-pip  git  clone  https://github.com/adafruit/Adafruit_Python_DHT.git   cd  Adafruit_Python_DHT  sudo python setup.py install  sudo pip install RPi.GPIO  git  clone  https://github.com/adafruit/Adafruit_Python_CharLCD   cd  Adafruit_Python_CharLCD  sudo python setup.py install      
-   安装       1  2       cd  /var/www/html  git  clone   https://github.com/yfgeek/rpi-TempRuntime.git      
-   运行       1  2       cd  /var/www/html/rpi-TempRuntime  python LCD.py      
-   截图    
-
+   安装依赖       1  2  3  4  5  6  7  8  9      sudo apt-get update  sudo apt-get instal
     
     
         <a href="/2016/08/26/runtimelcd/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -157,7 +209,7 @@
     
     
         <a href="/2016/08/25/ba-kalifang-dao-upan-li/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -199,7 +251,7 @@
     
     
         <a href="/2016/08/25/rpi-tmp-hdt-platform/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -242,7 +294,7 @@
     
     
         <a href="/2016/08/20/916/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -282,13 +334,11 @@
            
    DNS/PAC大法    优酷土豆爱奇艺  在 iOS 的 Wi-Fi 设置当中，点进某个 Wi-Fi 的属性页面，拖到最下面设置「HTTP 代理」-「自动」为：       1      http://pac.uku.im/pac.pac       
  DNS:       1      158.69.209.100       
- 更新： https://github.com/uku/Unblock-Youku/issues/618  
-   替换hosts大法    网易云音乐       1  2  3  4  5  6  7  8  9  10  11      104.236.189.178 http://music.163.com   198.47.104.134 http://m1.music.126.net   198.47.104.134 http://m2.music.126.net   198.47.104.134 http://m3.music.126.net   198.47.104.134 http://m4.music.126.net  198.47.104.134 http://m5.music.126.net   198.47.104.134 http://m6.music.126.net   198.47.104.134 http://m7.music.126.net   198.47.104.134 http://m8.music.126.net   198.47.104.134 http://m9.music.126.net   198.47.104.134 http://m10.music.126.net      
-
+ 更新： https://github.com/
     
     
         <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -317,6 +367,26 @@
 
 <script src="/js/main.js"></script>
 
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
 
 
 

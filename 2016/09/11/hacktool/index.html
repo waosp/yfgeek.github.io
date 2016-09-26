@@ -6,6 +6,8 @@
   <title>那些Hack神器及奇技淫巧 | Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#2196f3">
+  
   
   <meta name="keywords" content="Hack">
   <meta name="description" content="简介这里会总结一些Hack经验，都是我日常使用的，会长期更新，渗透测试专用，请勿挪作非法用途。
@@ -37,22 +39,24 @@ http://www.144118.com/
 国际https://haveibeenpwned.com/
 https://leakbase.pw/">
   
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
   <meta name="summary" content="Thinking as a Geek">
-  <link rel="shortcut icon" href="/">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu"  >
+  <nav id="menu" class="hide" >
    <div class="inner flex-row-vertical">
   <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
       <i class="icon icon-lg icon-close"></i>
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="undefined"></a>
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -60,6 +64,48 @@ https://leakbase.pw/">
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
       
     </ul>
 
@@ -75,6 +121,16 @@ https://leakbase.pw/">
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">那些Hack神器及奇技淫巧</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
         
         
     </div>
@@ -109,6 +165,10 @@ https://leakbase.pw/">
 
             
 
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#简介"><span class="post-toc-text">简介</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#那些网站"><span class="post-toc-text">那些网站</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#社工库"><span class="post-toc-text">社工库</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#国内"><span class="post-toc-text">国内</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#国际"><span class="post-toc-text">国际</span></a></li></ol></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#C段"><span class="post-toc-text">C段</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#whois查询"><span class="post-toc-text">whois查询</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#历史页面"><span class="post-toc-text">历史页面</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#那些实用命令"><span class="post-toc-text">那些实用命令</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#reg导出sam"><span class="post-toc-text">reg导出sam</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#Windows新建用户"><span class="post-toc-text">Windows新建用户</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#打开3389-2003-xp"><span class="post-toc-text">打开3389(2003,xp)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#sethc后门"><span class="post-toc-text">sethc后门</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#mssql-xpcmdshell报错"><span class="post-toc-text">mssql xpcmdshell报错</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#那些一句话"><span class="post-toc-text">那些一句话</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#asp一句话木马"><span class="post-toc-text">asp一句话木马</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#php一句话木马"><span class="post-toc-text">php一句话木马</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#aspx一句话"><span class="post-toc-text">aspx一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#数据库加密一句话-密码a"><span class="post-toc-text">数据库加密一句话(密码a)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#网站配置、版权信息专用一句话"><span class="post-toc-text">网站配置、版权信息专用一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一句话再过护卫神"><span class="post-toc-text">一句话再过护卫神</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#过拦截一句话木马"><span class="post-toc-text">过拦截一句话木马</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#asp闭合型一句话"><span class="post-toc-text">asp闭合型一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#能过安全狗的解析格式"><span class="post-toc-text">能过安全狗的解析格式</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#突破安全狗的一句话"><span class="post-toc-text">突破安全狗的一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#elong过安全狗的php一句话"><span class="post-toc-text">elong过安全狗的php一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#后台常用写入php一句话（密码x）"><span class="post-toc-text">后台常用写入php一句话（密码x）</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#高强度php一句话"><span class="post-toc-text">高强度php一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#新型变异PHP一句话-密码b4dboy"><span class="post-toc-text">新型变异PHP一句话(密码b4dboy)</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#突破安全狗的aspx一句话"><span class="post-toc-text">突破安全狗的aspx一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#突破护卫神，保护盾一句话"><span class="post-toc-text">突破护卫神，保护盾一句话</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#PHP高强度一句话："><span class="post-toc-text">PHP高强度一句话：</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#aspx过狗"><span class="post-toc-text">aspx过狗</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#那些神器"><span class="post-toc-text">那些神器</span></a></li></ol>
+            </nav>
             
         </aside>
 
@@ -193,6 +253,26 @@ https://leakbase.pw/">
 
             
             
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hacktool" data-title="那些Hack神器及奇技淫巧" data-url="http://blog.yfgeek.com/2016/09/11/hacktool/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
 
 
 
@@ -210,6 +290,26 @@ https://leakbase.pw/">
 
 <script src="/js/main.js"></script>
 
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
 
 
 

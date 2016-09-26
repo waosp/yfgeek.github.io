@@ -6,6 +6,8 @@
   <title>基于树莓派的实时温度湿度监测平台 | Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
+  <meta name="theme-color" content="#2196f3">
+  
   
   <meta name="keywords" content="Raspberry">
   <meta name="description" content="前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
@@ -28,23 +30,25 @@
 在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。">
 <meta name="twitter:image" content="http://blog.yfgeek.com/content/images/2016/08/GPIO.png">
   
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
   <meta name="summary" content="&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。&lt;/p&gt;
 &lt;p&gt;在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。&lt;br&gt;">
-  <link rel="shortcut icon" href="/">
+  <link rel="shortcut icon" href="/favicon.ico">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu"  >
+  <nav id="menu" class="hide" >
    <div class="inner flex-row-vertical">
   <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
       <i class="icon icon-lg icon-close"></i>
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="undefined"></a>
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -52,6 +56,48 @@
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
       
     </ul>
 
@@ -67,6 +113,16 @@
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">基于树莓派的实时温度湿度监测平台</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
         
         
     </div>
@@ -99,6 +155,10 @@
 
             
 
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#知识储备"><span class="post-toc-text">知识储备</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原料"><span class="post-toc-text">原料</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#语言"><span class="post-toc-text">语言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#组件"><span class="post-toc-text">组件</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#接线"><span class="post-toc-text">接线</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#2K-电阻如何连接到电路"><span class="post-toc-text">2K 电阻如何连接到电路</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LCD1602-接线方案"><span class="post-toc-text">LCD1602 接线方案</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#LCD1602-开机测试"><span class="post-toc-text">LCD1602 开机测试</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DHT11-接线方案"><span class="post-toc-text">DHT11 接线方案</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运行效果"><span class="post-toc-text">运行效果</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考资料"><span class="post-toc-text">参考资料</span></a></li></ol>
+            </nav>
             
         </aside>
 
@@ -191,6 +251,26 @@
 
             
             
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="rpi-tmp-hdt-platform" data-title="基于树莓派的实时温度湿度监测平台" data-url="http://blog.yfgeek.com/2016/08/25/rpi-tmp-hdt-platform/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
 
 
 
@@ -208,6 +288,26 @@
 
 <script src="/js/main.js"></script>
 
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
 
 
 

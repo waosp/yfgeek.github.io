@@ -6,8 +6,6 @@
   <title>常用Bash命令总结 | Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="theme-color" content="#2196f3">
-  
   
   <meta name="keywords" content="Linux">
   <meta name="description" content="自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：">
@@ -21,24 +19,22 @@
 <meta name="twitter:title" content="常用Bash命令总结">
 <meta name="twitter:description" content="自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：">
   
-    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
-  
   <meta name="summary" content="&lt;p&gt;自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：&lt;/p&gt;">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="/">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
+  <nav id="menu"  >
    <div class="inner flex-row-vertical">
   <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
       <i class="icon icon-lg icon-close"></i>
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <a href="/" class="avatar"><img src="undefined"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -46,48 +42,6 @@
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
-      
-          <li class="waves-block waves-effect">
-            <a href="/"  >
-              <i class="icon icon-lg icon-home"></i>
-              主页
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/fav"  >
-              <i class="icon icon-lg icon-archives"></i>
-              收藏夹
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/tags"  >
-              <i class="icon icon-lg icon-tags"></i>
-              分类
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://github.com/yfgeek" target="_blank" >
-              <i class="icon icon-lg icon-github"></i>
-              Github
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="http://www.weibo.com/yfsss" target="_blank" >
-              <i class="icon icon-lg icon-weibo"></i>
-              Weibo
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://www.zhihu.com/people/yfgeek" target="_blank" >
-              <i class="icon icon-lg icon-link"></i>
-              知乎
-            </a>
-          </li>
       
     </ul>
 
@@ -103,16 +57,6 @@
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">常用Bash命令总结</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
         
         
     </div>
@@ -145,10 +89,6 @@
 
             
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#日常"><span class="post-toc-text">日常</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安全"><span class="post-toc-text">安全</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一句话命令"><span class="post-toc-text">一句话命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用功能"><span class="post-toc-text">常用功能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定时任务"><span class="post-toc-text">#定时任务</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#scp"><span class="post-toc-text">#scp</span></a></li></ol>
-            </nav>
             
         </aside>
 
@@ -240,26 +180,6 @@
 
             
             
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="bash" data-title="常用Bash命令总结" data-url="http://blog.yfgeek.com/2016/08/06/bash/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"yifani"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
 
 
 
@@ -277,26 +197,6 @@
 
 <script src="/js/main.js"></script>
 
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<script type="text/template" id="search-tpl">
-<li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</script>
-
-<script src="/js/search.js"></script>
 
 
 

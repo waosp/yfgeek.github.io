@@ -6,8 +6,6 @@
   <title>Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="theme-color" content="#2196f3">
-  
   
   <meta name="keywords" content="undefined">
   <meta name="description" content="Thinking as a Geek">
@@ -20,10 +18,8 @@
 <meta name="twitter:title" content="Ivan's Blog">
 <meta name="twitter:description" content="Thinking as a Geek">
   
-    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
-  
   <meta name="summary" content="Thinking as a Geek">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="/">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -37,7 +33,7 @@
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <a href="/" class="avatar"><img src="undefined"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -45,48 +41,6 @@
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
-      
-          <li class="waves-block waves-effect">
-            <a href="/"  >
-              <i class="icon icon-lg icon-home"></i>
-              主页
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/fav"  >
-              <i class="icon icon-lg icon-archives"></i>
-              收藏夹
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/tags"  >
-              <i class="icon icon-lg icon-tags"></i>
-              分类
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://github.com/yfgeek" target="_blank" >
-              <i class="icon icon-lg icon-github"></i>
-              Github
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="http://www.weibo.com/yfsss" target="_blank" >
-              <i class="icon icon-lg icon-weibo"></i>
-              Weibo
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://www.zhihu.com/people/yfgeek" target="_blank" >
-              <i class="icon icon-lg icon-link"></i>
-              知乎
-            </a>
-          </li>
       
     </ul>
 
@@ -102,16 +56,6 @@
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">Ivan&#39;s Blog</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
         
         
     </div>
@@ -161,7 +105,7 @@
     
     
         <a href="/2016/07/28/tor/" class="post-more waves-effect waves-button">
-            阅读全文...
+            
         </a>
     </div>
     
@@ -204,11 +148,93 @@
  vi +n filename ：打开文件，并将光标置于第n行首 
  vi + filename ：打开文件，并将光标置于最后一行首 
  vi +/pattern filename：打开文件，并将光标置于第一个与pattern匹配的串处 
- vi -r filename ：在上次正用vi编辑时
+ vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复filename 
+ vi filename….filename ：打开多个文件，依次进行编辑 
+   移动光标类命令  h ：光标左移一个字符 
+ l ：光标右移一个字符 
+ space：光标右移一个字符 
+ Backspace：光标左移一个字符 
+ k或Ctrl+p：光标上移一行 
+ j或Ctrl+n ：光标下移一行 
+ Enter ：光标下移一行 
+ w或W ：光标右移一个字至字首 
+ b或B ：光标左移一个字至字首 
+ e或E ：光标右移一个字至字尾 
+ ) ：光标移至句尾 
+ ( ：光标移至句首 
+ }：光标移至段落开头 
+ {：光标移至段落结尾 
+ nG：光标移至第n行首 
+ n+：光标下移n行 
+ n-：光标上移n行 
+ n$：光标移至第n行尾 
+ H ：光标移至屏幕顶行 
+ M ：光标移至屏幕中间行 
+ L ：光标移至屏幕最后行 
+ 0：（注意是数字零）光标移至当前行首 
+ $：光标移至当前行尾 
+   屏幕翻滚类命令  Ctrl+u：向文件首翻半屏 
+ Ctrl+d：向文件尾翻半屏 
+ Ctrl+f：向文件尾翻一屏 
+ Ctrl＋b；向文件首翻一屏 
+ nz：将第n行滚至屏幕顶部，不指定n时将当前行滚至屏幕顶部。 
+   插入文本类命令  i ：在光标前 
+ I ：在当前行首 
+ a：光标后 
+ A：在当前行尾 
+ o：在当前行之下新开一行 
+ O：在当前行之上新开一行 
+ r：替换当前字符 
+ R：替换当前字符及其后的字符，直至按ESC键 
+ s：从当前光标位置处开始，以输入的文本替代指定数目的字符 
+ S：删除指定数目的行，并以所输入文本代替之 
+ ncw或nCW：修改指定数目的字 
+ nCC：修改指定数目的行 
+   删除命令  ndw或ndW：删除光标处开始及其后的n-1个字 
+ do：删至行首 
+ d$：删至行尾 
+ ndd：删除当前行及其后n-1行 
+ x或X：删除一个字符，x删除光标后的，而X删除光标前的 
+ Ctrl+u：删除输入方式下所输入的文本 
+   搜索及替换命令  /pattern：从光标开始处向文件尾搜索pattern 
+ ?pattern：从光标开始处向文件首搜索pattern 
+ n：在同一方向重复上一次搜索命令 
+ N：在反方向上重复上一次搜索命令 
+ ：s/p1/p2/g：将当前行中所有p1均用p2替代 
+ ：n1,n2s/p1/p2/g：将第n1至n2行中所有p1均用p2替代 
+ ：g/p1/s//p2/g：将文件中所有p1均用p2替换 
+   选项设置  all：列出所有选项设置情况 
+ term：设置终端类型 
+ ignorance：在搜索中忽略大小写 
+ list：显示制表位(Ctrl+I)和行尾标志（$) 
+ number：显示行号 
+ report：显示由面向行的命令修改过的数目 
+ terse：显示简短的警告信息 
+ warn：在转到别的文件时若没保存当前文件则显示NO write信息 
+ nomagic：允许在搜索模式中，使用前面不带“\”的特殊字符 
+ nowrapscan：禁止vi在搜索到达文件两端时，又从另一端开始 
+ mesg：允许vi显示其他用户用write写到自己终端上的信息 
+   最后行方式命令  ：n1,n2 co n3：将n1行到n2行之间的内容拷贝到第n3行下 
+ ：n1,n2 m n3：将n1行到n2行之间的内容移至到第n3行下 
+ ：n1,n2 d ：将n1行到n2行之间的内容删除 
+ ：w ：保存当前文件 
+ ：e filename：打开文件filename进行编辑 
+ ：x：保存当前文件并退出 
+ ：q：退出vi 
+ ：q!：不保存文件并退出vi 
+ ：!command：执行shell命令command 
+ ：n1,n2 w!command：将文件中n1行至n2行的内容作为command的输入并执行之，若不指定n1，n2，则表示将整个文件内容作为command的输入 
+ ：r!command：将命令command的输出结果放到当前行 
+   寄存器操作  “?nyy：将当前行及其下n行的内容保存到寄存器？中，其中?为一个字母，n为一个数字 
+ “?nyw：将当前行及其下n个字保存到寄存器？中，其中?为一个字母，n为一个数字 
+ “?nyl：将当前行及其下n个字符保存到寄存器？中，其中?为一个字母，n为一个数字 
+ “?p：取出寄存器？中的内容并将其放到光标位置处。这里？可以是一个字母，也可以是一个数字 
+ ndd：将当前行及其下共n行文本删除，并将所删内容放到1号删除寄存器中。 
+
     
     
         <a href="/2016/07/28/vimda-quan/" class="post-more waves-effect waves-button">
-            阅读全文...
+            
         </a>
     </div>
     
@@ -247,11 +273,44 @@
     
          本文介绍了iTerm2的美化过程，包括安装oh my zsh，powerline，以及对vim的美化。 
    1.首先下载 iTerm 2    2.打开iTerm 2    3.输入下面指令安装oh-my-zsh   curl -L https://raw.github.com/robbyrussell/oh-my-zsh/master/tools/install.sh | sh  
-   
+   4.接下来安装Powerline  在官网有教程，我们只需要执行官网第一条安装指令就行 如果你的终端能够正常执行pip指令，那么直接执行下面的指令可以完成安装 
+  pip install powerline-status  
+ 如果没有，则先执行安装pip指令 
+  sudo easy_install pip  
+   5.下载、安装库字体库  1）将工程下载下来后cd到 install.sh 文件所在目录 2）执行指令安装字体库 
+ 执行 ./install.sh 指令安装所有Powerline字体 
+ 安装完成后提示所有字体均已下载到 /Users/superdanny/Library/Fonts 路径下  All Powerline fonts installed to /Users/superdanny/Library/Fonts  
+   6. 设置iTerm 2的Regular Font 和 Non-ASCII Font  安装完字体库之后，把iTerm 2的设置里的Profile中的Text 选项卡中里的Regular Font和Non-ASCII Font的字体都设置成 Powerline的字体，我这里设置的字体是12pt Meslo LG S DZ Regular for Powerline 
+   7. 配色方案  1）安装配色方案 进入刚刚下载的工程的solarized/iterm2-colors-solarized 下双击 Solarized Dark.itermcolors 和 Solarized Light.itermcolors 两个文件就可以把配置文件导入到 iTerm2 里 
+ 2）配置配色方案 通过load presets选择刚刚安装的配色主题即可 
+   8. 使用agnoster主题  1）下载agnoster主题 到下载的工程里面运行install文件,主题将安装到 ~/.oh-my-zsh/themes 目录下 
+ 2）设置该主题 进入~/.zshrc打开.zshrc文件，然后将 ZSH_THEME 后面的字段改为 agnoster 。 ZSH_THEME=&quot;agnoster&quot; （agnoster即为要设置的主题） 
+   9. 增加指令高亮效果——zsh-syntax-highlighting  指令高亮效果作用是当用户输入正确命令时指令会绿色高亮，错误时命令红色高亮 
+ 1）cd到.zshrc所在目录 
+ 2）执行指令将工程克隆到当前目录 
+  git clone git://github.com/zsh-users/zsh-syntax-highlighting.git  
+ 3）打开.zshrc文件，在最后添加下面内容 
+  source XXX/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh  
+ 保存文件。 
+ 注意：xxx代表 .zshrc 所在目录 
+ 4） cd ~/.oh-my-zsh/custom/plugins  
+ 5）再次打开 .zshrc 文件，在最后面添加下面内容 plugins=(zsh-syntax-highlighting) 保存文件。 
+  启动iTerm 2 默认使用dash改用zsh解决方法：   chsh -s /bin/zsh  
+   Vim   $ cd solarized
+$ cd vim-colors-solarized/colors
+$ mkdir -p ~/.vim/colors
+$ cp solarized.vim ~/.vim/colors/   $ vi ~/.vimrc
+syntax enable
+set background=dark
+colorscheme solarized  
+   ls  Mac OS X 是基于 FreeBSD 的，所以一些工具 ls, top 等都是 BSD 那一套，ls 不是 GNU ls，所以即使 Terminal/iTerm2 配置了颜色，但是在 Mac 上敲入 ls 命令也不会显示高亮，可以通过安装 coreutils 来解决（ brew install coreutils ），不过如果对 ls 颜色不挑剔的话有个简单办法就是在 .bash_profile 里输出 CLICOLOR=1： 
+  $ vi ~/.bash_profile
+export CLICOLOR=1  
+
     
     
         <a href="/2016/07/28/iterm2-mei-hua-quan-guo-cheng/" class="post-more waves-effect waves-button">
-            阅读全文...
+            
         </a>
     </div>
     
@@ -280,26 +339,6 @@
 
 <script src="/js/main.js"></script>
 
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<script type="text/template" id="search-tpl">
-<li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</script>
-
-<script src="/js/search.js"></script>
 
 
 

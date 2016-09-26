@@ -6,8 +6,6 @@
   <title>树莓派实时温度湿度监测进阶 | Ivan&#39;s Blog | Thinking as a Geek</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   
-  <meta name="theme-color" content="#2196f3">
-  
   
   <meta name="keywords" content="Raspberry">
   <meta name="description" content="这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。
@@ -41,24 +39,22 @@ Nginx/Apache (请自行提前安装)
 安装依赖123456789sudo apt-get updatesudo apt-get install build-essential python-dev python-smbus python">
 <meta name="twitter:image" content="http://blog.yfgeek.com/content/images/2016/08/WechatIMG10.jpeg">
   
-    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
-  
   <meta name="summary" content="Thinking as a Geek">
-  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="shortcut icon" href="/">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
 <body>
   <div id="loading" class="active"></div>
 
-  <nav id="menu" class="hide" >
+  <nav id="menu"  >
    <div class="inner flex-row-vertical">
   <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
       <i class="icon icon-lg icon-close"></i>
   </a>
   <div class="brand-wrap">
     <div class="brand">
-      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <a href="/" class="avatar"><img src="undefined"></a>
       <hgroup class="introduce">
         <h5 class="nickname">Ivan</h5>
       </hgroup>
@@ -66,48 +62,6 @@ Nginx/Apache (请自行提前安装)
   </div>
   <div class="scroll-wrap flex-col">
     <ul class="nav">
-      
-          <li class="waves-block waves-effect">
-            <a href="/"  >
-              <i class="icon icon-lg icon-home"></i>
-              主页
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/fav"  >
-              <i class="icon icon-lg icon-archives"></i>
-              收藏夹
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="/tags"  >
-              <i class="icon icon-lg icon-tags"></i>
-              分类
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://github.com/yfgeek" target="_blank" >
-              <i class="icon icon-lg icon-github"></i>
-              Github
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="http://www.weibo.com/yfsss" target="_blank" >
-              <i class="icon icon-lg icon-weibo"></i>
-              Weibo
-            </a>
-          </li>
-      
-          <li class="waves-block waves-effect">
-            <a href="https://www.zhihu.com/people/yfgeek" target="_blank" >
-              <i class="icon icon-lg icon-link"></i>
-              知乎
-            </a>
-          </li>
       
     </ul>
 
@@ -123,16 +77,6 @@ Nginx/Apache (请自行提前安装)
           <i class="icon icon-lg icon-navicon"></i>
         </a>
         <div class="flex-col header-title ellipsis">树莓派实时温度湿度监测进阶</div>
-        
-        <div class="search-wrap" id="search-wrap">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
-                <i class="icon icon-lg icon-chevron-left"></i>
-            </a>
-            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
-            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
-                <i class="icon icon-lg icon-search"></i>
-            </a>
-        </div>
         
         
     </div>
@@ -165,10 +109,6 @@ Nginx/Apache (请自行提前安装)
 
             
 
-            
-            <nav class="post-toc-wrap" id="post-toc">
-            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#依赖"><span class="post-toc-text">依赖</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装依赖"><span class="post-toc-text">安装依赖</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#安装"><span class="post-toc-text">安装</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#运行"><span class="post-toc-text">运行</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#截图"><span class="post-toc-text">截图</span></a></li></ol>
-            </nav>
             
         </aside>
 
@@ -221,26 +161,6 @@ Nginx/Apache (请自行提前安装)
 
             
             
-<div class="duoshuo">
-	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="runtimelcd" data-title="树莓派实时温度湿度监测进阶" data-url="http://blog.yfgeek.com/2016/08/26/runtimelcd/index.html"></div>
-	<!-- 多说评论框 end -->
-	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-	<script type="text/javascript">
-	var duoshuoQuery = {short_name:"yifani"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-		 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
-	</script>
-	<!-- 多说公共JS代码 end -->
-</div>
-
-
 
 
 
@@ -258,26 +178,6 @@ Nginx/Apache (请自行提前安装)
 
 <script src="/js/main.js"></script>
 
-
-
-<div class="search-panel" id="search-panel">
-    <ul class="search-result" id="search-result"></ul>
-</div>
-<script type="text/template" id="search-tpl">
-<li class="item">
-    <a href="/{path}" class="waves-block waves-effect">
-        <div class="title ellipsis" title="{title}">{title}</div>
-        <div class="flex-row flex-middle">
-            <div class="tags ellipsis">
-                {tags}
-            </div>
-            <time class="flex-col time">{date}</time>
-        </div>
-    </a>
-</li>
-</script>
-
-<script src="/js/search.js"></script>
 
 
 

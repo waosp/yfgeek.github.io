@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Java初学者小经验 | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#2196f3">
+  
+  
+  <meta name="keywords" content="Java">
+  <meta name="description" content="Java初学者小技巧我是个Java新手，总结了一些经验
+构造器和方法的区别主题构造器方法功能建立一个类的实例java功能语句修饰不能用bstract, final, native, static, or synchronized能返回类型没有返回值，没有void有返回值，或者void命名和类名相同；通常为名词，大写开头通常代表一个动词的意思，小写开头this指向同一个类中另外一个构造器，在第一行指">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Java初学者小经验">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/09/30/Java初学者小经验/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="Java初学者小技巧我是个Java新手，总结了一些经验
+构造器和方法的区别主题构造器方法功能建立一个类的实例java功能语句修饰不能用bstract, final, native, static, or synchronized能返回类型没有返回值，没有void有返回值，或者void命名和类名相同；通常为名词，大写开头通常代表一个动词的意思，小写开头this指向同一个类中另外一个构造器，在第一行指">
+<meta property="og:updated_time" content="2016-10-05T10:45:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Java初学者小经验">
+<meta name="twitter:description" content="Java初学者小技巧我是个Java新手，总结了一些经验
+构造器和方法的区别主题构造器方法功能建立一个类的实例java功能语句修饰不能用bstract, final, native, static, or synchronized能返回类型没有返回值，没有void有返回值，或者void命名和类名相同；通常为名词，大写开头通常代表一个动词的意思，小写开头this指向同一个类中另外一个构造器，在第一行指">
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="Thinking as a Geek">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
+      
+    </ul>
+
+    
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Java初学者小经验</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Java初学者小经验</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-09-30T11:47:27.000Z" itemprop="datePublished" class="page-time">
+  2016-09-30
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Java/">Java</a></li></ul>
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-Java初学者小经验" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Java/">Java</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java初学者小技巧"><span class="post-toc-text">Java初学者小技巧</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#构造器和方法的区别"><span class="post-toc-text">构造器和方法的区别</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Java"><span class="post-toc-text">Java</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#Eclipse"><span class="post-toc-text">Eclipse</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="Java初学者小技巧"><a href="#Java初学者小技巧" class="headerlink" title="Java初学者小技巧"></a>Java初学者小技巧</h1><p>我是个Java新手，总结了一些经验</p>
+<h2 id="构造器和方法的区别"><a href="#构造器和方法的区别" class="headerlink" title="构造器和方法的区别"></a>构造器和方法的区别</h2><p><table><tbody><tr></tr><tr><th><font>主题</font></th><th><font>构造器</font></th><th><font>方法</font></th></tr><tr><td><font>功能</font></td><td><font>建立一个类的实例</font></td><td><font>java功能语句</font></td></tr><tr><td><font>修饰</font></td><td><font>不能用<code>bstract</code>, <code>final</code>, <code>native</code>, <code>static</code>, or <code>synchronized</code></font></td><td><font>能<code></code></font></td></tr><tr><td><font>返回类型</font></td><td><font>没有返回值，没有void<code></code></font></td><td><code><font>有返回值，或者void</font></code></td></tr><tr><td><font>命名</font></td><td><font>和类名相同；通常为名词，大写开头</font></td><td><font>通常代表一个动词的意思，小写开头</font></td></tr><tr><td><code><font>this</font></code></td><td><font>指向同一个类中另外一个构造器，在第一行</font></td><td><font>指向当前类的一个实例，不能用于静态方法</font></td></tr><tr><td><code><font>super</font></code></td><td><font>调用父类的构造器，在第一行</font></td><td><font>调用父类中一个重载的方法</font></td></tr><tr><td><font>继承</font></td><td><font>构造器不能被继承</font></td><td><font>方法可以被继承</font></td></tr><tr><td><font>编译器自动加入一个缺省的构造器</font></td><td><font>自动加入（如果没有）</font></td><td><font>不支持</font></td></tr><tr><td><font>编译器自动加入一个缺省的调用到超类的构造器</font></td><td><font>自动加入（如果没有）</font></td><td><font>不支持</font></td></tr></tbody></table></p>
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><ul>
+<li>输入args<h1 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h1></li>
+<li><code>alt + /</code> 自动补全</li>
+<li><code>ctrl+shift+F</code> 格式化代码</li>
+<li></li>
+</ul>
+
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://blog.yfgeek.com/2016/09/30/Java初学者小经验/" target="_blank" rel="external">http://blog.yfgeek.com/2016/09/30/Java初学者小经验/</a>
+                </p>
+                <footer><cite><a href="http://blog.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/10/05/SQL重复记录查询（转载）/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">SQL重复记录查询（转载）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/09/26/使用ProxyChains进行终端代理/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">使用ProxyChains进行终端代理</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Java初学者小经验" data-title="Java初学者小经验" data-url="http://blog.yfgeek.com/2016/09/30/Java初学者小经验/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Kali系列——信息收集阶段（一） | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#2196f3">
+  
+  
+  <meta name="keywords" content="Hack">
+  <meta name="description" content="记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：
+
+进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探
+爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！
+
+其实，我觉得渗透测试无论怎么变，不外乎这几点：
+
+信息收集阶段-&amp;gt;漏洞检测阶段-&amp;g">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Kali系列——信息收集阶段（一）">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/07/30/hack1/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：
+
+进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探
+爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！
+
+其实，我觉得渗透测试无论怎么变，不外乎这几点：
+
+信息收集阶段-&amp;gt;漏洞检测阶段-&amp;g">
+<meta property="og:updated_time" content="2016-08-05T20:13:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Kali系列——信息收集阶段（一）">
+<meta name="twitter:description" content="记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：
+
+进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探
+爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！
+
+其实，我觉得渗透测试无论怎么变，不外乎这几点：
+
+信息收集阶段-&amp;gt;漏洞检测阶段-&amp;g">
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探&lt;/p&gt;
+&lt;p&gt;爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;其实，我觉得渗透测试无论怎么变，不外乎这几点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;信息收集阶段-&amp;gt;漏洞检测阶段-&amp;gt;漏洞利用阶段-&amp;gt;持久化后门阶段&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最近借了本好书《高度安全环境下的高级渗透测试》，这本书内容浅显易懂，但却很实用，虽然很多内容都知道，但是不成系统，这本书总结工作做得非常好，总结一下读书笔记。&lt;br&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
+      
+    </ul>
+
+    
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Kali系列——信息收集阶段（一）</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Kali系列——信息收集阶段（一）</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-07-30T16:48:20.000Z" itemprop="datePublished" class="page-time">
+  2016-07-30
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-hack1" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hack/">Hack</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#信息收集阶段"><span class="post-toc-text">信息收集阶段</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#DNS信息"><span class="post-toc-text">DNS信息</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#nslookup"><span class="post-toc-text">nslookup</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#dig"><span class="post-toc-text">dig</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#whois"><span class="post-toc-text">whois</span></a></li></ol></li></ol></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：</p>
+<blockquote>
+<p>进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探</p>
+<p>爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！</p>
+</blockquote>
+<p>其实，我觉得渗透测试无论怎么变，不外乎这几点：</p>
+<blockquote>
+<p>信息收集阶段-&gt;漏洞检测阶段-&gt;漏洞利用阶段-&gt;持久化后门阶段</p>
+</blockquote>
+<p>最近借了本好书《高度安全环境下的高级渗透测试》，这本书内容浅显易懂，但却很实用，虽然很多内容都知道，但是不成系统，这本书总结工作做得非常好，总结一下读书笔记。<br><a id="more"></a> </p>
+<h1 id="信息收集阶段"><a href="#信息收集阶段" class="headerlink" title="信息收集阶段"></a>信息收集阶段</h1><h2 id="DNS信息"><a href="#DNS信息" class="headerlink" title="DNS信息"></a>DNS信息</h2><p>其实DNS信息收集阶段用两个Linux系统自带工具即可完成。</p>
+<h3 id="nslookup"><a href="#nslookup" class="headerlink" title="nslookup"></a>nslookup</h3><p>此命令，可以快速查处ip地址<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"> ✘ ivan@Ivan~ nslookup zhihu.com</div><div class="line">Server:		114.114.114.114</div><div class="line">Address:	114.114.114.114<span class="comment">#53</span></div><div class="line"></div><div class="line">Non-authoritative answer:</div><div class="line">Name:	zhihu.com</div><div class="line">Address: 54.223.189.245</div></pre></td></tr></table></figure></p>
+<p>当然也可以指定dns查询服务器：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">ivan@Ivan ~ nslookup -type=ns zhihu.com 8.8.8.8</div><div class="line">Server:		8.8.8.8</div><div class="line">Address:	8.8.8.8<span class="comment">#53</span></div><div class="line"></div><div class="line">Non-authoritative answer:</div><div class="line">zhihu.com	nameserver = ns3.dnsv4.com.</div><div class="line">zhihu.com	nameserver = ns4.dnsv4.com.</div><div class="line"></div><div class="line">Authoritative answers can be found from:</div></pre></td></tr></table></figure></p>
+<h3 id="dig"><a href="#dig" class="headerlink" title="dig"></a>dig</h3><p>dig真是个好工具，甚至可以找出DNS域传送漏洞。下面举一个例子，也是乌云网曝光过的，由于篇幅问题，精简了很多内容：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div></pre></td><td class="code"><pre><div class="line">ivan@Ivan  ~  dig @dns.csust.edu.cn csust.edu.cn axfr</div><div class="line"></div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; @dns.csust.edu.cn csust.edu.cn axfr</div><div class="line">; (1 server found)</div><div class="line">;; global options: +cmd</div><div class="line">csust.edu.cn.		86400	IN	SOA	dns.csust.edu.cn. root.localhost.csust.edu.cn. 20160725 28800 7200 604800 86400</div><div class="line">csust.edu.cn.		86400	IN	NS	dns.csust.edu.cn.</div><div class="line">csust.edu.cn.		86400	IN	NS	dns2.csust.edu.cn.</div><div class="line">csust.edu.cn.		86400	IN	A	113.240.233.146</div><div class="line">csust.edu.cn.		86400	IN	A	210.43.192.8</div><div class="line">csust.edu.cn.		86400	IN	A	210.43.192.18</div><div class="line">csust.edu.cn.		86400	IN	MX	5 mxbiz1.qq.com.</div><div class="line">csust.edu.cn.		86400	IN	MX	10 mxbiz2.qq.com.</div><div class="line">csust.edu.cn.		86400	IN	AAAA	2001:da8:d002::d22b:c008</div><div class="line">3g.csust.edu.cn.	86400	IN	A	113.240.233.6</div><div class="line">app.csust.edu.cn.	86400	IN	A	113.240.233.11</div><div class="line">app7.csust.edu.cn.	86400	IN	A	222.240.152.227</div><div class="line">app8.csust.edu.cn.	86400	IN	A	113.240.233.8</div><div class="line">archives.csust.edu.cn.	86400	IN	A	222.240.152.232</div><div class="line">bid.csust.edu.cn.	86400	IN	CNAME	jtcloud.csust.edu.cn.</div><div class="line">bw.csust.edu.cn.	86400	IN	A	10.255.194.20</div><div class="line">cas.csust.edu.cn.	86400	IN	A	210.43.198.1</div><div class="line">cslgqkzx.csust.edu.cn.	86400	IN	A	210.43.188.80</div><div class="line">cslgxbsk.csust.edu.cn.	86400	IN	CNAME	cslgqkzx.csust.edu.cn.</div><div class="line">cslgxbzk.csust.edu.cn.	86400	IN	CNAME	cslgqkzx.csust.edu.cn.</div><div class="line">cwcx.csust.edu.cn.	86400	IN	A	10.22.14.252</div><div class="line">cxlt.csust.edu.cn.	86400	IN	A	222.240.152.203</div><div class="line">dkxnsyzx.csust.edu.cn.	86400	IN	A	222.240.152.200</div><div class="line">dlkjxb.csust.edu.cn.	86400	IN	CNAME	cslgqkzx.csust.edu.cn.</div><div class="line">dns.csust.edu.cn.	86400	IN	A	210.43.192.8</div><div class="line">csust.edu.cn.		86400	IN	SOA	dns.csust.edu.cn. root.localhost.csust.edu.cn. 20160725 28800 7200 604800 86400</div><div class="line">;; Query time: 62 msec</div><div class="line">;; SERVER: 210.43.192.8<span class="comment">#53(210.43.192.8)</span></div><div class="line">;; WHEN: Sat Jul 30 20:18:47 2016</div><div class="line">;; XFR size: 112 records (messages 1, bytes 2369)</div></pre></td></tr></table></figure></p>
+<p>可以看到，各种信息，从A、cname到MX全部暴露无遗。<br>如果不存在该漏洞则会被服务器拒绝查询请求。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">ivan@Ivan ~ dig @dns4.tju.edu.cn tju.edu.cn axfr</div><div class="line">; &lt;&lt;&gt;&gt; DiG 9.8.3-P1 &lt;&lt;&gt;&gt; @dns4.tju.edu.cn tju.edu.cn axfr</div><div class="line">; (1 server found)</div><div class="line">;; global options: +cmd</div><div class="line">; Transfer failed.</div></pre></td></tr></table></figure>
+<h3 id="whois"><a href="#whois" class="headerlink" title="whois"></a>whois</h3><p>whois查询，不多解释了</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line">ivan@Ivan ~ whois yfgeek.com</div><div class="line"></div><div class="line">Whois Server Version 2.0</div><div class="line"></div><div class="line">Domain names <span class="keyword">in</span> the .com and .net domains can now be registered</div><div class="line">with many different competing registrars. Go to http://www.internic.net</div><div class="line"><span class="keyword">for</span> detailed information.</div><div class="line"></div><div class="line">   Domain Name: YFGEEK.COM</div><div class="line">   Registrar: GODADDY.COM, LLC</div><div class="line">   Sponsoring Registrar IANA ID: 146</div><div class="line">   Whois Server: whois.godaddy.com</div><div class="line">   Referral URL: http://www.godaddy.com</div><div class="line">   Name Server: F1G1NS1.DNSPOD.NET</div><div class="line">   Name Server: F1G1NS2.DNSPOD.NET</div><div class="line">   Status: clientDeleteProhibited https://icann.org/epp<span class="comment">#clientDeleteProhibited</span></div><div class="line">   Status: clientRenewProhibited https://icann.org/epp<span class="comment">#clientRenewProhibited</span></div><div class="line">   Status: clientTransferProhibited https://icann.org/epp<span class="comment">#clientTransferProhibited</span></div><div class="line">   Status: clientUpdateProhibited https://icann.org/epp<span class="comment">#clientUpdateProhibited</span></div><div class="line">   Updated Date: 21-apr-2016</div><div class="line">   Creation Date: 23-nov-2012</div><div class="line">   Expiration Date: 23-nov-2017</div></pre></td></tr></table></figure>
+
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://blog.yfgeek.com/2016/07/30/hack1/" target="_blank" rel="external">http://blog.yfgeek.com/2016/07/30/hack1/</a>
+                </p>
+                <footer><cite><a href="http://blog.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Kali系列——信息收集阶段（二）</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/07/29/emacs-da-quan/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Emacs 命令大全</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="hack1" data-title="Kali系列——信息收集阶段（一）" data-url="http://blog.yfgeek.com/2016/07/30/hack1/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>Tor安全上网指南 | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#2196f3">
+  
+  
+  <meta name="keywords" content="Hack">
+  <meta name="description" content="本文主要介绍了如何将一个虚拟机系统全局使用TOR技术，笔者所用操作系统为OS X EI Capitan 10.11.5，虚拟机系统为VMware Fusion专业版 8.1.1 (3771013)。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tor安全上网指南">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/07/28/tor/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="本文主要介绍了如何将一个虚拟机系统全局使用TOR技术，笔者所用操作系统为OS X EI Capitan 10.11.5，虚拟机系统为VMware Fusion专业版 8.1.1 (3771013)。">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/1-1.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/1-2.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/1-3.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/1-4.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/1-5.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/2-2.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/2-1.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/1.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/2.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/4-1.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/5-pic_hd.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/6-pic_hd.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/7-pic_hd.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/9-pic_hd.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/07/8-pic_hd.jpg">
+<meta property="og:updated_time" content="2016-08-05T20:13:45.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Tor安全上网指南">
+<meta name="twitter:description" content="本文主要介绍了如何将一个虚拟机系统全局使用TOR技术，笔者所用操作系统为OS X EI Capitan 10.11.5，虚拟机系统为VMware Fusion专业版 8.1.1 (3771013)。">
+<meta name="twitter:image" content="http://blog.yfgeek.com/content/images/2016/07/1-1.png">
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;本文主要介绍了如何将一个虚拟机系统全局使用TOR技术，笔者所用操作系统为OS X EI Capitan 10.11.5，虚拟机系统为VMware Fusion专业版 8.1.1 (3771013)。&lt;br&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
+      
+    </ul>
+
+    
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">Tor安全上网指南</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">Tor安全上网指南</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-07-28T15:01:47.000Z" itemprop="datePublished" class="page-time">
+  2016-07-28
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-tor" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Hack/">Hack</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vidalia部分"><span class="post-toc-text">Vidalia部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#Vmware部分"><span class="post-toc-text">Vmware部分</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#虚拟机部分-Win"><span class="post-toc-text">虚拟机部分(Win)</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>本文主要介绍了如何将一个虚拟机系统全局使用TOR技术，笔者所用操作系统为OS X EI Capitan 10.11.5，虚拟机系统为VMware Fusion专业版 8.1.1 (3771013)。<br><a id="more"></a><br>声明！</p>
+<p>==本文原创，技术无罪，笔者即将身处海外，本文撰写目的<strong>仅为防止美国棱镜计划侵犯本人隐私安全，无其它任何用途</strong>。==</p>
+<p>==使用TOR技术请在遵守当地法律的前提下使用！本软件在中国大陆地区已被封锁，按照相关法律法规，禁止使用本软件。由于相关政策法律原因，<strong>不允许任何形式私自转载</strong>，本文只进行对TOR相关<strong>技术探讨</strong>，不涉及任何违法违规行为，请勿用于非法用途（如渗透服务器、非法扫描网段、不受监控的网络言论、不受监控的非法互联网通讯等），如出现上述等违法行为，请自负法律责任！==</p>
+<p><strong>准备条件</strong></p>
+<ul>
+<li><p>1.一个隧道(ssh,shadowsocks,socket5,http,vpn都可以)可以连接到真正的互联网，如果身处海外请无视此条。</p>
+</li>
+<li><p>2.最新版Vidalia <a href="https://dist.torproject.org/vidalia-bundles/" target="_blank" rel="external">下载地址</a>（需完整互联网）</p>
+</li>
+<li><p>3.Vmware Fusion/Vmware workstation/Oracle VirtualBox</p>
+</li>
+<li><p>4.一个完整版的虚拟机操作系统</p>
+</li>
+</ul>
+<p><strong>笔者环境</strong></p>
+<p>操作系统：OS X EI Capitan 10.11.5</p>
+<p>虚拟机软件：VMware Fusion专业版 8.1.1 (3771013)</p>
+<p>虚拟机操作系统：Windows xp sp2 或 Kali linux</p>
+<p>隧道软件：lantern 或 shadowsockets</p>
+<h3 id="Vidalia部分"><a href="#Vidalia部分" class="headerlink" title="Vidalia部分"></a>Vidalia部分</h3><p><em>如果你的网络未进行封锁，请忽略前2步，请跑步进入第3步。</em><br><img src="/content/images/2016/07/1-1.png" width="500px"><br><strong>1.建立您的隧道网络</strong></p>
+<p>笔者以shadowsocks为例，开启shadowsocks配置好信息后，无需做任何操作。shadowsocks的默认对外端口为1080。</p>
+<p><strong>2.在Vidalia中设置代理连接</strong></p>
+<p>打开Vidalia-设置-网络：我使用代理服务器连接网络</p>
+<p>地址：127.0.0.1 端口：1080（用户定义）</p>
+<p>类型：SOCKS 5<br><img src="/content/images/2016/07/1-2.png" alt=""></p>
+<p><strong>3.继续设置，转发出外网端口</strong></p>
+<p>Vidalia-设置-高级-编辑当前torrc：<br><img src="/content/images/2016/07/1-3.png" alt=""><br>确认socksport为9050，也可以定义为其他端口。<br>同时添加<code>SocksListenAddress 0.0.0.0:9050</code>到底部<br>保存</p>
+<p>笔者配置文件如下，仅供参考，不可复制：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># This file was generated by Tor; if you edit it, comments will not be preserved</span></div><div class="line"><span class="comment"># The old torrc file was renamed to torrc.orig.1 or similar, and Tor will ignore it</span></div><div class="line"></div><div class="line">ControlPort 9051</div><div class="line">DataDirectory /Users/ivan/.tor</div><div class="line">DirReqStatistics 0</div><div class="line">HashedControlPassword 16:此处隐藏</div><div class="line">Socks5Proxy 127.0.0.1:1080</div><div class="line">Log notice stdout</div><div class="line">SocksListenAddress 0.0.0.0:9050</div><div class="line">SocksPort 9050</div></pre></td></tr></table></figure>
+<p><br><img src="/content/images/2016/07/1-4.png" alt=""><br><strong>4.Vidalia启动TOR</strong></p>
+<p>稍等片刻，需要建立Tor回路，五分钟后，便会提示你连接成功。<br><img src="/content/images/2016/07/1-5.png" alt=""><br>随后可以通过使用Chrome的网络代理插件测试，通过ip测试可判断是否成功。如果ip地址每几分钟自动更新一次，且都是不同国家的，则说明TOR回路建立成功。<br><img src="/content/images/2016/07/2-2.png" alt=""><br><img src="/content/images/2016/07/2-1.png" alt=""></p>
+<h3 id="Vmware部分"><a href="#Vmware部分" class="headerlink" title="Vmware部分"></a>Vmware部分</h3><p><strong>1.设置Vmware，添加虚拟网卡</strong></p>
+<p>进入Vmware的偏好设置-网络，先点小锁，把功能解锁。</p>
+<p>然后点+，新建一个网络，<strong>警告：请勿勾选NAT</strong>。</p>
+<p><strong>勾选 将MAC主机连入该网络</strong></p>
+<p>同时设置 <strong>通过DHCP在该网络提供网络地址</strong>：</p>
+<pre>
+子网ip：172.16.225.0
+
+子网掩码：255.255.255.0
+</pre>
+
+<p><img src="/content/images/2016/07/1.jpg" alt=""><br><strong>2.在虚拟机系统的配置中，将网络适配器的上网方式改为vmnet2</strong></p>
+<p>虚拟机-设置-网络适配器-vmnet2，请再次确保无其他上网方式以保证绝对安全。<br><img src="/content/images/2016/07/2.jpg" alt=""></p>
+<h3 id="虚拟机部分-Win"><a href="#虚拟机部分-Win" class="headerlink" title="虚拟机部分(Win)"></a><strong>虚拟机部分(Win)</strong></h3><p><strong>1.进入操作系统</strong></p>
+<p>建议重新安装操作系统，以保证系统纯净性。<br><img src="/content/images/2016/07/4-1.jpg" alt=""><br><img src="/content/images/2016/07/5-pic_hd.jpg" alt=""></p>
+<p><strong>2.寻找宿主机ip</strong></p>
+<p>经过笔者的简单测试，宿主机ip为172.16.225.1<br><img src="/content/images/2016/07/6-pic_hd.jpg" alt=""><br>如果实在找不到，可用啊D工具箱或nmap等工具进行查找。</p>
+<p><strong>3.确认系统当前状态下不能上网，甚至局域网也不可通，检查网络连接中的网络适配器，禁用一切，仅保留本地连接</strong></p>
+<p><strong>4.安装Proxifier</strong></p>
+<p>Proxifier是一个全局代理软件，将socket端口流量转发到系统全局，十分好用稳定，值得推荐。</p>
+<p><strong>5.配置Proxifer</strong></p>
+<p>打开Proxifier-Profile-Proxy Servers，点击Add…<br><img src="/content/images/2016/07/7-pic_hd.jpg" alt=""></p>
+<p>随后保存并设置而为默认</p>
+<p><strong>6.测试网络</strong></p>
+<p>打开浏览器，对当前ip进行查询，ip会随着时间随机切换，不同国家。<br><img src="/content/images/2016/07/9-pic_hd.jpg" alt=""><br><img src="/content/images/2016/07/8-pic_hd.jpg" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a><strong>总结</strong></h3><p>为了保证用户隐私的绝对安全，建议做到以下几点：</p>
+<ul>
+<li>在虚拟机系统下不要留下任何痕迹：<ul>
+<li>虚拟机操作系统系统语言设置为英语，地区为美国。</li>
+<li>虚拟机下的浏览器建议使用friefox或chrome，安装https everywhere、noscript等插件，在浏览器相关设置中设置禁止追踪等查看隐私行为。</li>
+<li>关机前清除系统隐私记录，养成良好习惯。</li>
+<li>能设置不保留记录的软件均设置如此。</li>
+<li>不要安装使用任何国产软件，尤其是任何国产音乐播放器、任何国产视频播放器，严禁使用360等任何管家、QQ、搜狗输入法、各种国产云盘，否则一定会前功尽弃。</li>
+<li>不要使用任何私人账户登录任何网站、任何软件，如有必要，建议现场注册新号码，不要自作聪明使用尘封已久的小号。</li>
+</ul>
+</li>
+<li>将虚拟机操作系统放在Truecrypt等加密软件的虚拟磁盘里，如果是Windows，建议开启Bitlocker，如果是MacOS，建议开启FileVault，同时将系统密码设置为与自己隐私无关的高强度密码。</li>
+<li>设置宿主机的BIOS密码，防止设备被盗隐私丢失，同时建议写好一键远程删除虚拟磁盘的sh脚本，以防重要文件泄露。</li>
+<li>进入TOR网络后，您将面临更大的网络威胁，因为TOR的网域中深藏全球各地的极客、大黑客、恐怖分子等危险人物，请更加注意保护虚拟机子系统安全以及文件安全。</li>
+</ul>
+<p><strong>特别鸣谢</strong></p>
+<p>感谢几年前@safe121提供的无私技术帮助</p>
+
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://blog.yfgeek.com/2016/07/28/tor/" target="_blank" rel="external">http://blog.yfgeek.com/2016/07/28/tor/</a>
+                </p>
+                <footer><cite><a href="http://blog.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/07/29/emacs-da-quan/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">Emacs 命令大全</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/07/28/vimda-quan/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Vim 命令大全</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="tor" data-title="Tor安全上网指南" data-url="http://blog.yfgeek.com/2016/07/28/tor/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

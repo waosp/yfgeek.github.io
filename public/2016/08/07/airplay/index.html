@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>用树莓派把蓝牙音响变成Airplay音响 | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#2196f3">
+  
+  
+  <meta name="keywords" content="Raspberry">
+  <meta name="description" content="前言最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。于是萌生了一个想法，正好手上有个树莓派，能不能这样：
+
+iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用树莓派把蓝牙音响变成Airplay音响">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/08/07/airplay/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="前言最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。于是萌生了一个想法，正好手上有个树莓派，能不能这样：
+
+iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/08/DSC07326-5.JPG">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/2016/08/IMG_0635.PNG">
+<meta property="og:updated_time" content="2016-08-07T22:28:30.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="用树莓派把蓝牙音响变成Airplay音响">
+<meta name="twitter:description" content="前言最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。于是萌生了一个想法，正好手上有个树莓派，能不能这样：
+
+iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱">
+<meta name="twitter:image" content="http://blog.yfgeek.com/content/images/2016/08/DSC07326-5.JPG">
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。&lt;br&gt;于是萌生了一个想法，正好手上有个树莓派，能不能这样：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;iOS设备-&amp;gt;Airplay-&amp;gt;树莓派-&amp;gt;蓝牙-&amp;gt;小米蓝牙音箱&lt;br&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
+      
+    </ul>
+
+    
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">用树莓派把蓝牙音响变成Airplay音响</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">用树莓派把蓝牙音响变成Airplay音响</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-08-07T20:23:56.000Z" itemprop="datePublished" class="page-time">
+  2016-08-07
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-airplay" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Raspberry/">Raspberry</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#原料"><span class="post-toc-text">原料</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#开始"><span class="post-toc-text">开始</span></a><ol class="post-toc-child"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#树莓派安装Shairport-Sync"><span class="post-toc-text">树莓派安装Shairport Sync</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#树莓派安装蓝牙"><span class="post-toc-text">树莓派安装蓝牙</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#配置蓝牙音频及Shariport-Sync"><span class="post-toc-text">配置蓝牙音频及Shariport Sync</span></a></li></ol></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#参考文章"><span class="post-toc-text">参考文章</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>最近买了小米蓝牙音响，使用一段时间后发现小米蓝牙音箱有一个极其不方便的地方就是家里苹果设备比较多，想切换设备播放的时候就比较麻烦，还要断开操作。<br>于是萌生了一个想法，正好手上有个树莓派，能不能这样：</p>
+<blockquote>
+<p>iOS设备-&gt;Airplay-&gt;树莓派-&gt;蓝牙-&gt;小米蓝牙音箱<br><a id="more"></a><br><img src="/content/images/2016/08/DSC07326-5.JPG" alt=""></p>
+</blockquote>
+<p>因此这个问题可以分为两个部分：</p>
+<ul>
+<li>1.树莓派蓝牙音频配置部分</li>
+<li>2.树莓派Airplay播放部分</li>
+</ul>
+<p>在解决这个问题的时候，我走了不少弯路，错路，目前网上没有完整的这个问题的解决方案，此文目的正是填补网络空白。</p>
+<h1 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h1><ul>
+<li>树莓派3</li>
+<li>小米蓝牙音箱</li>
+<li>iOS设备</li>
+</ul>
+<h1 id="开始"><a href="#开始" class="headerlink" title="开始"></a>开始</h1><h2 id="树莓派安装Shairport-Sync"><a href="#树莓派安装Shairport-Sync" class="headerlink" title="树莓派安装Shairport Sync"></a>树莓派安装Shairport Sync</h2><p>Shairport Sync实际上是Shairport的修改版，负责让树莓派发射出稳定的Airplay，之前我一直在使用Shairport，偶然间发现这个神器，让Shairport更加稳定好用，而且加入到系统进程，开机即打开Airplay。<br>安装前请确认是否安装以下依赖包：</p>
+<ul>
+<li><code>apt-get install build-essential git</code></li>
+<li><code>apt-get install autoconf automake libtool libdaemon-dev libasound2-dev libpopt-dev libconfig-dev</code></li>
+<li><code>apt-get install avahi-daemon libavahi-client-dev</code> </li>
+<li><code>apt-get install libssl-dev</code> </li>
+<li><code>apt-get install libpolarssl-dev</code> </li>
+<li><code>apt-get install libsoxr-dev</code> </li>
+</ul>
+<p>随后下载Shairport Sync：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/mikebrady/shairport-sync.git</div></pre></td></tr></table></figure></p>
+<p>然后<code>cd</code>到相应目录，执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">autoreconf -i <span class="_">-f</span></div></pre></td></tr></table></figure></p>
+<p>随后执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">./configure --with-alsa --with-avahi --with-ssl=openssl --with-metadata --with-soxr --with-systemd</div></pre></td></tr></table></figure></p>
+<p>如果没问题的话，可以make了，此时该去洗手间去洗手间，该睡觉睡觉：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">make</div></pre></td></tr></table></figure></p>
+<p>创建开机启动：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">getent group shairport-sync &amp;&gt;/dev/null || sudo groupadd -r shairport-sync &gt;/dev/null</div><div class="line"></div><div class="line">getent passwd shairport-sync &amp;&gt; /dev/null || sudo useradd -r -M -g shairport-sync <span class="_">-s</span> /usr/bin/nologin -G audio shairport-sync &gt;/dev/null</div></pre></td></tr></table></figure></p>
+<p>然后运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<p>最后输入，完成安装：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo update-rc.d shairport-sync defaults 90 10</div></pre></td></tr></table></figure></p>
+<h2 id="树莓派安装蓝牙"><a href="#树莓派安装蓝牙" class="headerlink" title="树莓派安装蓝牙"></a>树莓派安装蓝牙</h2><p>打开终端，用普通用户权限执行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get updgrade -y</div><div class="line">sudo apt-get dist-upgrade -y</div></pre></td></tr></table></figure></p>
+<p>随后安装蓝牙及管理软件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pi-bluetooth bluez bluez-firmware blueman</div></pre></td></tr></table></figure></p>
+<p>将pi用户添加到蓝牙组<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo usermod -G bluetooth <span class="_">-a</span> pi</div></pre></td></tr></table></figure></p>
+<p>还有很<strong>重要</strong>的一条，安装蓝牙音频配置<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install pulseaudio pulseaudio-module-bluetooth</div></pre></td></tr></table></figure></p>
+<p>随后重启一次树莓派，开机，在图形化界面中配对蓝牙，操作比较简单，记得在配对成功后对设备进行连接，省略。<br>也可通过bluetoothctl或hictool命令进行配对。<br>随后记下蓝牙设备的地址，XX:XX:XX:XX:XX:XX格式。</p>
+<p><strong>在此步，务必通过测试音频是否能够正常与蓝牙设备通信，记得软件中要勾选蓝牙设备，否则将从3.5mm端口输出音频。推荐使用vlc播放器。</strong></p>
+<h2 id="配置蓝牙音频及Shariport-Sync"><a href="#配置蓝牙音频及Shariport-Sync" class="headerlink" title="配置蓝牙音频及Shariport Sync"></a>配置蓝牙音频及Shariport Sync</h2><p>安装依赖包：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install libdbus-1-dev</div><div class="line">sudo apt-get install libglib2.0-dev</div><div class="line">apt-cache search libasound</div><div class="line">sudo apt-get install libasound2-dev</div></pre></td></tr></table></figure></p>
+<p>配置及重新安装最新版bluez，此刻可以去洗手间和睡觉觉：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">wget http://www.kernel.org/pub/linux/bluetooth/bluez-4.101.tar.xz</div><div class="line">tar -xvf bluez-4.101.tar.xz</div><div class="line"><span class="built_in">cd</span> bluez-4.101</div><div class="line">./configure --prefix=/usr --mandir=/usr/share/man --sysconfdir=/etc --localstatedir=/var --libexecdir=/lib</div><div class="line">make</div><div class="line">sudo make install</div></pre></td></tr></table></figure></p>
+<p>复制配置文件到目录：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo cp /home/pi/bluez-4.101/<span class="built_in">test</span>/simple-agent /usr/bin/bluez-simple-agent</div><div class="line">sudo cp /home/pi/bluez-4.101/<span class="built_in">test</span>/<span class="built_in">test</span>-device /usr/bin/bluez-test-device</div><div class="line">sudo cp /home/pi/bluez-4.101/<span class="built_in">test</span>/<span class="built_in">test</span>-audio /usr/bin/bluez-test-audio</div><div class="line">sudo cp /home/pi/bluez-4.101/audio/audio.conf /etc/bluetooth/</div></pre></td></tr></table></figure></p>
+<p>接着运行：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install python-dbus</div><div class="line">sudo apt-get install python-gobject</div><div class="line">sudo cp /usr/lib/alsa-lib/libasound_module_pcm_bluetooth.so /usr/lib/arm-linux-gnueabihf/alsa-lib/</div></pre></td></tr></table></figure></p>
+<p>编辑audio.conf文件使shariport的音频从蓝牙设备输出：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/bluetooth/audio.conf</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 在[General]区域添加:</span></div><div class="line">Enable=Sink,Socket</div><div class="line"><span class="comment"># 取消[A2DP]注释，并加入:</span></div><div class="line">Maxconnections=4</div></pre></td></tr></table></figure>
+<p>打开蓝牙自启动:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo systemctl <span class="built_in">enable</span> bluetooth</div></pre></td></tr></table></figure></p>
+<p>重启设备后，继续配置，打开asund.conf文件：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/asound.conf</div></pre></td></tr></table></figure></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">pcm.bt_canz &#123;</div><div class="line">type plug</div><div class="line">slave &#123;</div><div class="line">pcm &#123;</div><div class="line">type bluetooth</div><div class="line">device XX:XX:XX:XX:XX:XX</div><div class="line">profile <span class="string">"auto"</span></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">hint &#123;</div><div class="line">show on</div><div class="line">description <span class="string">"Mi Speaker"</span></div><div class="line">&#125;</div><div class="line">&#125;</div><div class="line">ctl.bt_canz &#123;</div><div class="line">type bluetooth</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试bluez能否使用：<code>sudo bluez-simple-agent</code>，如果正常，按ctrl+c停止。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo bluez-simple-agent hci0 XX:XX:XX:XX:XX:XX</div><div class="line">sudo bluez-test-audio connect XX:XX:XX:XX:XX:XX</div></pre></td></tr></table></figure></p>
+<p>测试是否连通：<code>speaker-test -c 2 -D bt_canz</code></p>
+<p>再次重启设备。<br>开启后编辑<code>/etc/shairport-sync.conf</code>：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/shairport-sync.conf</div><div class="line"><span class="comment">#去掉下面的注释，并加入bt_canz</span></div><div class="line">output_device = bt_canz</div></pre></td></tr></table></figure></p>
+<p>保存！重启！开机即可用。<br><img src="/content/images/2016/08/IMG_0635.PNG" alt=""></p>
+<h1 id="参考文章"><a href="#参考文章" class="headerlink" title="参考文章"></a>参考文章</h1><p><a href="https://github.com/mikebrady/shairport-sync/issues/200" target="_blank" rel="external">https://github.com/mikebrady/shairport-sync/issues/200</a><br><a href="https://github.com/mikebrady/shairport-sync" target="_blank" rel="external">https://github.com/mikebrady/shairport-sync</a><br><a href="http://shumeipai.nxez.com/2014/12/10/raspberry-pi-using-airplay-wireless-audio-playback-achieve-even-putting-wifi.html" target="_blank" rel="external">http://shumeipai.nxez.com/2014/12/10/raspberry-pi-using-airplay-wireless-audio-playback-achieve-even-putting-wifi.html</a><br><a href="http://wangye.org/blog/archives/921/" target="_blank" rel="external">http://wangye.org/blog/archives/921/</a><br><a href="http://blog.csdn.net/huayucong/article/details/51376461" target="_blank" rel="external">http://blog.csdn.net/huayucong/article/details/51376461</a><br><a href="http://blog.csdn.net/zhaoqi_0612/article/details/47731821" target="_blank" rel="external">http://blog.csdn.net/zhaoqi_0612/article/details/47731821</a><br><a href="http://blog.csdn.net/techtitan/article/details/6165116" target="_blank" rel="external">http://blog.csdn.net/techtitan/article/details/6165116</a><br><a href="http://www.eeboard.com/bbs/forum.php?mod=viewthread&amp;tid=45040&amp;page=1" target="_blank" rel="external">http://www.eeboard.com/bbs/forum.php?mod=viewthread&amp;tid=45040&amp;page=1</a></p>
+
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://blog.yfgeek.com/2016/08/07/airplay/" target="_blank" rel="external">http://blog.yfgeek.com/2016/08/07/airplay/</a>
+                </p>
+                <footer><cite><a href="http://blog.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/08/12/hai-wai-appsheng-cun-zhi-nan/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">海外App生存指南</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/08/06/bash/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">常用Bash命令总结</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="airplay" data-title="用树莓派把蓝牙音响变成Airplay音响" data-url="http://blog.yfgeek.com/2016/08/07/airplay/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

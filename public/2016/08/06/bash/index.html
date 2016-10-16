@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>常用Bash命令总结 | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#2196f3">
+  
+  
+  <meta name="keywords" content="Linux">
+  <meta name="description" content="自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：">
+<meta property="og:type" content="article">
+<meta property="og:title" content="常用Bash命令总结">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/08/06/bash/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：">
+<meta property="og:updated_time" content="2016-08-06T10:15:29.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="常用Bash命令总结">
+<meta name="twitter:description" content="自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：">
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="&lt;p&gt;自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：&lt;/p&gt;">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
+      
+    </ul>
+
+    
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">常用Bash命令总结</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">常用Bash命令总结</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-08-05T23:36:19.000Z" itemprop="datePublished" class="page-time">
+  2016-08-06
+</time>
+
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-bash" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Linux/">Linux</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#日常"><span class="post-toc-text">日常</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#安全"><span class="post-toc-text">安全</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#一句话命令"><span class="post-toc-text">一句话命令</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#常用功能"><span class="post-toc-text">常用功能</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#定时任务"><span class="post-toc-text">#定时任务</span></a></li><li class="post-toc-item post-toc-level-2"><a class="post-toc-link" href="#scp"><span class="post-toc-text">#scp</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <p>自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美工，总结了一些命令，仅供参考，省去了最简单的命令，不过部分也比较简单：</p>
+<a id="more"></a> 
+<h2 id="日常"><a href="#日常" class="headerlink" title="日常"></a>日常</h2><ul>
+<li><code>ctrl + a</code> #命令跳转到句首</li>
+<li><code>ctrl + r</code> #命令搜索模式</li>
+<li><code>TAB</code> #命令自动补全</li>
+<li><code>pwd</code> #显示当前路径</li>
+<li><code>tar -cvf mytest.tar mytest/</code> #对mytest目录打包</li>
+<li><code>tar -xvf mytest.tar</code> #解压tar文件</li>
+<li><code>tar -xvf mytest.tar -C /opt/setups/</code> #解压到特殊目录</li>
+<li><code>find / -name *.conf</code> #查找/下的所有conf文件</li>
+<li><code>du -sh ./*</code> #查看当前文件夹下的空间占用情况</li>
+<li><code>more</code> #分页查看</li>
+<li><code>which</code> #查看目录</li>
+<li><code>locate</code> #快速搜索</li>
+</ul>
+<h2 id="安全"><a href="#安全" class="headerlink" title="安全"></a>安全</h2><ul>
+<li><code>who</code> #当前登录情况</li>
+<li><code>last</code> #最近登录情况</li>
+<li><code>cat /etc/passwd |awk -F \: &#39;{print $1}&#39;</code> #系统所有用户</li>
+<li><code>chkconfig</code> #启动项检查</li>
+<li><code>netstat -lnp</code> #端口情况</li>
+<li><code>uptime</code> #系统开机多久了</li>
+<li><code>sudo iptables -A INPUT -p tcp -m tcp --dport 80 -j ACCEPT</code> #允许访问 80 端口</li>
+</ul>
+<h2 id="一句话命令"><a href="#一句话命令" class="headerlink" title="一句话命令"></a>一句话命令</h2><p>脚本中切换用户<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">su - <span class="built_in">test</span> -c <span class="string">"pwd"</span></div></pre></td></tr></table></figure></p>
+<p>连接到你服务器端口的ip<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">netstat -tun|grep 7890|sort|awk <span class="string">'&#123;print $5&#125;'</span>|cut <span class="_">-d</span> : <span class="_">-f</span> 1|uniq</div></pre></td></tr></table></figure></p>
+<h2 id="常用功能"><a href="#常用功能" class="headerlink" title="常用功能"></a>常用功能</h2><h2 id="定时任务"><a href="#定时任务" class="headerlink" title="#定时任务"></a>#定时任务</h2><p>使用-l参数列出crontab文件:<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crontab <span class="_">-l</span></div></pre></td></tr></table></figure></p>
+<p>编辑crontab文件<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">crontab <span class="_">-e</span></div></pre></td></tr></table></figure></p>
+<p>实例1：每1分钟执行一次myCommand<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* * * * * myCommand</div></pre></td></tr></table></figure></p>
+<p>实例2：每小时的第3和第15分钟执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3,15 * * * * myCommand</div></pre></td></tr></table></figure></p>
+<p>实例3：在上午8点到11点的第3和第15分钟执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3,15 8-11 * * * myCommand</div></pre></td></tr></table></figure></p>
+<p>实例4：每隔两天的上午8点到11点的第3和第15分钟执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3,15 8-11 */2  *  * myCommand</div></pre></td></tr></table></figure></p>
+<p>实例5：每周一上午8点到11点的第3和第15分钟执行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">3,15 8-11 * * 1 myCommand</div></pre></td></tr></table></figure></p>
+<p>实例6：每晚的21:30重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">30 21 * * * /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
+<p>实例7：每月1、10、22日的4 : 45重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">45 4 1,10,22 * * /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
+<p>实例8：每周六、周日的1 : 10重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">10 1 * * 6,0 /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
+<p>实例9：每天18 : 00至23 : 00之间每隔30分钟重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0,30 18-23 * * * /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
+<p>实例10：每星期六的晚上11 : 00 pm重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">0 23 * * 6 /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
+<p>实例11：每一小时重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* */1 * * * /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
+<p>实例12：晚上11点到早上7点之间，每隔一小时重启smb<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">* 23-7/1 * * * /etc/init.d/smb restart</div></pre></td></tr></table></figure></p>
+<h2 id="scp"><a href="#scp" class="headerlink" title="#scp"></a>#scp</h2><p>实例1：从远处复制文件到本地目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp root@10.6.159.147:/opt/soft/demo.tar /opt/soft/</div></pre></td></tr></table></figure></p>
+<p>说明：从10.6.159.147机器上的/opt/soft/的目录中下载demo.tar 文件到本地/opt/soft/目录中</p>
+<p>实例2：从远处复制到本地<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r root@10.6.159.147:/opt/soft/<span class="built_in">test</span> /opt/soft/</div></pre></td></tr></table></figure></p>
+<p>说明：从10.6.159.147机器上的/opt/soft/中下载test目录到本地的/opt/soft/目录来。</p>
+<p>实例3：上传本地文件到远程机器指定目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp /opt/soft/demo.tar root@10.6.159.147:/opt/soft/scptest</div></pre></td></tr></table></figure></p>
+<p>说明：复制本地opt/soft/目录下的文件demo.tar 到远程机器10.6.159.147的opt/soft/scptest目录</p>
+<p>实例4：上传本地目录到远程机器指定目录<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r /opt/soft/<span class="built_in">test</span> root@10.6.159.147:/opt/soft/scptest</div></pre></td></tr></table></figure></p>
+<p>说明：上传本地目录 /opt/soft/test到远程机器10.6.159.147上/opt/soft/scptest的目录中</p>
+
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://blog.yfgeek.com/2016/08/06/bash/" target="_blank" rel="external">http://blog.yfgeek.com/2016/08/06/bash/</a>
+                </p>
+                <footer><cite><a href="http://blog.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/08/07/airplay/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">用树莓派把蓝牙音响变成Airplay音响</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">Kali系列——信息收集阶段（二）</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="bash" data-title="常用Bash命令总结" data-url="http://blog.yfgeek.com/2016/08/06/bash/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

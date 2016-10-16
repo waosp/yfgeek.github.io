@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>微信小程序的一些感想 | Ivan&#39;s Blog | Thinking as a Geek</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  
+  <meta name="theme-color" content="#2196f3">
+  
+  
+  <meta name="keywords" content="Web">
+  <meta name="description" content="前言这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。
+下载微信小程序目前正处于内测阶段，所以我这个算是尝鲜，用的破解版。Mac版下载地址：http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg
+windows下载地址：http://source.lattecake.com/files/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="微信小程序的一些感想">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/09/25/微信小程序的一些感想/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="前言这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。
+下载微信小程序目前正处于内测阶段，所以我这个算是尝鲜，用的破解版。Mac版下载地址：http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg
+windows下载地址：http://source.lattecake.com/files/">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/wechat/1.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/wechat/2.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/wechat/3.jpg">
+<meta property="og:updated_time" content="2016-09-25T19:24:32.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="微信小程序的一些感想">
+<meta name="twitter:description" content="前言这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。
+下载微信小程序目前正处于内测阶段，所以我这个算是尝鲜，用的破解版。Mac版下载地址：http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg
+windows下载地址：http://source.lattecake.com/files/">
+<meta name="twitter:image" content="http://blog.yfgeek.com/content/images/wechat/1.jpg">
+  
+    <link rel="alternative" href="/atom.xml" title="Ivan&#39;s Blog" type="application/atom+xml">
+  
+  <meta name="summary" content="Thinking as a Geek">
+  <link rel="shortcut icon" href="/favicon.ico">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <div id="loading" class="active"></div>
+
+  <nav id="menu" class="hide" >
+   <div class="inner flex-row-vertical">
+  <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="menu-off">
+      <i class="icon icon-lg icon-close"></i>
+  </a>
+  <div class="brand-wrap">
+    <div class="brand">
+      <a href="/" class="avatar"><img src="/img/logo.jpg"></a>
+      <hgroup class="introduce">
+        <h5 class="nickname">Ivan</h5>
+      </hgroup>
+    </div>
+  </div>
+  <div class="scroll-wrap flex-col">
+    <ul class="nav">
+      
+          <li class="waves-block waves-effect">
+            <a href="/"  >
+              <i class="icon icon-lg icon-home"></i>
+              主页
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/fav"  >
+              <i class="icon icon-lg icon-archives"></i>
+              收藏夹
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/tags"  >
+              <i class="icon icon-lg icon-tags"></i>
+              分类
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="https://github.com/yfgeek" target="_blank" >
+              <i class="icon icon-lg icon-github"></i>
+              Github
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="http://www.weibo.com/yfsss" target="_blank" >
+              <i class="icon icon-lg icon-weibo"></i>
+              Weibo
+            </a>
+          </li>
+      
+          <li class="waves-block waves-effect">
+            <a href="/about" target="_blank" >
+              <i class="icon icon-lg icon-link"></i>
+              关于
+            </a>
+          </li>
+      
+    </ul>
+
+    
+  </div>
+</div>
+
+  </nav>
+  <main id="main">
+    <header class="top-header" id="header">
+    <div class="flex-row">
+        <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light on" id="menu-toggle">
+          <i class="icon icon-lg icon-navicon"></i>
+        </a>
+        <div class="flex-col header-title ellipsis">微信小程序的一些感想</div>
+        
+        <div class="search-wrap" id="search-wrap">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="back">
+                <i class="icon icon-lg icon-chevron-left"></i>
+            </a>
+            <input type="text" id="key" class="search-input " autocomplete="off" placeholder="输入感兴趣的关键字">
+            <a href="javascript:;" class="header-icon waves-effect waves-circle waves-light" id="search">
+                <i class="icon icon-lg icon-search"></i>
+            </a>
+        </div>
+        
+        
+    </div>
+</header>
+<header class="content-header">
+  <div class="container">
+    <h1 class="author">微信小程序的一些感想</h1>
+    <h5 class="subtitle">
+        
+            <time datetime="2016-09-25T17:50:00.000Z" itemprop="datePublished" class="page-time">
+  2016-09-25
+</time>
+
+
+	<ul class="article-category-list"><li class="article-category-list-item"><a class="article-category-list-link" href="/categories/Web/">Web</a></li></ul>
+
+        
+    </h5>
+  </div>
+</header>
+
+    <div class="container body-wrap">
+      <article id="post-微信小程序的一些感想" 
+  class="article article-type-post" itemprop="blogPost">
+    <div class="post-meta flex-row">
+        
+	<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Web/">Web</a></li></ul>
+
+    </div>
+    <div class="post-body">
+        <aside class="post-widget" id="post-widget">
+
+            
+
+            
+            <nav class="post-toc-wrap" id="post-toc">
+            <ol class="post-toc"><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#前言"><span class="post-toc-text">前言</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#下载"><span class="post-toc-text">下载</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#破解"><span class="post-toc-text">破解</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#尝鲜"><span class="post-toc-text">尝鲜</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#优点"><span class="post-toc-text">优点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#缺点"><span class="post-toc-text">缺点</span></a></li><li class="post-toc-item post-toc-level-1"><a class="post-toc-link" href="#总结"><span class="post-toc-text">总结</span></a></li></ol>
+            </nav>
+            
+        </aside>
+
+        <div class="post-main">
+
+            <div class="post-content" id="post-content" itemprop="postContent">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。</p>
+<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>微信小程序目前正处于内测阶段，所以我这个算是尝鲜，用的破解版。<br>Mac版下载地址：<br><a href="http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg</a></p>
+<p>windows下载地址：<br><a href="http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100_x64.exe" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100_x64.exe</a></p>
+<h1 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h1><p>如果你不是内测用户，你需要破解，先下载以下文件。</p>
+<p>文件1：</p>
+<p><a href="http://source.lattecake.com/files/2016/09/createstep.js" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/createstep.js</a></p>
+<p>文件2：</p>
+<p><a href="http://source.lattecake.com/files/2016/09/projectStores.js" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/projectStores.js</a></p>
+<p>替换路径：</p>
+<p>createstep.js -&gt; /Applications/wechatwebdevtools.app/Contents/Resources/app.nw/app/dist/components/create/createstep.js</p>
+<p>projectStores.js -&gt; /Applications/wechatwebdevtools.app/Contents/Resources/app.nw/app/dist/stroes/projectStores.js</p>
+<h1 id="尝鲜"><a href="#尝鲜" class="headerlink" title="尝鲜"></a>尝鲜</h1><p><img src="/content/images/wechat/1.jpg" alt=""></p>
+<p><img src="/content/images/wechat/2.jpg" alt=""><br>做了一次简单的尝鲜，写了一个hellowolrd，微信小程序是由几个最基础的文件构成的：</p>
+<ul>
+<li>app.js</li>
+<li>app.wxss</li>
+<li>app.json</li>
+<li>app.wxml</li>
+</ul>
+<p>其中wxss文件类似于css，所有css语法均支持<br>js是APP()<br>json文件是层级设置，页面的形态<br>wxml文件更像是xml和html的混合版</p>
+<p><img src="/content/images/wechat/3.jpg" alt=""></p>
+<p>IDE并不强大，但是是用HTML写的，有点类似于VS CODE。</p>
+<h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><ul>
+<li><strong>HTML5是未来，腾讯帮助整个生态系统往前走了一大步。</strong></li>
+<li>腾讯有巨大用户群的优势，使得部分程序，尤其是企业程序的开发成本大幅度降低，跨平台变得更加简单通用。</li>
+<li>有统一开发的IDE，包括IDE也是一个HTML5程序，这就是未来。</li>
+<li>开发简单，入门门槛低。</li>
+</ul>
+<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><ul>
+<li>不支持引用js，比如jquery等众多优秀的js插件。</li>
+<li>可移植性差，如果以后还有XX app想做个小程序功能，你需要跳出这个体系，重新做，这是巨大的成本。我想这也就是腾讯想把你牢牢地拴在他所创建的体系下的方式。</li>
+<li>随时有被App Store封掉的风险，苹果不允许程序里嵌套程序，我觉得小程序做不长久，可以参考当年下架Adode的flash文件直接转换的ipa文件事件。</li>
+<li>没有react native好，这是两个完全不同的概念，腾讯创建出的小程序似乎更像是js+html+css，react才是未来。</li>
+</ul>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我想用一句名言总结一下前端趋势及未来App趋势：</p>
+<blockquote>
+<p>Any application that can be written in JavaScript, will eventually be written in JavaScript.</p>
+</blockquote>
+<p>腾讯的想法是非常好的，让JavaScript去干一切事情，这就是未来。Java喊了好几年了一次编译到处运行，全世界没有程序员不知道，但实际呢？JavaScript似乎是真正把这件事情做成了，JavaScript作为网站的前端默默地发展了几十年，现在趋势越来越明显，随着浏览器内核的运行效率的大幅度提升，这些看似不不现实的趋势越来越明显，那就是网页程序。</p>
+<p>不过受限于App store不知道能否有较大的发展，开发者看似十分火爆的东西，真正在用户层次上能否一样的火爆，不得人知，让时间去检验一切吧。</p>
+
+
+            
+            
+            <blockquote>
+                <p>
+                本文地址：
+                <a href="http://blog.yfgeek.com/2016/09/25/微信小程序的一些感想/" target="_blank" rel="external">http://blog.yfgeek.com/2016/09/25/微信小程序的一些感想/</a>
+                </p>
+                <footer><cite><a href="http://blog.yfgeek.com">@Ivan's Blog</a></cite></footer>
+            </blockquote>
+            </div>
+            
+<nav class="post-nav">
+  
+    <div class="waves-block waves-effect prev fl">
+      <a href="/2016/09/26/使用ProxyChains进行终端代理/" id="post-prev" class="post-nav-link">
+        <div class="tips"><i class="icon icon-angle-left icon-lg icon-pr"></i> Prev</div>
+        <h4 class="title">使用ProxyChains进行终端代理</h4>
+      </a>
+    </div>
+  
+
+  
+    <div class="waves-block waves-effect next fr">
+      <a href="/2016/09/13/ss-server/" id="post-next" class="post-nav-link">
+        <div class="tips">Next <i class="icon icon-angle-right icon-lg icon-pl"></i></div>
+        <h4 class="title">树莓派搭建ss服务器</h4>
+      </a>
+    </div>
+  
+</nav>
+
+
+            
+            
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="微信小程序的一些感想" data-title="微信小程序的一些感想" data-url="http://blog.yfgeek.com/2016/09/25/微信小程序的一些感想/index.html"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"yifani"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+        </div>
+    </div>
+</article>
+    </div>
+  </main>
+<div class="mask" id="mask"></div>
+<a href="javascript:;" id="gotop" class="waves-effect waves-circle waves-light"><span class="icon icon-lg icon-chevron-up"></span></a>
+
+
+
+<script src="//cdn.bootcss.com/node-waves/0.7.4/waves.min.js"></script>
+
+<script src="/js/main.js"></script>
+
+
+
+<div class="search-panel" id="search-panel">
+    <ul class="search-result" id="search-result"></ul>
+</div>
+<script type="text/template" id="search-tpl">
+<li class="item">
+    <a href="/{path}" class="waves-block waves-effect">
+        <div class="title ellipsis" title="{title}">{title}</div>
+        <div class="flex-row flex-middle">
+            <div class="tags ellipsis">
+                {tags}
+            </div>
+            <time class="flex-col time">{date}</time>
+        </div>
+    </a>
+</li>
+</script>
+
+<script src="/js/search.js"></script>
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,16 +1,17 @@
 ---
-title: 'Github Follow项目'
+title: 'Github Follow 项目 & BaiduBlogTransferee 项目'
 date: 2016-11-08 01:24:35
 tags: github
 categories: github
 ---
 最近总是有莫名其妙的人关注我的Github，于是乎突发奇想，做了一个Github批量跟随的Python小程序。
 
-用Python做这种事情最过瘾，Python短小、精炼、库多，非常好用。
+用Python做这种事情最过瘾，Python短小、精炼、库多，非常好用，用了不到2个小时就把整个小程序完成了。
 
 项目地址：
 
-https://github.com/yfgeek/GithubFollow
+[点击进入项目](https://github.com/yfgeek/GithubFollow)
+
 
 除此之外，我还整理了只去百度空间的Blogs放到了Github封存。
 

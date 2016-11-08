@@ -1,5 +1,5 @@
 ---
-title: 'Github Follow 项目 & BaiduBlogTransferee 项目'
+title: 'Github Follow 及 BaiduBlogTransfer 项目'
 date: 2016-11-08 01:24:35
 tags: github
 categories: github
@@ -17,7 +17,7 @@ categories: github
 
 https://github.com/yfgeek/Blog
 
-目录是用一个python小程序自动生成的，通过修改@cheezer的BaiduBlogTransferee项目的代码，添加了生成Markdown功能，把原来百度空间的内容全部导出来了。
+目录是用一个python小程序自动生成的，通过修改@cheezer的BaiduBlogTransfer项目的代码，添加了生成Markdown功能，把原来百度空间的内容全部导出来了。
 
 [点击进入项目](https://github.com/yfgeek/BaiduBlogTransferer)
 

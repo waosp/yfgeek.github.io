@@ -71,3 +71,5 @@ deploy:
   type: git
   repository: https://github.com/yfgeek/yfgeek.github.io
   branch: master
+  include:
+  - .nojekyll

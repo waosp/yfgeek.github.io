@@ -6,7 +6,7 @@
 favicon: /favicon.ico
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "Thinkg as a Geek"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -251,7 +251,7 @@ mathjax:
 #baidu_analytics:
 
 # Duoshuo ShortName
-#duoshuo_shortname:
+duoshuo_shortname: yifani
 
 # Disqus
 #disqus_shortname:
@@ -397,7 +397,7 @@ fancybox: true
 # Please use the https protocol of CDN files when you enable https on your site.
 vendors:
   # Internal path prefix. Please do not edit it.
-  _internal: vendors
+  _internal: libs
 
   # Internal version: 2.1.3
   jquery:

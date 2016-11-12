@@ -198,7 +198,7 @@ links:
   Wayne Yan: https://yw1994.github.io/
   Echowxsy: http://echowxsy.github.io/
   Li Rujia: http://lirujia.github.io/
-  
+
 
 
 # ---------------------------------------------------------------
@@ -232,7 +232,7 @@ excerpt_description: true
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
   enable: true
-  length: 250
+  length: 300
 
 
 # Wechat Subscriber
@@ -303,7 +303,7 @@ duoshuo_shortname: yifani
 duoshuo_info:
   ua_enable: true
   admin_enable: false
-  user_id: 0
+  user_id: 6313747378612470529
   admin_nickname: 一凡
 
 

@@ -129,8 +129,11 @@ font:
 # Social Links
 # Key is the link label showing to end users.
 # Value is the target link (E.g. GitHub: https://github.com/iissnan)
-#social:
-  #LinkLabel: Link
+social:
+  GitHub: https://github.com/yfgeek
+  Twitter: https://twitter.com/yfbk
+  微博: http://weibo.com/yfss
+  知乎: http://www.zhihu.com/people/yfgeek
 
 
 # Social Links Icons
@@ -144,7 +147,8 @@ social_icons:
   # KeyMapsToSocalItemKey: NameOfTheIconFromFontAwesome
   GitHub: github
   Twitter: twitter
-  Weibo: weibo
+  微博: weibo
+  知乎: safari
 
 
 # Sidebar Avatar
@@ -185,11 +189,16 @@ sidebar:
 
 
 # Blogrolls
-#links_title: Links
+links_title: Links
 #links_layout: block
 #links_layout: inline
-#links:
+links:
   #Title: http://example.com/
+  Fu Xiao Hei: http://fuxiaohei.me/
+  Wayne Yan: https://yw1994.github.io/
+  Echowxsy: http://echowxsy.github.io/
+  Li Rujia: http://lirujia.github.io/
+  
 
 
 # ---------------------------------------------------------------

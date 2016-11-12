@@ -33,10 +33,10 @@ canonical: true
 menu:
   home: /
   #categories: /categories
-  about: /about
   archives: /archives
   tags: /tags
   fav : /fav
+  about: /about
   #sitemap: /sitemap.xml
   #commonweal: /404.html
 

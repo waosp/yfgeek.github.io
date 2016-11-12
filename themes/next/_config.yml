@@ -33,9 +33,10 @@ canonical: true
 menu:
   home: /
   #categories: /categories
-  #about: /about
+  about: /about
   archives: /archives
   tags: /tags
+  fav : /fav
   #sitemap: /sitemap.xml
   #commonweal: /404.html
 
@@ -148,7 +149,7 @@ social_icons:
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.jpg
 # in site  directory(source/uploads): /uploads/avatar.jpg
-#avatar:
+avatar: /images/logo.jpg
 
 
 # Table Of Contents in the Sidebar
@@ -221,7 +222,7 @@ excerpt_description: true
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
   enable: true
-  length: 150
+  length: 200
 
 
 # Wechat Subscriber
@@ -293,7 +294,7 @@ duoshuo_info:
   ua_enable: true
   admin_enable: false
   user_id: 0
-  #admin_nickname: Author
+  admin_nickname: 一凡
 
 
 # Facebook SDK Support.

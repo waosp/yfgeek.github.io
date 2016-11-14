@@ -7,7 +7,7 @@ title: Ivan's Blog
 subtitle: Thinking as a Geek
 description: Thinking as a Geek
 author: Ivan
-language: zh-CN
+language: zh-Hans
 timezone:
 
 # URL
@@ -63,7 +63,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: material
+theme: next
 
 search:
   path: search.xml

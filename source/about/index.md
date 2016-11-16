@@ -34,7 +34,9 @@ University of Birmingham
 * 知乎：[点击进入...](https://www.zhihu.com/people/yfgeek)
 
 # 友情链接
+
 ## 百度空间好友
+
 * [Fuxiaohei](http://fuxiaohei.me/)
 * [幽虫博客](https://luoyandi.wordpress.com/)
 * [胡戈戈](http://hugege.com)
@@ -43,7 +45,9 @@ University of Birmingham
 * [lzlhoho](http://lzlhoho.zcool.com.cn/)
 * [52abc/xinzhixiang](http://xxz.cc)
 * [Monyer](http://monyer.com/)
+
 ## 生活好友
+
 * [Wayne Yan](http://www.oursays.com)
 * [Echowxsy](http://echowxsy.com/)
 * [rjgeek](http://rjgeek.github.io/)

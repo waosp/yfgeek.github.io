@@ -10,7 +10,7 @@ categories: github
 
 项目地址：
 
-[点击进入项目](https://github.com/yfgeek/GithubFollow)
+[点击进入项目](https://github.com/yfgeek/AutoGithub)
 
 
 除此之外，我还整理了只去百度空间的Blogs放到了Github封存。

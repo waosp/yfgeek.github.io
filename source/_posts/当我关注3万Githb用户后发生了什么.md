@@ -9,7 +9,7 @@ categories: Github
 
 于是乎我利用这个关注了3万人的Github，可是关注后~~除了同性交友~~似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。
 
-![](/content/githubauto/1.jpg)
+![](/content/images/githubauto/1.jpg)
 
 翻都翻不过来，那么同时还存在一些“无用( ~~垃圾~~ )项目”，star和fork数量很少，点开没有意义。那么能否写一个python小程序，把“高质量”的项目来源于好友follow的项目都爬出来呢？
 
@@ -29,7 +29,7 @@ categories: Github
 
 效果如图
 
-![](/content/githubauto/awesomesnap.png)
+![](/content/images/githubauto/awesomesnap.png)
 
 # 配置
 

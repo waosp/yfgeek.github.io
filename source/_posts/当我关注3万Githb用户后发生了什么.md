@@ -4,7 +4,7 @@ date: 2016-11-19 11:36:26
 tags: Github
 categories: Github
 ---
-
+# 前言
 16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。
 
 于是乎我利用这个关注了3万人的Github，可是关注后~~除了同性交友~~似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。
@@ -17,7 +17,7 @@ categories: Github
 
 现在进入[AutoGithub](https://github.com/yfgeek/AutoGithub)项目就可以看到GithubAwesome.py项目
 
-## 规则
+# 规则
 
 设置一个规则，如果关注的人的动态里刷出来的项目 star数量 大于 最少 star  或 大于 最少 fork，那么就把他输出出来。
 
@@ -31,7 +31,7 @@ categories: Github
 
 ![](/content/githubauto/awesomesnap.png)
 
-## 配置
+# 配置
 
 首先，确保你安装了``beautifulsoup4``.
 

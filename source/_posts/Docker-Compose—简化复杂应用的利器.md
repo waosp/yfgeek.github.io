@@ -4,7 +4,8 @@ date: 2016-10-15 19:10:35
 tags: docker
 categories: docker
 ---
-<p>Compose是用于定义和运行复杂Docker应用的工具。你可以在一个文件中定义一个多容器的应用，然后使用一条命令来启动你的应用，然后所有相关的操作都会被自动完成。<span id="more-1319"></span></p>
+Compose是用于定义和运行复杂Docker应用的工具。你可以在一个文件中定义一个多容器的应用，然后使用一条命令来启动你的应用，然后所有相关的操作都会被自动完成。
+<!-- more --> 
 ## 1. 安装Docker和Compose
 ```bash
 # 当前最新的Docker是1.6.2，Compose为1.2.0

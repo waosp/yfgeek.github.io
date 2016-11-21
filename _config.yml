@@ -48,6 +48,12 @@ default_category: uncategorized
 category_map:
 tag_map:
 
+# add post views
+leancloud_visitors:
+  enable: true
+  app_id: oLTXcyRzIdgKgCNIteRM0cUy-gzGzoHsz
+  app_key: BUnbApGSylYt7lWhAHBbFsdF
+
 # Date / Time format
 ## Hexo uses Moment.js to parse and display date
 ## You can customize the date format as defined in
@@ -70,7 +76,7 @@ search:
   field: post
   format: html
   limit: 10000
-  
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:

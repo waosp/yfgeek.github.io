@@ -77,7 +77,7 @@
             <time title="{{ __('post.modified') }}" itemprop="dateModified" datetime="{{ moment(post.updated).format() }}">
               {{ date(post.updated, config.date_format) }}
             </time>
-            
+
           </span>
 
           {% if post.categories and post.categories.length %}
@@ -163,13 +163,18 @@
               <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>{{ theme.busuanzi_count.page_pv_footer }}
               </span>
           {% endif %}
-          
+
           {% if post.description and (not theme.excerpt_description or not is_index) %}
               <div class="post-description">
                   {{ post.description }}
               </div>
           {% endif %}
-
+          {% if theme.leancloud_visitors.enable %}
+          &nbsp; | &nbsp;
+          <span id="{{ url_for(post.path) }}"class="leancloud_visitors" data-flag-title="{{ post.title }}">
+                   &nbsp;{{__('post.visitors')}}
+                  </span>
+          {% endif %}
         </div>
       </header>
     {% endif %}

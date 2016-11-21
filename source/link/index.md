@@ -19,6 +19,6 @@ date: 2016-09-26 00:27:35
 
 ## 生活好友
 
-* [Wayne Yan](http://www.oursays.com)
-* [Echowxsy](http://echowxsy.com/)
+* [Wayne Yan](http://yw1994.github.io)
+* [Echowxsy](http://blog.echowxsy.com/)
 * [rjgeek](http://rjgeek.github.io/)

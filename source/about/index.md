@@ -33,21 +33,3 @@ University of Birmingham
 * 邮件：yifanb@gmail.com （接受邮件，一直会回复）
 * 知乎：[点击进入...](https://www.zhihu.com/people/yfgeek)
 
-# 友情链接
-
-## 百度空间好友
-
-* [Fuxiaohei](http://fuxiaohei.me/)
-* [幽虫博客](https://luoyandi.wordpress.com/)
-* [胡戈戈](http://hugege.com)
-* [safe121](http://www.safe121.com)
-* [Panda熊猫](http://www.panda-studio.cn/)
-* [lzlhoho](http://lzlhoho.zcool.com.cn/)
-* [52abc/xinzhixiang](http://xxz.cc)
-* [Monyer](http://monyer.com/)
-
-## 生活好友
-
-* [Wayne Yan](http://www.oursays.com)
-* [Echowxsy](http://echowxsy.com/)
-* [rjgeek](http://rjgeek.github.io/)

@@ -36,6 +36,7 @@ menu:
   archives: /archives
   tags: /tags
   fav : /fav
+  link: /link
   about: /about
   #sitemap: /sitemap.xml
   #commonweal: /404.html

@@ -16,6 +16,7 @@ menu:
   search: 搜索
   commonweal: 公益404
   fav: 收藏夹
+  link: 友情链接
 
 
 sidebar:
@@ -30,7 +31,7 @@ post:
   read_more: 阅读全文
   untitled: 未命名
   toc_empty: 此文章未包含目录
- 
+
 page:
   totally: 共有
   tags: 标签

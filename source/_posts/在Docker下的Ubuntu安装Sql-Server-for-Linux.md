@@ -56,12 +56,22 @@ docker inspect --format='{{.NetworkSettings.IPAddress}}' 容器id
 172.17.0.2
 
 # 连接
+用户名是SA
+
+密码是用户自己设置的
 
 ![](/content/images/sqldocker/1.jpg)
+
+连接成功！
 
 ![](/content/images/sqldocker/2.jpg)
 
 # 最后
+
+内存占用情况
+
+![](/content/images/sqldocker/3.jpg)
+
 
 我们一起默念** 微软大法好 ** ** 微软大法好 ** ** 微软大法好 ** 。
 

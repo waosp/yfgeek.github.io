@@ -1,5 +1,5 @@
 ---
-title: Docker下的配置Sql Server for Linux
+title: Docker下的配置SQL Server for Linux
 date: 2016-11-22 14:44:06
 tags: docker sql-server
 categories: docker

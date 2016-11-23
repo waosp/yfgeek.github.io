@@ -4,6 +4,8 @@ date: 2016-11-19 11:36:26
 permalink: github3k
 tags: Github
 categories: Github
+sticky: 10
+
 ---
 # 前言
 16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。

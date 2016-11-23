@@ -264,7 +264,15 @@ wget http://monyer.com/game/game1/img/4681851790659554.jpg
 cat 4681851790659554.jpg
 ```
 密码藏在图片里
-
+```
+���^�v��*{I�z��^�iؾSRW�V�6�Z��(����H�����ٹ�����
+�Ǿ���ʽ�ʲô���ţ�
+�ԣ�������������������......��
+��ϲ�㣡
+��ʮ������Ϊ��MonyerLikeYou_the10level
+�����ڿ�ʼ�漰������Ķ�̬���������㶼���԰���ʾ������ɵģ�
+�����Լ���û��ģ�%
+```
 MonyerLikeYou_the10level
 
 # 第十关
@@ -308,20 +316,20 @@ http://monyer.com/game/game1/doyouknow.php?action=show_login_true
 # 第十二关
 
 http://monyer.com/game/game1/smartboy.php
-```
+
 JTRBJTU0JTYzJTdBJTRBJTU0JTVBJTQ3JTRBJTU0JTU5JTc5JTRBJTU0JTU5JTMxJTRBJTU0JTU5JTc4JTRBJTU0JTYzJTMxJTRBJTU0JTYzJTMwJTRBJTU0JTU5JTM1JTRBJTU0JTU5JTMyJTRBJTU0JTYzJTMxJTRBJTU0JTVBJTQ0JTRBJTU0JTRBJTQ2JTRBJTU0JTYzJTc3JTRBJTU0JTU5JTM0JTRBJTU0JTYzJTc3
-```
+
 直觉告诉我，这显然是Base64 解密
-```
+
 %4A%54%63%7A%4A%54%5A%47%4A%54%59%79%4A%54%59%31%4A%54%59%78%4A%54%63%31%4A%54%63%30%4A%54%59%35%4A%54%59%32%4A%54%63%31%4A%54%5A%44%4A%54%4A%46%4A%54%63%77%4A%54%59%34%4A%54%63%77
-```
+
 直觉告诉我，这显然是 UrlEncode 解密
-```
+
 JTczJTZGJTYyJTY1JTYxJTc1JTc0JTY5JTY2JTc1JTZDJTJFJTcwJTY4JTcw
-```
+
 直觉再次告诉我，这显然是 Base64 解密
 
->%73%6F%62%65%61%75%74%69%66%75%6C%2E%70%68%70
+%73%6F%62%65%61%75%74%69%66%75%6C%2E%70%68%70
 
 直觉再次告诉我，这显然是  UrlEncode 解密
 

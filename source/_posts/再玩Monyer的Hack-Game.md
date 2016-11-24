@@ -372,7 +372,7 @@ http://monyer.com/game/game1/whatyouneverknow.php
 
 # 第十五关
 
-![](/content/images/monyerhack/4.jpg)
+![](/content/images/monyerhack/4.png)
 
 
 

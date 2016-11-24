@@ -362,7 +362,20 @@ wtf..显然他判断了http来源，需要伪造http referer，那么我们在�
 
 http://monyer.com/game/game1/whatyouneverknow.php
 
-oh 是个exe程序 改日再看吧....
+感谢@Echowxsy提供第14关解密过程
+
+![](/content/images/monyerhack/1.jpg)
+
+![](/content/images/monyerhack/2.jpg)
+
+![](/content/images/monyerhack/3.jpg)
+
+# 第十五关
+
+![](/content/images/monyerhack/4.jpg)
+
+
+
 
 
 

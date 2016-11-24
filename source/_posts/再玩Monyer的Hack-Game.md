@@ -229,24 +229,15 @@ http://monyer.com/game/game1/eighteen8.php
 10000以内所有质数和，so easy！写个javascript 算一下。
 
 ```
-var list = [];
 var sum = 0;
-for (var i = 2; i <= 10000; i++) {
-	list.push(i);
-}
-
-for (var i = 0; i < list.length; i++) {
-	for (var j = 2; j < list[i]; j++) {
-		if (list[i] % j == 0) {
-			list.splice(i, 1);
-			j = 2;
-		}
+for (var i = 2; i < 10000; i++) {
+	var flag = true;
+	for (var j = 2; j < i ; j++) {
+		if (i % j == 0) flag = false ;
 	}
+    if(flag) {sum = sum + i;}
 }
-for (var i = 0; i < list.length; i++) {
-	sum = sum + list[i]
-}
-console.log(sum)
+console.log(sum);
 
 5736396
 ```
@@ -364,6 +355,7 @@ wtf..显然他判断了http来源，需要伪造http referer，那么我们在�
 万能密码熟记于心
 
 >下一关密码：whatyouneverknow
+
 下一关！
 
 # 第十四关

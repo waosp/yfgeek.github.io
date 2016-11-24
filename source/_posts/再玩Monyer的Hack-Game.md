@@ -232,7 +232,7 @@ http://monyer.com/game/game1/eighteen8.php
 var sum = 0;
 for (var i = 2; i < 10000; i++) {
 	var flag = true;
-	for (var j = 2; j < i ; j++) {
+	for (var j = 2; j <= Math.sqrt(i); j++) {
 		if (i % j == 0) flag = false ;
 	}
     if(flag) {sum = sum + i;}

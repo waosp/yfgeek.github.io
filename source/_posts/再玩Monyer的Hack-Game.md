@@ -364,11 +364,19 @@ http://monyer.com/game/game1/whatyouneverknow.php
 
 感谢@Echowxsy提供第14关解密过程
 
+![](/content/images/monyerhack/01.jpg)
+
+![](/content/images/monyerhack/02.jpg)
+
+![](/content/images/monyerhack/03.jpg)
+
 ![](/content/images/monyerhack/1.jpg)
 
 ![](/content/images/monyerhack/2.jpg)
 
 ![](/content/images/monyerhack/3.jpg)
+
+![](/content/images/monyerhack/5.jpg)
 
 # 第十五关
 

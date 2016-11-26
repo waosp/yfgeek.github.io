@@ -1,6 +1,9 @@
 <style>
-#ds-reset .ds-avatar img,
-#ds-recent-visitors .ds-avatar img {
+.ds-recent-visitors{
+    margin-top: 20px;
+    margin-left:2px;
+}
+#ds-reset .ds-avatar img, #ds-recent-visitors .ds-avatar img {
     width: 54px;
     height: 54px;
     border-radius: 27px;
@@ -12,7 +15,8 @@
 
 
 #ds-recent-visitors .ds-avatar {
-    float: left
+    float: left;
+    margin: 6px !important;
 }
 #ds-thread #ds-reset .ds-powered-by {
     display: none;

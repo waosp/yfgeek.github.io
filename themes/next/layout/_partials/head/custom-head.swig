@@ -2,6 +2,7 @@
 .ds-recent-visitors{
     margin-top: 20px;
     margin-left:2px;
+    padding: 10px;
 }
 #ds-reset .ds-avatar img, #ds-recent-visitors .ds-avatar img {
     width: 54px;

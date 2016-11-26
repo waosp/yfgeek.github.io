@@ -4,8 +4,7 @@ date: 2016-11-19 11:36:26
 permalink: github3k
 tags: Github
 categories: Github
-sticky: 1000
-top: 1000
+top: true
 
 ---
 # 前言

@@ -1,6 +1,7 @@
 <style>
 .ds-recent-visitors{
     margin-top: 20px;
+    margin-bottom: 20px;
     margin-left:2px;
     padding: 10px;
 }
@@ -28,6 +29,17 @@
     text-align: center;
 }
 .visitors-link {
-    margin-top: 20px;
+    margin: 0 15px;
+}
+
+.visitors-link p {
+    display: block;
+    color: #fc6423;
+    border: none;
+    margin: 5px 0;
+}
+.visitors-link p i {
+    color: #fc6423;
+    font-size: 14px;
 }
 </style>

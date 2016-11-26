@@ -2,7 +2,7 @@
 #ds-reset .ds-avatar img,
 #ds-recent-visitors .ds-avatar img {
     width: 54px;
-    height: 54px;   
+    height: 54px;
     border-radius: 27px;
     -webkit-border-radius: 27px;
     -moz-border-radius: 27px;

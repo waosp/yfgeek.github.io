@@ -136,7 +136,12 @@
       {% endif %}
 
     </div>
-
+    <div class="visitors-link motion-element">
+            <p>
+              <i class="fa fa-github-alt"></i>
+              最近访客
+            </p>
+    </div>
      <div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
 
   </aside>

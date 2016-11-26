@@ -22,4 +22,12 @@
 #ds-thread #ds-reset .ds-powered-by {
     display: none;
 }
+.visitors-link {
+    border-top: 1px dotted #ccc;
+    border-bottom: 1px dotted #ccc;
+    text-align: center;
+}
+.visitors-link {
+    margin-top: 20px;
+}
 </style>

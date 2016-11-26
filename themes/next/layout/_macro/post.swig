@@ -285,6 +285,7 @@
       {% if is_index and not isLast %}
         <div class="post-eof"></div>
       {% endif %}
+      <div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
     </footer>
   </article>
 

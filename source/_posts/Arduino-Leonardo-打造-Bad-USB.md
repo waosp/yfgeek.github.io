@@ -26,8 +26,6 @@ BadUSB最可怕的一点是恶意代码存在于U盘的固件中，由于PC上�
 
 ![](/content/images/badusb/1.jpg)
 
-# 效果
-![](/content/images/badusb/preview.gif)
 
 # 原料
 1. Arduino Leonardo
@@ -100,6 +98,10 @@ void loop()//循环
 ```
 
 已经在多台Windows电脑上试验成功。
+
+
+# 效果
+![](/content/images/badusb/preview.gif)
 
 # 进阶
 

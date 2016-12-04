@@ -17,7 +17,7 @@ BadUSB最可怕的一点是恶意代码存在于U盘的固件中，由于PC上�
 Bad USB
 
 # 效果
-![](content/images/preview.gif)
+![](/content/images/preview.gif)
 
 # 原料
 1. Arduino Leonardo

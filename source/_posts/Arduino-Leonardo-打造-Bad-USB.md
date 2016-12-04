@@ -121,8 +121,6 @@ https://github.com/Xyntax/BadUSB-code
 
 # 参考
 http://www.extremetech.com/extreme/191467-badusb-returns-hackers-publish-code-that-could-infect-millions-of-usb-devices
-
 http://www.freebuf.com/sectool/107242.html
-
 http://www.freebuf.com/articles/terminal/53886.html
 

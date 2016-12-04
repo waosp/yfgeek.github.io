@@ -22,19 +22,10 @@ BadUSB最可怕的一点是恶意代码存在于U盘的固件中，由于PC上�
 
 # 目标
 
-![](/content/images/badusb/1.jpg)
-
 打造一个廉价Bad USB，实现对 终端机、别人的电脑快速合法化入侵。
 
-```flow
-st=>start: 插入Bad USB
-op=>operation: 自动执行CMD/Powershell
-op1=>operation: 下载需要执行的程序
-op2=>operation: 执行程序
-cond=>operation: 等待30秒 循环执行
+![](/content/images/badusb/1.jpg)
 
-st->op->op1->op2->cond->op
-```
 # 效果
 ![](/content/images/badusb/preview.gif)
 

@@ -6,6 +6,7 @@ categories: hack
 ---
 
 中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。
+
 <!--more-->
 
 通过OTR技术，能够实现:
@@ -14,18 +15,15 @@ categories: hack
 - 服务器无法记录你的真实聊天内容
 
 # 原理
-
-OTR采用非对称加密技术。
-
 ## 消息鉴别码(MAC)
 
 在密码学中，消息鉴别码(Message Authentication Code)是经过特定算法后产生的一小段信息，检查某段消息的完整性，以及作身份验证。
 
-![](/content/images/1.png)
+![](/content/otr/images/1.png)
 
 假设有两个聊天用户，一个叫Alice，一个叫Bob。
 
-![](/content/images/2.jpg)
+![](/content/otr/images/2.jpg)
 
 例如：Alice要给一个叫Bob发信，Alice将明文MK使用Hash算法进行摘要提取，提取结果为Hash(MK)，之后用Alice的私钥对摘要进行签名SA[Hash(MK)]，之后将MK和SA[Hash(MK)]一同发给Bob。
 

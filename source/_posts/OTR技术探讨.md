@@ -1,5 +1,5 @@
 ---
-title: OTR(Off-the-record) 技术探讨
+title: OTR(Off-the-Record) 技术探讨
 date: 2016-12-06 20:25:59
 tags: hack
 categories: hack

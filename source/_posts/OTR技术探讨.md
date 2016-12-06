@@ -19,11 +19,11 @@ categories: hack
 
 在密码学中，消息鉴别码(Message Authentication Code)是经过特定算法后产生的一小段信息，检查某段消息的完整性，以及作身份验证。
 
-![](/content/otr/images/1.png)
+![](/content/images/otr/1.png)
 
 假设有两个聊天用户，一个叫Alice，一个叫Bob。
 
-![](/content/otr/images/2.jpg)
+![](/content/images/otr/2.jpg)
 
 例如：Alice要给一个叫Bob发信，Alice将明文MK使用Hash算法进行摘要提取，提取结果为Hash(MK)，之后用Alice的私钥对摘要进行签名SA[Hash(MK)]，之后将MK和SA[Hash(MK)]一同发给Bob。
 

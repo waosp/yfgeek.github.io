@@ -71,7 +71,7 @@ categories: hack
 4. Bob用自己的私钥和Alice的公钥对M1进行解密、签名校验，最终还原出M
 
 # 应用
-## 例子🌰 在macOS系统下安装pidgin 并 安装otr-
+## 例子🌰 在macOS系统下安装pidgin 并 安装otr插件
 
 安装pidgin，按照官网的提示，要使用Homebrew 或 Fink 或 Macports安装，但是官网没有具体给出运行的shell是什么，猜测着运行了一下，竟然成了：
 ```

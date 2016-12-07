@@ -70,14 +70,30 @@ categories: hack
 3. M1经由服务器被发送给消息接收方
 4. Bob用自己的私钥和Alice的公钥对M1进行解密、签名校验，最终还原出M
 
+# 应用
+## 例子🌰 在macOS系统下安装pidgin 并 安装otr-
+
+安装pidgin，按照官网的提示，要使用Homebrew 或 Fink 或 Macports安装，但是官网没有具体给出运行的shell是什么，猜测着运行了一下，竟然成了：
+```
+brew update
+brew link pcre
+brew install pidgin
+```
+然后在终端输入pidgin（这个方式真古老，没办法）
+
+![](/content/images/otr/3.jpg)
+
+未完待续...
 
 # 小结
 
 研究算法的过程很有趣，也很累，每次应用OTR技术聊天的时候，我都强烈的感受到我的数据包被加密解密的过程，不知道为什么，感觉，异常，舒爽...
 
 # 链接
-- 官网: https://otr.cypherpunks.ca/
-- pidgin-otr: https://otr.cypherpunks.ca/gentoo-install/otr-setup.html
-- JavaScript 实现: https://github.com/arlolra/otr
+官网: https://otr.cypherpunks.ca/
+
+pidgin-otr: https://otr.cypherpunks.ca/gentoo-install/otr-setup.html
+
+JavaScript 实现: https://github.com/arlolra/otr
 
 

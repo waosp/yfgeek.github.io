@@ -21,7 +21,7 @@ Centos 6
 4. ngx_http_substitutions_filter_module 多重替换
 
 ## 安装
-```
+```bash
 #
 # 安装 gcc & git
 #
@@ -108,7 +108,7 @@ vi /opt/nginx-1.7.8/conf/nginx.conf
 
 ```
 http配置方式
-```
+```javascript
 server {
   server_name <你的域名>;
   listen 80;
@@ -120,7 +120,7 @@ server {
 }
 ```
 https配置方式
-```
+```javascript
 server {
   server_name <你的域名>;
   listen 443;
@@ -136,7 +136,7 @@ server {
 }
 ```
 随后
-```
+```bash
 #
 # 配置修改后, 需要 reload nginx 来让配置生效, 
 #

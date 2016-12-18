@@ -1,5 +1,5 @@
 ---
-title: Raspberry Pi Zero 无网线键盘配置
+title: Raspberry Pi Zero 无键盘网络配置指南
 date: 2016-12-17 21:58:26
 tags: Raspberry  
 categories: Raspberry  
@@ -43,9 +43,9 @@ diskutil unmountDisk /dev/SD卡的标号 #如disk2
 cd /Users/ivan/Downloads/2016-11-25-raspbian-jessie #进入目录
 sudo dd bs=1m if=2016-11-25-raspbian-jessie.img of=/dev/rdisk2
 ```
-2.刷好系统后编辑`config.txt`文件，在最后一行添加：
+2.刷好系统后编辑`config.txt`文件，在最后一行下，另起一行添加：
 ```bash
-dtoverlay=dwc2 on a new line
+dtoverlay=dwc2
 ```
 保存文件
 

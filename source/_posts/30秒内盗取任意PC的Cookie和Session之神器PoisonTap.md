@@ -3,6 +3,7 @@ title: 30秒内盗取任意PC的Cookie神器 PoisonTap
 date: 2016-12-18 18:44:51
 tags: hack 
 categories: hack
+permalink: poisontap
 ---
 
 著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。

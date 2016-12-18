@@ -44,6 +44,8 @@ permalink: raspizero
 
 那么关键问题就来了，如何才能在 没有网口、没有Wi-Fi、没有显示器、没有鼠标、没有键盘的情况下 配置可爱的树莓派Zero呢？
 
+我们 可以 把 树莓派 虚拟为 网卡，然后在内网连接它。
+
 1.下载完整版 Raspbian Jessie 或 Raspbian Jessie Lite 系统，并且刷到你的SD Card里，Windows用Win32 Disk Imager， Mac/Linux 用命令，如下：
 
 ```bash
@@ -128,6 +130,32 @@ vncserver  # 启动vncserver
 
 ![](/content/images/raspizero/3.png)
 
+## 设置代理
+本来想着，既然把它虚拟为网卡了，能否NAT网络给他让他上网？事实上，是失败的。
+
+那么我们有一个临时解决方案，就是设置代理
+
+首先，在本机搭建一个squid
+
+```
+brew update
+brew install squid
+```
+然后下载[SquidMan](http://squidman.net/squidman/)，安装。
+在本机开启端口为8080的HTTP代理服务，并把本机名称更为Mac。
+
+进入树莓派shell，输入：
+```bash
+cd /etc/apt/apt.conf.d
+sudo vi /etc/apt/apt.conf.d
+```
+最后一行加入一句话：
+```
+Acquire::http::Proxy "http://Mac.local:8080";
+```
+保存
+
+apt-get update一下，怎么样是不是能装软件了？
 
 # 感想
 

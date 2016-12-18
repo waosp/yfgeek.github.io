@@ -120,6 +120,9 @@ vncserver  # 启动vncserver
 ![](/content/images/raspizero/3.png)
 
 
+# 感想
+
+这块小板子，我太喜欢了，好精致
 
 # 参考
 https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md

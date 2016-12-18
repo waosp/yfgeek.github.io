@@ -1,5 +1,5 @@
 ---
-title: Raspberry Pi Zero 无需网络键盘配置教程
+title: Raspberry Pi Zero 无需键盘网络 配置教程
 date: 2016-12-17 21:58:26
 tags: Raspberry  
 categories: Raspberry  
@@ -32,6 +32,15 @@ permalink: raspizero
 不过值得一提的是，USB On-The-Go接口也可以用来供电。
 
 # 发车
+
+网络上关于树莓派Zero如何连接配置大概有以下几种：
+
+- OTG口转USB 接 USB以太网适配器
+- OTG口转USB 接 USB Wi-Fi
+- OTG口转USB 接 USB键盘 且 用HDMI接显示器
+- GPIO接以太网适配器
+
+但是以上，都太麻烦了，对不对？
 
 那么关键问题就来了，如何才能在 没有网口、没有Wi-Fi、没有显示器、没有鼠标、没有键盘的情况下 配置可爱的树莓派Zero呢？
 

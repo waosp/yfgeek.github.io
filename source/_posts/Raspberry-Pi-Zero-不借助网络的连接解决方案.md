@@ -16,9 +16,9 @@ permalink: raspizero
 
 # 信仰充值
 
-![](/content/images/raspizero/mail.jpg)
-
 滴！信仰充值成功！
+
+![](/content/images/raspizero/mail.jpg)
 
 没有错，你没有看错，就是这么小，但是小也有小的坏处，没有USB口，没有Wi-Fi，没有网线接口，似乎什么都没有用。
 

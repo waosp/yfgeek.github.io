@@ -92,6 +92,34 @@ pi@raspberrypi.local
 
 同时你需要通过执行``sudo passwd root``更改root密码
 
+## 安装vnc-server
+
+首先，去[VNC官网](https://www.realvnc.com/download/vnc/raspberrypi/)下载最新版本的vnc-server
+
+用scp命令传到树莓派上
+
+```bash
+scp /Users/ivan/Downloads/VNC-5.3.2-Linux-ARM-DEB.tar.gz  pi@raspberrypi.local:~
+```
+在树莓派shell下，安装VNC
+```
+tar xvf VNC-5.3.2-Linux-ARM-DEB.tar.gz
+sudo dpkg -i VNC-Server-5.3.2-Linux-ARM.deb
+```
+
+![](/content/images/raspizero/2.png)
+
+
+```
+vncpasswd -user  # 设置连接密码
+vncserver  # 启动vncserver
+```
+
+连接raspberry.local:1测试成功
+
+![](/content/images/raspizero/3.png)
+
+
 
 # 参考
 https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md

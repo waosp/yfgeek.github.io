@@ -83,6 +83,31 @@ reboot
 ```
 好了，已经安装好了，接下来我们可以Hack啦~
 # Hack
+## Cookie 和 Session窃取
+把配置好的树莓派重新插入电脑里，这时他已经变成了黑阔神器了。
+
+为了使攻击过程可视化，我们访问 www.google.com
+
+![](/content/images/poisontap/4.png)
+
+动画非常炫酷，这时候已经在窃取成千上万的网站的Cookie了，吃个小饼干。
+
+![](/content/images/poisontap/5.png)
+
+打开Chrome的工具看一看，哇。
+
+随后，Cookie都被保存在树莓派里了，我们连接上树莓派的SSH，看一下，成功。
+
+```bash
+cat poisontap.cookies.log
+```
+
+![](/content/images/poisontap/3.png)
+
+## 伪造网站
+
+
+## 远程后门
 
 
 # 参考

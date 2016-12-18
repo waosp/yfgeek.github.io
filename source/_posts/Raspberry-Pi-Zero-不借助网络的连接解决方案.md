@@ -1,5 +1,5 @@
 ---
-title: Raspberry Pi Zero 无需网络键盘教程
+title: Raspberry Pi Zero 无需网络键盘配置教程
 date: 2016-12-17 21:58:26
 tags: Raspberry  
 categories: Raspberry  

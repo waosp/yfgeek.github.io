@@ -1,5 +1,5 @@
 ---
-title: 30秒内盗取任意PC的Cookie和Session之神器PoisonTap
+title: 30秒内盗取任意PC的Cookie神器 PoisonTap
 date: 2016-12-18 18:44:51
 tags: hack 
 categories: hack

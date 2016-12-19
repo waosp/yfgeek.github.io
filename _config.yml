@@ -102,8 +102,6 @@ RSS: true
 weibo_username:     yfss
 zhihu_username:     yfgeek
 github_username:    yfgeek
-twitter_username:   yfbk
-facebook_username:  www.facebook.com/ivanwu123
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

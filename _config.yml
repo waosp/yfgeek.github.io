@@ -87,8 +87,8 @@ sitemap:
 baidusitemap:
   path: baidusitemap.xml
 
-duoshuo_username: 6313747378612470529
-duoshuo_share: false
+duoshuo_username: yifani
+duoshuo_share: ture
 
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "像极客一样思考"

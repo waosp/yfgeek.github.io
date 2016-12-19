@@ -1,0 +1,1148 @@
+<!doctype html>
+
+
+
+
+<html class="theme-next pisces" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Raspberry," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Ivan's Blog" type="application/atom+xml" />
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。
+上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi Zero 无需键盘网络 配置教程">
+<meta property="og:url" content="http://blog.yfgeek.com/2016/12/17/raspizero/index.html">
+<meta property="og:site_name" content="Ivan's Blog">
+<meta property="og:description" content="我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。
+上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/raspizero/mail.jpg">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/raspizero/1.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/raspizero/2.png">
+<meta property="og:image" content="http://blog.yfgeek.com/content/images/raspizero/3.png">
+<meta property="og:updated_time" content="2016-12-18T03:42:49.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Raspberry Pi Zero 无需键盘网络 配置教程">
+<meta name="twitter:description" content="我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。
+上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。">
+<meta name="twitter:image" content="http://blog.yfgeek.com/content/images/raspizero/mail.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: false,
+    duoshuo: {
+      userId: '6313747378612471000',
+      author: '一凡'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://blog.yfgeek.com/2016/12/17/raspizero/"/>
+
+
+<style>
+.ds-recent-visitors{
+    margin-top: 20px;
+    margin-bottom: 20px;
+    margin-left:2px;
+    padding: 10px;
+}
+#ds-reset .ds-avatar img, #ds-recent-visitors .ds-avatar img {
+    width: 54px;
+    height: 54px;
+    border-radius: 27px;
+    -webkit-border-radius: 27px;
+    -moz-border-radius: 27px;
+    box-shadow: inset 0 -1px 0 #3333sf;
+    -webkit-box-shadow: inset 0 -1px 0 #3333sf;
+}
+
+
+#ds-recent-visitors .ds-avatar {
+    float: left;
+    margin: 6px !important;
+}
+#ds-thread #ds-reset .ds-powered-by {
+    display: none;
+}
+.visitors-link {
+    border-top: 1px dotted #ccc;
+    border-bottom: 1px dotted #ccc;
+    text-align: center;
+}
+.visitors-link {
+    margin: 0 15px;
+}
+
+.visitors-link p {
+    display: block;
+    color: #fc6423;
+    border: none;
+    margin: 5px 0;
+}
+.visitors-link p i {
+    color: #fc6423;
+    font-size: 14px;
+}
+</style>
+
+
+  <title> Raspberry Pi Zero 无需键盘网络 配置教程 | Ivan's Blog </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+  <div style="display: none;">
+    <script src="//s95.cnzz.com/z_stat.php?id=1260938883&web_id=1260938883" language="JavaScript"></script>
+  </div>
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">Ivan's Blog</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">Web前端 & 极客 & 渗透</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-fav">
+          <a href="/fav" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-star"></i> <br />
+            
+            收藏夹
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-link">
+          <a href="/link" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            友情链接
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup">
+ <span class="search-icon fa fa-search"></span>
+ <input type="text" id="local-search-input">
+ <div id="local-search-result"></div>
+ <span class="popup-btn-close">close</span>
+</div>
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="http://blog.yfgeek.com/2016/12/17/raspizero/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="Ivan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/logo.jpg">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="Ivan's Blog">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="Ivan's Blog" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Raspberry Pi Zero 无需键盘网络 配置教程
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-17T21:58:26+00:00">
+              2016-12-17
+            </time>
+
+            &nbsp;|&nbsp;
+
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-check-o"></i>
+            </span>
+            <time title="Post modified" itemprop="dateModified" datetime="2016-12-18T03:42:49+00:00">
+              2016-12-18
+            </time>
+
+          </span>
+
+          
+            <span class="post-category" >
+              &nbsp; | &nbsp;
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Raspberry/" itemprop="url" rel="index">
+                    <span itemprop="name">Raspberry</span>
+                  </a>
+                </span>
+
+                
+                
+
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                &nbsp; | &nbsp;
+                <a href="/2016/12/17/raspizero/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/17/raspizero/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+
+          
+          
+          
+             <span id="/2016/12/17/raspizero/" class="leancloud_visitors" data-flag-title="Raspberry Pi Zero 无需键盘网络 配置教程">
+               &nbsp; | &nbsp;
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               <span class="post-meta-item-text">阅读次数 </span>
+               <span class="leancloud-visitors-count"></span>
+              </span>
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。</p>
+<p>上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。</p>
+<a id="more"></a> 
+<p>请注意，不要认为所谓的4磅很便宜，毕竟，我还多掏了2.50磅的邮费。树莓派Zero在中国并不便宜，因为树莓派Zero的产能有限，每周只能供很少的货，买树莓派Zero就像抢12306一样，我抢了两周，也正是因为这个原因，树莓派Zero在亚马逊的黄牛卖家卖20磅，淘宝卖120元左右，实际上原价只有40元左右。</p>
+<h1 id="信仰充值"><a href="#信仰充值" class="headerlink" title="信仰充值"></a>信仰充值</h1><p>滴！信仰充值成功！</p>
+<p><img src="/content/images/raspizero/mail.jpg" alt=""></p>
+<p>没有错，你没有看错，就是这么小，但是小也有小的坏处，没有USB口，没有Wi-Fi，没有网线接口，似乎什么都没有用。</p>
+<ul>
+<li>1Ghz, Single-core CPU</li>
+<li>512MB RAM</li>
+<li>Mini HDMI and USB On-The-Go ports</li>
+<li>Micro USB power</li>
+<li>HAT-compatible 40-pin header</li>
+<li>Composite video and reset headers</li>
+</ul>
+<p>不过值得一提的是，USB On-The-Go接口也可以用来供电。</p>
+<h1 id="发车"><a href="#发车" class="headerlink" title="发车"></a>发车</h1><p>网络上关于树莓派Zero如何连接配置大概有以下几种：</p>
+<ul>
+<li>OTG口转USB 接 USB以太网适配器</li>
+<li>OTG口转USB 接 USB Wi-Fi</li>
+<li>OTG口转USB 接 USB键盘 且 用HDMI接显示器</li>
+<li>GPIO接以太网适配器</li>
+</ul>
+<p>但是以上，都太麻烦了，对不对？</p>
+<p>那么关键问题就来了，如何才能在 没有网口、没有Wi-Fi、没有显示器、没有鼠标、没有键盘的情况下 配置可爱的树莓派Zero呢？</p>
+<p>我们 可以 把 树莓派 虚拟为 网卡，然后在内网连接它。</p>
+<p>1.下载完整版 Raspbian Jessie 或 Raspbian Jessie Lite 系统，并且刷到你的SD Card里，Windows用Win32 Disk Imager， Mac/Linux 用命令，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">diskutil list</div><div class="line">diskutil unmountDisk /dev/SD卡的标号 <span class="comment">#如disk2</span></div><div class="line"><span class="built_in">cd</span> /Users/ivan/Downloads/2016-11-25-raspbian-jessie <span class="comment">#进入目录</span></div><div class="line">sudo dd bs=1m <span class="keyword">if</span>=2016-11-25-raspbian-jessie.img of=/dev/rdisk2</div></pre></td></tr></table></figure>
+<p>2.刷好系统后编辑<code>config.txt</code>文件，在最后一行下，另起一行添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dtoverlay=dwc2</div></pre></td></tr></table></figure></p>
+<p>保存文件</p>
+<p>3.最后，打开<code>cmdline.txt</code>文件。<br>找到单词<code>rootwait</code>，在其之后添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">modules-load=dwc2,g_ether</div></pre></td></tr></table></figure>
+<p>4.添加一个文件名为<code>ssh</code>到根目录下，内容为空</p>
+<p>5.把SD Card放到树莓派Zero，用安卓数据线与电脑连接，USB口接OTG口，等待60-90s，电脑会发现网卡并且自动配置ip地址。</p>
+<p><img src="/content/images/raspizero/1.png" alt=""></p>
+<p>6.Ping 一下raspberrypi.local看是否能通</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PING raspberrypi.local (169.254.70.245): 56 data bytes</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=0 ttl=64 time=0.570 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=1 ttl=64 time=0.338 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=2 ttl=64 time=0.316 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=3 ttl=64 time=0.344 ms</div></pre></td></tr></table></figure>
+<p>7.ssh连接raspberrypi.local，默认密码为raspberry<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pi@raspberrypi.local</div></pre></td></tr></table></figure></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>因为没有网络，只能通过下载离线安装文件，传输到树莓派内，再在树莓派里安装。</p>
+<h2 id="配置树莓派"><a href="#配置树莓派" class="headerlink" title="配置树莓派"></a>配置树莓派</h2><p>通过直接运行<code>raspi-config</code>命令</p>
+<p>你需要做</p>
+<ul>
+<li>容量扩展</li>
+<li>更改系统时区</li>
+<li>更改系统密码</li>
+</ul>
+<p>同时你需要通过执行<code>sudo passwd root</code>更改root密码</p>
+<h2 id="安装vnc-server"><a href="#安装vnc-server" class="headerlink" title="安装vnc-server"></a>安装vnc-server</h2><p>首先，去<a href="https://www.realvnc.com/download/vnc/raspberrypi/" target="_blank" rel="external">VNC官网</a>下载最新版本的vnc-server</p>
+<p>用scp命令传到树莓派上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp /Users/ivan/Downloads/VNC-5.3.2-Linux-ARM-DEB.tar.gz  pi@raspberrypi.local:~</div></pre></td></tr></table></figure>
+<p>在树莓派shell下，安装VNC<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar xvf VNC-5.3.2-Linux-ARM-DEB.tar.gz</div><div class="line">sudo dpkg -i VNC-Server-5.3.2-Linux-ARM.deb</div></pre></td></tr></table></figure></p>
+<p><img src="/content/images/raspizero/2.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vncpasswd -user  # 设置连接密码</div><div class="line">vncserver  # 启动vncserver</div></pre></td></tr></table></figure>
+<p>连接raspberry.local:1测试成功</p>
+<p><img src="/content/images/raspizero/3.png" alt=""></p>
+<h2 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h2><p>本来想着，既然把它虚拟为网卡了，能否NAT网络给他让他上网？事实上，是失败的。</p>
+<p>那么我们有一个临时解决方案，就是设置代理</p>
+<p>首先，在本机搭建一个squid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install squid</div></pre></td></tr></table></figure>
+<p>然后下载<a href="http://squidman.net/squidman/" target="_blank" rel="external">SquidMan</a>，安装。<br>在本机开启端口为8080的HTTP代理服务，并把本机名称更为Mac。</p>
+<p>进入树莓派shell，输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/apt/apt.conf.d</div><div class="line">sudo vi /etc/apt/apt.conf.d</div></pre></td></tr></table></figure></p>
+<p>最后一行加入一句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Acquire::http::Proxy &quot;http://Mac.local:8080&quot;;</div></pre></td></tr></table></figure></p>
+<p>保存</p>
+<p>apt-get update一下，怎么样是不是能装软件了？</p>
+<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>这块小板子，我太喜欢了，好精致</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md" target="_blank" rel="external">https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Raspberry/" rel="tag"># Raspberry</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/11/Google镜像站的搭建/" rel="next" title="Google镜像站的搭建">
+                <i class="fa fa-chevron-left"></i> Google镜像站的搭建
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/18/poisontap/" rel="prev" title="30秒内盗取任意PC的Cookie神器 PoisonTap">
+                30秒内盗取任意PC的Cookie神器 PoisonTap <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/17/raspizero/"
+           data-title="Raspberry Pi Zero 无需键盘网络 配置教程" data-url="http://blog.yfgeek.com/2016/12/17/raspizero/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/logo.jpg"
+               alt="Ivan" />
+          <p class="site-author-name" itemprop="name">Ivan</p>
+          <p class="site-description motion-element" itemprop="description">Thinking as a Geek</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">34</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              
+                <span class="site-state-item-count">12</span>
+                <span class="site-state-item-name">分类</span>
+              
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">15</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+          <div class="feed-link motion-element">
+            <a href="/atom.xml" rel="alternate">
+              <i class="fa fa-rss"></i>
+              RSS
+            </a>
+          </div>
+        
+
+        <div class="links-of-author motion-element">
+          
+            
+              <span class="links-of-author-item">
+                <a href="https://github.com/yfgeek" target="_blank" title="GitHub">
+                  
+                    <i class="fa fa-fw fa-github"></i>
+                  
+                  GitHub
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="https://twitter.com/yfbk" target="_blank" title="Twitter">
+                  
+                    <i class="fa fa-fw fa-twitter"></i>
+                  
+                  Twitter
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://weibo.com/yfss" target="_blank" title="微博">
+                  
+                    <i class="fa fa-fw fa-weibo"></i>
+                  
+                  微博
+                </a>
+              </span>
+            
+              <span class="links-of-author-item">
+                <a href="http://www.zhihu.com/people/yfgeek" target="_blank" title="知乎">
+                  
+                    <i class="fa fa-fw fa-safari"></i>
+                  
+                  知乎
+                </a>
+              </span>
+            
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#信仰充值"><span class="nav-number">1.</span> <span class="nav-text">信仰充值</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#发车"><span class="nav-number">2.</span> <span class="nav-text">发车</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#配置"><span class="nav-number">3.</span> <span class="nav-text">配置</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#配置树莓派"><span class="nav-number">3.1.</span> <span class="nav-text">配置树莓派</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装vnc-server"><span class="nav-number">3.2.</span> <span class="nav-text">安装vnc-server</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#设置代理"><span class="nav-number">3.3.</span> <span class="nav-text">设置代理</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#感想"><span class="nav-number">4.</span> <span class="nav-text">感想</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考"><span class="nav-number">5.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+    <div class="visitors-link motion-element">
+            <p>
+              <i class="fa fa-github-alt"></i>
+              最近访客
+            </p>
+    </div>
+     <div class="ds-recent-visitors" data-num-items="28" data-avatar-size="42" id="ds-recent-visitors"></div>
+
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Ivan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"yifani"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length == 0) {
+      search_path = "search.xml";
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    function proceedsearch() {
+      $("body").append('<div class="popoverlay">').css('overflow', 'hidden');
+      $('.popup').toggle();
+    }
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+      $.ajax({
+        url: path,
+        dataType: "xml",
+        async: true,
+        success: function( xmlResponse ) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = $( "entry", xmlResponse ).map(function() {
+            return {
+              title: $( "title", this ).text(),
+              content: $("content",this).text(),
+              url: $( "url" , this).text()
+            };
+          }).get();
+          var $input = document.getElementById(search_id);
+          var $resultContent = document.getElementById(content_id);
+          $input.addEventListener('input', function(){
+            var matchcounts = 0;
+            var str='<ul class=\"search-result-list\">';
+            var keywords = this.value.trim().toLowerCase().split(/[\s\-]+/);
+            $resultContent.innerHTML = "";
+            if (this.value.trim().length > 1) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var content_index = [];
+                var data_title = data.title.trim().toLowerCase();
+                var data_content = data.content.trim().replace(/<[^>]+>/g,"").toLowerCase();
+                var data_url = decodeURIComponent(data.url);
+                var index_title = -1;
+                var index_content = -1;
+                var first_occur = -1;
+                // only match artiles with not empty titles and contents
+                if(data_title != '') {
+                  keywords.forEach(function(keyword, i) {
+                    index_title = data_title.indexOf(keyword);
+                    index_content = data_content.indexOf(keyword);
+                    if( index_title >= 0 || index_content >= 0 ){
+                      isMatch = true;
+                      if (i == 0) {
+                        first_occur = index_content;
+                      }
+                    }
+
+                  });
+                }
+                // show search results
+                if (isMatch) {
+                  matchcounts += 1;
+                  str += "<li><a href='"+ data_url +"' class='search-result-title'>"+ data_title +"</a>";
+                  var content = data.content.trim().replace(/<[^>]+>/g,"");
+                  if (first_occur >= 0) {
+                    // cut out 100 characters
+                    var start = first_occur - 20;
+                    var end = first_occur + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if(start == 0){
+                      end = 50;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    var match_content = content.substring(start, end);
+                    // highlight all keywords
+                    keywords.forEach(function(keyword){
+                      var regS = new RegExp(keyword, "gi");
+                      match_content = match_content.replace(regS, "<b class=\"search-keyword\">"+keyword+"</b>");
+                    });
+
+                    str += "<p class=\"search-result\">" + match_content +"...</p>"
+                  }
+                  str += "</li>";
+                }
+              })};
+            str += "</ul>";
+            if (matchcounts == 0) { str = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>' }
+            if (keywords == "") { str = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>' }
+            $resultContent.innerHTML = str;
+          });
+          proceedsearch();
+        }
+      });}
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched == false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(function(e){
+      $('.popup').hide();
+      $(".popoverlay").remove();
+      $('body').css('overflow', '');
+    });
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+  </script>
+
+
+  
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.1.js"></script>
+  <script>AV.initialize("oLTXcyRzIdgKgCNIteRM0cUy-gzGzoHsz", "BUnbApGSylYt7lWhAHBbFsdF");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+
+</body>
+</html>

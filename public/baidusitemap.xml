@@ -1,0 +1,650 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/12/18/poisontap/</loc>
+    <lastmod>2016-12-18T19:20:52.000Z</lastmod>
+    <data>
+        <display>
+        <title>30秒内盗取任意PC的Cookie神器 PoisonTap</title>
+        <pubTime>2016-12-18T18:44:51.000Z</pubTime>
+        
+        <tag>hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="hack" url="http://blog.yfgeek.com/categories/hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/12/17/raspizero/</loc>
+    <lastmod>2016-12-18T03:42:49.000Z</lastmod>
+    <data>
+        <display>
+        <title>Raspberry Pi Zero 无需键盘网络 配置教程</title>
+        <pubTime>2016-12-17T21:58:26.000Z</pubTime>
+        
+        <tag>Raspberry</tag>
+         
+         
+           
+             
+              <breadCrumb title="Raspberry" url="http://blog.yfgeek.com/categories/Raspberry/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/12/11/Google%E9%95%9C%E5%83%8F%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/</loc>
+    <lastmod>2016-12-11T19:30:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>Google镜像站的搭建</title>
+        <pubTime>2016-12-11T19:21:59.000Z</pubTime>
+        
+        <tag>Ops</tag>
+         
+         
+           
+             
+              <breadCrumb title="Ops" url="http://blog.yfgeek.com/categories/Ops/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/</loc>
+    <lastmod>2016-12-07T00:43:58.000Z</lastmod>
+    <data>
+        <display>
+        <title>OTR(Off-the-Record) 技术探讨</title>
+        <pubTime>2016-12-06T20:25:59.000Z</pubTime>
+        
+        <tag>hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="hack" url="http://blog.yfgeek.com/categories/hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/11/27/badusb/</loc>
+    <lastmod>2016-12-04T15:05:25.000Z</lastmod>
+    <data>
+        <display>
+        <title>Arduino Leonardo 打造 Bad USB</title>
+        <pubTime>2016-11-27T02:48:23.000Z</pubTime>
+        
+        <tag>hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="hack" url="http://blog.yfgeek.com/categories/hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/11/19/github3k/</loc>
+    <lastmod>2016-11-26T02:24:56.000Z</lastmod>
+    <data>
+        <display>
+        <title>当我关注3万Github用户后发生了什么</title>
+        <pubTime>2016-11-19T11:36:26.000Z</pubTime>
+        
+        <tag>Github</tag>
+         
+         
+           
+             
+              <breadCrumb title="Github" url="http://blog.yfgeek.com/categories/Github/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/11/26/TOR%E6%9A%97%E7%BD%91%E7%9A%84%E7%A7%98%E5%AF%86/</loc>
+    <lastmod>2016-11-26T01:44:11.000Z</lastmod>
+    <data>
+        <display>
+        <title>TOR暗网的秘密</title>
+        <pubTime>2016-11-26T01:00:34.000Z</pubTime>
+        
+        <tag>hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="hack" url="http://blog.yfgeek.com/categories/hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/11/23/%E5%86%8D%E7%8E%A9Monyer%E7%9A%84Hack-Game/</loc>
+    <lastmod>2016-11-25T10:59:27.000Z</lastmod>
+    <data>
+        <display>
+        <title>再玩Monyer的Hack Game</title>
+        <pubTime>2016-11-23T19:15:20.000Z</pubTime>
+        
+        <tag>hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="hack" url="http://blog.yfgeek.com/categories/hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/11/22/docker-SQLServer/</loc>
+    <lastmod>2016-11-22T21:53:33.000Z</lastmod>
+    <data>
+        <display>
+        <title>Docker下配置SQL Server for Linux</title>
+        <pubTime>2016-11-22T14:44:06.000Z</pubTime>
+        
+        <tag>docker sql-server</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.yfgeek.com/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/10/15/Docker-Compose%E2%80%94%E7%AE%80%E5%8C%96%E5%A4%8D%E6%9D%82%E5%BA%94%E7%94%A8%E7%9A%84%E5%88%A9%E5%99%A8/</loc>
+    <lastmod>2016-11-19T12:09:26.000Z</lastmod>
+    <data>
+        <display>
+        <title>Docker Compose—简化复杂应用的利器 </title>
+        <pubTime>2016-10-15T18:10:35.000Z</pubTime>
+        
+        <tag>docker</tag>
+         
+         
+           
+             
+              <breadCrumb title="docker" url="http://blog.yfgeek.com/categories/docker/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/11/08/Github%20Follow%20%E5%8F%8A%20BaiduBlogTransfer%20%E9%A1%B9%E7%9B%AE/</loc>
+    <lastmod>2016-11-19T12:09:00.000Z</lastmod>
+    <data>
+        <display>
+        <title>Github Follow 及 BaiduBlogTransfer 项目</title>
+        <pubTime>2016-11-08T01:24:35.000Z</pubTime>
+        
+        <tag>github</tag>
+         
+         
+           
+             
+              <breadCrumb title="github" url="http://blog.yfgeek.com/categories/github/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/09/25/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/</loc>
+    <lastmod>2016-11-19T12:08:53.000Z</lastmod>
+    <data>
+        <display>
+        <title>微信小程序的一些感想</title>
+        <pubTime>2016-09-25T17:50:00.000Z</pubTime>
+        
+        <tag>Web</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://blog.yfgeek.com/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/11/17/opt-rpi-project/</loc>
+    <lastmod>2016-11-19T12:08:40.000Z</lastmod>
+    <data>
+        <display>
+        <title>树莓派实时温度湿度监测 优化后续</title>
+        <pubTime>2016-11-17T23:46:21.000Z</pubTime>
+        
+        <tag>Raspberry</tag>
+         
+         
+           
+             
+              <breadCrumb title="Raspberry" url="http://blog.yfgeek.com/categories/Raspberry/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/10/12/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%84%99%E8%A7%86%E9%93%BE/</loc>
+    <lastmod>2016-11-19T12:08:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>程序员鄙视链</title>
+        <pubTime>2016-10-12T14:07:48.000Z</pubTime>
+        
+        <tag>笑话</tag>
+         
+         
+           
+             
+              <breadCrumb title="笑话" url="http://blog.yfgeek.com/categories/%E7%AC%91%E8%AF%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/10/05/SQL%E9%87%8D%E5%A4%8D%E8%AE%B0%E5%BD%95%E6%9F%A5%E8%AF%A2%EF%BC%88%E8%BD%AC%E8%BD%BD%EF%BC%89/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>SQL重复记录查询（转载）</title>
+        <pubTime>2016-10-05T18:34:04.000Z</pubTime>
+        
+        <tag>Sql</tag>
+         
+         
+           
+             
+              <breadCrumb title="Sql" url="http://blog.yfgeek.com/categories/Sql/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/09/26/%E4%BD%BF%E7%94%A8ProxyChains%E8%BF%9B%E8%A1%8C%E7%BB%88%E7%AB%AF%E4%BB%A3%E7%90%86/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>使用ProxyChains进行终端代理</title>
+        <pubTime>2016-09-25T23:46:04.000Z</pubTime>
+        
+        <tag>Hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hack" url="http://blog.yfgeek.com/categories/Hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/09/11/hacktool/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>那些Hack神器及奇技淫巧</title>
+        <pubTime>2016-09-11T22:07:28.000Z</pubTime>
+        
+        <tag>Hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hack" url="http://blog.yfgeek.com/categories/Hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/09/13/ss-server/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>树莓派搭建ss服务器</title>
+        <pubTime>2016-09-13T22:38:35.000Z</pubTime>
+        
+        <tag>Raspberry</tag>
+         
+         
+           
+             
+              <breadCrumb title="Linux" url="http://blog.yfgeek.com/categories/Linux/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/10/11/JavaScript%E5%88%9B%E5%BB%BA%E5%AF%B9%E8%B1%A1%E7%9A%84%E4%B8%83%E7%A7%8D%E6%A8%A1%E5%BC%8F/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>JavaScript创建对象的七种模式</title>
+        <pubTime>2016-10-11T12:16:14.000Z</pubTime>
+        
+        <tag>Web</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://blog.yfgeek.com/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/09/12/GHOST%E6%90%AC%E8%BF%81%E5%88%B0HEXO-Github-Pages-%E6%8C%87%E5%8D%97/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>GHOST搬迁到HEXO(Github Pages)指南</title>
+        <pubTime>2016-09-12T20:41:59.000Z</pubTime>
+        
+        <tag>Web</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://blog.yfgeek.com/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/10/09/Mac-Wi-Fi-%E6%8E%89%E7%BA%BF%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88-1/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>Mac Wi-Fi掉线解决方案</title>
+        <pubTime>2016-10-09T14:07:52.000Z</pubTime>
+        
+        <tag>Mac</tag>
+         
+         
+           
+             
+              <breadCrumb title="Mac" url="http://blog.yfgeek.com/categories/Mac/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/26/runtimelcd/</loc>
+    <lastmod>2016-11-19T11:35:18.000Z</lastmod>
+    <data>
+        <display>
+        <title>树莓派实时温度湿度监测进阶</title>
+        <pubTime>2016-08-26T14:19:14.000Z</pubTime>
+        
+        <tag>Raspberry</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/25/ba-kalifang-dao-upan-li/</loc>
+    <lastmod>2016-08-25T18:29:38.000Z</lastmod>
+    <data>
+        <display>
+        <title>把KALI放到U盘里</title>
+        <pubTime>2016-08-25T18:26:45.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/25/rpi-tmp-hdt-platform/</loc>
+    <lastmod>2016-08-25T18:28:59.000Z</lastmod>
+    <data>
+        <display>
+        <title>基于树莓派的实时温度湿度监测平台</title>
+        <pubTime>2016-08-25T12:39:08.000Z</pubTime>
+        
+        <tag>Raspberry</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/20/916/</loc>
+    <lastmod>2016-08-21T00:09:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>我怀念的依旧是916</title>
+        <pubTime>2016-08-20T22:22:01.000Z</pubTime>
+        
+        <tag>杂谈</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/12/hai-wai-appsheng-cun-zhi-nan/</loc>
+    <lastmod>2016-08-12T22:30:50.000Z</lastmod>
+    <data>
+        <display>
+        <title>海外App生存指南</title>
+        <pubTime>2016-08-12T22:13:34.000Z</pubTime>
+        
+        <tag>其他</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/07/airplay/</loc>
+    <lastmod>2016-08-07T22:28:30.000Z</lastmod>
+    <data>
+        <display>
+        <title>用树莓派把蓝牙音响变成Airplay音响</title>
+        <pubTime>2016-08-07T20:23:56.000Z</pubTime>
+        
+        <tag>Raspberry</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/06/bash/</loc>
+    <lastmod>2016-08-06T10:15:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>常用Bash命令总结</title>
+        <pubTime>2016-08-05T23:36:19.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/07/28/iterm2-mei-hua-quan-guo-cheng/</loc>
+    <lastmod>2016-08-05T20:14:29.000Z</lastmod>
+    <data>
+        <display>
+        <title>iTerm2 美化全过程</title>
+        <pubTime>2016-07-28T08:49:20.000Z</pubTime>
+        
+        <tag>Mac</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/07/28/vimda-quan/</loc>
+    <lastmod>2016-08-05T20:14:15.000Z</lastmod>
+    <data>
+        <display>
+        <title>Vim 命令大全</title>
+        <pubTime>2016-07-28T09:16:13.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/07/29/emacs-da-quan/</loc>
+    <lastmod>2016-08-05T20:14:03.000Z</lastmod>
+    <data>
+        <display>
+        <title>Emacs 命令大全</title>
+        <pubTime>2016-07-29T01:10:07.000Z</pubTime>
+        
+        <tag>Linux</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/07/28/tor/</loc>
+    <lastmod>2016-08-05T20:13:45.000Z</lastmod>
+    <data>
+        <display>
+        <title>Tor安全上网指南</title>
+        <pubTime>2016-07-28T15:01:47.000Z</pubTime>
+        
+        <tag>Hack</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/07/30/hack1/</loc>
+    <lastmod>2016-08-05T20:13:28.000Z</lastmod>
+    <data>
+        <display>
+        <title>Kali系列——信息收集阶段（一）</title>
+        <pubTime>2016-07-30T16:48:20.000Z</pubTime>
+        
+        <tag>Hack</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://blog.yfgeek.com/2016/08/01/kalixi-lie-xin-xi-shou-ji-jie-duan-yi/</loc>
+    <lastmod>2016-08-05T20:13:14.000Z</lastmod>
+    <data>
+        <display>
+        <title>Kali系列——信息收集阶段（二）</title>
+        <pubTime>2016-08-01T22:20:17.000Z</pubTime>
+        
+        <tag>Hack</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+</urlset>

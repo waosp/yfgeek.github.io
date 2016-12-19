@@ -1,8 +1,8 @@
 ---
 title: Arduino Leonardo 打造 Bad USB
 date: 2016-11-27 02:48:23
-tags: hack 
-categories: hack
+tags: Hack 
+categories: Hack
 permalink: badusb
 ---
 

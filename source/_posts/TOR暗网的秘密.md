@@ -1,8 +1,8 @@
 ---
 title: TOR暗网的秘密
 date: 2016-11-26 01:00:34
-tags: hack
-categories: hack
+tags: Hack
+categories: Hack
 ---
 
 TOR 是一个不可以吃的洋葱，众所周知洋葱新闻美国一个非常严谨的讽刺新闻公司，所以这个文章跟洋葱新闻没什么关系。

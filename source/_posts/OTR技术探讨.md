@@ -1,8 +1,8 @@
 ---
 title: OTR(Off-the-Record) 技术探讨
 date: 2016-12-06 20:25:59
-tags: hack
-categories: hack
+tags: Hack
+categories: Hack
 ---
 
 中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。

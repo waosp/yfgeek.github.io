@@ -10,6 +10,11 @@ author: Ivan
 language: zh-Hans
 timezone:
 
+SEOTitle: Ivan's Blog | Web前端 & 极客 & 渗透
+header-img: img/home-bg.jpg
+email: yifanb@gmail.com
+keyword: "Web前端,极客,渗透"
+
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
 url: http://blog.yfgeek.com
@@ -69,7 +74,7 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: next
+theme: huxblog
 
 search:
   path: search.xml
@@ -81,6 +86,24 @@ sitemap:
   path: sitemap.xml
 baidusitemap:
   path: baidusitemap.xml
+
+duoshuo_username: 6313747378612470529
+duoshuo_share: false
+
+sidebar: true                           # whether or not using Sidebar.
+sidebar-about-description: "像极客一样思考"
+sidebar-avatar: img/logo.jpg
+
+featured-tags: true                     # whether or not using Feature-Tags
+featured-condition-size: 1
+
+
+RSS: true
+weibo_username:     yfss
+zhihu_username:     yfgeek
+github_username:    yfgeek
+twitter_username:   yfbk
+facebook_username:  www.facebook.com/ivanwu123
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html

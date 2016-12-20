@@ -1,6 +1,6 @@
 ---
 title: 前端收藏夹
-permalink: fav
+permalink: f2e
 id: 7
 updated: '2016-08-17 19:53:28'
 date: 2016-07-31 00:27:35

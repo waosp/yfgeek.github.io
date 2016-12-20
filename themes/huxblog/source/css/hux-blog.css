@@ -1034,3 +1034,7 @@ body {
 #ds-recent-comments li.ds-comment .ds-excerpt{
 font-size: 12px;
 }
+
+#ds-recent-comments li.ds-comment .ds-thread-title {
+    line-height: 20px !important;
+}

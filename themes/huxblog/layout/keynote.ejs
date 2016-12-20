@@ -130,16 +130,6 @@ layout: layout
                 <hr>
                 <h5>GUESTS</h5>
                 <div class="ds-recent-visitors" data-num-items="17" data-avatar-size="32" id="ds-recent-visitors"></div>
-                <!-- Featured Tags -->
-                <% if(config['featured-tags']) { %>
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="<%= config.root %>tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        <%- list_tags({style: '', class: '', show_count: false, separator: ''}) %>
-                    </div>
-                </section>
-                <% }%>
 
                 <!-- Friends Blog -->
                 <% if(config.friends) { %>

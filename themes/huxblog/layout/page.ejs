@@ -72,7 +72,7 @@ layout: layout
                 col-xs-12
                 post-container
             ">
-            
+
                 <%- page.content || body %>
 
                 <!-- 如果开启评论功能 -->
@@ -134,7 +134,7 @@ layout: layout
                             (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
                         })();
 
-                        
+
                     </script>
                     <!-- disqus 公共JS代码 end -->
                     <% } %>
@@ -245,8 +245,8 @@ layout: layout
                                     </a>
                                 </li>
                             <% } %>
-                            
-                            
+
+
                             <% if (config.linkedin_username) { %>
                                 <li>
                                     <a target="_blank"  href="https://www.linkedin.com/in/<%= config.linkedin_username %>">
@@ -260,7 +260,7 @@ layout: layout
                         </ul>
                     </div>
                 </section>
-                
+
                 <!-- Friends Blog -->
                 <% if(config.friends) { %>
                 <hr>
@@ -272,6 +272,13 @@ layout: layout
                     <% }); %>
                 </ul>
                 <% }%>
+                <!-- Comments List -->
+                <div class="widget-wrap">
+                  <h3 class="widget-title"><%= __('最近评论') %></h3>
+                	<div class="widget">
+                		<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="30"></ul>
+                	</div>
+                  </div>
             </div>
         <%} %>
     </div>

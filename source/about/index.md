@@ -1,8 +1,10 @@
 ---
 title: 关于
 permalink: about
-id: 8
+id: 10
 date: 2016-09-26 00:27:35
+header-img: "content/images/f2e/about-me.jpg"
+
 ---
 # 关于我
 

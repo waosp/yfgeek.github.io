@@ -1,10 +1,10 @@
-@media (min-width:1200px) {
+@media(min-width:1200px) {
 	.post-container,.sidebar-container {
 		padding-right: 5%
 	}
 }
 
-@media (min-width:768px) {
+@media(min-width:768px) {
 	.post-container {
 		padding-right: 5%
 	}
@@ -60,7 +60,7 @@
 body {
 	font-family: -apple-system,"Helvetica Neue",Arial,"PingFang SC","Hiragino Sans GB",STHeiti,"Microsoft YaHei","Microsoft JhengHei","Source Han Sans SC","Noto Sans CJK SC","Source Han Sans CN","Noto Sans SC","Source Han Sans TC","Noto Sans CJK TC","WenQuanYi Micro Hei",SimSun,sans-serif;
 	line-height: 1.7;
-	font-size: 16px;
+	font-size: 15px;
 	color: #404040;
 	overflow-x: hidden
 }
@@ -219,7 +219,7 @@ pre code {
 
 @media only screen and (max-width:767px) {
 	.navbar-default .navbar-collapse {
-		border: none;
+		border: 0;
 		background: #fff;
 		box-shadow: 0 5px 10px 2px rgba(0,0,0,.2);
 		box-shadow: rgba(0,0,0,.117647) 0 1px 6px,rgba(0,0,0,.239216) 0 1px 4px;
@@ -277,8 +277,8 @@ pre code {
 }
 
 .navbar-custom {
-	background: 0 0;
-	border: none;
+	background: 0;
+	border: 0;
 	position: absolute;
 	top: 0;
 	left: 0;
@@ -313,7 +313,7 @@ pre code {
 
 @media only screen and (min-width:768px) {
 	.navbar-custom {
-		background: 0 0;
+		background: 0;
 		border-bottom: 1px solid transparent
 	}
 
@@ -341,7 +341,7 @@ pre code {
 	}
 
 	.navbar-custom .nav li a:active {
-		background: 0 0
+		background: 0
 	}
 }
 
@@ -433,7 +433,7 @@ pre code {
 }
 
 .intro-header .site-heading,.intro-header .page-heading {
-    text-shadow: 1px 1px 30px #666;
+	text-shadow: 1px 1px 30px #666;
 	text-align: center
 }
 
@@ -629,10 +629,10 @@ footer .copyright a:hover,footer .copyright a:focus {
 	position: relative;
 	padding-right: 0;
 	padding-left: 0;
-	border: none;
+	border: 0;
 	border-radius: 0;
 	font-size: 1.5em;
-	background: 0 0;
+	background: 0;
 	box-shadow: none!important;
 	resize: none
 }
@@ -748,12 +748,12 @@ form .row:first-child .floating-label-form-group {
 
 img::selection {
 	color: #fff;
-	background: 0 0
+	background: 0
 }
 
 img::-moz-selection {
 	color: #fff;
-	background: 0 0
+	background: 0
 }
 
 body {
@@ -806,11 +806,11 @@ body {
 
 #tag_cloud a,#tag_cloud .tag {
 	font-size: 14px;
-	border: none;
+	border: 0;
 	line-height: 28px;
 	margin: 0 2px;
 	margin-bottom: 8px;
-	background: #D6D6D6
+	background: #d6d6d6
 }
 
 #tag_cloud a:hover,#tag_cloud .tag:hover,#tag_cloud a:active,#tag_cloud .tag:active {
@@ -956,11 +956,11 @@ body {
 }
 
 .comment #ds-thread #ds-reset .ds-textarea-wrapper {
-	background: 0 0
+	background: 0
 }
 
 .comment #ds-thread #ds-reset .ds-gradient-bg {
-	background: 0 0
+	background: 0
 }
 
 #ds-smilies-tooltip ul.ds-smilies-tabs li a {
@@ -1015,4 +1015,22 @@ body {
 
 .page-fullscreen footer .copyright a:hover {
 	color: #ddd
+}
+#ds-recent-comments {
+    padding-left: 0;
+    padding-right: 25px;
+}
+.ds-recent-comments .ds-avatar img {
+    width: 32px;
+    height: 32px;
+    float: left;
+    font-size: 0;
+    border-radius: 50%;
+}
+
+#ds-recent-comments li.ds-comment {
+    border: 0px !important;
+}
+#ds-recent-comments li.ds-comment .ds-excerpt{
+font-size: 12px;
 }

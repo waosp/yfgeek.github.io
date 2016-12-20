@@ -4,6 +4,8 @@ permalink: fav
 id: 7
 updated: '2016-08-17 19:53:28'
 date: 2016-07-31 00:27:35
+header-img: "/content/images/f2e/post-bg-js-version.jpg"
+
 ---
 
 这是一个真正的前端收藏夹，由于前端技术更新较快，好资源太多，在这里做个收藏夹，只为方便自己。

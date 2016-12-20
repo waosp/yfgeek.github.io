@@ -165,7 +165,7 @@
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#docker sql-server" title="docker sql-server">docker sql-server</a>
+                          <a class="tag" href="/tags/#Docker SQLserver" title="Docker SQLserver">Docker SQLserver</a>
                         
                     </div>
                     <h1>Docker下配置SQL Server for Linux</h1>
@@ -201,13 +201,13 @@
 <li>至少 4GB 内存</li>
 </ul>
 <p><img src="/content/images/sqldocker/0.jpg" alt=""></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="拉取docker镜像"><a href="#拉取docker镜像" class="headerlink" title="拉取docker镜像"></a>拉取docker镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="拉取docker镜像"><a href="#拉取docker镜像" class="headerlink" title="拉取docker镜像"></a>拉取docker镜像</h2><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull microsoft/mssql-<span class="keyword">server</span>-linux</div></pre></td></tr></table></figure>
 <h2 id="运行docker镜像"><a href="#运行docker镜像" class="headerlink" title="运行docker镜像"></a>运行docker镜像</h2><p><code>YourStrong!Passw0rd</code> 为你的密码</p>
-<p><code>1433</code> 为对外端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
-<p>🌰 例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
+<p><code>1433</code> 为对外端口<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="keyword">run</span><span class="bash"> <span class="_">-e</span> <span class="string">'ACCEPT_EULA=Y'</span> <span class="_">-e</span> <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p 1433:1433 <span class="_">-d</span> microsoft/mssql-server-linux</span></div></pre></td></tr></table></figure></p>
+<p>🌰 例子<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker <span class="keyword">run</span><span class="bash"> <span class="_">-e</span> <span class="string">'ACCEPT_EULA=Y'</span> <span class="_">-e</span> <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p 1433:1433 <span class="_">-d</span> microsoft/mssql-server-linux</span></div></pre></td></tr></table></figure></p>
 <h2 id="设置-宿主机保存数据目录-暂不支持"><a href="#设置-宿主机保存数据目录-暂不支持" class="headerlink" title="设置 宿主机保存数据目录(暂不支持)"></a>设置 宿主机保存数据目录(暂不支持)</h2><p><code>&lt;host directory&gt;</code> 为目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -v &lt;host directory&gt;:/var/opt/mssql -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
-<h2 id="查看容器的ip-调试用"><a href="#查看容器的ip-调试用" class="headerlink" title="查看容器的ip(调试用)"></a>查看容器的ip(调试用)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker inspect --format=&apos;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&apos; 容器id</div></pre></td></tr></table></figure>
+<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e <span class="string">'ACCEPT_EULA=Y'</span> -e <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p <span class="number">1433</span><span class="symbol">:</span><span class="number">1433</span> -v &lt;host directory&gt;<span class="symbol">:/var/opt/mssql</span> -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
+<h2 id="查看容器的ip-调试用"><a href="#查看容器的ip-调试用" class="headerlink" title="查看容器的ip(调试用)"></a>查看容器的ip(调试用)</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">docker inspect --format</span>=<span class="string">'&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;'</span> 容器id</div></pre></td></tr></table></figure>
 <p>172.17.0.2</p>
 <h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><p>用户名是SA</p>
 <p>密码是用户自己设置的</p>
@@ -223,6 +223,29 @@
 
                 <hr>
 
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="2016/11/22/docker-SQLServer/"
+                    data-title="Docker下配置SQL Server for Linux"
+                    data-url="http://blog.yfgeek.com/2016/11/22/docker-SQLServer/"
+                    data-images=""
+                    data-content="前言微软已经不再是以前的那个微软了，如果微软SQL Server早开源几年，估计现在数据库方面... | Ivan&#39;s Blog | Web前端 &amp; 极客 &amp; 渗透 " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
                 
 
                 <ul class="pager">
@@ -270,7 +293,7 @@
                     <h5><a href="/tags/">FEATURED TAGS</a></h5>
                     <div class="tags">
                        
-                          <a class="tag" href="/tags/#docker sql-server" title="docker sql-server">docker sql-server</a>
+                          <a class="tag" href="/tags/#Docker SQLserver" title="Docker SQLserver">Docker SQLserver</a>
                         
                     </div>
                 </section>
@@ -288,7 +311,7 @@
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
     // dynamic User by Hux
-    var _user = '6313747378612471000';
+    var _user = 'yifani';
 
     // duoshuo comment query.
     var duoshuoQuery = {short_name: _user };
@@ -307,6 +330,40 @@
 
 
 
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
 
 
 
@@ -327,15 +384,6 @@
                         </a>
                     </li>
                 
-                
-                    <li>
-                        <a target="_blank" href="https://twitter.com/yfbk">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-twitter fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
                 
                 
                     <li>
@@ -360,15 +408,6 @@
                 
 
                 
-                    <li>
-                        <a target="_blank" href="https://www.facebook.com/www.facebook.com/ivanwu123">
-                            <span class="fa-stack fa-lg">
-                                <i class="fa fa-circle fa-stack-2x"></i>
-                                <i class="fa fa-facebook fa-stack-1x fa-inverse"></i>
-                            </span>
-                        </a>
-                    </li>
-                
 
                 
                     <li>
@@ -385,18 +424,13 @@
 
                 </ul>
                 <p class="copyright text-muted">
-                    Copyright &copy; Ivan&#39;s Blog 2016 
+                    Copyright &copy; Ivan&#39;s Blog 2016
                     <br>
-                    Theme by <a href="http://huangxuan.me">Hux</a> 
+                    Theme inspired by <a href="http://huangxuan.me">Hux</a>
                     <span style="display: inline-block; margin: 0 5px;">
                         <i class="fa fa-heart"></i>
-                    </span> 
-                    Ported by <a href="http://blog.kaijun.rocks">Kaijun</a> | 
-                    <iframe
-                        style="margin-left: 2px; margin-bottom:-5px;"
-                        frameborder="0" scrolling="0" width="91px" height="20px"
-                        src="https://ghbtns.com/github-btn.html?user=kaijun&repo=hexo-theme-huxblog&type=star&count=true" >
-                    </iframe>
+                    </span>
+                    Proudly powered by Hexo
                 </p>
             </div>
         </div>
@@ -425,14 +459,14 @@
     }
 </script>
 
-<!-- 
-     Because of the native support for backtick-style fenced code blocks 
-     right within the Markdown is landed in Github Pages, 
-     From V1.6, There is no need for Highlight.js, 
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
      so Huxblog drops it officially.
 
-     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0  
-     - https://help.github.com/articles/creating-and-highlighting-code-blocks/    
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
 -->
 <!--
     <script>
@@ -476,7 +510,6 @@
 
 
 <!-- Side Catalog -->
-
 
 
 

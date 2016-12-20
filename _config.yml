@@ -97,6 +97,7 @@ sidebar-avatar: img/logo.jpg
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1
 
+anchorjs: true 
 
 RSS: true
 weibo_username:     yfss

@@ -13,11 +13,12 @@ header-img: "/content/images/f2e/post-bg-js-version.jpg"
 # 网站
 * [Github热度排名](https://www.awesomes.cn/)
 * [imweb前端社区](http://imweb.io/)
+* [前端乱炖](http://www.html-js.com/)
 * [鑫空间](http://www.zhangxinxu.com/wordpress/)
 * [AlloyTeam](http://www.alloyteam.com/)
 
 # Github
-* [PDF.JS 加载pdf](http://mozilla.github.io/pdf.js)
+* [我Star的项目](https://github.com/yfgeek?tab=stars)
 
 # 娱乐
 * [前端 JSer 装逼手册](https://segmentfault.com/a/1190000005987011)
@@ -41,9 +42,6 @@ header-img: "/content/images/f2e/post-bg-js-version.jpg"
 * [HTML5 UP](https://html5up.net/)
 * [控制面板](https://www.awesomes.cn/subject/admins)
 
-# 文档
-* [Hexo](https://hexo.io/zh-cn/docs/)
-
 # 文章
 * [通过一张简单的图，让你彻底地、永久地搞懂JS的\=\=运算](https://zhuanlan.zhihu.com/p/21650547)
 * [如何在前端开发中增加编码效率，这里有十款 Chrome 扩展可以帮你](https://zhuanlan.zhihu.com/p/21490434)
@@ -56,3 +54,5 @@ header-img: "/content/images/f2e/post-bg-js-version.jpg"
 * [Nodejs学习日志（一）——cheerio爬虫](http://molunerfinn.com/nodejs-1/)
 * [如何打造一个令人愉悦的前端开发环境（一）](https://segmentfault.com/a/1190000006157372)
 * [如何让你的网页打开速度降低到1s内](http://www.jianshu.com/p/d857c3ff78d6)
+
+![](/content/images/f2e/keep-calm-and-learn-javascript.png)

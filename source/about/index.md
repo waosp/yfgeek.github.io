@@ -12,11 +12,11 @@ header-img: "content/images/f2e/about-me.jpg"
 
 本科 自动化 研究生 计算机科学技术
 
+人在 英国 来自 北京
+
 University of Birmingham
 
-# 生活方式
-
-* 爱好Web前端
+* 爱好Web前端 (React粉丝)
 * 爱好渗透测试
 * 和前端相关的美工，但渣
 * 从来不用收藏夹，一直背网址

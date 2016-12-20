@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.yfgeek.com/"/>
-  <updated>2016-12-20T00:10:22.000Z</updated>
+  <updated>2016-12-20T01:37:06.000Z</updated>
   <id>http://blog.yfgeek.com/</id>
   
   <author>
@@ -20,7 +20,7 @@
     <link href="http://blog.yfgeek.com/2016/12/18/poisontap/"/>
     <id>http://blog.yfgeek.com/2016/12/18/poisontap/</id>
     <published>2016-12-18T18:44:51.000Z</published>
-    <updated>2016-12-20T00:10:22.000Z</updated>
+    <updated>2016-12-20T01:37:06.000Z</updated>
     
     <content type="html"><![CDATA[<p>著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。</p>
 <p>是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。</p>

@@ -4,7 +4,7 @@ permalink: fav
 id: 7
 updated: '2016-08-17 19:53:28'
 date: 2016-07-31 00:27:35
-header-img: "/content/images/f2e/post-bg-js-version.jpg"
+header-img: "content/images/f2e/post-bg-js-version.jpg"
 
 ---
 

@@ -169,7 +169,7 @@ layout: layout
 
                 <!-- Short About -->
                 <section class="visible-md visible-lg">
-                    <hr><h5><a href="<%= config.root %>about/">ABOUT ME</a></h5>
+                    <hr><h5><a href="<%= config.root %>about.html">ABOUT ME</a></h5>
                     <div class="short-about">
 
                         <% if(config['sidebar-avatar']) { %>
@@ -273,13 +273,10 @@ layout: layout
                 </ul>
                 <% }%>
                 <!-- Comments List -->
-                <div class="widget-wrap">
-                  <h3 class="widget-title"><%= __('最近评论') %></h3>
+                  <h5>COMMENTS</h5>
                 	<div class="widget">
                 		<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="1" data-excerpt-length="30"></ul>
                 	</div>
-                  </div>
-            </div>
         <%} %>
     </div>
 </div>

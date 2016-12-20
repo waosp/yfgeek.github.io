@@ -11,7 +11,7 @@ language: zh-CN
 timezone:
 
 SEOTitle: Ivan's Blog | Web前端 & 极客 & 渗透
-header-img: img/home-bg.jpg
+header-img: /content/images/2016/08/wallhaven-94129-2.jpg
 email: yifanb@gmail.com
 keyword: "Web前端,极客,渗透"
 

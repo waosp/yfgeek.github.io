@@ -39,13 +39,13 @@ titlecase: false # Transform title into titlecase
 external_link: true # Open external links in new tab
 filename_case: 0
 render_drafts: false
-post_asset_folder: false
+post_asset_folder: true
 relative_link: false
 future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: false
+  auto_detect: true
   tab_replace:
 
 # Category & Tag
@@ -97,7 +97,7 @@ sidebar-avatar: img/logo.jpg
 featured-tags: true                     # whether or not using Feature-Tags
 featured-condition-size: 1
 
-anchorjs: true 
+anchorjs: true
 
 RSS: true
 weibo_username:     yfss

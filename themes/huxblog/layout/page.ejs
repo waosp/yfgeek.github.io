@@ -100,25 +100,7 @@ layout: layout
                     <% } %>
 
 
-                    <% if(config['duoshuo_username']) { %>
-                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        // dynamic User by Hux
-                        var _user = '<%= config['duoshuo_username'] %>';
 
-                        // duoshuo comment query.
-                        var duoshuoQuery = {short_name: _user };
-                        (function() {
-                            var ds = document.createElement('script');
-                            ds.type = 'text/javascript';ds.async = true;
-                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                            ds.charset = 'UTF-8';
-                            (document.getElementsByTagName('head')[0]
-                             || document.getElementsByTagName('body')[0]).appendChild(ds);
-                        })();
-                    </script>
-                    <!-- 多说公共JS代码 end -->
-                    <% } %>
 
                     <% if(config['disqus_username']) { %>
                     <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
@@ -278,6 +260,26 @@ layout: layout
                 	<div class="widget">
                 		<ul class="ds-recent-comments" data-num-items="8" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="0" data-excerpt-length="20"></ul>
                 	</div>
+
+                    <% if(config['duoshuo_username']) { %>
+                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        // dynamic User by Hux
+                        var _user = '<%= config['duoshuo_username'] %>';
+
+                        // duoshuo comment query.
+                        var duoshuoQuery = {short_name: _user };
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                    </script>
+                    <!-- 多说公共JS代码 end -->
+                    <% } %>
         <%} %>
     </div>
 </div>

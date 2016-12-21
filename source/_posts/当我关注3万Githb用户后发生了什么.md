@@ -5,6 +5,7 @@ permalink: github3k
 tags: Github
 categories: Github
 top: 1
+header-img: "/content/images/githubauto/background.jpg"
 
 ---
 # 前言

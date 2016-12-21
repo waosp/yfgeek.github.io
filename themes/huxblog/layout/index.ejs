@@ -19,7 +19,10 @@ layout: page
     </a>
     <p class="post-meta">
         Posted by <%- post.author || config.author %> on
-        <%= post.date.format(config.date_format) %>
+        <%= post.date.format(config.date_format) %> &nbsp;
+        <span id="{{ url_for(post.path) }}"class="leancloud_visitors" data-flag-title="{{ post.title }}">
+         &nbsp;{{__('post.visitors')}}
+        </span>
     </p>
 
 </div>

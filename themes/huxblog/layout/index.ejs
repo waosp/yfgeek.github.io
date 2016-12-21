@@ -20,14 +20,6 @@ layout: page
     <p class="post-meta">
         Posted by <%- post.author || config.author %> on
         <%= post.date.format(config.date_format) %>
-        <% if (site.posts.length){ %>
-          <div class="widget-wrap">
-            <div class="widget">
-              <ul class="popularlist">
-              </ul>
-            </div>
-          </div>
-        <% } %>
 
     </p>
 

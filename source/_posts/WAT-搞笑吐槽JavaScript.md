@@ -14,7 +14,7 @@ header-img: "/content/images/wat/home-bg-o.jpg"
 
 # Wat
 
-![](https://www.destroyallsoftware.com/images/posters/talks/wat.poster.png)
+[![](https://www.destroyallsoftware.com/images/posters/talks/wat.poster.png)](https://www.destroyallsoftware.com/talks/wat)
 
 
 ```javascript
@@ -44,7 +44,7 @@ Array(16).join("wat" - 1 ) + " Batman!"
 
 
 
-![](https://www.destroyallsoftware.com/images/posters/talks/the-birth-and-death-of-javascript.poster.png)
+[![](https://www.destroyallsoftware.com/images/posters/talks/the-birth-and-death-of-javascript.poster.png)](https://www.destroyallsoftware.com/talks/the-birth-and-death-of-javascript)
 
 
 十分客观的罗列出了JS的缺点、当前JS发展趋势必然产生的低效率问题。

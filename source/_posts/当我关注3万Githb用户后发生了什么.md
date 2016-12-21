@@ -1,5 +1,5 @@
 ---
-title: 【置顶】当我关注3万Github用户后发生了什么
+title: 当我关注3万Github用户后发生了什么
 date: 2016-11-19 11:36:26
 permalink: github3k
 tags: Github

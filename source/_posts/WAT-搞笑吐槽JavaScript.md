@@ -8,7 +8,7 @@ header-img: "/content/images/wat/home-bg-o.jpg"
 
 ---
 
-今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽Js的视频，简直搞笑，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。
+今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽JavaScript的视频，简直搞笑，不过也挺客观的，毕竟是一个10天内攒出来的语言，虽然现在发展有ES支撑，但是依然非常零散，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。
 
 # Wat
 <video class="u-full-width" poster="https://www.destroyallsoftware.com/images/posters/talks/wat.poster.png" preload="none" controls="" width=100%>

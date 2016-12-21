@@ -651,11 +651,11 @@
   </entry>
   
   <entry>
-    <title>当我关注3万Github用户后发生了什么</title>
+    <title>【置顶】当我关注3万Github用户后发生了什么</title>
     <link href="http://blog.yfgeek.com/2016/11/19/github3k/"/>
     <id>http://blog.yfgeek.com/2016/11/19/github3k/</id>
     <published>2016-11-19T11:36:26.000Z</published>
-    <updated>2016-12-21T15:45:32.000Z</updated>
+    <updated>2016-12-21T15:50:21.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。</p>
 <p>于是乎我利用这个关注了3万人的Github，可是关注后<del>除了同性交友</del>似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。<br><a id="more"></a><br><img src="/content/images/githubauto/1.jpg" alt=""></p>

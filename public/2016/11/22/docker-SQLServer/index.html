@@ -94,7 +94,7 @@
 
                         
                         <li>
-                            <a href="/fav.html">前端收藏夹</a>
+                            <a href="/f2e.html">前端收藏夹</a>
                         </li>
                         
                     
@@ -201,13 +201,13 @@
 <li>至少 4GB 内存</li>
 </ul>
 <p><img src="/content/images/sqldocker/0.jpg" alt=""></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="拉取docker镜像"><a href="#拉取docker镜像" class="headerlink" title="拉取docker镜像"></a>拉取docker镜像</h2><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull microsoft/mssql-<span class="keyword">server</span>-linux</div></pre></td></tr></table></figure>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="拉取docker镜像"><a href="#拉取docker镜像" class="headerlink" title="拉取docker镜像"></a>拉取docker镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
 <h2 id="运行docker镜像"><a href="#运行docker镜像" class="headerlink" title="运行docker镜像"></a>运行docker镜像</h2><p><code>YourStrong!Passw0rd</code> 为你的密码</p>
-<p><code>1433</code> 为对外端口<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="keyword">run</span><span class="bash"> <span class="_">-e</span> <span class="string">'ACCEPT_EULA=Y'</span> <span class="_">-e</span> <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p 1433:1433 <span class="_">-d</span> microsoft/mssql-server-linux</span></div></pre></td></tr></table></figure></p>
-<p>🌰 例子<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker <span class="keyword">run</span><span class="bash"> <span class="_">-e</span> <span class="string">'ACCEPT_EULA=Y'</span> <span class="_">-e</span> <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p 1433:1433 <span class="_">-d</span> microsoft/mssql-server-linux</span></div></pre></td></tr></table></figure></p>
+<p><code>1433</code> 为对外端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
+<p>🌰 例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
 <h2 id="设置-宿主机保存数据目录-暂不支持"><a href="#设置-宿主机保存数据目录-暂不支持" class="headerlink" title="设置 宿主机保存数据目录(暂不支持)"></a>设置 宿主机保存数据目录(暂不支持)</h2><p><code>&lt;host directory&gt;</code> 为目录</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e <span class="string">'ACCEPT_EULA=Y'</span> -e <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p <span class="number">1433</span><span class="symbol">:</span><span class="number">1433</span> -v &lt;host directory&gt;<span class="symbol">:/var/opt/mssql</span> -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
-<h2 id="查看容器的ip-调试用"><a href="#查看容器的ip-调试用" class="headerlink" title="查看容器的ip(调试用)"></a>查看容器的ip(调试用)</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">docker inspect --format</span>=<span class="string">'&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;'</span> 容器id</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -v &lt;host directory&gt;:/var/opt/mssql -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
+<h2 id="查看容器的ip-调试用"><a href="#查看容器的ip-调试用" class="headerlink" title="查看容器的ip(调试用)"></a>查看容器的ip(调试用)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker inspect --format=&apos;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&apos; 容器id</div></pre></td></tr></table></figure>
 <p>172.17.0.2</p>
 <h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><p>用户名是SA</p>
 <p>密码是用户自己设置的</p>
@@ -297,25 +297,14 @@
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 sidebar-container">
-
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                       
-                          <a class="tag" href="/tags/#Docker SQLserver" title="Docker SQLserver">Docker SQLserver</a>
-                        
-                    </div>
-                </section>
-                
+                <!-- GUESTS Blog -->
+                <hr>
+                <h5>GUESTS</h5>
+                <div class="ds-recent-visitors" data-num-items="17" data-avatar-size="32" id="ds-recent-visitors"></div>
 
                 <!-- Friends Blog -->
                 
-                <hr>
-                <h5>GUESTS</h5>
-                <div class="ds-recent-visitors" data-num-items="10" data-avatar-size="32" id="ds-recent-visitors"></div>
+
 
             </div>
 

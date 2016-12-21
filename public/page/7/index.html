@@ -94,7 +94,7 @@
 
                         
                         <li>
-                            <a href="/fav.html">前端收藏夹</a>
+                            <a href="/f2e.html">前端收藏夹</a>
                         </li>
                         
                     
@@ -178,9 +178,37 @@
                 col-xs-12
                 post-container
             ">
-            
+
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/07/30/hack1/">
+        <h2 class="post-title">
+            Kali系列——信息收集阶段（一）
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            记得前几周去参加过一个阿里巴巴举办的安全峰会，其中一个大牛讲到以前的渗透测试三字经，当场真是笑出声：
+
+进谷歌 找注入 没注入 就旁注 没旁注 用0day 没0day 猜目录 没目录 就嗅探
+爆账户 找后台 传小马 放大马 拿权限 挂页面  放暗连 清数据 拿不下 去自杀 死不了 继续来 查资料 去社工！
+
+其实，我觉得渗透测试无论怎么变，不外乎这几点：
+
+信息收集阶段-&gt;漏洞检测阶段......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-07-30
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -287,12 +315,11 @@ vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复file.....
 <ul class="pager">
     
         <li class="previous">
-            <a href="/page/6/">&larr; Newer Posts</a>
+            <a href="/page/6/">&larr; 上一篇</a>
         </li>
     
     
 </ul>
-
 
 
                 <!-- 如果开启评论功能 -->
@@ -317,21 +344,19 @@ vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复file.....
                             
                         
                             
+                            <a href="/tags/#Hack" title="Hack" rel="10">Hack</a>
+                            
                         
                             
                             <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="3">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="4">Web</a>
                             
                         
                             
                         
-                            
-                        
-                            
-                            <a href="/tags/#Hack" title="Hack" rel="10">Hack</a>
                             
                         
                             
@@ -345,7 +370,7 @@ vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复file.....
                             
                         
                             
-                        
+                            <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
                             
                         
                             
@@ -362,7 +387,7 @@ vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复file.....
 
                 <!-- Short About -->
                 <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <hr><h5><a href="/about.html">ABOUT ME</a></h5>
                     <div class="short-about">
 
                         
@@ -420,16 +445,41 @@ vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复file.....
                                     </a>
                                 </li>
                             
-                            
-                            
+
+
                             
                         </ul>
                     </div>
                 </section>
-                
+
                 <!-- Friends Blog -->
                 
-            </div>
+                <!-- Comments List -->
+                <hr>
+                  <h5>COMMENTS</h5>
+                	<div class="widget">
+                		<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="0" data-excerpt-length="20"></ul>
+                	</div>
+
+                    
+                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        // dynamic User by Hux
+                        var _user = 'yifani';
+
+                        // duoshuo comment query.
+                        var duoshuoQuery = {short_name: _user };
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                    </script>
+                    <!-- 多说公共JS代码 end -->
+                    
         
     </div>
 </div>

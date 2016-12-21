@@ -94,7 +94,7 @@
 
                         
                         <li>
-                            <a href="/fav.html">前端收藏夹</a>
+                            <a href="/f2e.html">前端收藏夹</a>
                         </li>
                         
                     
@@ -178,9 +178,34 @@
                 col-xs-12
                 post-container
             ">
-            
+
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/10/09/Mac-Wi-Fi-掉线解决方案-1/">
+        <h2 class="post-title">
+            Mac Wi-Fi掉线解决方案
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            最近连接学校的WiFi老掉线，经过清空WiFi默认配置后，成功。
+分享解决方案：
+进入目录/Library/Preferences/SystemConfiguration
+删除
+12345com.apple.airport.preferences.plistcom.apple.network.identification.plistcom.apple.wifi.message-tracer.......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-10-09
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -272,35 +297,6 @@ windows下载地址：http://source.lattecake.com/fi......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/">
-        <h2 class="post-title">
-            GHOST搬迁到HEXO(Github Pages)指南
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言想了很长时间，权衡了一下利弊，还是觉得Github Pages平台会好一些，虽然可能我用了几天就会被和谐掉。
-但是GHOST还需要找专门能够运行Node的平台，在这方面，全静态的HEXO绝对是博客的首选。
-前提在搬家之前，首先你要有一个Github，或者Gitlab，本文不过多叙述：
-
-安装HEXO
-配置Github
-
-搬家第一步Ghost导出数据json：实验室-导出，下载好json
-......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-09-12
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -308,16 +304,15 @@ windows下载地址：http://source.lattecake.com/fi......
 <ul class="pager">
     
         <li class="previous">
-            <a href="/page/3/">&larr; Newer Posts</a>
+            <a href="/page/3/">&larr; 上一篇</a>
         </li>
     
     
         <li class="next">
-            <a href="/page/5/">Older Posts &rarr;</a>
+            <a href="/page/5/">下一篇 &rarr;</a>
         </li>
     
 </ul>
-
 
 
                 <!-- 如果开启评论功能 -->
@@ -342,21 +337,19 @@ windows下载地址：http://source.lattecake.com/fi......
                             
                         
                             
+                            <a href="/tags/#Hack" title="Hack" rel="10">Hack</a>
+                            
                         
                             
                             <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="3">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="4">Web</a>
                             
                         
                             
                         
-                            
-                        
-                            
-                            <a href="/tags/#Hack" title="Hack" rel="10">Hack</a>
                             
                         
                             
@@ -370,7 +363,7 @@ windows下载地址：http://source.lattecake.com/fi......
                             
                         
                             
-                        
+                            <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
                             
                         
                             
@@ -387,7 +380,7 @@ windows下载地址：http://source.lattecake.com/fi......
 
                 <!-- Short About -->
                 <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <hr><h5><a href="/about.html">ABOUT ME</a></h5>
                     <div class="short-about">
 
                         
@@ -445,16 +438,41 @@ windows下载地址：http://source.lattecake.com/fi......
                                     </a>
                                 </li>
                             
-                            
-                            
+
+
                             
                         </ul>
                     </div>
                 </section>
-                
+
                 <!-- Friends Blog -->
                 
-            </div>
+                <!-- Comments List -->
+                <hr>
+                  <h5>COMMENTS</h5>
+                	<div class="widget">
+                		<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="0" data-excerpt-length="20"></ul>
+                	</div>
+
+                    
+                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        // dynamic User by Hux
+                        var _user = 'yifani';
+
+                        // duoshuo comment query.
+                        var duoshuoQuery = {short_name: _user };
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                    </script>
+                    <!-- 多说公共JS代码 end -->
+                    
         
     </div>
 </div>

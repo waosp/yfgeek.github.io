@@ -94,7 +94,7 @@
 
                         
                         <li>
-                            <a href="/fav.html">前端收藏夹</a>
+                            <a href="/f2e.html">前端收藏夹</a>
                         </li>
                         
                     
@@ -178,9 +178,33 @@
                 col-xs-12
                 post-container
             ">
-            
+
                 <!-- Main Content -->
 
+
+<div class="post-preview">
+
+    <a href="/2016/11/17/opt-rpi-project/">
+        <h2 class="post-title">
+            树莓派实时温度湿度监测 优化后续
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            树莓派这个项目已经过去了两月了，一直没有维护，直到我到了英国后发现，在英国连接北京的树莓派网速堪忧，只有100kb/s，每次想查看家里的温度情况，都要等待很长时间才能加载出来，有时候会丢包，这让我很不爽，于是我决定小小的优化一下。 
+优化css js之前写的css与js一直没有压缩，这次决定用gulp压缩一下
+安装 gulp1npm install -g gulp
+安装 gulp-uglif......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-11-17
+    </p>
+
+</div>
+<hr>
 
 <div class="post-preview">
 
@@ -274,31 +298,6 @@ https://github.com/yfgeek/Blog
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/10/09/Mac-Wi-Fi-掉线解决方案-1/">
-        <h2 class="post-title">
-            Mac Wi-Fi掉线解决方案
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            最近连接学校的WiFi老掉线，经过清空WiFi默认配置后，成功。
-分享解决方案：
-进入目录/Library/Preferences/SystemConfiguration
-删除
-12345com.apple.airport.preferences.plistcom.apple.network.identification.plistcom.apple.wifi.message-tracer.......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-10-09
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -306,16 +305,15 @@ https://github.com/yfgeek/Blog
 <ul class="pager">
     
         <li class="previous">
-            <a href="/page/2/">&larr; Newer Posts</a>
+            <a href="/page/2/">&larr; 上一篇</a>
         </li>
     
     
         <li class="next">
-            <a href="/page/4/">Older Posts &rarr;</a>
+            <a href="/page/4/">下一篇 &rarr;</a>
         </li>
     
 </ul>
-
 
 
                 <!-- 如果开启评论功能 -->
@@ -340,21 +338,19 @@ https://github.com/yfgeek/Blog
                             
                         
                             
+                            <a href="/tags/#Hack" title="Hack" rel="10">Hack</a>
+                            
                         
                             
                             <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="3">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="4">Web</a>
                             
                         
                             
                         
-                            
-                        
-                            
-                            <a href="/tags/#Hack" title="Hack" rel="10">Hack</a>
                             
                         
                             
@@ -368,7 +364,7 @@ https://github.com/yfgeek/Blog
                             
                         
                             
-                        
+                            <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
                             
                         
                             
@@ -385,7 +381,7 @@ https://github.com/yfgeek/Blog
 
                 <!-- Short About -->
                 <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about/">ABOUT ME</a></h5>
+                    <hr><h5><a href="/about.html">ABOUT ME</a></h5>
                     <div class="short-about">
 
                         
@@ -443,16 +439,41 @@ https://github.com/yfgeek/Blog
                                     </a>
                                 </li>
                             
-                            
-                            
+
+
                             
                         </ul>
                     </div>
                 </section>
-                
+
                 <!-- Friends Blog -->
                 
-            </div>
+                <!-- Comments List -->
+                <hr>
+                  <h5>COMMENTS</h5>
+                	<div class="widget">
+                		<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="0" data-excerpt-length="20"></ul>
+                	</div>
+
+                    
+                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        // dynamic User by Hux
+                        var _user = 'yifani';
+
+                        // duoshuo comment query.
+                        var duoshuoQuery = {short_name: _user };
+                        (function() {
+                            var ds = document.createElement('script');
+                            ds.type = 'text/javascript';ds.async = true;
+                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+                            ds.charset = 'UTF-8';
+                            (document.getElementsByTagName('head')[0]
+                             || document.getElementsByTagName('body')[0]).appendChild(ds);
+                        })();
+                    </script>
+                    <!-- 多说公共JS代码 end -->
+                    
         
     </div>
 </div>

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.yfgeek.com/"/>
-  <updated>2016-12-20T01:37:06.000Z</updated>
+  <updated>2016-12-21T15:33:19.000Z</updated>
   <id>http://blog.yfgeek.com/</id>
   
   <author>
@@ -14,6 +14,40 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Wat 吐槽JavaScript</title>
+    <link href="http://blog.yfgeek.com/2016/12/21/wat/"/>
+    <id>http://blog.yfgeek.com/2016/12/21/wat/</id>
+    <published>2016-12-21T01:17:26.000Z</published>
+    <updated>2016-12-21T15:33:19.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽JavaScript的视频，简直搞笑，不过也挺客观的，毕竟是一个10天内攒出来的语言，虽然现在发展有ES支撑，但是依然非常零散，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。</p>
+<h1 id="Wat"><a href="#Wat" class="headerlink" title="Wat"></a>Wat</h1><p><a href="https://www.destroyallsoftware.com/talks/wat" target="_blank" rel="external"><img src="https://www.destroyallsoftware.com/images/posters/talks/wat.poster.png" alt=""></a></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">[] + []</div><div class="line"><span class="string">""</span></div><div class="line">[] + &#123;&#125;</div><div class="line"><span class="string">"[object Object]"</span></div><div class="line">&#123;&#125; + []</div><div class="line"><span class="number">0</span></div><div class="line">&#123;&#125; + &#123;&#125;</div><div class="line"><span class="string">"[object Object][object Object]"</span></div><div class="line"><span class="built_in">Array</span>(<span class="number">16</span>)</div><div class="line">[<span class="literal">undefined</span> × <span class="number">16</span>]</div><div class="line"><span class="built_in">Array</span>(<span class="number">16</span>).join(<span class="string">"wat"</span>)</div><div class="line"><span class="string">"watwatwatwatwatwatwatwatwatwatwatwatwatwatwat"</span></div><div class="line"><span class="built_in">Array</span>(<span class="number">16</span>).join(<span class="string">"wat"</span> - <span class="number">1</span> ) + <span class="string">" Batman!"</span></div><div class="line"><span class="string">"NaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaNNaN Batman!"</span></div></pre></td></tr></table></figure>
+<p>总之，看完这个视频，我就想说一句：</p>
+<p><img src="/content/images/wat/1.jpg" alt=""></p>
+<h1 id="Javascript的出生与死亡"><a href="#Javascript的出生与死亡" class="headerlink" title="Javascript的出生与死亡"></a>Javascript的出生与死亡</h1><p>此外还有另一个视频 对JS从1995-2035年的历史阐述及大胆预测。</p>
+<p><a href="https://www.destroyallsoftware.com/talks/the-birth-and-death-of-javascript" target="_blank" rel="external"><img src="https://www.destroyallsoftware.com/images/posters/talks/the-birth-and-death-of-javascript.poster.png" alt=""></a></p>
+<p>十分客观的罗列出了JS的缺点、当前JS发展趋势必然产生的低效率问题。</p>
+<p><img src="/content/images/wat/2.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽JavaScript的视频，简直搞笑，不过也挺客观的，毕竟是一个10天内攒出来的语言，虽然现在发展有ES支撑，但是依然非常零散，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。&lt;/p&gt;
+&lt;h1 id=&quot;Wa
+    
+    </summary>
+    
+      <category term="笑话" scheme="http://blog.yfgeek.com/categories/%E7%AC%91%E8%AF%9D/"/>
+    
+    
+      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+    
+      <category term="笑话" scheme="http://blog.yfgeek.com/tags/%E7%AC%91%E8%AF%9D/"/>
+    
+  </entry>
   
   <entry>
     <title>30秒内盗取任意PC的Cookie神器 PoisonTap</title>
@@ -434,11 +468,11 @@
 <p>好的输入地址，我么进入第一关</p>
 <h1 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h1><p><a href="http://monyer.com/game/game1/first.php" target="_blank" rel="external">http://monyer.com/game/game1/first.php</a></p>
 <p>打开页面依然是什么都没有，这很正常。审查工具看代码。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="undefined"></span></div><div class="line">    function check()&#123;</div><div class="line">        if(document.getElementById('txt').value=="  ")&#123;</div><div class="line">            window.location.href="hello.php";</div><div class="line">        &#125;else&#123;</div><div class="line">            alert("密码错误");</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">'txt'</span>).value==<span class="string">"  "</span>)&#123;</div><div class="line">            <span class="built_in">window</span>.location.href=<span class="string">"hello.php"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            alert(<span class="string">"密码错误"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>好了 我们知道密码了，并且知道下一关的文件是hello.php</p>
 <h1 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h1><p><a href="http://monyer.com/game/game1/hello.php" target="_blank" rel="external">http://monyer.com/game/game1/hello.php</a></p>
 <p>审查工具看源代码，head中</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="undefined"></span></div><div class="line">    document.oncontextmenu=function()&#123;return false&#125;;</div><div class="line"></div><div class="line">    var a,b,c,d,e,f,g;</div><div class="line">    a = 3.14;</div><div class="line">    b = a * 2;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = Math.floor(a);</div><div class="line"></div><div class="line">    function check()&#123;</div><div class="line">        if(document.getElementById("txt").value==a)&#123;</div><div class="line">            window.location.href=a + ".php";</div><div class="line">        &#125;else&#123;</div><div class="line">            alert("密码错误");</div><div class="line">            return false;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">document</span>.oncontextmenu=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">false</span>&#125;;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> a,b,c,d,e,f,g;</div><div class="line">    a = <span class="number">3.14</span>;</div><div class="line">    b = a * <span class="number">2</span>;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = <span class="built_in">Math</span>.floor(a);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">"txt"</span>).value==a)&#123;</div><div class="line">            <span class="built_in">window</span>.location.href=a + <span class="string">".php"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            alert(<span class="string">"密码错误"</span>);</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
 <p>现在是2016年了，我们不需要手算和计算器了。直接在chrome的console里输入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a,b,c,d,e,f,g;</div><div class="line">    a = <span class="number">3.14</span>;</div><div class="line">    b = a * <span class="number">2</span>;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = <span class="built_in">Math</span>.floor(a);</div><div class="line">    </div><div class="line"><span class="number">424178</span></div></pre></td></tr></table></figure></p>
 <p>好的我们知道a的值是424178，输入，进入下一关</p>
 <h1 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h1><p><a href="http://monyer.com/game/game1/424178.php" target="_blank" rel="external">http://monyer.com/game/game1/424178.php</a></p>
@@ -464,7 +498,7 @@
 </blockquote>
 <p>这题的难点在于 找到不密码藏在哪里了 搜索了个遍 就是找不到密码 看看http头呢？</p>
 <p>找到了，在cookie里</p>
-<figure class="highlight livecodeserver"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">monyer:<span class="keyword">the</span> password <span class="keyword">for</span> <span class="keyword">the</span> next level is asdf</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">monyer:the password for the next level is asdf</div></pre></td></tr></table></figure>
 <p>下一关！</p>
 <h1 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h1><p><a href="http://monyer.com/game/game1/asdf.php" target="_blank" rel="external">http://monyer.com/game/game1/asdf.php</a></p>
 <p>是个线索题目</p>
@@ -480,20 +514,20 @@
 <p>下一关</p>
 <h1 id="第八关"><a href="#第八关" class="headerlink" title="第八关"></a>第八关</h1><p><a href="http://monyer.com/game/game1/eighteen8.php" target="_blank" rel="external">http://monyer.com/game/game1/eighteen8.php</a></p>
 <p>直接看到 一个404 不要着急 审查工具</p>
-<figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;p style=<span class="string">"display:none"</span>&gt;</div><div class="line">第<span class="number">8</span>关</div><div class="line">朋友您好，第<span class="number">8</span>关欢迎您！</div><div class="line">我对您的聪明才智感到惊讶！</div><div class="line">相信我，现在世界上<span class="number">85</span>%以上的人都在你之下，</div><div class="line">所以你可以大步向前，义无反顾地进行你的事业了。</div><div class="line">因为只要你肯努力，不畏惧挫折，这个世界上没有难倒你的事。</div><div class="line">那么继续我们的约定，我将告诉你第<span class="number">9</span>关的入口：</div><div class="line"><span class="number">10000</span>以内所有质数和.php</div><div class="line">&lt;/p&gt;</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;p style=&quot;display:none&quot;&gt;</div><div class="line">第8关</div><div class="line">朋友您好，第8关欢迎您！</div><div class="line">我对您的聪明才智感到惊讶！</div><div class="line">相信我，现在世界上85%以上的人都在你之下，</div><div class="line">所以你可以大步向前，义无反顾地进行你的事业了。</div><div class="line">因为只要你肯努力，不畏惧挫折，这个世界上没有难倒你的事。</div><div class="line">那么继续我们的约定，我将告诉你第9关的入口：</div><div class="line">10000以内所有质数和.php</div><div class="line">&lt;/p&gt;</div></pre></td></tr></table></figure>
 <p>10000以内所有质数和，so easy！写个javascript 算一下。</p>
-<figure class="highlight maxima"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">var</span> <span class="built_in">sum</span> = <span class="number">0</span>;</div><div class="line"><span class="keyword">for</span> (<span class="built_in">var</span> i = <span class="number">2</span>; i &lt; <span class="number">10000</span>; i++) &#123;</div><div class="line">	<span class="built_in">var</span> flag = <span class="literal">true</span>;</div><div class="line">	<span class="keyword">for</span> (<span class="built_in">var</span> j = <span class="number">2</span>; j &lt;= Math.<span class="built_in">sqrt</span>(i); j++) &#123;</div><div class="line">		<span class="keyword">if</span> (i <span class="symbol">%</span> j == <span class="number">0</span>) flag = <span class="literal">false</span> ;</div><div class="line">	&#125;</div><div class="line">    <span class="keyword">if</span>(flag) &#123;<span class="built_in">sum</span> = <span class="built_in">sum</span> + i;&#125;</div><div class="line">&#125;</div><div class="line">console.<span class="built_in">log</span>(<span class="built_in">sum</span>);</div><div class="line"></div><div class="line"><span class="number">5736396</span></div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var sum = 0;</div><div class="line">for (var i = 2; i &lt; 10000; i++) &#123;</div><div class="line">	var flag = true;</div><div class="line">	for (var j = 2; j &lt;= Math.sqrt(i); j++) &#123;</div><div class="line">		if (i % j == 0) flag = false ;</div><div class="line">	&#125;</div><div class="line">    if(flag) &#123;sum = sum + i;&#125;</div><div class="line">&#125;</div><div class="line">console.log(sum);</div><div class="line"></div><div class="line">5736396</div></pre></td></tr></table></figure>
 <p>下一关</p>
 <h1 id="第九关"><a href="#第九关" class="headerlink" title="第九关"></a>第九关</h1><p><a href="http://monyer.com/game/game1/5736396.php" target="_blank" rel="external">http://monyer.com/game/game1/5736396.php</a></p>
-<p>在命令行里输入：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http:<span class="regexp">//m</span>onyer.com<span class="regexp">/game/g</span>ame1<span class="regexp">/img/</span><span class="number">4681851790659554</span>.jpg</div><div class="line">cat <span class="number">4681851790659554</span>.jpg</div></pre></td></tr></table></figure></p>
-<p>密码藏在图片里<br><figure class="highlight clean"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">���^�v��*&#123;I�z��^�iؾSRW�V�<span class="number">6</span>�Z��(����H�����ٹ�����</div><div class="line">�Ǿ���ʽ�ʲô���ţ�</div><div class="line">�ԣ�������������������......��</div><div class="line">��ϲ�㣡</div><div class="line">��ʮ������Ϊ��MonyerLikeYou_the10level</div><div class="line">�����ڿ�ʼ�漰������Ķ�̬���������㶼���԰���ʾ������ɵģ�</div><div class="line">�����Լ���û��ģ�%</div></pre></td></tr></table></figure></p>
+<p>在命令行里输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http://monyer.com/game/game1/img/4681851790659554.jpg</div><div class="line">cat 4681851790659554.jpg</div></pre></td></tr></table></figure></p>
+<p>密码藏在图片里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">���^�v��*&#123;I�z��^�iؾSRW�V�6�Z��(����H�����ٹ�����</div><div class="line">�Ǿ���ʽ�ʲô���ţ�</div><div class="line">�ԣ�������������������......��</div><div class="line">��ϲ�㣡</div><div class="line">��ʮ������Ϊ��MonyerLikeYou_the10level</div><div class="line">�����ڿ�ʼ�漰������Ķ�̬���������㶼���԰���ʾ������ɵģ�</div><div class="line">�����Լ���û��ģ�%</div></pre></td></tr></table></figure></p>
 <p>MonyerLikeYou_the10level</p>
 <h1 id="第十关"><a href="#第十关" class="headerlink" title="第十关"></a>第十关</h1><p><a href="http://monyer.com/game/game1/MonyerLikeYou_the10level.php" target="_blank" rel="external">http://monyer.com/game/game1/MonyerLikeYou_the10level.php</a></p>
 <blockquote>
 <p>当前用户身份为simpleuser 不是admin，无法显示下一关密码</p>
 </blockquote>
 <p>很显然这是一道session/cookie欺骗题</p>
-<p>在console里直接输入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.cookie=<span class="string">"username=admin"</span></div></pre></td></tr></table></figure></p>
+<p>在console里直接输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie=&quot;username=admin&quot;</div></pre></td></tr></table></figure></p>
 <p>刷新</p>
 <blockquote>
 <p>好聪明哦！下一关密码为：doyouknow</p>
@@ -503,7 +537,7 @@
 <blockquote>
 <p>你的session不是passer，不能查看下一关密码</p>
 </blockquote>
-<p>在console里直接输入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">document</span>.cookie=<span class="string">"username=passer"</span></div></pre></td></tr></table></figure></p>
+<p>在console里直接输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie=&quot;username=passer&quot;</div></pre></td></tr></table></figure></p>
 <p>刷新，好像不对哦，monyer骗我，哼！</p>
 <p>再看标题 action=show_login_false </p>
 <p><a href="http://monyer.com/game/game1/doyouknow.php?action=show_login_true" target="_blank" rel="external">http://monyer.com/game/game1/doyouknow.php?action=show_login_true</a></p>
@@ -512,8 +546,8 @@
 </blockquote>
 <p>下一关！</p>
 <h1 id="第十二关"><a href="#第十二关" class="headerlink" title="第十二关"></a>第十二关</h1><p><a href="http://monyer.com/game/game1/smartboy.php" target="_blank" rel="external">http://monyer.com/game/game1/smartboy.php</a></p>
-<figure class="highlight gcode"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">JTRBJTU<span class="number">0</span>JTYzJTdBJTRBJTU<span class="number">0</span>JTVBJTQ<span class="number">3</span>JTRBJTU<span class="number">0</span>JTU<span class="number">5</span>JTc<span class="number">5</span>JTRBJTU<span class="number">0</span>JTU<span class="number">5</span>JTMxJTRBJTU<span class="number">0</span>JTU<span class="number">5</span>JTc<span class="number">4</span>JTRBJTU<span class="number">0</span>JTYzJTMxJTRBJTU<span class="number">0</span>JTYzJTMwJTRBJTU<span class="number">0</span>JTU<span class="number">5</span>JT<span class="name">M1</span>JTRBJTU<span class="number">0</span>JTU<span class="number">5</span>JTMyJTRBJTU<span class="number">0</span>JTYzJTMxJTRBJTU<span class="number">0</span>JTVBJTQ<span class="number">0</span>JTRBJTU<span class="number">0</span>JTRBJTQ<span class="number">2</span>JTRBJTU<span class="number">0</span>JTYzJTc<span class="number">3</span>JTRBJTU<span class="number">0</span>JTU<span class="number">5</span>JT<span class="name">M0</span>JTRBJTU<span class="number">0</span>JTYzJTc<span class="number">3</span></div></pre></td></tr></table></figure>
-<p>直觉告诉我，这显然是Base64 解密<br><figure class="highlight mojolicious"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="xml"></span><span class="perl">%4A%54%63%7A%4A%54%5A%47%4A%54%59%79%4A%54%59%31%4A%54%59%78%4A%54%63%31%4A%54%63%30%4A%54%59%35%4A%54%59%32%4A%54%63%31%4A%54%5A%44%4A%54%4A%46%4A%54%63%77%4A%54%59%34%4A%54%63%77</span><span class="xml"></span></div></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">JTRBJTU0JTYzJTdBJTRBJTU0JTVBJTQ3JTRBJTU0JTU5JTc5JTRBJTU0JTU5JTMxJTRBJTU0JTU5JTc4JTRBJTU0JTYzJTMxJTRBJTU0JTYzJTMwJTRBJTU0JTU5JTM1JTRBJTU0JTU5JTMyJTRBJTU0JTYzJTMxJTRBJTU0JTVBJTQ0JTRBJTU0JTRBJTQ2JTRBJTU0JTYzJTc3JTRBJTU0JTU5JTM0JTRBJTU0JTYzJTc3</div></pre></td></tr></table></figure>
+<p>直觉告诉我，这显然是Base64 解密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%4A%54%63%7A%4A%54%5A%47%4A%54%59%79%4A%54%59%31%4A%54%59%78%4A%54%63%31%4A%54%63%30%4A%54%59%35%4A%54%59%32%4A%54%63%31%4A%54%5A%44%4A%54%4A%46%4A%54%63%77%4A%54%59%34%4A%54%63%77</div></pre></td></tr></table></figure></p>
 <p>直觉告诉我，这显然是 UrlEncode 解密</p>
 <p>JTczJTZGJTYyJTY1JTYxJTc1JTc0JTY5JTY2JTc1JTZDJTJFJTcwJTY4JTcw</p>
 <p>直觉再次告诉我，这显然是 Base64 解密</p>
@@ -534,7 +568,7 @@
 </blockquote>
 <p>看源代码有post提交</p>
 <p>这是一道SQL 注入题</p>
-<p>试试我大万能密码！<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">' or <span class="number">1</span>=<span class="number">1</span></div></pre></td></tr></table></figure></p>
+<p>试试我大万能密码！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos; or 1=1</div></pre></td></tr></table></figure></p>
 <p>万能密码熟记于心</p>
 <blockquote>
 <p>下一关密码：whatyouneverknow</p>
@@ -582,13 +616,13 @@
 <li>至少 4GB 内存</li>
 </ul>
 <p><img src="/content/images/sqldocker/0.jpg" alt=""></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="拉取docker镜像"><a href="#拉取docker镜像" class="headerlink" title="拉取docker镜像"></a>拉取docker镜像</h2><figure class="highlight axapta"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull microsoft/mssql-<span class="keyword">server</span>-linux</div></pre></td></tr></table></figure>
+<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="拉取docker镜像"><a href="#拉取docker镜像" class="headerlink" title="拉取docker镜像"></a>拉取docker镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
 <h2 id="运行docker镜像"><a href="#运行docker镜像" class="headerlink" title="运行docker镜像"></a>运行docker镜像</h2><p><code>YourStrong!Passw0rd</code> 为你的密码</p>
-<p><code>1433</code> 为对外端口<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker <span class="keyword">run</span><span class="bash"> <span class="_">-e</span> <span class="string">'ACCEPT_EULA=Y'</span> <span class="_">-e</span> <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p 1433:1433 <span class="_">-d</span> microsoft/mssql-server-linux</span></div></pre></td></tr></table></figure></p>
-<p>🌰 例子<br><figure class="highlight dockerfile"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker <span class="keyword">run</span><span class="bash"> <span class="_">-e</span> <span class="string">'ACCEPT_EULA=Y'</span> <span class="_">-e</span> <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p 1433:1433 <span class="_">-d</span> microsoft/mssql-server-linux</span></div></pre></td></tr></table></figure></p>
+<p><code>1433</code> 为对外端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
+<p>🌰 例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
 <h2 id="设置-宿主机保存数据目录-暂不支持"><a href="#设置-宿主机保存数据目录-暂不支持" class="headerlink" title="设置 宿主机保存数据目录(暂不支持)"></a>设置 宿主机保存数据目录(暂不支持)</h2><p><code>&lt;host directory&gt;</code> 为目录</p>
-<figure class="highlight elixir"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e <span class="string">'ACCEPT_EULA=Y'</span> -e <span class="string">'SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;'</span> -p <span class="number">1433</span><span class="symbol">:</span><span class="number">1433</span> -v &lt;host directory&gt;<span class="symbol">:/var/opt/mssql</span> -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
-<h2 id="查看容器的ip-调试用"><a href="#查看容器的ip-调试用" class="headerlink" title="查看容器的ip(调试用)"></a>查看容器的ip(调试用)</h2><figure class="highlight ebnf"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="attribute">docker inspect --format</span>=<span class="string">'&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;'</span> 容器id</div></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -v &lt;host directory&gt;:/var/opt/mssql -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
+<h2 id="查看容器的ip-调试用"><a href="#查看容器的ip-调试用" class="headerlink" title="查看容器的ip(调试用)"></a>查看容器的ip(调试用)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker inspect --format=&apos;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&apos; 容器id</div></pre></td></tr></table></figure>
 <p>172.17.0.2</p>
 <h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><p>用户名是SA</p>
 <p>密码是用户自己设置的</p>
@@ -621,7 +655,7 @@
     <link href="http://blog.yfgeek.com/2016/11/19/github3k/"/>
     <id>http://blog.yfgeek.com/2016/11/19/github3k/</id>
     <published>2016-11-19T11:36:26.000Z</published>
-    <updated>2016-11-26T02:24:56.000Z</updated>
+    <updated>2016-12-21T15:39:04.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。</p>
 <p>于是乎我利用这个关注了3万人的Github，可是关注后<del>除了同性交友</del>似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。<br><a id="more"></a><br><img src="/content/images/githubauto/1.jpg" alt=""></p>
@@ -1051,47 +1085,6 @@
     
     
       <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>GHOST搬迁到HEXO(Github Pages)指南</title>
-    <link href="http://blog.yfgeek.com/2016/09/12/GHOST%E6%90%AC%E8%BF%81%E5%88%B0HEXO-Github-Pages-%E6%8C%87%E5%8D%97/"/>
-    <id>http://blog.yfgeek.com/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/</id>
-    <published>2016-09-12T20:41:59.000Z</published>
-    <updated>2016-11-19T11:35:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>想了很长时间，权衡了一下利弊，还是觉得Github Pages平台会好一些，虽然可能我用了几天就会被和谐掉。</p>
-<p>但是GHOST还需要找专门能够运行Node的平台，在这方面，全静态的HEXO绝对是博客的首选。</p>
-<h1 id="前提"><a href="#前提" class="headerlink" title="前提"></a>前提</h1><p>在搬家之前，首先你要有一个Github，或者Gitlab，本文不过多叙述：</p>
-<ul>
-<li>安装HEXO</li>
-<li>配置Github</li>
-</ul>
-<h1 id="搬家"><a href="#搬家" class="headerlink" title="搬家"></a>搬家</h1><h2 id="第一步"><a href="#第一步" class="headerlink" title="第一步"></a>第一步</h2><p>Ghost导出数据json：实验室-导出，下载好json</p>
-<h2 id="第二步"><a href="#第二步" class="headerlink" title="第二步"></a>第二步</h2><p>安装搬家工具<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm i hexo-migrator-ghost --save</div></pre></td></tr></table></figure></p>
-<h2 id="第三步"><a href="#第三步" class="headerlink" title="第三步"></a>第三步</h2><p>修改<code>./scaffolds/post.md</code>文件内容为：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">title: &#123;&#123; title &#125;&#125;  </div><div class="line">date: &#123;&#123; date &#125;&#125;  </div><div class="line">tags: &#123;&#123; tags &#125;&#125;  </div><div class="line">---</div></pre></td></tr></table></figure>
-<h2 id="第四步"><a href="#第四步" class="headerlink" title="第四步"></a>第四步</h2><p>将json文件放到根目录，并且执行：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">hexo migrate ghost source.json  </div><div class="line">hexo clean ; hexo d -g</div></pre></td></tr></table></figure>
-<h1 id="注意"><a href="#注意" class="headerlink" title="注意"></a>注意</h1><p>经过以上步骤，基本上是搬家完毕了，但是仍有一些需要注意的：</p>
-<ul>
-<li>HEXO的Markdown语法比较严谨，所以倒入进来会存在问题，需要进一步修正，比如#如果前面不空格是不解析标题的</li>
-<li>tag可能会出问题，会自动加–，请自行删除，或者批量删除</li>
-</ul>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;想了很长时间，权衡了一下利弊，还是觉得Github Pages平台会好一些，虽然可能我用了几天就会被和谐掉。&lt;/p&gt;
-&lt;p&gt;但是GHOST还
-    
-    </summary>
-    
-      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
-    
-    
-      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
     
   </entry>
   

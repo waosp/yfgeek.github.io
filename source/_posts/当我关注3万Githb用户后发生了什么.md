@@ -5,6 +5,7 @@ permalink: github3k
 tags: Github
 categories: Github
 top: true
+sticky: 1
 
 ---
 # 前言

@@ -3,7 +3,8 @@ title: Wat 吐槽JavaScript
 date: 2016-12-21 01:17:26
 tags: 笑话 Web
 categories: 笑话
-
+permalink: wat
+header-img: "/content/images/wat/home-bg-o.jpg"
 
 ---
 

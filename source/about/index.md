@@ -16,6 +16,7 @@ header-img: "content/images/f2e/about-me.jpg"
 
 University of Birmingham
 
+* 自幼喜爱计算机技术 极客 爱钻研 爱学习
 * 爱好Web前端 (React粉丝)
 * 爱好渗透测试
 * 和前端相关的美工，但渣

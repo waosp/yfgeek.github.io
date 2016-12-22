@@ -1,0 +1,184 @@
+---
+title: Rasberry Pi Zero 联网奇妙记
+date: 2016-12-21 23:01:26
+tags: Rasberry
+categories: Rasberry
+---
+
+说句实话，Zero真的不适合把玩，想让他连上网，太难了。
+
+# 痛点
+- 住公寓，有WiFi/Lan登录认证系统
+- 公寓的网络动态分配范围很大，很难快速找到树莓派的IP
+- 公寓的网络防止扫描端口，有惩罚策略
+- 没有显示器 无法查看树莓派Zero的状态
+- 树莓派Zero只有一个OTG USB接口
+- 树莓派Zero没有内置以太网Lan
+- 树莓派Zero没有无线网卡WiFi
+- 树莓派Zero没有蓝牙 更没有蓝牙局域网
+- 树莓派Zero除了核心部分 一无所有
+
+# 已有装备
+- 树莓派Zero
+- USB HUB 分线器
+- USB 以太网网卡
+- USB WIFI
+- 路由器
+- 网线一根
+- MacBook Pro一台
+
+# 已有环境
+- Raspbian系统
+- vncserver
+
+# 解决方案
+## 整体思路
+
+树莓派连接USBOTG->
+
+OTG->USB HUB->
+
+|-MircoUSB -> PC
+
+|-WIFI -> Router
+
+其中 USB HUB MircoUSB PC 是临时之用 配置一旦完成 抛弃这些设备直接插上WiFi自动联网。
+
+![](/content/images/zeronet/1.jpg)
+
+## 去掉之前的USB网卡模式
+把sd卡取出，插入电脑
+
+在``config.txt``下删除
+```
+dtoverlay=dwc2
+```
+在``cmdline.txt``下删除
+```
+modules-load=dwc2,g_ether
+```
+
+## 安装WiFi驱动
+
+之前遇到过很多坑，比如别的内核的WiFi驱动。
+
+```
+pi@zero:~ $ sudo ./install-wifi
+
+Your current kernel revision = 4.4.34+
+Your current kernel build    = #930
+
+Checking for a wifi module to determine the driver to install.
+
+Your wifi module is Bus 001 Device 003: ID 0bda:8179 Realtek Semiconductor Corp.
+
+And it uses the 8188eu driver.
+
+Checking for a new 8188eu wifi driver module for your current kernel.
+The script cannot access Dropbox to check a driver is available.
+```
+手动下载
+https://dl.dropboxusercontent.com/u/80256631/8188eu-4.4.34-930.tar.gz
+
+切换WiFi到树莓派网络
+```
+scp 8188eu-4.4.34-930.tar.gz pi@zero.local:~
+```
+在树莓派下
+```
+tar xzf  8188eu-4.4.34-930.tar.gz
+sudo ./install.sh
+reboot
+```
+然后检查一下 ``lsusb``(这个其实不靠谱) 
+
+然后再检查一下 ``ifconfig``
+
+```
+wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
+          inet6 addr: fe80::4336:2657:c812:f11b/64 Scope:Link
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:6 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)
+```
+果然正确安装了。
+
+## 配置WiFi
+
+但是``wlan0     Link encap:Ethernet``被识别为了以太网，接下来我们继续解决坑。
+```
+sudo iwlist wlan0 scan
+```
+
+```
+  Cell 03 - Address: F0:B0:52:3B:7B:68
+                    ESSID:"ASK4 Wireless"
+                    Protocol:IEEE 802.11gn
+                    Mode:Master
+                    Frequency:2.417 GHz (Channel 2)
+                    Encryption key:off
+                    Bit Rates:144 Mb/s
+                    Quality=18/100  Signal level=70/100
+                    Extra:fm=0001
+```
+
+```
+sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
+```
+
+```
+country=GB
+ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
+update_config=1
+network={
+        ssid="ASK4 Wireless"
+        key_mgmt=NONE
+
+}
+```
+
+```
+sudo ifdown wlan0
+sudo ifup wlan0
+```
+
+```
+Listening on LPF/wlan0/0c:82:68:12:93:8f
+Sending on   LPF/wlan0/0c:82:68:12:93:8f
+Sending on   Socket/fallback
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 8
+DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 12
+DHCPREQUEST on wlan0 to 255.255.255.255 port 67
+DHCPOFFER from 10.80.192.1
+DHCPACK from 10.80.192.1
+bound to 10.80.200.83 -- renewal in 440 seconds.
+```
+
+
+```
+wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
+          inet addr:10.80.200.83  Bcast:10.80.207.255  Mask:255.255.240.0
+          UP BROADCAST MULTICAST  MTU:1500  Metric:1
+          RX packets:0 errors:0 dropped:17 overruns:0 frame:0
+          TX packets:0 errors:0 dropped:1 overruns:0 carrier:0
+          collisions:0 txqueuelen:1000
+          RX bytes:4681 (4.5 KiB)  TX bytes:18372 (17.9 KiB)
+```
+
+![](/content/images/zeronet/3.png)
+
+再对mac地址进行绑定，再进入vnc，试试看
+
+![](/content/images/zeronet/4.jpg)
+
+哇 可以上网了！
+
+然而悲痛的消息还有呢~
+
+内网隔离
+
+![](/content/images/zeronet/2.jpg)
+
+

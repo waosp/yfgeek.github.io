@@ -38,7 +38,7 @@ header-img: "/content/images/zeronet/ras.jpg"
 
 ![](/content/images/zeronet/0.png)
 
-其中 USB HUB MircoUSB PC 是临时之用 配置一旦完成 抛弃这些设备直接插上WiFi自动联网。
+其中 USB HUB USB网卡 临时路由器 PC 是临时之用 配置一旦完成 抛弃这些设备直接插上WiFi自动联网。
 
 ![](/content/images/zeronet/1.jpg)
 

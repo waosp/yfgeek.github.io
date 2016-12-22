@@ -209,5 +209,33 @@ wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
 
 内网隔离
 
-未完待续
+## ngrok TCP转发
+
+这难不倒我，用ngrok就可以解决，正好身在墙外，更加方便。
+
+下载ngrok
+```bash
+wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip
+unzip ngrok-stable-linux-arm.zip
+```
+配置开机启动项``vi /etc/rc.local``
+在exit 0 前面加入
+```bash
+/home/pi/ngrok authtoken 你的AUTO
+/home/pi/ngrok tcp 22
+```
+搞定！拔掉USB HUB，关掉路由器，重启！
+
+过了10分钟后，我们的树莓派上线了！
+
+![](/content/images/zeronet/5.png)
+
+用ssh命令连接一下
+
+```bash
+ssh pi@0.tcp.ngrok.io -p 13016
+```
+连接速度超级快，如同本地一样，给ngrok官网点赞。
+
+![](/content/images/zeronet/6.png)
 

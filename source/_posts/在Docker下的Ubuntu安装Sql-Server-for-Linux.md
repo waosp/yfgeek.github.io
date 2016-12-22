@@ -1,7 +1,9 @@
 ---
 title: Docker下配置SQL Server for Linux
 date: 2016-11-22 14:44:06
-tags: Docker SQLserver
+tags: 
+- Docker 
+- SQLserver
 permalink: docker-SQLServer
 categories: Docker
 ---

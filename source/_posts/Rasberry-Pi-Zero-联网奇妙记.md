@@ -24,7 +24,7 @@ header-img: "/content/images/zeronet/ras.jpg"
 - 树莓派Zero
 - USB HUB 分线器
 - USB 以太网网卡
-- USB WIFI
+- USB WIFI (芯片 8188EU)
 - 路由器
 - 网线一根
 - MacBook Pro一台
@@ -63,6 +63,12 @@ modules-load=dwc2,g_ether
 ## 安装WiFi驱动
 
 之前遇到过很多坑，比如别的内核的WiFi驱动。
+
+首先手动下载
+
+https://dl.dropboxusercontent.com/u/80256631/install-wifi.tar.gz
+
+检查无线适配器版本，同时传到树莓派上
 
 ```
 pi@zero:~ $ sudo ./install-wifi
@@ -125,6 +131,9 @@ sudo iwlist wlan0 scan
                     Quality=18/100  Signal level=70/100
                     Extra:fm=0001
 ```
+随后对``wpa_supplicant.conf``文件进行编辑，使之加入到自己的网络里。
+
+请注意，``key_mgmt=NONE``表示没有WiFi密码(这是个查了很久猜得到的宝贵线索)，如果有密码请把这个更改为``psk = "密码" ``
 
 ```
 sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
@@ -140,11 +149,36 @@ network={
 
 }
 ```
+编辑``/etc/network/interfaces``文件，使wlan0为动态分配获取IP。
+
+```
+sudo vi /etc/network/interfaces
+```
+```
+auto lo
+iface lo inet loopback
+
+iface eth0 inet dhcp
+
+auto wlan0
+allow-hotplug wlan0
+iface wlan0 inet dhcp
+wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+
+
+allow-hotplug wlan1
+iface wlan1 inet manual
+    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf
+```
+
+随后重启我们wlan0
 
 ```
 sudo ifdown wlan0
 sudo ifup wlan0
 ```
+
+如果能搜索到WiFi会自动进行DHCP获取ip地址阶段
 
 ```
 Listening on LPF/wlan0/0c:82:68:12:93:8f
@@ -157,7 +191,7 @@ DHCPOFFER from 10.80.192.1
 DHCPACK from 10.80.192.1
 bound to 10.80.200.83 -- renewal in 440 seconds.
 ```
-
+随后，用``ifconfig``命令查看一下获取的IP地址
 
 ```
 wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
@@ -183,4 +217,5 @@ wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
 
 ![](/content/images/zeronet/2.jpg)
 
+未完待续
 

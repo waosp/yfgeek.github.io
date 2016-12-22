@@ -215,7 +215,5 @@ wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
 
 内网隔离
 
-![](/content/images/zeronet/2.jpg)
-
 未完待续
 

@@ -70,7 +70,7 @@ https://dl.dropboxusercontent.com/u/80256631/install-wifi.tar.gz
 
 检查无线适配器版本，同时传到树莓派上
 
-```
+```bash
 pi@zero:~ $ sudo ./install-wifi
 
 Your current kernel revision = 4.4.34+
@@ -89,11 +89,11 @@ The script cannot access Dropbox to check a driver is available.
 https://dl.dropboxusercontent.com/u/80256631/8188eu-4.4.34-930.tar.gz
 
 切换WiFi到树莓派网络
-```
+```bash
 scp 8188eu-4.4.34-930.tar.gz pi@zero.local:~
 ```
 在树莓派下
-```
+```bash
 tar xzf  8188eu-4.4.34-930.tar.gz
 sudo ./install.sh
 reboot
@@ -102,7 +102,7 @@ reboot
 
 然后再检查一下 ``ifconfig``
 
-```
+```bash
 wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
           inet6 addr: fe80::4336:2657:c812:f11b/64 Scope:Link
           UP BROADCAST MULTICAST  MTU:1500  Metric:1
@@ -116,11 +116,11 @@ wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
 ## 配置WiFi
 
 但是``wlan0     Link encap:Ethernet``被识别为了以太网，接下来我们继续解决坑。
-```
+```bash
 sudo iwlist wlan0 scan
 ```
 
-```
+```bash
   Cell 03 - Address: F0:B0:52:3B:7B:68
                     ESSID:"ASK4 Wireless"
                     Protocol:IEEE 802.11gn
@@ -135,11 +135,11 @@ sudo iwlist wlan0 scan
 
 请注意，``key_mgmt=NONE``表示没有WiFi密码(这是个查了很久猜得到的宝贵线索)，如果有密码请把这个更改为``psk = "密码" ``
 
-```
+```bash
 sudo vi /etc/wpa_supplicant/wpa_supplicant.conf
 ```
 
-```
+```bash
 country=GB
 ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev
 update_config=1
@@ -148,13 +148,13 @@ network={
         key_mgmt=NONE
 
 }
-```
+```bash
 编辑``/etc/network/interfaces``文件，使wlan0为动态分配获取IP。
 
-```
+```bash
 sudo vi /etc/network/interfaces
 ```
-```
+```bash
 auto lo
 iface lo inet loopback
 
@@ -173,14 +173,14 @@ iface wlan1 inet manual
 
 随后重启我们wlan0
 
-```
+```bash
 sudo ifdown wlan0
 sudo ifup wlan0
 ```
 
 如果能搜索到WiFi会自动进行DHCP获取ip地址阶段
 
-```
+```bash
 Listening on LPF/wlan0/0c:82:68:12:93:8f
 Sending on   LPF/wlan0/0c:82:68:12:93:8f
 Sending on   Socket/fallback
@@ -193,7 +193,7 @@ bound to 10.80.200.83 -- renewal in 440 seconds.
 ```
 随后，用``ifconfig``命令查看一下获取的IP地址
 
-```
+```bash
 wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f
           inet addr:10.80.200.83  Bcast:10.80.207.255  Mask:255.255.240.0
           UP BROADCAST MULTICAST  MTU:1500  Metric:1

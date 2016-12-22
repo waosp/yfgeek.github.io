@@ -36,13 +36,7 @@ header-img: "/content/images/zeronet/ras.jpg"
 # 解决方案
 ## 整体思路
 
-树莓派连接USBOTG->
-
-OTG->USB HUB->
-
-|-MircoUSB -> PC
-
-|-WIFI -> Router
+![](/content/images/zeronet/0.png)
 
 其中 USB HUB MircoUSB PC 是临时之用 配置一旦完成 抛弃这些设备直接插上WiFi自动联网。
 

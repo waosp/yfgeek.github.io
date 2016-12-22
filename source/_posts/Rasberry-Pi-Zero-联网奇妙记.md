@@ -4,7 +4,7 @@ date: 2016-12-21 23:01:26
 tags: Raspberry
 categories: Rasberry
 permalink: network-zero
-
+header-img: "/content/images/zeronet/ras.jpg"
 ---
 
 说句实话，Zero真的不适合把玩，想让他连上网，太难了。

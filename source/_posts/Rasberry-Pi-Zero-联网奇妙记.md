@@ -239,3 +239,65 @@ ssh pi@0.tcp.ngrok.io -p 13016
 
 ![](/content/images/zeronet/6.jpg)
 
+## lighttpd 部署
+
+总要搞点事情嘛，部署一个Web服务对于512MB的内存的树莓派Zero不过分吧。
+
+那么什么Web服务最合适呢？脑海第一时间想到轻量级的lighttpd，ngnix我都嫌弃费资源，那么就它了。
+
+```bash
+sudo apt-get install -y lighttpd
+```
+
+安装完成！目录在``/var/www/html``
+
+写好html，部署上去。
+
+那么如何才能办到同时映射到两个端口呢？ngrok的官方文档有提示。
+
+``nano /home/pi/.ngrok2/ngrok.yml``
+```
+authtoken: 你的AUTH
+region: eu
+json_resolver_url: ""
+dns_resolver_ips: []
+
+tunnels:
+  app-foo:
+    addr: 80
+    proto: http
+    host_header: app-foo.dev
+  app-bar:
+    addr: 22
+    proto: tcp
+    host_header: app-bar.dev
+
+```
+这样就部署了两个服务，``app-foo``，``app-bar``，不错，开机再启动他们。
+
+```bash
+sudo nano /etc/rc.local
+```
+把之前那句换成
+```
+/home/pi/proj/ngrok/ngrok start --config /home/pi/.ngrok2/ngrok.yml app-foo app-bar
+```
+好了，剩下我们要做的就是重启与等待。
+
+![](/content/images/zeronet/7.jpg)
+
+哈哈，上线了，访问一下。
+
+![](/content/images/zeronet/8.png)
+
+这个只有4英镑的树莓派实现联网后花费了：
+
+树莓派：4磅
+
+OTG线：0.86磅
+
+WIFI：人民币25元
+
+储存卡：9磅
+
+谢谢~~观看~~忍耐全文。

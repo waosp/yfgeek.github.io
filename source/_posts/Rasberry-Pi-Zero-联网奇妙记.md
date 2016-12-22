@@ -148,7 +148,7 @@ network={
         key_mgmt=NONE
 
 }
-```bash
+```
 编辑``/etc/network/interfaces``文件，使wlan0为动态分配获取IP。
 
 ```bash

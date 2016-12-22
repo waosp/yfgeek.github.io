@@ -1,7 +1,7 @@
 ---
-title: Rasberry Pi Zero 联网奇妙记
+title: Raspberry Pi Zero 联网奇妙记
 date: 2016-12-21 23:01:26
-tags: Rasberry
+tags: Raspberry
 categories: Rasberry
 ---
 

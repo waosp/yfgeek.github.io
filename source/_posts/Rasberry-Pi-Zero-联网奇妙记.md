@@ -237,5 +237,5 @@ ssh pi@0.tcp.ngrok.io -p 13016
 ```
 连接速度超级快，如同本地一样，给ngrok官网点赞。
 
-![](/content/images/zeronet/6.png)
+![](/content/images/zeronet/6.jpg)
 

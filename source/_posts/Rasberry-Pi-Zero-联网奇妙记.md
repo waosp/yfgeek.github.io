@@ -296,7 +296,7 @@ sudo nano /etc/rc.local
 
 OTG线：0.86磅
 
-WIFI：人民币25元
+WIFI适配器：人民币25元
 
 储存卡：9磅
 

@@ -1,8 +1,11 @@
 ---
 title: Emoji 表情域名 引领未来
 date: 2016-12-27 03:37:27
+permalink: emoji
 tags: Web
 categories: Web
+header-img: "/content/images/emoji/background.jpg"
+
 ---
 
 国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。

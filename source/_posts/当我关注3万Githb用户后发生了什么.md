@@ -4,7 +4,6 @@ date: 2016-11-19 11:36:26
 permalink: github3k
 tags: Github
 categories: Github
-top: 1
 header-img: "/content/images/githubauto/background.jpg"
 
 ---

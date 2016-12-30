@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.yfgeek.com/"/>
-  <updated>2016-12-21T15:33:19.000Z</updated>
+  <updated>2016-12-27T03:59:29.000Z</updated>
   <id>http://blog.yfgeek.com/</id>
   
   <author>
@@ -14,6 +14,163 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>Emoji 表情域名 引领未来</title>
+    <link href="http://blog.yfgeek.com/2016/12/27/emoji/"/>
+    <id>http://blog.yfgeek.com/2016/12/27/emoji/</id>
+    <published>2016-12-27T03:37:27.000Z</published>
+    <updated>2016-12-27T03:59:29.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂</p>
+<p><img src="/content/images/emoji/1.jpg" alt=""></p>
+<p>Emoji 等 Unicode 字符，浏览器Punycode的方式将 Unicode字符用ASCII进行编码。</p>
+<p>我也顺势跟风，注册了一个坑爹的TK域名。</p>
+<p><a href="http://💌.tk" target="_blank" rel="external">💌.tk</a></p>
+<p><img src="/content/images/emoji/emoji.jpg" alt=""></p>
+<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><p>在chrome浏览器上直接输入[想要注册的表情].com</p>
+<p>按下回车键，chrome浏览器会自动帮你转换为ASCII编码方式的格式。</p>
+<p>💌.tk</p>
+<p>转换为：</p>
+<p><a href="http://xn--rr8h.tk/" target="_blank" rel="external">http://xn--rr8h.tk/</a></p>
+<h1 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h1><p>拿着自己的域名转换后的字符，比如xn–rr8h，去Godaddy或者别的域名网站直接搜就好啦。</p>
+<p>注意：</p>
+<p>.com域名目前无法注册任何包含emoji表情字符的域名，尚未开发，一旦开放，又是一笔巨大的商机。</p>
+<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://🌶️🐔.ws" target="_blank" rel="external">🐔.ws</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/emoji/1
+    
+    </summary>
+    
+      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
+    
+    
+      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Raspberry Pi Zero联网奇妙记</title>
+    <link href="http://blog.yfgeek.com/2016/12/21/network-zero/"/>
+    <id>http://blog.yfgeek.com/2016/12/21/network-zero/</id>
+    <published>2016-12-21T23:01:26.000Z</published>
+    <updated>2016-12-22T15:30:15.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>说句实话，Zero真的不适合把玩，想让他连上网，太难了。</p>
+<h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><ul>
+<li>住公寓，有WiFi/Lan登录认证系统</li>
+<li>公寓的网络动态分配范围很大，很难快速找到树莓派的IP</li>
+<li>公寓的网络防止扫描端口，有惩罚策略</li>
+<li>没有显示器 无法查看树莓派Zero的状态</li>
+<li>树莓派Zero只有一个OTG USB接口</li>
+<li>树莓派Zero没有内置以太网Lan</li>
+<li>树莓派Zero没有无线网卡WiFi</li>
+<li>树莓派Zero没有蓝牙 更没有蓝牙局域网</li>
+<li>树莓派Zero除了核心部分 一无所有</li>
+</ul>
+<h1 id="已有装备"><a href="#已有装备" class="headerlink" title="已有装备"></a>已有装备</h1><ul>
+<li>树莓派Zero</li>
+<li>USB HUB 分线器</li>
+<li>USB 以太网网卡</li>
+<li>USB WIFI (芯片 8188EU)</li>
+<li>路由器</li>
+<li>网线一根</li>
+<li>MacBook Pro一台</li>
+</ul>
+<h1 id="已有环境"><a href="#已有环境" class="headerlink" title="已有环境"></a>已有环境</h1><ul>
+<li>Raspbian系统</li>
+<li>vncserver</li>
+</ul>
+<h1 id="解决方案"><a href="#解决方案" class="headerlink" title="解决方案"></a>解决方案</h1><h2 id="整体思路"><a href="#整体思路" class="headerlink" title="整体思路"></a>整体思路</h2><p><img src="/content/images/zeronet/0.png" alt=""></p>
+<p>其中 USB HUB USB网卡 临时路由器 PC 是临时之用 配置一旦完成 抛弃这些设备直接插上WiFi自动联网。</p>
+<p><img src="/content/images/zeronet/1.jpg" alt=""></p>
+<h2 id="去掉之前的USB网卡模式"><a href="#去掉之前的USB网卡模式" class="headerlink" title="去掉之前的USB网卡模式"></a>去掉之前的USB网卡模式</h2><p>把sd卡取出，插入电脑</p>
+<p>在<code>config.txt</code>下删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dtoverlay=dwc2</div></pre></td></tr></table></figure></p>
+<p>在<code>cmdline.txt</code>下删除<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">modules-load=dwc2,g_ether</div></pre></td></tr></table></figure></p>
+<h2 id="安装WiFi驱动"><a href="#安装WiFi驱动" class="headerlink" title="安装WiFi驱动"></a>安装WiFi驱动</h2><p>之前遇到过很多坑，比如别的内核的WiFi驱动。</p>
+<p>首先手动下载</p>
+<p><a href="https://dl.dropboxusercontent.com/u/80256631/install-wifi.tar.gz" target="_blank" rel="external">https://dl.dropboxusercontent.com/u/80256631/install-wifi.tar.gz</a></p>
+<p>检查无线适配器版本，同时传到树莓派上</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">pi@zero:~ $ sudo ./install-wifi</div><div class="line"></div><div class="line">Your current kernel revision = 4.4.34+</div><div class="line">Your current kernel build    = <span class="comment">#930</span></div><div class="line"></div><div class="line">Checking <span class="keyword">for</span> a wifi module to determine the driver to install.</div><div class="line"></div><div class="line">Your wifi module is Bus 001 Device 003: ID 0bda:8179 Realtek Semiconductor Corp.</div><div class="line"></div><div class="line">And it uses the 8188eu driver.</div><div class="line"></div><div class="line">Checking <span class="keyword">for</span> a new 8188eu wifi driver module <span class="keyword">for</span> your current kernel.</div><div class="line">The script cannot access Dropbox to check a driver is available.</div></pre></td></tr></table></figure>
+<p>手动下载<br><a href="https://dl.dropboxusercontent.com/u/80256631/8188eu-4.4.34-930.tar.gz" target="_blank" rel="external">https://dl.dropboxusercontent.com/u/80256631/8188eu-4.4.34-930.tar.gz</a></p>
+<p>切换WiFi到树莓派网络<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp 8188eu-4.4.34-930.tar.gz pi@zero.local:~</div></pre></td></tr></table></figure></p>
+<p>在树莓派下<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">tar xzf  8188eu-4.4.34-930.tar.gz</div><div class="line">sudo ./install.sh</div><div class="line">reboot</div></pre></td></tr></table></figure></p>
+<p>然后检查一下 <code>lsusb</code>(这个其实不靠谱) </p>
+<p>然后再检查一下 <code>ifconfig</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f</div><div class="line">          inet6 addr: fe80::4336:2657:c812:f11b/64 Scope:Link</div><div class="line">          UP BROADCAST MULTICAST  MTU:1500  Metric:1</div><div class="line">          RX packets:0 errors:0 dropped:6 overruns:0 frame:0</div><div class="line">          TX packets:0 errors:0 dropped:0 overruns:0 carrier:0</div><div class="line">          collisions:0 txqueuelen:1000</div><div class="line">          RX bytes:0 (0.0 B)  TX bytes:0 (0.0 B)</div></pre></td></tr></table></figure>
+<p>果然正确安装了。</p>
+<h2 id="配置WiFi"><a href="#配置WiFi" class="headerlink" title="配置WiFi"></a>配置WiFi</h2><p>但是<code>wlan0     Link encap:Ethernet</code>被识别为了以太网，接下来我们继续解决坑。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo iwlist wlan0 scan</div></pre></td></tr></table></figure></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Cell 03 - Address: F0:B0:52:3B:7B:68</div><div class="line">                  ESSID:<span class="string">"ASK4 Wireless"</span></div><div class="line">                  Protocol:IEEE 802.11gn</div><div class="line">                  Mode:Master</div><div class="line">                  Frequency:2.417 GHz (Channel 2)</div><div class="line">                  Encryption key:off</div><div class="line">                  Bit Rates:144 Mb/s</div><div class="line">                  Quality=18/100  Signal level=70/100</div><div class="line">                  Extra:fm=0001</div></pre></td></tr></table></figure>
+<p>随后对<code>wpa_supplicant.conf</code>文件进行编辑，使之加入到自己的网络里。</p>
+<p>请注意，<code>key_mgmt=NONE</code>表示没有WiFi密码(这是个查了很久猜得到的宝贵线索)，如果有密码请把这个更改为<code>psk = &quot;密码&quot;</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/wpa_supplicant/wpa_supplicant.conf</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">country=GB</div><div class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</div><div class="line">update_config=1</div><div class="line">network=&#123;</div><div class="line">        ssid=<span class="string">"ASK4 Wireless"</span></div><div class="line">        key_mgmt=NONE</div><div class="line"></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>编辑<code>/etc/network/interfaces</code>文件，使wlan0为动态分配获取IP。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo vi /etc/network/interfaces</div></pre></td></tr></table></figure>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">auto lo</div><div class="line">iface lo inet loopback</div><div class="line"></div><div class="line">iface eth0 inet dhcp</div><div class="line"></div><div class="line">auto wlan0</div><div class="line">allow-hotplug wlan0</div><div class="line">iface wlan0 inet dhcp</div><div class="line">wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</div><div class="line"></div><div class="line"></div><div class="line">allow-hotplug wlan1</div><div class="line">iface wlan1 inet manual</div><div class="line">    wpa-conf /etc/wpa_supplicant/wpa_supplicant.conf</div></pre></td></tr></table></figure>
+<p>随后重启我们wlan0</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo ifdown wlan0</div><div class="line">sudo ifup wlan0</div></pre></td></tr></table></figure>
+<p>如果能搜索到WiFi会自动进行DHCP获取ip地址阶段</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">Listening on LPF/wlan0/0c:82:68:12:93:8f</div><div class="line">Sending on   LPF/wlan0/0c:82:68:12:93:8f</div><div class="line">Sending on   Socket/fallback</div><div class="line">DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 8</div><div class="line">DHCPDISCOVER on wlan0 to 255.255.255.255 port 67 interval 12</div><div class="line">DHCPREQUEST on wlan0 to 255.255.255.255 port 67</div><div class="line">DHCPOFFER from 10.80.192.1</div><div class="line">DHCPACK from 10.80.192.1</div><div class="line">bound to 10.80.200.83 -- renewal <span class="keyword">in</span> 440 seconds.</div></pre></td></tr></table></figure>
+<p>随后，用<code>ifconfig</code>命令查看一下获取的IP地址</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">wlan0     Link encap:Ethernet  HWaddr 0c:82:68:12:93:8f</div><div class="line">          inet addr:10.80.200.83  Bcast:10.80.207.255  Mask:255.255.240.0</div><div class="line">          UP BROADCAST MULTICAST  MTU:1500  Metric:1</div><div class="line">          RX packets:0 errors:0 dropped:17 overruns:0 frame:0</div><div class="line">          TX packets:0 errors:0 dropped:1 overruns:0 carrier:0</div><div class="line">          collisions:0 txqueuelen:1000</div><div class="line">          RX bytes:4681 (4.5 KiB)  TX bytes:18372 (17.9 KiB)</div></pre></td></tr></table></figure>
+<p><img src="/content/images/zeronet/3.png" alt=""></p>
+<p>再对mac地址进行绑定，再进入vnc，试试看</p>
+<p><img src="/content/images/zeronet/4.jpg" alt=""></p>
+<p>哇 可以上网了！</p>
+<p>然而悲痛的消息还有呢~</p>
+<p>内网隔离</p>
+<h2 id="ngrok-TCP转发"><a href="#ngrok-TCP转发" class="headerlink" title="ngrok TCP转发"></a>ngrok TCP转发</h2><p>这难不倒我，用ngrok就可以解决，正好身在墙外，更加方便。</p>
+<p>下载ngrok<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://bin.equinox.io/c/4VmDzA7iaHb/ngrok-stable-linux-arm.zip</div><div class="line">unzip ngrok-stable-linux-arm.zip</div></pre></td></tr></table></figure></p>
+<p>配置开机启动项<code>vi /etc/rc.local</code><br>在exit 0 前面加入<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">/home/pi/ngrok authtoken 你的AUTO</div><div class="line">/home/pi/ngrok tcp 22</div></pre></td></tr></table></figure></p>
+<p>搞定！拔掉USB HUB，关掉路由器，重启！</p>
+<p>过了10分钟后，我们的树莓派上线了！</p>
+<p><img src="/content/images/zeronet/5.png" alt=""></p>
+<p>用ssh命令连接一下</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ssh pi@0.tcp.ngrok.io -p 13016</div></pre></td></tr></table></figure>
+<p>连接速度超级快，如同本地一样，给ngrok官网点赞。</p>
+<p><img src="/content/images/zeronet/6.jpg" alt=""></p>
+<h2 id="lighttpd-部署"><a href="#lighttpd-部署" class="headerlink" title="lighttpd 部署"></a>lighttpd 部署</h2><p>总要搞点事情嘛，部署一个Web服务对于512MB的内存的树莓派Zero不过分吧。</p>
+<p>那么什么Web服务最合适呢？脑海第一时间想到轻量级的lighttpd，ngnix我都嫌弃费资源，那么就它了。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install -y lighttpd</div></pre></td></tr></table></figure>
+<p>安装完成！目录在<code>/var/www/html</code></p>
+<p>写好html，部署上去。</p>
+<p>那么如何才能办到同时映射到两个端口呢？ngrok的官方文档有提示。</p>
+<p><code>nano /home/pi/.ngrok2/ngrok.yml</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">authtoken: 你的AUTH</div><div class="line">region: eu</div><div class="line">json_resolver_url: &quot;&quot;</div><div class="line">dns_resolver_ips: []</div><div class="line"></div><div class="line">tunnels:</div><div class="line">  app-foo:</div><div class="line">    addr: 80</div><div class="line">    proto: http</div><div class="line">    host_header: app-foo.dev</div><div class="line">  app-bar:</div><div class="line">    addr: 22</div><div class="line">    proto: tcp</div><div class="line">    host_header: app-bar.dev</div></pre></td></tr></table></figure></p>
+<p>这样就部署了两个服务，<code>app-foo</code>，<code>app-bar</code>，不错，开机再启动他们。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/rc.local</div></pre></td></tr></table></figure>
+<p>把之前那句换成<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">/home/pi/proj/ngrok/ngrok start --config /home/pi/.ngrok2/ngrok.yml app-foo app-bar</div></pre></td></tr></table></figure></p>
+<p>好了，剩下我们要做的就是重启与等待。</p>
+<p><img src="/content/images/zeronet/7.jpg" alt=""></p>
+<p>哈哈，上线了，访问一下。</p>
+<p><img src="/content/images/zeronet/8.png" alt=""></p>
+<p>这个只有4英镑的树莓派实现联网后花费了：</p>
+<p>树莓派：4磅</p>
+<p>OTG线：0.86磅</p>
+<p>WIFI适配器：人民币25元</p>
+<p>储存卡：9磅</p>
+<p>谢谢<del>观看</del>忍耐全文。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;说句实话，Zero真的不适合把玩，想让他连上网，太难了。&lt;/p&gt;
+&lt;h1 id=&quot;痛点&quot;&gt;&lt;a href=&quot;#痛点&quot; class=&quot;headerlink&quot; title=&quot;痛点&quot;&gt;&lt;/a&gt;痛点&lt;/h1&gt;&lt;ul&gt;
+&lt;li&gt;住公寓，有WiFi/Lan登录认证系统&lt;/li&gt;
+&lt;li
+    
+    </summary>
+    
+      <category term="Rasberry" scheme="http://blog.yfgeek.com/categories/Rasberry/"/>
+    
+    
+      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
+    
+  </entry>
   
   <entry>
     <title>Wat 吐槽JavaScript</title>
@@ -604,7 +761,7 @@
     <link href="http://blog.yfgeek.com/2016/11/22/docker-SQLServer/"/>
     <id>http://blog.yfgeek.com/2016/11/22/docker-SQLServer/</id>
     <published>2016-11-22T14:44:06.000Z</published>
-    <updated>2016-12-19T23:55:24.000Z</updated>
+    <updated>2016-12-22T01:16:52.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>微软已经不再是以前的那个微软了，如果微软SQL Server早开源几年，估计现在数据库方面就没有Oracle什么事情了。</p>
 <p>Canonical 技术主管 Dustin Kirkland 表示：「微软和 Canonical 继续在 Windows 世界和 Linux 世界之间建立桥梁。 SQL Server on Ubuntu 便是这种趋势的又一示例。」</p>
@@ -646,16 +803,18 @@
       <category term="Docker" scheme="http://blog.yfgeek.com/categories/Docker/"/>
     
     
-      <category term="Docker SQLserver" scheme="http://blog.yfgeek.com/tags/Docker-SQLserver/"/>
+      <category term="Docker" scheme="http://blog.yfgeek.com/tags/Docker/"/>
+    
+      <category term="SQLserver" scheme="http://blog.yfgeek.com/tags/SQLserver/"/>
     
   </entry>
   
   <entry>
-    <title>【置顶】当我关注3万Github用户后发生了什么</title>
+    <title>当我关注3万Github用户后发生了什么</title>
     <link href="http://blog.yfgeek.com/2016/11/19/github3k/"/>
     <id>http://blog.yfgeek.com/2016/11/19/github3k/</id>
     <published>2016-11-19T11:36:26.000Z</published>
-    <updated>2016-12-21T15:50:21.000Z</updated>
+    <updated>2016-12-27T03:50:14.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。</p>
 <p>于是乎我利用这个关注了3万人的Github，可是关注后<del>除了同性交友</del>似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。<br><a id="more"></a><br><img src="/content/images/githubauto/1.jpg" alt=""></p>
@@ -771,7 +930,7 @@
     <link href="http://blog.yfgeek.com/2016/10/15/Docker-Compose%E2%80%94%E7%AE%80%E5%8C%96%E5%A4%8D%E6%9D%82%E5%BA%94%E7%94%A8%E7%9A%84%E5%88%A9%E5%99%A8/"/>
     <id>http://blog.yfgeek.com/2016/10/15/Docker-Compose—简化复杂应用的利器/</id>
     <published>2016-10-15T18:10:35.000Z</published>
-    <updated>2016-11-19T12:09:26.000Z</updated>
+    <updated>2016-12-22T01:16:34.000Z</updated>
     
     <content type="html"><![CDATA[<p>Compose是用于定义和运行复杂Docker应用的工具。你可以在一个文件中定义一个多容器的应用，然后使用一条命令来启动你的应用，然后所有相关的操作都会被自动完成。<br><a id="more"></a> </p>
 <h2 id="1-安装Docker和Compose"><a href="#1-安装Docker和Compose" class="headerlink" title="1. 安装Docker和Compose"></a>1. 安装Docker和Compose</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当前最新的Docker是1.6.2，Compose为1.2.0</span></div><div class="line">curl <span class="_">-s</span> https://get.docker.io/ubuntu/ | sudo sh</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install lxc-docker</div><div class="line"><span class="comment"># 参考http://docs.docker.com/compose/install/#install-compose</span></div><div class="line">curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname <span class="_">-s</span>`-`uname -m` &amp;gt; /usr/<span class="built_in">local</span>/bin/docker-compose</div><div class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</div></pre></td></tr></table></figure>
@@ -832,10 +991,10 @@
     
     </summary>
     
-      <category term="docker" scheme="http://blog.yfgeek.com/categories/docker/"/>
+      <category term="Docker" scheme="http://blog.yfgeek.com/categories/Docker/"/>
     
     
-      <category term="docker" scheme="http://blog.yfgeek.com/tags/docker/"/>
+      <category term="Docker" scheme="http://blog.yfgeek.com/tags/Docker/"/>
     
   </entry>
   
@@ -991,100 +1150,6 @@
     
     
       <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>微信小程序的一些感想</title>
-    <link href="http://blog.yfgeek.com/2016/09/25/%E5%BE%AE%E4%BF%A1%E5%B0%8F%E7%A8%8B%E5%BA%8F%E7%9A%84%E4%B8%80%E4%BA%9B%E6%84%9F%E6%83%B3/"/>
-    <id>http://blog.yfgeek.com/2016/09/25/微信小程序的一些感想/</id>
-    <published>2016-09-25T17:50:00.000Z</published>
-    <updated>2016-11-19T12:08:53.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。<br><a id="more"></a> </p>
-<h1 id="下载"><a href="#下载" class="headerlink" title="下载"></a>下载</h1><p>微信小程序目前正处于内测阶段，所以我这个算是尝鲜，用的破解版。<br>Mac版下载地址：<br><a href="http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg</a></p>
-<p>windows下载地址：<br><a href="http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100_x64.exe" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100_x64.exe</a></p>
-<h1 id="破解"><a href="#破解" class="headerlink" title="破解"></a>破解</h1><p>如果你不是内测用户，你需要破解，先下载以下文件。</p>
-<p>文件1：</p>
-<p><a href="http://source.lattecake.com/files/2016/09/createstep.js" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/createstep.js</a></p>
-<p>文件2：</p>
-<p><a href="http://source.lattecake.com/files/2016/09/projectStores.js" target="_blank" rel="external">http://source.lattecake.com/files/2016/09/projectStores.js</a></p>
-<p>替换路径：</p>
-<p>createstep.js -&gt; /Applications/wechatwebdevtools.app/Contents/Resources/app.nw/app/dist/components/create/createstep.js</p>
-<p>projectStores.js -&gt; /Applications/wechatwebdevtools.app/Contents/Resources/app.nw/app/dist/stroes/projectStores.js</p>
-<h1 id="尝鲜"><a href="#尝鲜" class="headerlink" title="尝鲜"></a>尝鲜</h1><p><img src="/content/images/wechat/1.jpg" alt=""></p>
-<p><img src="/content/images/wechat/2.jpg" alt=""><br>做了一次简单的尝鲜，写了一个hellowolrd，微信小程序是由几个最基础的文件构成的：</p>
-<ul>
-<li>app.js</li>
-<li>app.wxss</li>
-<li>app.json</li>
-<li>app.wxml</li>
-</ul>
-<p>其中wxss文件类似于css，所有css语法均支持<br>js是APP()<br>json文件是层级设置，页面的形态<br>wxml文件更像是xml和html的混合版</p>
-<p><img src="/content/images/wechat/3.jpg" alt=""></p>
-<p>IDE并不强大，但是是用HTML写的，有点类似于VS CODE。</p>
-<h1 id="优点"><a href="#优点" class="headerlink" title="优点"></a>优点</h1><ul>
-<li><strong>HTML5是未来，腾讯帮助整个生态系统往前走了一大步。</strong></li>
-<li>腾讯有巨大用户群的优势，使得部分程序，尤其是企业程序的开发成本大幅度降低，跨平台变得更加简单通用。</li>
-<li>有统一开发的IDE，包括IDE也是一个HTML5程序，这就是未来。</li>
-<li>开发简单，入门门槛低。</li>
-</ul>
-<h1 id="缺点"><a href="#缺点" class="headerlink" title="缺点"></a>缺点</h1><ul>
-<li>不支持引用js，比如jquery等众多优秀的js插件。</li>
-<li>可移植性差，如果以后还有XX app想做个小程序功能，你需要跳出这个体系，重新做，这是巨大的成本。我想这也就是腾讯想把你牢牢地拴在他所创建的体系下的方式。</li>
-<li>随时有被App Store封掉的风险，苹果不允许程序里嵌套程序，我觉得小程序做不长久，可以参考当年下架Adode的flash文件直接转换的ipa文件事件。</li>
-<li>没有react native好，这是两个完全不同的概念，腾讯创建出的小程序似乎更像是js+html+css，react才是未来。</li>
-</ul>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我想用一句名言总结一下前端趋势及未来App趋势：</p>
-<blockquote>
-<p>Any application that can be written in JavaScript, will eventually be written in JavaScript.</p>
-</blockquote>
-<p>腾讯的想法是非常好的，让JavaScript去干一切事情，这就是未来。Java喊了好几年了一次编译到处运行，全世界没有程序员不知道，但实际呢？JavaScript似乎是真正把这件事情做成了，JavaScript作为网站的前端默默地发展了几十年，现在趋势越来越明显，随着浏览器内核的运行效率的大幅度提升，这些看似不不现实的趋势越来越明显，那就是网页程序。</p>
-<p>不过受限于App store不知道能否有较大的发展，开发者看似十分火爆的东西，真正在用户层次上能否一样的火爆，不得人知，让时间去检验一切吧。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
-    
-    
-      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>树莓派搭建ss服务器</title>
-    <link href="http://blog.yfgeek.com/2016/09/13/ss-server/"/>
-    <id>http://blog.yfgeek.com/2016/09/13/ss-server/</id>
-    <published>2016-09-13T22:38:35.000Z</published>
-    <updated>2016-11-19T11:35:18.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>树莓派打算长期放在家里了，为了方便我身居海外还能方便的听上网易云音乐，顺利的看上国内的优酷爱奇艺，打算在树莓派上搭ss服务器</p>
-<h1 id="为什么不用pptp-vpn"><a href="#为什么不用pptp-vpn" class="headerlink" title="为什么不用pptp vpn"></a>为什么不用pptp vpn</h1><p>这是个好问题，实际上我已经搭建了pptp vpn，只是连不上，大概是因为国内运营商中国电信做了端口屏蔽限制，目前发现已经屏蔽的端口有80和PPTP的端口。</p>
-<h1 id="一键配置脚本"><a href="#一键配置脚本" class="headerlink" title="一键配置脚本"></a>一键配置脚本</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">wget http://mirrors.linuxeye.com/oneinstack.tar.gz</div><div class="line">tar xzf oneinstack.tar.gz</div><div class="line">cd oneinstack</div><div class="line">./shadowsocks.sh install</div></pre></td></tr></table></figure>
-<p>漫长的等待结束就好了</p>
-<h1 id="慢慢配置"><a href="#慢慢配置" class="headerlink" title="慢慢配置"></a>慢慢配置</h1><h2 id="安装Pip"><a href="#安装Pip" class="headerlink" title="安装Pip"></a>安装Pip</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">apt-get install python-pip python-gevent python-m2crypto</div></pre></td></tr></table></figure>
-<h2 id="安装Shadowsocks"><a href="#安装Shadowsocks" class="headerlink" title="安装Shadowsocks"></a>安装Shadowsocks</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install shadowsocks</div></pre></td></tr></table></figure>
-<h2 id="创建Shadowsocks配置文件"><a href="#创建Shadowsocks配置文件" class="headerlink" title="创建Shadowsocks配置文件"></a>创建Shadowsocks配置文件</h2><p>配置文件 <code>/etc/shadowsocks.json</code> 内容如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    &quot;server&quot;:&quot;0.0.0.0&quot;,</div><div class="line">    &quot;server_port&quot;:8388,</div><div class="line">    &quot;local_address&quot;: &quot;127.0.0.1&quot;,</div><div class="line">    &quot;local_port&quot;:1080,</div><div class="line">    &quot;password&quot;:&quot;密码&quot;,</div><div class="line">    &quot;timeout&quot;:300,</div><div class="line">    &quot;method&quot;:&quot;aes-256-cfb&quot;,</div><div class="line">    &quot;fast_open&quot;: false,</div><div class="line">    &quot;workers&quot;: 1</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h2 id="启动服务"><a href="#启动服务" class="headerlink" title="启动服务"></a>启动服务</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">nohup ssserver -c /etc/shadowsocks.json &amp;</div></pre></td></tr></table></figure>
-<h2 id="设定为自动启动的方法"><a href="#设定为自动启动的方法" class="headerlink" title="设定为自动启动的方法"></a>设定为自动启动的方法</h2><p>写入 <code>nohup ssserver -c /etc/shadowsocks.json &amp;</code> 到 /etc/rc.local 文件的 exit 之前。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;简介&quot;&gt;&lt;a href=&quot;#简介&quot; class=&quot;headerlink&quot; title=&quot;简介&quot;&gt;&lt;/a&gt;简介&lt;/h1&gt;&lt;p&gt;树莓派打算长期放在家里了，为了方便我身居海外还能方便的听上网易云音乐，顺利的看上国内的优酷爱奇艺，打算在树莓派上搭ss服务器&lt;/p&gt;
-&lt;h1
-    
-    </summary>
-    
-      <category term="Linux" scheme="http://blog.yfgeek.com/categories/Linux/"/>
-    
-    
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
     
   </entry>
   

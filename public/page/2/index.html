@@ -10,7 +10,7 @@
     <meta name="description" content="Thinking as a Geek">
     <meta name="keyword"  content="Web前端,极客,渗透">
     <link rel="shortcut icon" href="/img/favicon.ico">
-
+<meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
     <title>
         
           Ivan&#39;s Blog | Web前端 &amp; 极客 &amp; 渗透
@@ -50,6 +50,8 @@
 
     <!-- ga & ba script hoook -->
     <script></script>
+    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
+    <script>AV.initialize("oLTXcyRzIdgKgCNIteRM0cUy-gzGzoHsz", "BUnbApGSylYt7lWhAHBbFsdF");</script>
 </head>
 
 
@@ -94,14 +96,14 @@
 
                         
                         <li>
-                            <a href="/f2e.html">前端收藏夹</a>
+                            <a href="/link.html">友情链接</a>
                         </li>
                         
                     
 
                         
                         <li>
-                            <a href="/link.html">友情链接</a>
+                            <a href="/f2e.html">前端收藏夹</a>
                         </li>
                         
                     
@@ -184,6 +186,37 @@
 
 <div class="post-preview">
 
+    <a href="/2016/12/11/Google镜像站的搭建/">
+        <h2 class="post-title">
+            Google镜像站的搭建
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前两天，Google开发者大会高调的宣布Google Developers 网站终于正式上线了，希望Google能够解决一切问题，早日回归大陆市场。
+
+教程环境Centos 6 
+依赖
+nginx
+pcre 正则
+ngx_http_proxy_module 反向代理
+ngx_http_substitutions_filter_module 多重替换
+
+安装123456789101112131......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-12-11
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/12/06/OTR技术探讨/">
         <h2 class="post-title">
             OTR(Off-the-Record) 技术探讨
@@ -206,6 +239,7 @@
     <p class="post-meta">
         Posted by Ivan on
         2016-12-06
+
     </p>
 
 </div>
@@ -233,6 +267,7 @@ BadUSB最可怕的一点是恶意代码存在于U盘的固件中，由于PC上�
     <p class="post-meta">
         Posted by Ivan on
         2016-11-27
+
     </p>
 
 </div>
@@ -259,6 +294,7 @@ Tor 内网很有趣，几乎什么都有，甚至连搜索引擎，VPS服务，�
     <p class="post-meta">
         Posted by Ivan on
         2016-11-26
+
     </p>
 
 </div>
@@ -287,32 +323,7 @@ Tor 内网很有趣，几乎什么都有，甚至连搜索引擎，VPS服务，�
     <p class="post-meta">
         Posted by Ivan on
         2016-11-23
-    </p>
 
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/11/22/docker-SQLServer/">
-        <h2 class="post-title">
-            Docker下配置SQL Server for Linux
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言微软已经不再是以前的那个微软了，如果微软SQL Server早开源几年，估计现在数据库方面就没有Oracle什么事情了。
-Canonical 技术主管 Dustin Kirkland 表示：「微软和 Canonical 继续在 Windows 世界和 Linux 世界之间建立桥梁。 SQL Server on Ubuntu 便是这种趋势的又一示例。」
-
-
-配置要求
-Docker版本在 1......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-11-22
     </p>
 
 </div>
@@ -364,9 +375,11 @@ Docker版本在 1......
                             
                         
                             
+                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
+                            
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="4">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="5">Web</a>
                             
                         
                             
@@ -378,13 +391,13 @@ Docker版本在 1......
                             
                         
                             
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="6">Raspberry</a>
-                            
-                        
+                            <a href="/tags/#Raspberry" title="Raspberry" rel="7">Raspberry</a>
                             
                         
                             
                             <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
+                            
+                        
                             
                         
                             
@@ -684,6 +697,146 @@ Docker版本在 1......
             padding: 80
         });
     });
+</script>
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10);
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //alert('New object created');
+                        },
+                        error: function(newcounter,error){
+                        alert('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                alert('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10);
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                alert("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
 </script>
 
 

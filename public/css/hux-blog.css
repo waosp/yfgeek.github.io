@@ -412,6 +412,7 @@ pre code {
 }
 
 .intro-header .site-heading,.intro-header .post-heading,.intro-header .page-heading {
+    text-shadow: 1px 1px 30px #666;
 	padding: 85px 0 55px;
 	color: #fff
 }

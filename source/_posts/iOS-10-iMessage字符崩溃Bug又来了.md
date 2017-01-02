@@ -47,7 +47,7 @@ HTML版本的触发代码: [http://vincedes3.com/crashtext.html](http://vincedes
 
 2\. 该链接会触发短信的快捷链接，点击打开
 
-3\. 进入发送短信也卖弄
+3\. 进入发送短信页面
 
 4\. 点击取消
 

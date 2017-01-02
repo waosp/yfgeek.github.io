@@ -9,9 +9,9 @@ categories: Hack
 
 # 介绍
 
-![1.png](http://image.3001.net/images/20170102/14833282151664.png!small)
-
 近日，黑客@vincedes3发现了一个从iOS 8 到 iOS 10.2.1 b2通用的iMessage字符崩溃Bug，该Bug同样利用了和当年iOS 8的iMessage短信Bug的类似手法，将一段恶意代码发送给受害者，受害者在接收短信后，浏览短信即可中招，此后短信应用陷入死机状态，除非打开修复网页程序，否则再也无法打开短信应用。
+
+![1.png](http://image.3001.net/images/20170102/14833282151664.png!small)
 
 # 利用
 

@@ -10,7 +10,7 @@ author: Ivan
 language: zh-CN
 timezone:
 
-SEOTitle: Ivan's Blog | Web前端 & 极客 & 渗透
+SEOTitle: Ivan's Blog
 header-img: content/images/2016/08/wallhaven-94129-2.jpg
 email: yifanb@gmail.com
 keyword: "Web前端,极客,渗透"
@@ -91,7 +91,7 @@ duoshuo_username: yifani
 duoshuo_share: ture
 
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "像极客一样思考"
+sidebar-about-description: "对任何技术永远充满敬畏之心"
 sidebar-avatar: img/logo.jpg
 
 featured-tags: true                     # whether or not using Feature-Tags

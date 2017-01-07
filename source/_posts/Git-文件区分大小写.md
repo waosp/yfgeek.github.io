@@ -1,5 +1,5 @@
 ---
-title: Git 文件区分大小写
+title: Git 文件、文件夹区分大小写
 date: 2017-01-07 02:25:32
 permalink: gitcase
 tags: Github

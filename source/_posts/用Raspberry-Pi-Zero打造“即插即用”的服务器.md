@@ -173,5 +173,3 @@ phpinfo();
 ![](/content/images/zeroweb/2.png)
 
 至于应用嘛，其实做什么都可以的。
-
-![](/content/images/zeroweb/3.png)

@@ -21,8 +21,8 @@ University of Birmingham
 * 爱好渗透测试
 * 和前端相关的美工，但渣
 * 从来不用收藏夹，一直背网址
-* TAB档，除了用python的时候
-* github的star各种人的狂魔
+* 空格档
+* Github的star各种人的狂魔
 * Cnbeta党
 * Mac党，中度果粉
 * 知乎狂魔

@@ -119,7 +119,7 @@
     document.addEventListener('click', function (e) {
       textIndex++
       if (textIndex >= texts.length) {
-          window.location.href="aboutme.html";
+          window.location.href="/aboutme.html";
       }
       text = texts[textIndex]
       console.log(textIndex)
@@ -128,7 +128,7 @@
     document.addEventListener('touchstart', function (e) {
       textIndex++
       if (textIndex >= texts.length) {
-          window.location.href="aboutme.html";
+          window.location.href="/aboutme.html";
       }
       text = texts[textIndex]
       console.log(textIndex)

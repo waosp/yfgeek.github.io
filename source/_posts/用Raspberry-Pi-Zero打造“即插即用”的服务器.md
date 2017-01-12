@@ -7,6 +7,8 @@ permalink: network-zero-web
 header-img: "/content/images/zeronet/ras.jpg"
 ---
 
+![](/content/images/zeroweb/0.jpg)
+
 虽然Raspberry Pi Zero只有4.5英镑，非常便宜，但确实具有局限性，由于缺少网口、WiFi，功能比较单一，可曾设想，用Raspberry Pi Zero打造一个完美的“即插即用”的Web服务器？
 
 ![](/content/images/raspizero/mail.jpg)

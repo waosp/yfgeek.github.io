@@ -1,6 +1,6 @@
 ---
 title: 关于
-permalink: about
+permalink: aboutme
 id: 10
 date: 2016-09-26 00:27:35
 header-img: "content/images/f2e/about-me.jpg"
@@ -35,4 +35,3 @@ University of Birmingham
 * 微信：yifani
 * 邮件：yifanb@gmail.com （接受邮件，一直会回复）
 * 知乎：[点击进入...](https://www.zhihu.com/people/yfgeek)
-

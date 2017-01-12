@@ -4,7 +4,7 @@ date: 2017-01-12 02:04:44
 tags: Raspberry
 categories: Rasberry
 permalink: network-zero-web
-header-img: "/content/images/zeronet/ras.jpg"
+header-img: "/content/images/2016/07/stock-photo-132346157-1.jpg"
 ---
 
 ![](/content/images/zeroweb/0.jpg)

@@ -265,17 +265,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -303,7 +303,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )
@@ -336,17 +336,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -374,7 +374,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )

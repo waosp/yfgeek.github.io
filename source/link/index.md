@@ -22,3 +22,4 @@ date: 2016-09-26 00:27:35
 * [Wayne Yan](http://yw1994.github.io)
 * [Echowxsy](http://blog.echowxsy.com/)
 * [rjgeek](http://rjgeek.github.io/)
+* [jazzyin](http://jazzyin.com/)

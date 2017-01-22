@@ -122,7 +122,6 @@
           window.location.href="/aboutme.html";
       }
       text = texts[textIndex]
-      console.log(textIndex)
     }, false)
 
     document.addEventListener('touchstart', function (e) {
@@ -131,7 +130,6 @@
           window.location.href="/aboutme.html";
       }
       text = texts[textIndex]
-      console.log(textIndex)
     }, false)
   }
 

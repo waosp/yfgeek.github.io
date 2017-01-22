@@ -10,6 +10,25 @@ header-img: "content/images/f2e/post-bg-js-version.jpg"
 
 这是一个真正的前端收藏夹，由于前端技术更新较快，好资源太多，在这里做个收藏夹，只为方便自己。
 
+# 前端CDN
+* [CDNBEE](https://cdnbee.com/)
+
+# 模板素材
+* [easyicon](http://www.easyicon.net/)
+* [阿里巴巴iconfont](http://iconfont.cn/)
+* [Fontello](http://fontello.com/)
+
+
+* [稀土区](https://xituqu.com/)
+* [优设](http://www.uisdc.com/)
+* [500px](https://marketplace.500px.com/)
+* [壁纸wallhaven](https://alpha.wallhaven.cc/)
+* [jquery](http://www.htmleaf.com/)
+
+# 模板
+* [HTML5 UP](https://html5up.net/)
+* [控制面板](https://www.awesomes.cn/subject/admins)
+
 # 网站
 * [Github热度排名](https://www.awesomes.cn/)
 * [imweb前端社区](http://imweb.io/)
@@ -30,17 +49,6 @@ header-img: "content/images/f2e/post-bg-js-version.jpg"
 * [在Mac平台配置你的开发环境](http://mp.weixin.qq.com/s?__biz=MzI3MDE0MzAzMw==&mid=2652201857&idx=1&sn=803e04a8304c127aaa0bb7770f8add1d&scene=0#wechat_redirect)
 * [前端工具箱chrome插件](https://github.com/Pearyman/chrome_plugin)
 
-# 模板素材
-* [easyicon](http://www.easyicon.net/)
-* [稀土区](https://xituqu.com/)
-* [优设](http://www.uisdc.com/)
-* [500px](https://marketplace.500px.com/)
-* [壁纸wallhaven](https://alpha.wallhaven.cc/)
-* [jquery](http://www.htmleaf.com/)
-
-# 模板
-* [HTML5 UP](https://html5up.net/)
-* [控制面板](https://www.awesomes.cn/subject/admins)
 
 # 文章
 * [通过一张简单的图，让你彻底地、永久地搞懂JS的\=\=运算](https://zhuanlan.zhihu.com/p/21650547)

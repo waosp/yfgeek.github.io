@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Thinking as a Geek">
+    <meta name="keyword"  content="Web前端,极客,渗透">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+<meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
+    <title>
+        
+          我眼中的React - Ivan&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://blog.yfgeek.com/2017/02/04/react/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ivan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    <li>
+                        <a href="/f2e.html">前端收藏夹</a>
+                    </li>
+                    <li>
+                        <a href="/link.html">友情链接</a>
+                    </li>
+                    <li>
+                        <a href="/about">关于我</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://blog.yfgeek.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/content/images/react/wall.png')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Web" title="Web">Web</a>
+                        
+                    </div>
+                    <h1>我眼中的React</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Ivan on
+                        2017-02-04
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>前两天，用React把 之前的 <a href="https://github.com/yfgeek/rpi-TempRuntime" target="_blank" rel="external">基于树莓派3B,DHT11/DHT22,LCD1602的一个实时温度湿度检测系统</a> 的Web部分重构了一下。</p>
+<p>这个项目之前是用Semantic UI + eCharts + JQuery Datapicker写的，由于这个项目的实现过程比较经典，几乎把所有的感觉React的基础思想都实现了一遍。</p>
+<p>无疑，React给前端带来了各种新的想法与思想，声明式、虚拟Dom、单向数据流、JSX、组件化、Flux、以JavaScript为中心、React Native。</p>
+<p><img src="/content/images/react/0.png" alt=""></p>
+<h1 id="虚拟Dom"><a href="#虚拟Dom" class="headerlink" title="虚拟Dom"></a>虚拟Dom</h1><p>React是以JS为中心的，而非HTML，虚拟Dom是一个至关重要的概念。</p>
+<p>在jQuery出现之前，我们一般都是直接操作Dom，方法“暴力、简单”，也存在兼容性的问题。在jQuery出现之后，jQuery的选择器帮助我们简单、高效的操作Dom，也就是在jQuery出现之后，前端就开始大爆发了。</p>
+<p>但是随着发展，这种简单暴力的操作Dom的方法对于很多大型系统性工程来说，从软件工程的角度上讲，是杂乱、无序的，一旦时间久远，项目越来越大，维护成本就变大。于是，我们有了各种前端MVC、MVVM框架，典型的有Angular、React、vue.js，MVVM给我们带来一种全新的思想，数据绑定。</p>
+<p>不过，与此同时，React给我们带来了一种全新的思想，虚拟Dom，从此，我们再也不用直接操作Dom了，而是用虚拟Dom更新Dom。</p>
+<p>你可能会问，这样做，效率岂不是更低了？</p>
+<p>是的，也不是。其实没有那么明显，一般来讲，操作Dom树的Diff算法应该是O(n^3)，而React把效率降低到了O(n)。</p>
+<p><img src="/content/images/react/1.png" alt=""></p>
+<p>简单来讲，如图所示，React只会比较相同层级的Dom，从而简化了Dom Diff的复杂度，虽然有所舍弃，但是全局比较是没有必要的。</p>
+<p>通过在JSX文件中写虚拟Dom，React在内存中会自动拿现在的虚拟Dom和旧的虚拟Dom进行Diff操作，如果发现有Diff的部分，就拿出来形成新的Patch部分，加入到现在的Dom树上。</p>
+<p>也就是因为这个原因，虚拟Dom使得在操作Dom上更加高效，每次更新数据不会进行O(n^3)复杂的操作。</p>
+<p>你可能会问，什么是JSX？</p>
+<h1 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h1><p>其实JSX只是一种未编译的JavaScript，可以方便的对HTML进行书写，先上代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'semantic-ui-react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ButtonComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            &lt;span&gt;</div><div class="line">            &lt;Button color='blue' &gt;分钟&lt;/Button&gt;</div><div class="line">            &lt;Button color='violet'&gt;小时&lt;/Button&gt;</div><div class="line">            &lt;/span&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ButtonComponent;</div></pre></td></tr></table></figure>
+<p>代码部分用<code>ES6</code>书写，你可能会问什么是ES6？其实还有ES7(ECMAScript 2016)呢~</p>
+<p>那么，你可能看到了很变态的写法，就是HTML和JS混写，没错，这就是EJS，但请注意，这不是HTML，写着写着很有可能会掉入<a href="http://www.css88.com/react/docs/jsx-gotchas.html" target="_blank" rel="external">JSX陷阱</a>。</p>
+<p>经过<code>babel</code>等工具的编译后，JSX在运行的时候会被编译为真实的JavaScript语言，之所以这样写，只是为了方便程序员更方便的写代码。</p>
+<p>比如上面的代码“HTML部分”会被编译为：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">React.createElement(<span class="string">'button'</span>, &#123;<span class="attr">class</span>: <span class="string">'ui blue button'</span>&#125;, <span class="string">'分钟'</span>);</div><div class="line">React.createElement(<span class="string">'button'</span>, &#123;<span class="attr">class</span>: <span class="string">'ui violet button'</span>&#125;, <span class="string">'小时'</span>);</div></pre></td></tr></table></figure>
+<p>当然，JSX也有很多坑，比如：</p>
+<p><code>Module build failed: SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag</code></p>
+<p>作为新手，这个问题，我经常遇到，因为你在写每一个JSX模块的时候，你需要用类似于<code>&lt;div&gt;&lt;/div&gt;</code>作为开始与结尾，不规范的代码不会被编译成功。</p>
+<h1 id="ECMAScript-ES"><a href="#ECMAScript-ES" class="headerlink" title="ECMAScript(ES)"></a>ECMAScript(ES)</h1><p>ES无疑是这几年最火的前端语言，没错，他是JavaScript的改进版，我知道，其实还有很多其他类似的比如CoffeeScript，但是ES会被各大浏览器所兼容支持，但是你可能会问到兼容性问题，没事，我们有<code>babel</code>工具。</p>
+<ul>
+<li>ECMAScript：一个由 ECMA International 进行标准化，TC39 委员会进行监督的语言。通常用于指代标准本身。</li>
+<li>JavaScript：ECMAScript 标准的各种实现的最常用称呼。这个术语并不局限于某个特定版本的 ECMAScript 规范，并且可能被用于任何不同程度的任意版本的 ECMAScript 的实现。</li>
+<li>ECMAScript 5 (ES5)：ECMAScript 的第五版修订，于 2009 年完成标准化。这个规范在所有现代浏览器中都相当完全的实现了。</li>
+<li>ECMAScript 6 (ES6) / ECMAScript 2015 (ES2015)：ECMAScript 的第六版修订，于 2015 年完成标准化。这个标准被部分实现于大部分现代浏览器。可以查阅这张兼容性表来查看不同浏览器和工具的实现情况。</li>
+<li>ECMAScript Proposals：被考虑加入未来版本 ECMAScript 标准的特性与语法提案，他们需要经历五个阶段：Strawman（稻草人），Proposal（提议），Draft（草案），Candidate（候选）以及 Finished （完成）。</li>
+<li>ECMAScript 2016：第七版 ECMAScript 修订，增加了两个新特性。</li>
+</ul>
+<p>以上，都是我们常说的ES，在网上看到的代码目前以ES5和ES6居多，写法各异，我建议用最新版的写法写代码。</p>
+<p>说白了，就是Javascript并不是一个优秀的语言，但是经过不断的填补，修正，已经让Javascript支持了很多新特性，新的语法，更多的书写方式，以及拥有了更严谨的编程思想。比如<code>let</code>,arrow function(就是这个：<code>(i) =&gt; i + 1</code> )在ES中的运用等。</p>
+<p>所以，在认识React之前，最好学习ES的新特性以及<a href="http://blog.csdn.net/zhangjjie0110/article/details/53782537" target="_blank" rel="external">常用的新特性</a>。</p>
+<h1 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h1><p>我觉得这是React的重量级思想，组件化前端，从此，前端再也不是东拼西凑，而是像积木一样，拼起来。</p>
+<p><img src="/content/images/react/2.png" alt=""></p>
+<p>React把单一的用户界面，拆成了各种各样的组件，形成“组件树”，采用分而治之的思想，有一个好处，就是维护起来极其方便，对于组件的修改也显得很容易。</p>
+<h1 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h1><p>众所周知，Angular是双向数据绑定的，并且引以为豪，因为更容易维护与理解。</p>
+<p>但是双向数据绑定也带来了许多问题，会在些其他功能的时候莫名其妙出现很多bug。</p>
+<p>React是单向数据绑定的，是非常稳定的做法，但是也存在一些问题，就是在操作其他组件的时候，对于数据流的处理，显得异常困难。</p>
+<p>在React中，数据绑定仅仅需要在<code>render</code>中写<code>{数据绑定}</code>，而非像Angular一样，两边都要设置，一定情况下讲，这是比较方便的。</p>
+<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2><p>话说回来，React的每一个组件的实质是什么？状态机（State Machines），在React的每一个组件里，通过更新<code>this.state</code>，再通过<code>render()</code>进行渲染，React会自动把最新的状态渲染到网页上。</p>
+<p>举个栗子🌰<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DateSelectorComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">let</span> todaydate = <span class="keyword">this</span>.showLocale(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">     <span class="keyword">this</span>.state = &#123;</div><div class="line">         <span class="attr">timenow</span>: todaydate,</div><div class="line">         <span class="attr">showCalendar</span>: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">            <span class="keyword">return</span>(</div><div class="line">            &lt;div&gt;</div><div class="line">            &lt;Input icon='calendar' iconPosition='left' readOnly onClick=&#123;this.showCalendar&#125; value=&#123;this.state.timenow&#125; ref="inputbox"/&gt;</div><div class="line">            &lt;ButtonComponent /&gt;</div><div class="line">            &#123;CalendarComponent&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">        )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>通过这样的方式，我就设置了state的默认初始值，默认日历选择器是不出现的，而今天的日期是今天日期，这很正常。然后在将所谓的值渲染到Dom上。</p>
+<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p>React的数据流是单向的，是自上向下的层级传递的，props可以对固定的数据进行传递。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  render( </div><div class="line">    <span class="keyword">return</span> &lt;h1&gt;Hello &#123;this.props.name&#125;&lt;/h1&gt;;</div><div class="line">    )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">render()&#123;</div><div class="line"> <span class="keyword">return</span>(</div><div class="line">  &lt;HelloMessage name="John" /&gt;</div><div class="line">  )</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>在这种情况下，子组件会自动读取出父组件传递过来的<code>props</code>值John，并快速的渲染在页面上。</p>
+<h2 id="到底谁是谁"><a href="#到底谁是谁" class="headerlink" title="到底谁是谁"></a>到底谁是谁</h2><p><code>state</code>和<code>props</code>看起来很相似，其实是完全不同的东西。</p>
+<table>
+<thead>
+<tr>
+<th>问题</th>
+<th><em>props</em></th>
+<th><em>state</em></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可以从父组件得到初始值吗？</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>可以被父组件改变值吗？</td>
+<td>可以</td>
+<td>不可以</td>
+</tr>
+<tr>
+<td>可以设置组件内部的初始值吗？</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>可以改变组件内部的初始值吗？</td>
+<td>不可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>可以设置子组件的初始值吗？</td>
+<td>可以</td>
+<td>可以</td>
+</tr>
+<tr>
+<td>可以改变子组件的初始值吗？</td>
+<td>可以</td>
+<td>不可以</td>
+</tr>
+</tbody>
+</table>
+<p>按照我的个人理解，<code>props</code>是静态的，存入不变量，比如 购物车里的 商品名称、价格；<code>state</code>是动态的，存入随时变化的量，比如 用户购买商品的总价，购买数目。</p>
+<p>从操作的角度上讲，<code>props</code>是单向传递的，会一直被传递到子组件，而<code>state</code>更倾向于自身，只能改变自身的值。</p>
+<h1 id="获取Dom"><a href="#获取Dom" class="headerlink" title="获取Dom"></a>获取Dom</h1><p><code>this.refs</code>是react的重要组成之一，通过该方法可以快速高效的获取Dom。</p>
+<p>例如，在JSX代码中这样写道<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">"myInput"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
+<p>便可以通过<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.refs.myInput.value</div></pre></td></tr></table></figure></p>
+<p>命令获取该Input下的dom属性的value值，非常方便。</p>
+<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>组件都是有生命周期的，生命周期内，<code>props</code>和<code>state</code>改变会导致React自动用Diff算法重新渲染页面。那么生命周期到底都有哪些呢？</p>
+<p>大体上分为三类：</p>
+<ul>
+<li>挂载： 组件被插入到DOM中。</li>
+<li>更新： 组件被重新渲染，查明DOM是否应该刷新。</li>
+<li>移除： 组件从DOM中移除。</li>
+</ul>
+<p>从流程上讲，是这样的：</p>
+<p><strong>挂载期：</strong></p>
+<p>getInitialState() –&gt;&gt; componentWillMount() –&gt;&gt; render() –&gt;&gt; componentDidMount()</p>
+<p><strong>更新期：</strong></p>
+<p>componentWillReceiveProps() –&gt;&gt; shouldComponentUpdate() –&gt;&gt; componentWillUpdate render() –&gt;&gt; componentDidUpdate()</p>
+<p><strong>移除期：</strong></p>
+<p>componentWillUnmount()</p>
+<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p><strong>componentWillMount()</strong>： 在初次渲染之前执行一次，最早的执行点</p>
+<p><strong>componentDidMount()</strong>： 在初次渲染之后执行，比较常用，比如持续执行某事件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">componentDidMount()&#123;</div><div class="line"> setInterval(<span class="keyword">this</span>.loadData(<span class="keyword">this</span>.state.date),<span class="number">1000</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p><strong>componentWillReceiveProps()</strong>： 在组件接收到新的 <code>props</code> 的时候调用。在初始化渲染的时候，该方法不会调用。</p>
+<p><strong>shouldComponentUpdate()</strong>： 在接收到新的 <code>props</code> 或者 <code>state</code>，将要渲染之前调用。</p>
+<p><strong>componentWillUpdate()</strong>： 在接收到新的 props 或者 state 之前立刻调用。</p>
+<p><strong>componentDidUpdate()</strong>： 在组件的更新已经同步到 DOM 中之后立刻被调用。</p>
+<h2 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h2><p><strong>componentWillUnmount()</strong>： 在组件从 DOM 中移除的时候立刻被调用。</p>
+<h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><p>React是MVC中V的一部分，而Flux则是M和C的部分，Flux是单向数据流，符合React的核心思想，不过，Flux并不完善，是一个很松散的架构。</p>
+<ul>
+<li>Dispatcher： 处理动作分发，维护 Store 之间的依赖关系</li>
+<li>Store： 数据和逻辑部分</li>
+<li>View： React 组件，这一层可以看作 controller-views，作为视图同时响应用户交互</li>
+<li>Action： 提供给 Dispatcher 传递数据给 Store</li>
+</ul>
+<p><img src="/content/images/react/3.png" alt=""></p>
+<h1 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h1><p><img src="/content/images/react/5.jpeg" alt=""></p>
+<p>Flux把总架构都搭好了，可是实现起来并不容易，因为Flux并没有强大的API，只是一种纯粹的思想实现，而Redux是Flux的“升级版”，把各个部分更加方便的实现起来。</p>
+<p>此部分未完待续</p>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我觉得React给前端开发带来了一种全新的思想，那就是以JS为中心，一种全新的世界。</p>
+<p>网页不再是网页，而是像工程一样，一块块搭建起来的，拆下来，搬上去都很容易，似的前端再也不是那个凌乱拼凑的年代。</p>
+<p>我想任何一种编程语言，无论是解释性、脚本、编译语言都逃离不了这个全新的年代，就是组件化，大家似乎都在不同方向发展，但实际上，确实一样的。</p>
+<h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><p><a href="http://www.infoq.com/cn/articles/react-dom-diff" target="_blank" rel="external">深入浅出React（四）：虚拟DOM Diff算法解析</a></p>
+<p><a href="http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8/2" target="_blank" rel="external">React/React Native 的ES5 ES6写法对照表</a></p>
+<p><a href="https://www.cllgeek.com/archives/544" target="_blank" rel="external">React组件声明周期过程说明</a></p>
+
+
+                <hr>
+
+                
+                <!-- 多说 Share start -->
+                </style>
+                <div class="ds-share"
+                    style="text-align: right"
+                    data-thread-key="2017/02/04/react/"
+                    data-title="我眼中的React"
+                    data-url="http://blog.yfgeek.com/2017/02/04/react/"
+                    data-images="http://blog.yfgeek.com/2017/02/04/react//content/images/react/wall.png"
+                    data-content="前两天，用React把 之前的 基于树莓派3B,DHT11/DHT22,LCD1602的一个实... | Ivan&#39;s Blog " >
+                    <div class="ds-share-inline">
+                      <ul  class="ds-share-icons-16">
+                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
+                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
+                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
+                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
+                      </ul>
+                      <div class="ds-share-icons-more">
+                      </div>
+                    </div>
+                <hr>
+                </div>
+                <!-- 多说 Share end-->
+                
+
+                <ul class="pager">
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/01/12/network-zero-web/" data-toggle="tooltip" data-placement="top" title="用Raspberry Pi Zero打造“即插即用”的Web服务器">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+                <!-- 多说评论框 start -->
+                <div class="comment">
+                    <div class="ds-thread"
+                        data-thread-key="2017/02/04/react/"
+                        data-title="我眼中的React"
+                        data-url="http://blog.yfgeek.com/2017/02/04/react/" >
+                    </div>
+                </div>
+                <!-- 多说评论框 end -->
+                
+
+                
+
+            </div>
+    <!-- Side Catalog Container -->
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+                <!-- GUESTS Blog -->
+                <hr>
+                <h5>GUESTS</h5>
+                <div class="ds-recent-visitors" data-num-items="17" data-avatar-size="32" id="ds-recent-visitors"></div>
+
+                <!-- Friends Blog -->
+                
+
+
+            </div>
+
+        </div>
+    </div>
+</article>
+
+
+<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    // dynamic User by Hux
+    var _user = 'yifani';
+
+    // duoshuo comment query.
+    var duoshuoQuery = {short_name: _user };
+    (function() {
+        var ds = document.createElement('script');
+        ds.type = 'text/javascript';ds.async = true;
+        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+        ds.charset = 'UTF-8';
+        (document.getElementsByTagName('head')[0]
+         || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+</script>
+<!-- 多说公共JS代码 end -->
+
+
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/yfss">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Ivan&#39;s Blog 2017
+                    <br>
+                    Theme inspired by Hux
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    Proudly powered by Hexo
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://blog.yfgeek.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //console.log('New object created');
+                        },
+                        error: function(newcounter,error){
+                        console.log('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                console.log('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10);
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                console.log("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+
+
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //console.log('New object created');
+                        },
+                        error: function(newcounter,error){
+                        console.log('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                console.log('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10);
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                console.log("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+
+
+
+</body>
+
+</html>

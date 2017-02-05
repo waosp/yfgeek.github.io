@@ -49,9 +49,15 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script>
-    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
-    <script>AV.initialize("oLTXcyRzIdgKgCNIteRM0cUy-gzGzoHsz", "BUnbApGSylYt7lWhAHBbFsdF");</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 
 
@@ -170,6 +176,30 @@
 
 <div class="post-preview">
 
+    <a href="/2017/02/04/react/">
+        <h2 class="post-title">
+            我眼中的React
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前两天，用React把 之前的 基于树莓派3B,DHT11/DHT22,LCD1602的一个实时温度湿度检测系统 的Web部分重构了一下。
+这个项目之前是用Semantic UI + eCharts + JQuery Datapicker写的，由于这个项目的实现过程比较经典，几乎把所有的感觉React的基础思想都实现了一遍。
+无疑，React给前端带来了各种新的想法与思想，声明式、虚拟Dom......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-02-04
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/01/12/network-zero-web/">
         <h2 class="post-title">
             用Raspberry Pi Zero打造“即插即用”的Web服务器
@@ -272,34 +302,6 @@
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/12/27/emoji/">
-        <h2 class="post-title">
-            Emoji 表情域名 引领未来
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂
-
-Emoji 等 Unicode 字符，浏览器Punycode的方式将 Unicode字符用ASCII进行编码。
-我也顺势跟风，注册了一个坑爹的TK域名。
-💌.tk
-
-查询在chrome浏览器上直接......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-12-27
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -334,9 +336,9 @@ Emoji 等 Unicode 字符，浏览器Punycode的方式将 Unicode字符用ASCII�
                     <div class="tags">
                         
                             
-                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
-                            
                         
+                            
+                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
                             
                         
                             
@@ -348,13 +350,13 @@ Emoji 等 Unicode 字符，浏览器Punycode的方式将 Unicode字符用ASCII�
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="5">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="6">Web</a>
+                            
+                        
                             
                         
                             
                             <a href="/tags/#Github" title="Github" rel="2">Github</a>
-                            
-                        
                             
                         
                             
@@ -368,9 +370,9 @@ Emoji 等 Unicode 字符，浏览器Punycode的方式将 Unicode字符用ASCII�
                             
                         
                             
-                        
-                            
                             <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
+                            
+                        
                             
                         
                             
@@ -694,17 +696,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -732,7 +734,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )
@@ -765,17 +767,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -803,7 +805,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )

@@ -49,9 +49,15 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script>
-    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
-    <script>AV.initialize("oLTXcyRzIdgKgCNIteRM0cUy-gzGzoHsz", "BUnbApGSylYt7lWhAHBbFsdF");</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 
 
@@ -170,6 +176,34 @@
 
 <div class="post-preview">
 
+    <a href="/2016/07/28/vimda-quan/">
+        <h2 class="post-title">
+            Vim 命令大全
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+             
+##进入vi的命令
+vi filename :打开或新建文件，并将光标置于第一行首
+vi +n filename ：打开文件，并将光标置于第n行首
+vi + filename ：打开文件，并将光标置于最后一行首
+vi +/pattern filename：打开文件，并将光标置于第一个与pattern匹配的串处
+vi -r filename ：在上次正用vi编辑时发生系统崩溃，恢复file......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-07-28
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/07/28/iterm2-mei-hua-quan-guo-cheng/">
         <h2 class="post-title">
             iTerm2 美化全过程
@@ -226,9 +260,9 @@
                     <div class="tags">
                         
                             
-                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
-                            
                         
+                            
+                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
                             
                         
                             
@@ -240,13 +274,13 @@
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="5">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="6">Web</a>
+                            
+                        
                             
                         
                             
                             <a href="/tags/#Github" title="Github" rel="2">Github</a>
-                            
-                        
                             
                         
                             
@@ -260,9 +294,9 @@
                             
                         
                             
-                        
-                            
                             <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
+                            
+                        
                             
                         
                             
@@ -586,17 +620,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -624,7 +658,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )
@@ -657,17 +691,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -695,7 +729,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )

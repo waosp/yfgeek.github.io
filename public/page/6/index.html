@@ -49,9 +49,15 @@
     <![endif]-->
 
     <!-- ga & ba script hoook -->
-    <script></script>
-    <script src="https://cdn1.lncld.net/static/js/av-min-1.2.1.js"></script>
-    <script>AV.initialize("oLTXcyRzIdgKgCNIteRM0cUy-gzGzoHsz", "BUnbApGSylYt7lWhAHBbFsdF");</script>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
 </head>
 
 
@@ -170,6 +176,30 @@
 
 <div class="post-preview">
 
+    <a href="/2016/09/25/微信小程序的一些感想/">
+        <h2 class="post-title">
+            微信小程序的一些感想
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            前言这几天简直火爆了所有的社区的微信小程序，现在有时间可以试一试了。 
+下载微信小程序目前正处于内测阶段，所以我这个算是尝鲜，用的破解版。Mac版下载地址：http://source.lattecake.com/files/2016/09/wechat_web_devtools_0.9.092100.dmg
+windows下载地址：http://source.lattecake.com/fi......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-09-25
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/09/13/ss-server/">
         <h2 class="post-title">
             树莓派搭建ss服务器
@@ -278,29 +308,6 @@ Nginx/Apache (请自行提前安装)
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/08/25/ba-kalifang-dao-upan-li/">
-        <h2 class="post-title">
-            把KALI放到U盘里
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            步骤1：进入 bios设置U盘启动，保存并启动电脑
-步骤2：在启动选择画面中，选第一个“kali linux(686-pae)”。步骤3：进入kali桌面后 打开命令行，输入gparted，在弹出的窗口程序的右上角选择对应你U盘容量的磁盘。把第二个分区unmount后，将此区格式化成 ext4文件系统，同时把分区名(Label)改成 persistence ，同时记下分区列表里面第二个分区的......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-08-25
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -339,9 +346,9 @@ Nginx/Apache (请自行提前安装)
                     <div class="tags">
                         
                             
-                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
-                            
                         
+                            
+                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
                             
                         
                             
@@ -353,13 +360,13 @@ Nginx/Apache (请自行提前安装)
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="5">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="6">Web</a>
+                            
+                        
                             
                         
                             
                             <a href="/tags/#Github" title="Github" rel="2">Github</a>
-                            
-                        
                             
                         
                             
@@ -373,9 +380,9 @@ Nginx/Apache (请自行提前安装)
                             
                         
                             
-                        
-                            
                             <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
+                            
+                        
                             
                         
                             
@@ -699,17 +706,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -737,7 +744,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )
@@ -770,17 +777,17 @@ function addCount (Counter) {
                     newcounter.set("time",1);
                     newcounter.save(null,{
                         success: function(newcounter){
-                        //alert('New object created');
+                        //console.log('New object created');
                         },
                         error: function(newcounter,error){
-                        alert('Failed to create');
+                        console.log('Failed to create');
                         }
                         });
                 }
             },
             error: function(error){
                 //find null is not a error
-                alert('Error:'+error.code+" "+error.message);
+                console.log('Error:'+error.code+" "+error.message);
             }
         });
 }
@@ -808,7 +815,7 @@ $(function(){
                     }
                 },
             error: function(error){
-                alert("Error:"+error.code+" "+error.message);
+                console.log("Error:"+error.code+" "+error.message);
             }
             }
         )

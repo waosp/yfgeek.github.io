@@ -15,14 +15,15 @@ header-img: "content/images/f2e/post-bg-js-version.jpg"
 
 # 模板素材
 * [easyicon](http://www.easyicon.net/)
-* [阿里巴巴iconfont](http://iconfont.cn/)
+* [阿里巴巴iconfont](http://iconfont.cn/) (荐)
 * [Fontello](http://fontello.com/)
 
 
 * [稀土区](https://xituqu.com/)
 * [优设](http://www.uisdc.com/)
+* [pixabay](https://pixabay.com/zh/) (荐)
 * [500px](https://marketplace.500px.com/)
-* [壁纸wallhaven](https://alpha.wallhaven.cc/)
+* [壁纸wallhaven](https://alpha.wallhaven.cc/) (荐)
 * [jquery](http://www.htmleaf.com/)
 
 # 模板

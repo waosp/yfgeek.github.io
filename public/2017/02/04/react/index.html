@@ -199,7 +199,7 @@ var _hmt = _hmt || [];
 <p>也就是因为这个原因，虚拟Dom使得在操作Dom上更加高效，每次更新数据不会进行O(n^3)复杂的操作。</p>
 <p>你可能会问，什么是JSX？</p>
 <h1 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h1><p>其实JSX只是一种未编译的JavaScript，可以方便的对HTML进行书写，先上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'semantic-ui-react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ButtonComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            &lt;span&gt;</div><div class="line">            &lt;Button color='blue' &gt;分钟&lt;/Button&gt;</div><div class="line">            &lt;Button color='violet'&gt;小时&lt;/Button&gt;</div><div class="line">            &lt;/span&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ButtonComponent;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'semantic-ui-react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ButtonComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">Button</span> <span class="attr">color</span>=<span class="string">'blue'</span> &gt;</span>分钟<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">Button</span> <span class="attr">color</span>=<span class="string">'violet'</span>&gt;</span>小时<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ButtonComponent;</div></pre></td></tr></table></figure>
 <p>代码部分用<code>ES6</code>书写，你可能会问什么是ES6？其实还有ES7(ECMAScript 2016)呢~</p>
 <p>那么，你可能看到了很变态的写法，就是HTML和JS混写，没错，这就是EJS，但请注意，这不是HTML，写着写着很有可能会掉入<a href="http://www.css88.com/react/docs/jsx-gotchas.html" target="_blank" rel="external">JSX陷阱</a>。</p>
 <p>经过<code>babel</code>等工具的编译后，JSX在运行的时候会被编译为真实的JavaScript语言，之所以这样写，只是为了方便程序员更方便的写代码。</p>
@@ -228,10 +228,10 @@ var _hmt = _hmt || [];
 <p>React是单向数据绑定的，是非常稳定的做法，但是也存在一些问题，就是在操作其他组件的时候，对于数据流的处理，显得异常困难。</p>
 <p>在React中，数据绑定仅仅需要在<code>render</code>中写<code>{数据绑定}</code>，而非像Angular一样，两边都要设置，一定情况下讲，这是比较方便的。</p>
 <h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2><p>话说回来，React的每一个组件的实质是什么？状态机（State Machines），在React的每一个组件里，通过更新<code>this.state</code>，再通过<code>render()</code>进行渲染，React会自动把最新的状态渲染到网页上。</p>
-<p>举个栗子🌰<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DateSelectorComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">let</span> todaydate = <span class="keyword">this</span>.showLocale(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">     <span class="keyword">this</span>.state = &#123;</div><div class="line">         <span class="attr">timenow</span>: todaydate,</div><div class="line">         <span class="attr">showCalendar</span>: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">            <span class="keyword">return</span>(</div><div class="line">            &lt;div&gt;</div><div class="line">            &lt;Input icon='calendar' iconPosition='left' readOnly onClick=&#123;this.showCalendar&#125; value=&#123;this.state.timenow&#125; ref="inputbox"/&gt;</div><div class="line">            &lt;ButtonComponent /&gt;</div><div class="line">            &#123;CalendarComponent&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">        )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>举个栗子🌰<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DateSelectorComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">let</span> todaydate = <span class="keyword">this</span>.showLocale(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">     <span class="keyword">this</span>.state = &#123;</div><div class="line">         <span class="attr">timenow</span>: todaydate,</div><div class="line">         <span class="attr">showCalendar</span>: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">            <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">Input</span> <span class="attr">icon</span>=<span class="string">'calendar'</span> <span class="attr">iconPosition</span>=<span class="string">'left'</span> <span class="attr">readOnly</span> <span class="attr">onClick</span>=<span class="string">&#123;this.showCalendar&#125;</span> <span class="attr">value</span>=<span class="string">&#123;this.state.timenow&#125;</span> <span class="attr">ref</span>=<span class="string">"inputbox"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">ButtonComponent</span> /&gt;</span></div><div class="line">            &#123;CalendarComponent&#125;</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>通过这样的方式，我就设置了state的默认初始值，默认日历选择器是不出现的，而今天的日期是今天日期，这很正常。然后在将所谓的值渲染到Dom上。</p>
 <h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p>React的数据流是单向的，是自上向下的层级传递的，props可以对固定的数据进行传递。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  render( </div><div class="line">    <span class="keyword">return</span> &lt;h1&gt;Hello &#123;this.props.name&#125;&lt;/h1&gt;;</div><div class="line">    )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">render()&#123;</div><div class="line"> <span class="keyword">return</span>(</div><div class="line">  &lt;HelloMessage name="John" /&gt;</div><div class="line">  )</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  render( </div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</div><div class="line">    )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">render()&#123;</div><div class="line"> <span class="keyword">return</span>(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">HelloMessage</span> <span class="attr">name</span>=<span class="string">"John"</span> /&gt;</span></span></div><div class="line">  )</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在这种情况下，子组件会自动读取出父组件传递过来的<code>props</code>值John，并快速的渲染在页面上。</p>
 <h2 id="到底谁是谁"><a href="#到底谁是谁" class="headerlink" title="到底谁是谁"></a>到底谁是谁</h2><p><code>state</code>和<code>props</code>看起来很相似，其实是完全不同的东西。</p>
 <table>
@@ -240,6 +240,7 @@ var _hmt = _hmt || [];
 <th>问题</th>
 <th><em>props</em></th>
 <th><em>state</em></th>
+<th></th>
 </tr>
 </thead>
 <tbody>
@@ -247,26 +248,31 @@ var _hmt = _hmt || [];
 <td>可以从父组件得到初始值吗？</td>
 <td>可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以被父组件改变值吗？</td>
 <td>可以</td>
 <td>不可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以设置组件内部的初始值吗？</td>
 <td>可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以改变组件内部的初始值吗？</td>
 <td>不可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以设置子组件的初始值吗？</td>
 <td>可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以改变子组件的初始值吗？</td>
@@ -325,31 +331,12 @@ var _hmt = _hmt || [];
                 <hr>
 
                 
-                <!-- 多说 Share start -->
-                </style>
-                <div class="ds-share"
-                    style="text-align: right"
-                    data-thread-key="2017/02/04/react/"
-                    data-title="我眼中的React"
-                    data-url="http://blog.yfgeek.com/2017/02/04/react/"
-                    data-images="http://blog.yfgeek.com/2017/02/04/react//content/images/react/wall.png"
-                    data-content="前两天，用React把 之前的 基于树莓派3B,DHT11/DHT22,LCD1602的一个实... | Ivan&#39;s Blog " >
-                    <div class="ds-share-inline">
-                      <ul  class="ds-share-icons-16">
-                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
-                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
-                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
-                      </ul>
-                      <div class="ds-share-icons-more">
-                      </div>
-                    </div>
-                <hr>
-                </div>
-                <!-- 多说 Share end-->
-                
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/02/08/awesome-code/" data-toggle="tooltip" data-placement="top" title="什么才是优秀的程序代码">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">
@@ -359,18 +346,16 @@ var _hmt = _hmt || [];
                 </ul>
 
                 
-                <!-- 多说评论框 start -->
+                <!-- disqus 评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread"
-                        data-thread-key="2017/02/04/react/"
-                        data-title="我眼中的React"
-                        data-url="http://blog.yfgeek.com/2017/02/04/react/" >
-                    </div>
+                    <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
-                <!-- 多说评论框 end -->
+                <!-- disqus 评论框 end -->
                 
 
                 
+
+               
 
             </div>
     <!-- Side Catalog Container -->
@@ -410,25 +395,22 @@ var _hmt = _hmt || [];
 </article>
 
 
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    // dynamic User by Hux
-    var _user = 'yifani';
 
-    // duoshuo comment query.
-    var duoshuoQuery = {short_name: _user };
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "yfgeek";
+    var disqus_identifier = "http://blog.yfgeek.com/2017/02/04/react/";
+    var disqus_url = "http://blog.yfgeek.com/2017/02/04/react/";
+
     (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- 多说公共JS代码 end -->
-
-
+<!-- disqus 公共JS代码 end -->
 
 
 

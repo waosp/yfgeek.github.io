@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://blog.yfgeek.com/"/>
-  <updated>2017-02-05T14:09:51.000Z</updated>
+  <updated>2017-03-08T19:05:11.000Z</updated>
   <id>http://blog.yfgeek.com/</id>
   
   <author>
@@ -16,11 +16,185 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>揭秘utf8=✓背后的小秘密</title>
+    <link href="http://blog.yfgeek.com/2017/02/17/utf8true/"/>
+    <id>http://blog.yfgeek.com/2017/02/17/utf8true/</id>
+    <published>2017-02-17T16:51:18.000Z</published>
+    <updated>2017-03-08T19:05:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>你可能和我一样疑惑，为什么github等网站，在POST数据的时候，经常带有<code>utf8=✓</code>字符，显然这种方式看起来很难以接受，因为Unicode编码错误的话会导致很多问题，毕竟用户的浏览器是不一样的。</p>
+<p>为什么不用<code>utf8=true</code>来代替呢？</p>
+<p>答案恰恰相反！</p>
+<p><code>utf8=✓</code>就是为了让浏览器在POST数据时强制使用utf-8的编码方式，进而在后端代码中无需考虑字符串编码转换问题，以免带来困扰。</p>
+<p>在IE8，或者更早的IE浏览器里，在POST数据时，会尽可能的POST以Latin-1编码方式的字符串，这给后端带来了巨大的兼容性的困扰，但是你一旦在POST数据中包含了✓这样的Unicode字符，就会自动用uft8的编码方式发送字符串。</p>
+<p>是不是很有用的小技巧呢？</p>
+<p>本文翻译自:<a href="http://softwareengineering.stackexchange.com/questions/168751/is-the-use-of-utf8-preferable-to-utf8-true" target="_blank" rel="external">Is the use of “utf8=✓” preferable to “utf8=true”?</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;你可能和我一样疑惑，为什么github等网站，在POST数据的时候，经常带有&lt;code&gt;utf8=✓&lt;/code&gt;字符，显然这种方式看起来很难以接受，因为Unicode编码错误的话会导致很多问题，毕竟用户的浏览器是不一样的。&lt;/p&gt;
+&lt;p&gt;为什么不用&lt;code&gt;utf8=t
+    
+    </summary>
+    
+      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
+    
+    
+      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>浅谈函数式编程柯里化</title>
+    <link href="http://blog.yfgeek.com/2017/02/11/currying/"/>
+    <id>http://blog.yfgeek.com/2017/02/11/currying/</id>
+    <published>2017-02-11T18:27:57.000Z</published>
+    <updated>2017-03-08T19:05:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>百度百科里对柯里化的定义是</p>
+<blockquote>
+<p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家 Haskell Curry 命名的，尽管它是 Moses Schnfinkel 和 Gottlob Frege 发明的。</p>
+</blockquote>
+<p>简直看不懂哦，Talk is Cheap，我们拿一个简单的haskell程序说明什么叫</p>
+<h2 id="自动柯里化"><a href="#自动柯里化" class="headerlink" title="自动柯里化"></a>自动柯里化</h2><p>两数相加，返回结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fun add x y = x + y</div></pre></td></tr></table></figure>
+<p>这是一个典型的柯里化的版本，当我输入 <code>(add 1) 2</code> 时与<code>add 1 2</code> 的返回结果一模一样，都是3</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Prelude</span>&gt; (add <span class="number">1</span>) <span class="number">2</span></div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure>
+<p>但是，换个角度上讲，我明明设置了两个“变量”，在haskell里却把它们的结果又封装成了一个函数，这就是haskell的强大特性：自动柯里化，haskell全部帮你自动处理了。</p>
+<p>简单来说，柯里化指的是函数里只接收一个余下的参数，再调用原函数，返回出相应的结果。</p>
+<p>而同样的，没有柯里化的普通版本却是这样的：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">fun</span> add(x, y) = x + y</div></pre></td></tr></table></figure>
+<p>这个版本里，只能通过<code>add(1,2)</code>进行相加操作。</p>
+<p>柯里化实际上是将高阶函数进行降阶处理，没理解？接着看~ </p>
+<h2 id="JavaScript的柯里化"><a href="#JavaScript的柯里化" class="headerlink" title="JavaScript的柯里化"></a>JavaScript的柯里化</h2><p>JavaScript存在<strong>闭包</strong>的特性，能够很好的为我们将函数柯里化，但是很可惜JavaScript不支持自动柯里化，这意味着，我们要自己写柯里化的过程，不过还好，这能有效的让我们理解，到底什么是柯里化。</p>
+<p>同样的，还是那个add的简单函数，用JavaScript实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(y===<span class="literal">undefined</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="function">(<span class="params">z</span>) =&gt;</span> x + z;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">return</span> x+y;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试一下！通过执行<code>add(1)(2)</code>，果然返回了<code>3</code>，是的，这是一个手动构造柯里化函数的过程。对于大多数函数，我们有通用的柯里化方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> fixedArgs = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>);</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    args = fixedArgs.concat([].slice.call(<span class="built_in">arguments</span>))</div><div class="line">    <span class="keyword">return</span> func.apply(<span class="literal">null</span>, args);</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>也就是说，对于<code>add</code>函数来说，我们用一个函数生成了另一个范围更小的函数，一层接一层的解决问题。这符合函数式编程的思想，就是我们更关注<strong>函数</strong>与<strong>函数</strong>之间的关系，而非状态本身，更在乎局部而非整体。</p>
+<p>这个例子体现不出这种思想的精妙之处，那么我们再举一个例子🌰</p>
+<p>如果，我们想让一个已知的数组每个值都做加1操作，传统的方法该怎么做？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+<span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>对吧？那么我们下面可以用柯里化的思想把这个问题实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">ar</span> =&gt;</span> ar.map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="number">1</span>);</div><div class="line">add([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</div></pre></td></tr></table></figure>
+<p>首先我们在<code>add</code>里定义了一个函数，并且传入参数为<code>ar</code>，<code>ar</code>进行<code>Array.prototype.map()</code>操作，对每一个数进行遍历，并且返回这个数字+1后的值给<code>ar</code>，这看起来挺玄乎的，但确实可行，我们只关心局部，请试图把<code>add</code>当做数学里中的函数去思考理解，或许会好懂的多。可是这只是方便了我们理解，那么到底有什么好处呢？</p>
+<p>再举一个例子🌰</p>
+<p>如果我们想写一个函数，用来对已知数组的已知量进行相加n的操作，怎么写？传统方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar= [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addToArray</span>(<span class="params">ar,n</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+n)</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log(addToArray(ar,<span class="number">1</span>));</div></pre></td></tr></table></figure>
+<p>但是，我们可以这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">a</span> =&gt;</span> b =&gt; a+b;</div><div class="line"><span class="keyword">const</span> addToArray = <span class="function">(<span class="params">ar,n</span>) =&gt;</span> ar.map(add(n));</div><div class="line">addToArray([<span class="number">2</span>,<span class="number">3</span>],<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<p>结果都一样，其实过程是不一样的，你可能真的憋不住了，到底有什么用呢？</p>
+<h1 id="柯里化的好处"><a href="#柯里化的好处" class="headerlink" title="柯里化的好处"></a>柯里化的好处</h1><p>就像上面的例子一样，你能看出不同吗？对，第一个的实质是新写了一个函数，对数组进行map操作，而第二个则是在直接在<code>map</code>里进行<code>add</code>操作，这很通用，一旦你写了很多类似于<code>add</code>的函数，就会方便起来，可以让我们方便的在<code>map</code>,<code>reduce</code>,<code>filter</code>里调用。</p>
+<ul>
+<li>能够进行延迟计算，就像add(1)(2)一样，1比2先传入，2就会被延迟计算，在特定的场景里，有一定的应用意义。</li>
+<li>当你发现你要调用一个函数，并且调用参数都是一样的情况下，这个参数就可以被柯里化，以便更好的完成任务。</li>
+<li>优雅的写法，允许你写出来的代码更干净、更有表达力。</li>
+</ul>
+<p>虽然柯里化在日常应用不多，但仍然是一个不可不了解的好概念。</p>
+<h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><p><a href="https://cnodejs.org/topic/56261a249b48ca9448b776c4" target="_blank" rel="external"> JavaScript柯里化</a></p>
+<p><a href="http://codekirei.com/posts/currying-with-arrow-functions/" target="_blank" rel="external">Currying and ES6 Arrow Functions</a></p>
+<p><a href="http://www.cnblogs.com/zztt/p/4142891.html" target="_blank" rel="external">浅析 JavaScript 中的 函数 currying 柯里化</a></p>
+<p><a href="https://www.youtube.com/watch?v=iZLP4qOwY8I" target="_blank" rel="external">Currying - Part 6 of Functional Programming in JavaScript(需梯子)</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;百度百科里对柯里化的定义是&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher St
+    
+    </summary>
+    
+      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
+    
+    
+      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>什么才是优秀的程序代码</title>
+    <link href="http://blog.yfgeek.com/2017/02/08/awesome-code/"/>
+    <id>http://blog.yfgeek.com/2017/02/08/awesome-code/</id>
+    <published>2017-02-08T17:35:13.000Z</published>
+    <updated>2017-03-08T19:05:11.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>首先，我想说的是，我谈及的“优秀程序代码”，不是指“优秀程序”，也不是更易阅读的“代码”，恰恰相反，我可能想写的是更不易阅读的代码，这里的“优秀”指的是高效、快速。</p>
+<p>在写之前，我想先用一个原则引入这个文章：</p>
+<blockquote>
+<p><strong>KISS原则</strong>  <strong>*K</strong>eep <strong>I</strong>t <strong>S</strong>imple, <strong>S</strong>tupid* </p>
+</blockquote>
+<p>是的，这是我心中优秀的代码程序，就是简单、高效。</p>
+<p>相信所有人都知道时间复杂度这个东西，是的，优秀的代码永远都在做一件事：降低时间复杂度，哪怕写的过程是复杂的、理解起来是相对难的(比如，快速排序、堆排序)。那么，我接下来，想较一下真。</p>
+<h1 id="卡常数"><a href="#卡常数" class="headerlink" title="卡常数"></a>卡常数</h1><blockquote>
+<p>据考证，[卡]（Qa’a）是古埃及第一王朝的最后一位法老。</p>
+<p>他发现并研究了一种常数，后世以他的名字叫做卡常数。卡特兰数的起源也是因为卡的后人与特兰克斯结婚，生下来的孩子就叫卡特兰，而他只是发表了祖传的家书而已。</p>
+<p>Sereja也是卡的后人，提出括号序列问题，也是从家书里得到的资料。然而Sereja为了不让这个秘密公开，于是隐瞒了这道题的真正做法。可是由于卡的后人不是各个都像卡特兰一样爱慕虚荣，这一算法也无法找到。“欲见贤人而不以其道，犹欲其入而闭之门也”。卡之常数的奥秘，需要以一颗诚心去追寻。</p>
+</blockquote>
+<p>看不懂对吗？</p>
+<p>我也看不懂，因为这是一群高中生写的。按照我的理解，卡常数，就是内循环里的那些看似不重要的语句其实每一句话的运行速度是不一样的，这个客观规律，是真实存在的，举个栗子🌰</p>
+<p>程序1</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= K; i++)</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= K; j++)</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= K; k++) &#123; </div><div class="line">      r.a[i][j] += a[i][k] * x.a[k][j];</div><div class="line">      <span class="keyword">if</span> (r.a[i][j] &gt;= <span class="number">1l</span>l &lt;&lt; <span class="number">62</span> || k == K) r.a[i][j] %= mod;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>程序2</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt;= K; i++)</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> j = <span class="number">0</span>; j &lt;= K; j++)</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt;= K; k++)</div><div class="line">      r.a[i][j] = (r. a[i][j] + a[i][k] * x.a[k][j] % mod) % mod;</div></pre></td></tr></table></figure>
+<p>按照常人的理解，<code>程序1</code>和<code>程序2</code>的复杂度都是O(n^3)，没错，那么他们的时间是一样的吗？</p>
+<p>并不一样。</p>
+<p>在机器性能并没有那么高的情况下，在测试数据量没有那么少的情况下，第二种比第一种快了一倍。</p>
+<p><strong>为什么？</strong></p>
+<p>因为第二种代码更加精炼吗？并不完全是。</p>
+<p>在<code>程序1</code>中，<code>if (r.a[i][j] &gt;= 1ll &lt;&lt; 62 || k == K)</code>实际上是耗费时间的，if操作在执行的时候真实的操作是这样的：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">if</span>(这里面是<span class="literal">true</span>吗？)</div><div class="line">  左边是<span class="literal">true</span>吗？</div><div class="line">  右边是<span class="literal">true</span>吗？</div><div class="line">  ||操作是<span class="literal">true</span>吗？</div></pre></td></tr></table></figure>
+<p>这必然会消耗大量的时间，同理</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">r.a[i][j] += a[i][k] * x.a[k][j];</div><div class="line">r.a[i][j] = a[i][k] * x.a[k][j] + r.a[i][j];</div></pre></td></tr></table></figure>
+<p>一样吗？实际上是不一样的，后者比前者快一点。</p>
+<p>你可能觉得，这也太较真了吧？但是高效就是高效，效率提高才是硬道理。</p>
+<blockquote>
+<p>不积跬步，无以至千里；不积小流，无以成江海。</p>
+</blockquote>
+<h1 id="原则"><a href="#原则" class="headerlink" title="原则"></a>原则</h1><ul>
+<li><p>一杆内存在心中</p>
+</li>
+<li><p>多写一个不必要的循环递归，浑身难受</p>
+</li>
+<li><p>多写一个不必要的逻辑判断，浑身难受</p>
+</li>
+<li><p>多写一个无关变量，浑身难受</p>
+</li>
+<li><p>不找到最优解，浑身难受</p>
+</li>
+<li><p>始终自发的想着如何用栈、树去解决问题</p>
+</li>
+<li><p>代码效率哪怕提升的是一倍，花一天优化代码也是值得的</p>
+</li>
+<li><p>时刻遵循RP定律写代码，RP++</p>
+</li>
+</ul>
+<p>我从我接触OI那一刻起，我觉得算法是美的，每一个人写出来的算法都体现了一种算法，永远对高效快速的低复杂度的精炼代码充满敬畏之心！❤️</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;首先，我想说的是，我谈及的“优秀程序代码”，不是指“优秀程序”，也不是更易阅读的“代码”，恰恰相反，我可能想写的是更不易阅读的代码，这里的“优秀”指的是高效、快速。&lt;/p&gt;
+&lt;p&gt;在写之前，我想先用一个原则引入这个文章：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;stron
+    
+    </summary>
+    
+      <category term="CodeStyle" scheme="http://blog.yfgeek.com/categories/CodeStyle/"/>
+    
+    
+      <category term="CodeStyle" scheme="http://blog.yfgeek.com/tags/CodeStyle/"/>
+    
+  </entry>
+  
+  <entry>
     <title>我眼中的React</title>
     <link href="http://blog.yfgeek.com/2017/02/04/react/"/>
     <id>http://blog.yfgeek.com/2017/02/04/react/</id>
     <published>2017-02-04T14:35:03.000Z</published>
-    <updated>2017-02-05T14:09:51.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>前两天，用React把 之前的 <a href="https://github.com/yfgeek/rpi-TempRuntime" target="_blank" rel="external">基于树莓派3B,DHT11/DHT22,LCD1602的一个实时温度湿度检测系统</a> 的Web部分重构了一下。</p>
 <p>这个项目之前是用Semantic UI + eCharts + JQuery Datapicker写的，由于这个项目的实现过程比较经典，几乎把所有的感觉React的基础思想都实现了一遍。</p>
@@ -38,7 +212,7 @@
 <p>也就是因为这个原因，虚拟Dom使得在操作Dom上更加高效，每次更新数据不会进行O(n^3)复杂的操作。</p>
 <p>你可能会问，什么是JSX？</p>
 <h1 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h1><p>其实JSX只是一种未编译的JavaScript，可以方便的对HTML进行书写，先上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'semantic-ui-react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ButtonComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            &lt;span&gt;</div><div class="line">            &lt;Button color='blue' &gt;分钟&lt;/Button&gt;</div><div class="line">            &lt;Button color='violet'&gt;小时&lt;/Button&gt;</div><div class="line">            &lt;/span&gt;</div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ButtonComponent;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'semantic-ui-react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ButtonComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">Button</span> <span class="attr">color</span>=<span class="string">'blue'</span> &gt;</span>分钟<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">Button</span> <span class="attr">color</span>=<span class="string">'violet'</span>&gt;</span>小时<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ButtonComponent;</div></pre></td></tr></table></figure>
 <p>代码部分用<code>ES6</code>书写，你可能会问什么是ES6？其实还有ES7(ECMAScript 2016)呢~</p>
 <p>那么，你可能看到了很变态的写法，就是HTML和JS混写，没错，这就是EJS，但请注意，这不是HTML，写着写着很有可能会掉入<a href="http://www.css88.com/react/docs/jsx-gotchas.html" target="_blank" rel="external">JSX陷阱</a>。</p>
 <p>经过<code>babel</code>等工具的编译后，JSX在运行的时候会被编译为真实的JavaScript语言，之所以这样写，只是为了方便程序员更方便的写代码。</p>
@@ -67,10 +241,10 @@
 <p>React是单向数据绑定的，是非常稳定的做法，但是也存在一些问题，就是在操作其他组件的时候，对于数据流的处理，显得异常困难。</p>
 <p>在React中，数据绑定仅仅需要在<code>render</code>中写<code>{数据绑定}</code>，而非像Angular一样，两边都要设置，一定情况下讲，这是比较方便的。</p>
 <h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2><p>话说回来，React的每一个组件的实质是什么？状态机（State Machines），在React的每一个组件里，通过更新<code>this.state</code>，再通过<code>render()</code>进行渲染，React会自动把最新的状态渲染到网页上。</p>
-<p>举个栗子🌰<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DateSelectorComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">let</span> todaydate = <span class="keyword">this</span>.showLocale(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">     <span class="keyword">this</span>.state = &#123;</div><div class="line">         <span class="attr">timenow</span>: todaydate,</div><div class="line">         <span class="attr">showCalendar</span>: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">            <span class="keyword">return</span>(</div><div class="line">            &lt;div&gt;</div><div class="line">            &lt;Input icon='calendar' iconPosition='left' readOnly onClick=&#123;this.showCalendar&#125; value=&#123;this.state.timenow&#125; ref="inputbox"/&gt;</div><div class="line">            &lt;ButtonComponent /&gt;</div><div class="line">            &#123;CalendarComponent&#125;</div><div class="line">            &lt;/div&gt;</div><div class="line">        )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<p>举个栗子🌰<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DateSelectorComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">let</span> todaydate = <span class="keyword">this</span>.showLocale(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">     <span class="keyword">this</span>.state = &#123;</div><div class="line">         <span class="attr">timenow</span>: todaydate,</div><div class="line">         <span class="attr">showCalendar</span>: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">            <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">Input</span> <span class="attr">icon</span>=<span class="string">'calendar'</span> <span class="attr">iconPosition</span>=<span class="string">'left'</span> <span class="attr">readOnly</span> <span class="attr">onClick</span>=<span class="string">&#123;this.showCalendar&#125;</span> <span class="attr">value</span>=<span class="string">&#123;this.state.timenow&#125;</span> <span class="attr">ref</span>=<span class="string">"inputbox"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">ButtonComponent</span> /&gt;</span></div><div class="line">            &#123;CalendarComponent&#125;</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
 <p>通过这样的方式，我就设置了state的默认初始值，默认日历选择器是不出现的，而今天的日期是今天日期，这很正常。然后在将所谓的值渲染到Dom上。</p>
 <h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p>React的数据流是单向的，是自上向下的层级传递的，props可以对固定的数据进行传递。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  render( </div><div class="line">    <span class="keyword">return</span> &lt;h1&gt;Hello &#123;this.props.name&#125;&lt;/h1&gt;;</div><div class="line">    )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">render()&#123;</div><div class="line"> <span class="keyword">return</span>(</div><div class="line">  &lt;HelloMessage name="John" /&gt;</div><div class="line">  )</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  render( </div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</div><div class="line">    )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">render()&#123;</div><div class="line"> <span class="keyword">return</span>(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">HelloMessage</span> <span class="attr">name</span>=<span class="string">"John"</span> /&gt;</span></span></div><div class="line">  )</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>在这种情况下，子组件会自动读取出父组件传递过来的<code>props</code>值John，并快速的渲染在页面上。</p>
 <h2 id="到底谁是谁"><a href="#到底谁是谁" class="headerlink" title="到底谁是谁"></a>到底谁是谁</h2><p><code>state</code>和<code>props</code>看起来很相似，其实是完全不同的东西。</p>
 <table>
@@ -79,6 +253,7 @@
 <th>问题</th>
 <th><em>props</em></th>
 <th><em>state</em></th>
+<th></th>
 </tr>
 </thead>
 <tbody>
@@ -86,26 +261,31 @@
 <td>可以从父组件得到初始值吗？</td>
 <td>可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以被父组件改变值吗？</td>
 <td>可以</td>
 <td>不可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以设置组件内部的初始值吗？</td>
 <td>可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以改变组件内部的初始值吗？</td>
 <td>不可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以设置子组件的初始值吗？</td>
 <td>可以</td>
 <td>可以</td>
+<td></td>
 </tr>
 <tr>
 <td>可以改变子组件的初始值吗？</td>
@@ -179,7 +359,7 @@
     <link href="http://blog.yfgeek.com/2017/01/12/network-zero-web/"/>
     <id>http://blog.yfgeek.com/2017/01/12/network-zero-web/</id>
     <published>2017-01-12T02:04:44.000Z</published>
-    <updated>2017-01-12T14:53:50.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>虽然Raspberry Pi Zero只有4.5英镑，非常便宜，但确实具有局限性，由于缺少网口、WiFi，功能比较单一，可曾设想，用Raspberry Pi Zero打造一个完美的“即插即用”的Web服务器？</p>
 <p><img src="/content/images/zeroweb/0.jpg" alt=""></p>
@@ -255,7 +435,7 @@
     <link href="http://blog.yfgeek.com/2017/01/07/gitcase/"/>
     <id>http://blog.yfgeek.com/2017/01/07/gitcase/</id>
     <published>2017-01-07T02:25:32.000Z</published>
-    <updated>2017-01-07T02:30:00.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>其实非常简单，只是提醒一个小常识，Git默认是不区分文件，文件夹大小写的。</p>
 <p>这会给很多人带来很多困扰，比如文件改了名，在严格区分大小写的系统下，实际上是两个不同名字的文件，但是Git不区分大小写机制导致无法正常的commit。</p>
@@ -285,7 +465,7 @@
     <link href="http://blog.yfgeek.com/2017/01/02/iOS-10-iMessage%E5%AD%97%E7%AC%A6%E5%B4%A9%E6%BA%83Bug%E5%8F%88%E6%9D%A5%E4%BA%86/"/>
     <id>http://blog.yfgeek.com/2017/01/02/iOS-10-iMessage字符崩溃Bug又来了/</id>
     <published>2017-01-02T03:49:54.000Z</published>
-    <updated>2017-01-02T13:11:39.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>这是一篇本人发表到Freebuf的文章。</p>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>近日，黑客@vincedes3发现了一个从iOS 8 到 iOS 10.2.1 b2通用的iMessage字符崩溃Bug，该Bug同样利用了和当年iOS 8的iMessage短信Bug的类似手法，将一段恶意代码发送给受害者，受害者在接收短信后，浏览短信即可中招，此后短信应用陷入死机状态，除非打开修复网页程序，否则再也无法打开短信应用。</p>
@@ -330,7 +510,7 @@
     <link href="http://blog.yfgeek.com/2016/12/31/2017/"/>
     <id>http://blog.yfgeek.com/2016/12/31/2017/</id>
     <published>2016-12-31T14:51:23.000Z</published>
-    <updated>2016-12-31T21:30:09.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>似乎每年写年终总结已经成为习惯，2007年开始写博客，2009年开始，每年都象征性的写一个年终报告，或许是元旦或许是新年。</p>
 <p>每年这个时候，都会自觉地打开cnbeta.com看每一年的<a href="http://www.cnbeta.com/articles/572451.htm" target="_blank" rel="external">新年祝福</a>。今年，也不例外，这么一看，已经9年过去了。</p>
@@ -365,7 +545,7 @@
     <link href="http://blog.yfgeek.com/2016/12/27/emoji/"/>
     <id>http://blog.yfgeek.com/2016/12/27/emoji/</id>
     <published>2016-12-27T03:37:27.000Z</published>
-    <updated>2016-12-27T03:59:29.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂</p>
 <p><img src="/content/images/emoji/1.jpg" alt=""></p>
@@ -403,7 +583,7 @@
     <link href="http://blog.yfgeek.com/2016/12/21/network-zero/"/>
     <id>http://blog.yfgeek.com/2016/12/21/network-zero/</id>
     <published>2016-12-21T23:01:26.000Z</published>
-    <updated>2016-12-22T15:30:15.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>说句实话，Zero真的不适合把玩，想让他连上网，太难了。</p>
 <h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><ul>
@@ -522,7 +702,7 @@
     <link href="http://blog.yfgeek.com/2016/12/21/wat/"/>
     <id>http://blog.yfgeek.com/2016/12/21/wat/</id>
     <published>2016-12-21T01:17:26.000Z</published>
-    <updated>2016-12-21T15:33:19.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽JavaScript的视频，简直搞笑，不过也挺客观的，毕竟是一个10天内攒出来的语言，虽然现在发展有ES支撑，但是依然非常零散，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。</p>
 <h1 id="Wat"><a href="#Wat" class="headerlink" title="Wat"></a>Wat</h1><p><a href="https://www.destroyallsoftware.com/talks/wat" target="_blank" rel="external"><img src="https://www.destroyallsoftware.com/images/posters/talks/wat.poster.png" alt=""></a></p>
@@ -556,7 +736,7 @@
     <link href="http://blog.yfgeek.com/2016/12/18/poisontap/"/>
     <id>http://blog.yfgeek.com/2016/12/18/poisontap/</id>
     <published>2016-12-18T18:44:51.000Z</published>
-    <updated>2016-12-20T01:37:06.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。</p>
 <p>是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。</p>
@@ -631,7 +811,7 @@
     <link href="http://blog.yfgeek.com/2016/12/17/raspizero/"/>
     <id>http://blog.yfgeek.com/2016/12/17/raspizero/</id>
     <published>2016-12-17T21:58:26.000Z</published>
-    <updated>2016-12-18T03:42:49.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。</p>
 <p>上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。</p>
@@ -720,7 +900,7 @@
     <link href="http://blog.yfgeek.com/2016/12/11/Google%E9%95%9C%E5%83%8F%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
     <id>http://blog.yfgeek.com/2016/12/11/Google镜像站的搭建/</id>
     <published>2016-12-11T19:21:59.000Z</published>
-    <updated>2016-12-11T19:30:30.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>前两天，Google开发者大会高调的宣布Google Developers 网站终于正式上线了，希望Google能够解决一切问题，早日回归大陆市场。</p>
 <a id="more"></a>
@@ -757,7 +937,7 @@
     <link href="http://blog.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/"/>
     <id>http://blog.yfgeek.com/2016/12/06/OTR技术探讨/</id>
     <published>2016-12-06T20:25:59.000Z</published>
-    <updated>2016-12-19T23:54:42.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。</p>
 <a id="more"></a>
@@ -840,7 +1020,7 @@
     <link href="http://blog.yfgeek.com/2016/11/27/badusb/"/>
     <id>http://blog.yfgeek.com/2016/11/27/badusb/</id>
     <published>2016-11-27T02:48:23.000Z</published>
-    <updated>2016-12-19T23:54:30.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>嘿嘿嘿，又是一篇猥琐小文。</p>
 <a id="more"></a>
@@ -895,7 +1075,7 @@
     <link href="http://blog.yfgeek.com/2016/11/26/TOR%E6%9A%97%E7%BD%91%E7%9A%84%E7%A7%98%E5%AF%86/"/>
     <id>http://blog.yfgeek.com/2016/11/26/TOR暗网的秘密/</id>
     <published>2016-11-26T01:00:34.000Z</published>
-    <updated>2016-12-19T23:54:52.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>TOR 是一个不可以吃的洋葱，众所周知洋葱新闻美国一个非常严谨的讽刺新闻公司，所以这个文章跟洋葱新闻没什么关系。</p>
 <p>以下内容纯属虚构。</p>
@@ -957,7 +1137,7 @@
     <link href="http://blog.yfgeek.com/2016/11/23/%E5%86%8D%E7%8E%A9Monyer%E7%9A%84Hack-Game/"/>
     <id>http://blog.yfgeek.com/2016/11/23/再玩Monyer的Hack-Game/</id>
     <published>2016-11-23T19:15:20.000Z</published>
-    <updated>2016-12-19T23:55:02.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>之前混百度空间混久了，认识很多大牛，不乏monyer大牛。很早很早以前，他做了一个黑客小游戏，当时还不太会玩，现在突然打开发现，网站竟然还活着，决定重温经典。</p>
 <a id="more"></a>
@@ -1106,7 +1286,7 @@
     <link href="http://blog.yfgeek.com/2016/11/22/docker-SQLServer/"/>
     <id>http://blog.yfgeek.com/2016/11/22/docker-SQLServer/</id>
     <published>2016-11-22T14:44:06.000Z</published>
-    <updated>2016-12-22T01:16:52.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>微软已经不再是以前的那个微软了，如果微软SQL Server早开源几年，估计现在数据库方面就没有Oracle什么事情了。</p>
 <p>Canonical 技术主管 Dustin Kirkland 表示：「微软和 Canonical 继续在 Windows 世界和 Linux 世界之间建立桥梁。 SQL Server on Ubuntu 便是这种趋势的又一示例。」</p>
@@ -1159,7 +1339,7 @@
     <link href="http://blog.yfgeek.com/2016/11/19/github3k/"/>
     <id>http://blog.yfgeek.com/2016/11/19/github3k/</id>
     <published>2016-11-19T11:36:26.000Z</published>
-    <updated>2016-12-27T03:50:14.000Z</updated>
+    <updated>2017-03-08T19:05:11.000Z</updated>
     
     <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。</p>
 <p>于是乎我利用这个关注了3万人的Github，可是关注后<del>除了同性交友</del>似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。<br><a id="more"></a><br><img src="/content/images/githubauto/1.jpg" alt=""></p>
@@ -1187,159 +1367,6 @@
     
     
       <category term="Github" scheme="http://blog.yfgeek.com/tags/Github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>树莓派实时温度湿度监测 优化后续</title>
-    <link href="http://blog.yfgeek.com/2016/11/17/opt-rpi-project/"/>
-    <id>http://blog.yfgeek.com/2016/11/17/opt-rpi-project/</id>
-    <published>2016-11-17T23:46:21.000Z</published>
-    <updated>2016-11-19T12:08:40.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>树莓派这个项目已经过去了两月了，一直没有维护，直到我到了英国后发现，在英国连接北京的树莓派网速堪忧，只有100kb/s，每次想查看家里的温度情况，都要等待很长时间才能加载出来，有时候会丢包，这让我很不爽，于是我决定小小的优化一下。<br><a id="more"></a> </p>
-<h1 id="优化css-js"><a href="#优化css-js" class="headerlink" title="优化css js"></a>优化css js</h1><p>之前写的css与js一直没有压缩，这次决定用gulp压缩一下</p>
-<p>安装 <code>gulp</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g gulp</div></pre></td></tr></table></figure></p>
-<p>安装 <code>gulp-uglify</code> 模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-uglify</div></pre></td></tr></table></figure></p>
-<p>安装 <code>gulp-minify-css</code> 模块<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install gulp-minify-css</div></pre></td></tr></table></figure></p>
-<p>压缩源：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">asset/dist/js</div><div class="line">asset/dist/css</div></pre></td></tr></table></figure></p>
-<p>目标：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">asset/js</div><div class="line">asset/css</div></pre></td></tr></table></figure></p>
-<p>好的 我们可以开始写<code>gulpfile.js</code>文件了<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"><span class="comment">// 获取 gulp</span></div><div class="line"><span class="keyword">var</span> gulp = <span class="built_in">require</span>(<span class="string">'gulp'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 获取 uglify 模块（用于压缩 JS）</span></div><div class="line"><span class="keyword">var</span> uglify = <span class="built_in">require</span>(<span class="string">'gulp-uglify'</span>)</div><div class="line"><span class="comment">// 获取 minify-css 模块（用于压缩 CSS）</span></div><div class="line"><span class="keyword">var</span> minifyCSS = <span class="built_in">require</span>(<span class="string">'gulp-minify-css'</span>)</div><div class="line"></div><div class="line"><span class="comment">// 压缩 js 文件</span></div><div class="line"><span class="comment">// 在命令行使用 gulp script 启动此任务</span></div><div class="line">gulp.task(<span class="string">'script'</span>, <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 1. 找到文件</span></div><div class="line">    gulp.src(<span class="string">'asset/dist/js/*.js'</span>)</div><div class="line">    <span class="comment">// 2. 压缩文件</span></div><div class="line">        .pipe(uglify())</div><div class="line">    <span class="comment">// 3. 另存压缩后的文件</span></div><div class="line">        .pipe(gulp.dest(<span class="string">'asset/js'</span>))</div><div class="line">&#125;)</div><div class="line"><span class="comment">// 压缩 css 文件</span></div><div class="line"><span class="comment">// 在命令行使用 gulp css 启动此任务</span></div><div class="line">gulp.task(<span class="string">'css'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 1. 找到文件</span></div><div class="line">    gulp.src(<span class="string">'asset/dist/css/*.css'</span>)</div><div class="line">    <span class="comment">// 2. 压缩文件</span></div><div class="line">        .pipe(minifyCSS())</div><div class="line">    <span class="comment">// 3. 另存为压缩文件</span></div><div class="line">        .pipe(gulp.dest(<span class="string">'asset/css'</span>))</div><div class="line">&#125;)</div><div class="line"></div><div class="line"><span class="comment">// 在命令行使用 gulp auto 启动此任务</span></div><div class="line">gulp.task(<span class="string">'auto'</span>, <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="comment">// 监听文件修改，当文件被修改则执行 script 任务</span></div><div class="line">    gulp.watch(<span class="string">'js/*.js'</span>, [<span class="string">'script'</span>])</div><div class="line">    gulp.watch(<span class="string">'css/*.css'</span>, [<span class="string">'css'</span>])</div><div class="line">&#125;)</div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">// 使用 gulp.task('default') 定义默认任务</span></div><div class="line"><span class="comment">// 在命令行使用 gulp 启动 script 任务和 auto 任务</span></div><div class="line">gulp.task(<span class="string">'default'</span>, [<span class="string">'script'</span>, <span class="string">'css'</span> , <span class="string">'auto'</span>])</div></pre></td></tr></table></figure></p>
-<p>执行gulp即可进行自动压缩及监听任务</p>
-<h1 id="结构优化"><a href="#结构优化" class="headerlink" title="结构优化"></a>结构优化</h1><p>这是原有的结构</p>
-<p>前端：Semantic UI + eCharts + JQuery Datapicker</p>
-<p>数据： json(时间)</p>
-<p>后端：Python + Apache</p>
-<p>后端的python程序负责测温度和测湿度，并生成json数据，为了保证事实性，python程序一直在读写相同的json文件，每一分钟读写一次，造成了json文件的比较大，大概有68KB，在前端是通过ajax加载的json文件，如果网速很慢的话，必然会造成很长时间的延迟。</p>
-<p>为了解决这个问题，首先第一步就是减小json文件大小。设计了一个解决方案是，以前的前端已经可以加载每小时数据和每分钟数据，不过小时和分钟的数据是通过在js中忽略加载实现的。</p>
-<p>而现在采用新的方案，在data数据目录下，分别建立两个目录。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">data/min</div><div class="line">data/hour</div></pre></td></tr></table></figure>
-<p>数据： json(min) / json(hour) </p>
-<p>min的数据专门用于保存min,hour专门用于保存hour，为了解决旧数据迁移问题，首先先将内容移动到min目录下，在根目录下写了一个python小程序，执行挑选出hour数据并且迁移。</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#!/usr/bin/python</span></div><div class="line"><span class="keyword">import</span> sys</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">import</span> json</div><div class="line"><span class="keyword">import</span> os</div><div class="line"><span class="keyword">import</span> string</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">jsonRead</span><span class="params">(path,topath,name)</span>:</span></div><div class="line">    pathfile = path + <span class="string">'/'</span> + name</div><div class="line">    topathfile = topath + <span class="string">'/'</span> + name</div><div class="line">    <span class="keyword">if</span> os.path.exists(pathfile):</div><div class="line">        file =open(pathfile,<span class="string">"r"</span>)</div><div class="line">        data = json.loads(file.read().decode(<span class="string">'utf-8'</span>))</div><div class="line">        i = <span class="number">1</span></div><div class="line">        jsonWrite(data[<span class="number">0</span>],topathfile)</div><div class="line">        <span class="keyword">for</span> v <span class="keyword">in</span> data:</div><div class="line">            i = i + <span class="number">1</span></div><div class="line">            <span class="keyword">if</span>(i%<span class="number">60</span>==<span class="number">0</span>):</div><div class="line">                jsonWrite(v,topathfile)</div><div class="line">        file.close()</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">        <span class="keyword">print</span> <span class="string">'unable to open '</span> + pathfile + <span class="string">'file'</span></div><div class="line"><span class="function"><span class="keyword">def</span> <span class="title">jsonWrite</span><span class="params">(data,pathfile)</span>:</span></div><div class="line">    <span class="keyword">if</span> os.path.exists(pathfile):</div><div class="line">      file =open(pathfile,<span class="string">"rb+"</span>)</div><div class="line">      file.seek(<span class="number">-1</span>,os.SEEK_END)</div><div class="line">      file.truncate()</div><div class="line">      file.write(<span class="string">","</span>)</div><div class="line">      json.dump(data,file)</div><div class="line">      file.write(<span class="string">"]"</span>)</div><div class="line">      file.close()</div><div class="line">      <span class="keyword">print</span> <span class="string">'succes: '</span>+ pathfile</div><div class="line">    <span class="keyword">else</span>:</div><div class="line">      file =open(pathfile,<span class="string">"w"</span>)</div><div class="line">      file.write(<span class="string">"["</span>)</div><div class="line">      json.dump(data,file)</div><div class="line">      file.write(<span class="string">"]"</span>)</div><div class="line">      file.close()</div><div class="line"></div><div class="line">dir = <span class="string">'web/data/min'</span></div><div class="line">dist = <span class="string">'web/data/hour'</span></div><div class="line">files = os.listdir(dir)</div><div class="line"></div><div class="line"><span class="keyword">for</span> root, dirs, files <span class="keyword">in</span> os.walk(dir):</div><div class="line">    <span class="keyword">for</span> name <span class="keyword">in</span> files:</div><div class="line">        jsonRead(dir,dist,name)</div></pre></td></tr></table></figure>
-<p>与此同时也需要修改 前端js 与 后端python<br>具体代码在 <a href="https://github.com/yfgeek/rpi-TempRuntime/" target="_blank" rel="external">项目地址</a>，不贴了。</p>
-<p>最后，经过优化，速度大概提升了5倍，前端获取的json文件为1KB。</p>
-<p>后续还会增加季度数据统计，等待数据量大一点的时候方便做数据统计工作。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;树莓派这个项目已经过去了两月了，一直没有维护，直到我到了英国后发现，在英国连接北京的树莓派网速堪忧，只有100kb/s，每次想查看家里的温度情况，都要等待很长时间才能加载出来，有时候会丢包，这让我很不爽，于是我决定小小的优化一下。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/categories/Raspberry/"/>
-    
-    
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Github Follow 及 BaiduBlogTransfer 项目</title>
-    <link href="http://blog.yfgeek.com/2016/11/08/Github%20Follow%20%E5%8F%8A%20BaiduBlogTransfer%20%E9%A1%B9%E7%9B%AE/"/>
-    <id>http://blog.yfgeek.com/2016/11/08/Github Follow 及 BaiduBlogTransfer 项目/</id>
-    <published>2016-11-08T01:24:35.000Z</published>
-    <updated>2016-11-19T12:09:00.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>最近总是有莫名其妙的人关注我的Github，于是乎突发奇想，做了一个Github批量跟随的Python小程序。</p>
-<p>用Python做这种事情最过瘾，Python短小、精炼、库多，非常好用，用了不到2个小时就把整个小程序完成了。<br><a id="more"></a><br>项目地址：</p>
-<p><a href="https://github.com/yfgeek/AutoGithub" target="_blank" rel="external">点击进入项目</a></p>
-<p>除此之外，我还整理了只去百度空间的Blogs放到了Github封存。</p>
-<p><a href="https://github.com/yfgeek/Blog" target="_blank" rel="external">https://github.com/yfgeek/Blog</a></p>
-<p>目录是用一个python小程序自动生成的，通过修改@cheezer的BaiduBlogTransfer项目的代码，添加了生成Markdown功能，把原来百度空间的内容全部导出来了。</p>
-<p><a href="https://github.com/yfgeek/BaiduBlogTransferer" target="_blank" rel="external">点击进入项目</a></p>
-<p>百度空间是我最早的Blog(2007-2011)，小学初中，后转战独立空间VPS，先后用过Worldpress,Ghost以及现在的Hexo。</p>
-<p>百度空间有着很多的回忆，和百度斗智斗勇玩import js的eDIKID.CSS是美好的回忆❤️。</p>
-<p>百度空间被百度关闭了，文章也没有了。</p>
-<p>百度空间为我在初中高中时的玩具，部分内容掺杂当时网络用语，而且现在看来相当多的文章打脸，请不要用现在的眼光和视野去看过去的文章，在那个时候没有现在的思想和技术，所以文章内容过于幼稚。</p>
-<p>❤️:3Mac</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;最近总是有莫名其妙的人关注我的Github，于是乎突发奇想，做了一个Github批量跟随的Python小程序。&lt;/p&gt;
-&lt;p&gt;用Python做这种事情最过瘾，Python短小、精炼、库多，非常好用，用了不到2个小时就把整个小程序完成了。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="github" scheme="http://blog.yfgeek.com/categories/github/"/>
-    
-    
-      <category term="github" scheme="http://blog.yfgeek.com/tags/github/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Docker Compose—简化复杂应用的利器 </title>
-    <link href="http://blog.yfgeek.com/2016/10/15/Docker-Compose%E2%80%94%E7%AE%80%E5%8C%96%E5%A4%8D%E6%9D%82%E5%BA%94%E7%94%A8%E7%9A%84%E5%88%A9%E5%99%A8/"/>
-    <id>http://blog.yfgeek.com/2016/10/15/Docker-Compose—简化复杂应用的利器/</id>
-    <published>2016-10-15T18:10:35.000Z</published>
-    <updated>2016-12-22T01:16:34.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>Compose是用于定义和运行复杂Docker应用的工具。你可以在一个文件中定义一个多容器的应用，然后使用一条命令来启动你的应用，然后所有相关的操作都会被自动完成。<br><a id="more"></a> </p>
-<h2 id="1-安装Docker和Compose"><a href="#1-安装Docker和Compose" class="headerlink" title="1. 安装Docker和Compose"></a>1. 安装Docker和Compose</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># 当前最新的Docker是1.6.2，Compose为1.2.0</span></div><div class="line">curl <span class="_">-s</span> https://get.docker.io/ubuntu/ | sudo sh</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install lxc-docker</div><div class="line"><span class="comment"># 参考http://docs.docker.com/compose/install/#install-compose</span></div><div class="line">curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-`uname <span class="_">-s</span>`-`uname -m` &amp;gt; /usr/<span class="built_in">local</span>/bin/docker-compose</div><div class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</div></pre></td></tr></table></figure>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="comment">### 上面这个方法真的慢出翔，可以通过Python pip安装。</span></div><div class="line"></div><div class="line">apt-get install python-pip python-dev</div><div class="line">pip install -U docker-compose</div></pre></td></tr></table></figure>
-<p>当前最新的Docker是1.6.2，Compose为1.2.0<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install lxc-docker</div></pre></td></tr></table></figure></p>
-<p>参考 <a href="http://docs.docker.com/compose/install/#install-compose" target="_blank" rel="external">http://docs.docker.com/compose/install/#install-compose</a><br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-uname <span class="_">-s</span>-uname -m &gt; /usr/<span class="built_in">local</span>/bin/docker-compose curl -L https://github.com/docker/compose/releases/download/1.2.0/docker-compose-uname <span class="_">-s</span>-uname -m &gt; /usr/<span class="built_in">local</span>/bin/docker-compose</div><div class="line"></div><div class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</div><div class="line"><span class="comment">### 上面这个方法真的慢出翔，可以通过Python pip安装。</span></div><div class="line">apt-get install python-pip python-dev</div><div class="line">pip install -U docker-compose</div></pre></td></tr></table></figure></p>
-<p>这样compose就安装好了，查看一下compose的版本信息：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">chmod +x /usr/<span class="built_in">local</span>/bin/docker-compose</div><div class="line">docker-compose -version</div><div class="line">docker-compose 1.2.0</div></pre></td></tr></table></figure>
-<h2 id="2-使用Compose"><a href="#2-使用Compose" class="headerlink" title="2. 使用Compose"></a>2. 使用Compose</h2><p>使用Compose只需要简单的三个步骤：</p>
-<p>首先，使用Dockerfile来定义你的应用环境：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">FROM python:2.7</div><div class="line">ADD ./code</div><div class="line">WORKDIR /code</div><div class="line">RUN pip install -r requirements.txt</div></pre></td></tr></table></figure></p>
-<p>其中，requirements.txt中的内容包括：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">flask</div><div class="line">redis</div></pre></td></tr></table></figure>
-<p>再用Python写一个简单的app.py<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">from</span> flask importFlaskfrom redis importRedisimport os</div><div class="line">app =Flask(__name__)</div><div class="line">redis =Redis(host=<span class="string">'redis'</span>, port=<span class="number">6379</span>)@app.route(<span class="string">'/'</span>)<span class="function"><span class="keyword">def</span> <span class="title">hello</span><span class="params">()</span>:</span></div><div class="line">    redis.incr(<span class="string">'hits'</span>)<span class="keyword">return</span><span class="string">'Hello World! I have been seen %s times.'</span>% redis.get(<span class="string">'hits'</span>)<span class="keyword">if</span> __name__ ==<span class="string">"__main__"</span>:</div><div class="line">    app.run(host=<span class="string">"0.0.0.0"</span>, debug=<span class="keyword">True</span>)</div></pre></td></tr></table></figure></p>
-<p>第二步，用一个compose.yaml来定义你的应用服务，他们可以把不同的服务生成不同的容器中组成你的应用<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">web:</div><div class="line">  build:.</div><div class="line">  <span class="built_in">command</span>: python app.py</div><div class="line">  ports:</div><div class="line">         - <span class="string">"5000:5000"</span></div><div class="line">  volumes:</div><div class="line">         - .:/code</div><div class="line">  links:</div><div class="line">         - redis</div><div class="line">redis:</div><div class="line">  image: redis</div></pre></td></tr></table></figure></p>
-<p>第三步，执行<code>docker-compose up</code>来启动你的应用，它会根据compose.yaml的设置来pull/run这俩个容器，然后再启动。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line">Creating myapp_redis_1...</div><div class="line">Creating myapp_web_1...</div><div class="line">Building web...</div><div class="line">Step 0 : FROM python:2.7</div><div class="line">2.7: Pulling from python</div><div class="line">...</div><div class="line">Status: Downloaded newer image <span class="keyword">for</span> python:2.7</div><div class="line"> ---&gt; d833e0b23482</div><div class="line">Step 1 : ADD . /code</div><div class="line"> ---&gt; 1c04b1b15808</div><div class="line">Removing intermediate container 9dab91b4410d</div><div class="line">Step 2 : WORKDIR /code</div><div class="line"> ---&gt; Running <span class="keyword">in</span> f495a62feac9</div><div class="line"> ---&gt; ffea89a7b090</div><div class="line">Attaching to myapp_redis_1, myapp_web_1</div><div class="line">......</div><div class="line">redis_1 | [1] 17 May 10:42:38.147 * The server is now ready to accept connections on port 6379</div><div class="line">web_1   |  * Running on http://0.0.0.0:5000/ (Press CTRL+C to quit)</div><div class="line">web_1   |  * Restarting with <span class="built_in">stat</span></div></pre></td></tr></table></figure></p>
-<h2 id="3-Yaml文件参考"><a href="#3-Yaml文件参考" class="headerlink" title="3. Yaml文件参考"></a>3. Yaml文件参考</h2><p>在上面的yaml文件中，我们可以看到compose文件的基本结构。首先是定义一个服务名，下面是yaml服务中的一些选项条目：</p>
-<p>image:镜像的ID</p>
-<p>build:直接从pwd的Dockerfile来build，而非通过image选项来pull</p>
-<p>links：连接到那些容器。每个占一行，格式为SERVICE[:ALIAS],例如 – db[:database]</p>
-<p>external_links：连接到该compose.yaml文件之外的容器中，比如是提供共享或者通用服务的容器服务。格式同links</p>
-<p>command：替换默认的command命令</p>
-<p>ports: 导出端口。格式可以是：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">ports:-&quot;3000&quot;-&quot;8000:8000&quot;-&quot;127.0.0.1:8001:8001&quot;</div></pre></td></tr></table></figure>
-<p>expose：导出端口，但不映射到宿主机的端口上。它仅对links的容器开放。格式直接指定端口号即可。</p>
-<p>volumes：加载路径作为卷，可以指定只读模式。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">volumes:-/var/lib/mysql</div><div class="line"> - cache/:/tmp/cache</div><div class="line"> -~/configs:/etc/configs/:ro</div></pre></td></tr></table></figure></p>
-<p> volumes_from：加载其他容器或者服务的所有卷<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">environment:- RACK_ENV=development</div><div class="line">  - SESSION_SECRET</div></pre></td></tr></table></figure></p>
-<p>env_file：从一个文件中导入环境变量，文件的格式为RACK_ENV=development</p>
-<p>extends:扩展另一个服务，可以覆盖其中的一些选项。一个sample如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line">common.yml</div><div class="line">webapp:</div><div class="line">  build:./webapp</div><div class="line">  environment:- DEBUG=false- SEND_EMAILS=false</div><div class="line">development.yml</div><div class="line">web:extends:</div><div class="line">    file: common.yml</div><div class="line">    service: webapp</div><div class="line">  ports:-&quot;8000:8000&quot;</div><div class="line">  links:- db</div><div class="line">  environment:- DEBUG=true</div><div class="line">db:</div><div class="line">  image: postgres</div></pre></td></tr></table></figure></p>
-<p>net：容器的网络模式，可以为”bridge”, “none”, “container:[name or id]”, “host”中的一个。<br>dns：可以设置一个或多个自定义的DNS地址。</p>
-<p>dns_search:可以设置一个或多个DNS的扫描域。</p>
-<p>其他的working_dir, entrypoint, user, hostname, domainname, mem_limit, privileged, restart, stdin_open, tty, cpu_shares，和docker run命令是一样的，这些命令都是单行的命令。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">cpu_shares:73</div><div class="line">working_dir:/code</div><div class="line">entrypoint: /code/entrypoint.sh</div><div class="line">user: postgresql</div><div class="line">hostname: foo</div><div class="line">domainname: foo.com</div><div class="line">mem_limit:1000000000</div><div class="line">privileged:true</div><div class="line">restart: always</div><div class="line">stdin_open:true</div><div class="line">tty:true</div></pre></td></tr></table></figure>
-<h2 id="4-docker-compose常用命令"><a href="#4-docker-compose常用命令" class="headerlink" title="4. docker-compose常用命令"></a>4. docker-compose常用命令</h2><p>在第二节中的docker-compose up，这两个容器都是在前台运行的。我们可以指定-d命令以daemon的方式启动容器。除此之外，docker-compose还支持下面参数：</p>
-<p>–verbose：输出详细信息</p>
-<p>-f 制定一个非docker-compose.yml命名的yaml文件</p>
-<p>-p 设置一个项目名称（默认是directory名）</p>
-<p>docker-compose的动作包括：</p>
-<p>build：构建服务</p>
-<p>kill -s SIGINT：给服务发送特定的信号。</p>
-<p>logs：输出日志</p>
-<p>port：输出绑定的端口</p>
-<p>ps：输出运行的容器</p>
-<p>pull：pull服务的image</p>
-<p>rm：删除停止的容器</p>
-<p>run: 运行某个服务，例如docker-compose run web<br>python manage.py shell</p>
-<p>start：运行某个服务中存在的容器。</p>
-<p>stop:停止某个服务中存在的容器。</p>
-<p>up：create + run + attach容器到服务。</p>
-<p>scale：设置服务运行的容器数量。例如：docker-compose scale web=2 worker=3</p>
-<blockquote>
-<p>转载:<a href="http://debugo.com/docker-compose" target="_blank" rel="external">http://debugo.com/docker-compose</a></p>
-</blockquote>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;Compose是用于定义和运行复杂Docker应用的工具。你可以在一个文件中定义一个多容器的应用，然后使用一条命令来启动你的应用，然后所有相关的操作都会被自动完成。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Docker" scheme="http://blog.yfgeek.com/categories/Docker/"/>
-    
-    
-      <category term="Docker" scheme="http://blog.yfgeek.com/tags/Docker/"/>
     
   </entry>
   

@@ -202,22 +202,35 @@ var _hmt = _hmt || [];
                     <hr>
 
                     
-                    <!-- 多说评论框 start -->
+
+                    
+                    <!-- disqus 评论框 start -->
                     <div class="comment">
-                        <div class="ds-thread"
-                            data-thread-key="aboutme.html"
-                            data-title="关于"
-                            data-url="http://blog.yfgeek.com/aboutme.html" >
-                        </div>
+                        <div id="disqus_thread" class="disqus-thread"></div>
                     </div>
-                    <!-- 多说评论框 end -->
+                    <!-- disqus 评论框 end -->
                     
 
+
+
+
                     
+                    <!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+                    <script type="text/javascript">
+                        /* * * CONFIGURATION VARIABLES * * */
+                        var disqus_shortname = "yfgeek";
+                        var disqus_identifier = "http://blog.yfgeek.com/aboutme.html";
+                        var disqus_url = "http://blog.yfgeek.com/aboutme.html";
+
+                        (function() {
+                            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+                            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                        })();
 
 
-
-
+                    </script>
+                    <!-- disqus 公共JS代码 end -->
                     
 
 
@@ -241,8 +254,6 @@ var _hmt = _hmt || [];
                     <div class="tags">
                         
                             
-                        
-                            
                             <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
                             
                         
@@ -255,7 +266,7 @@ var _hmt = _hmt || [];
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="6">Web</a>
+                            <a href="/tags/#Web" title="Web" rel="8">Web</a>
                             
                         
                             
@@ -267,11 +278,15 @@ var _hmt = _hmt || [];
                             
                         
                             
+                        
+                            
                             <a href="/tags/#Mac" title="Mac" rel="2">Mac</a>
                             
                         
                             
                             <a href="/tags/#Raspberry" title="Raspberry" rel="8">Raspberry</a>
+                            
+                        
                             
                         
                             
@@ -366,24 +381,6 @@ var _hmt = _hmt || [];
                 		<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="0" data-excerpt-length="20"></ul>
                 	</div>
 
-                    
-                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        // dynamic User by Hux
-                        var _user = 'yifani';
-
-                        // duoshuo comment query.
-                        var duoshuoQuery = {short_name: _user };
-                        (function() {
-                            var ds = document.createElement('script');
-                            ds.type = 'text/javascript';ds.async = true;
-                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                            ds.charset = 'UTF-8';
-                            (document.getElementsByTagName('head')[0]
-                             || document.getElementsByTagName('body')[0]).appendChild(ds);
-                        })();
-                    </script>
-                    <!-- 多说公共JS代码 end -->
                     
         
     </div>

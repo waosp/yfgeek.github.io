@@ -237,29 +237,6 @@ var _hmt = _hmt || [];
                 <hr>
 
                 
-                <!-- 多说 Share start -->
-                </style>
-                <div class="ds-share"
-                    style="text-align: right"
-                    data-thread-key="2016/08/06/bash/"
-                    data-title="常用Bash命令总结"
-                    data-url="http://blog.yfgeek.com/2016/08/06/bash/"
-                    data-images=""
-                    data-content="自从入了Mac后，感觉敲命令更加方便了，对于我这种半吊子青年，一直号称不会写脚本的前端不是好美... | Ivan&#39;s Blog " >
-                    <div class="ds-share-inline">
-                      <ul  class="ds-share-icons-16">
-                        <li data-toggle="ds-share-icons-more"><a class="ds-more" href="#">分享到：</a></li>
-                        <li><a class="ds-wechat flat" href="javascript:void(0);" data-service="wechat">微信</a></li>
-                        <li><a class="ds-weibo flat" href="javascript:void(0);" data-service="weibo">微博</a></li>
-                        <li><a class="ds-douban flat" href="javascript:void(0);" data-service="douban">豆瓣</a></li>
-                      </ul>
-                      <div class="ds-share-icons-more">
-                      </div>
-                    </div>
-                <hr>
-                </div>
-                <!-- 多说 Share end-->
-                
 
                 <ul class="pager">
                     
@@ -275,18 +252,16 @@ var _hmt = _hmt || [];
                 </ul>
 
                 
-                <!-- 多说评论框 start -->
+                <!-- disqus 评论框 start -->
                 <div class="comment">
-                    <div class="ds-thread"
-                        data-thread-key="2016/08/06/bash/"
-                        data-title="常用Bash命令总结"
-                        data-url="http://blog.yfgeek.com/2016/08/06/bash/" >
-                    </div>
+                    <div id="disqus_thread" class="disqus-thread"></div>
                 </div>
-                <!-- 多说评论框 end -->
+                <!-- disqus 评论框 end -->
                 
 
                 
+
+               
 
             </div>
     <!-- Side Catalog Container -->
@@ -326,25 +301,22 @@ var _hmt = _hmt || [];
 </article>
 
 
-<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    // dynamic User by Hux
-    var _user = 'yifani';
 
-    // duoshuo comment query.
-    var duoshuoQuery = {short_name: _user };
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "yfgeek";
+    var disqus_identifier = "http://blog.yfgeek.com/2016/08/06/bash/";
+    var disqus_url = "http://blog.yfgeek.com/2016/08/06/bash/";
+
     (function() {
-        var ds = document.createElement('script');
-        ds.type = 'text/javascript';ds.async = true;
-        ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-        ds.charset = 'UTF-8';
-        (document.getElementsByTagName('head')[0]
-         || document.getElementsByTagName('body')[0]).appendChild(ds);
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<!-- 多说公共JS代码 end -->
-
-
+<!-- disqus 公共JS代码 end -->
 
 
 

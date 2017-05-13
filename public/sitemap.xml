@@ -233,14 +233,14 @@
   </url>
   
   <url>
-    <loc>http://blog.yfgeek.com/about/scripts/main.js</loc>
+    <loc>http://blog.yfgeek.com/about/styles/main.css</loc>
     
     <lastmod>2017-03-08T19:05:11.000Z</lastmod>
     
   </url>
   
   <url>
-    <loc>http://blog.yfgeek.com/about/scripts/universe.js</loc>
+    <loc>http://blog.yfgeek.com/about/scripts/main.js</loc>
     
     <lastmod>2017-03-08T19:05:11.000Z</lastmod>
     
@@ -282,7 +282,7 @@
   </url>
   
   <url>
-    <loc>http://blog.yfgeek.com/about/styles/main.css</loc>
+    <loc>http://blog.yfgeek.com/about/scripts/universe.js</loc>
     
     <lastmod>2017-03-08T19:05:11.000Z</lastmod>
     

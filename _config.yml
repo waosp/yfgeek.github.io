@@ -87,8 +87,7 @@ sitemap:
 baidusitemap:
   path: baidusitemap.xml
 
-duoshuo_username: yifani
-duoshuo_share: ture
+disqus_username: yfgeek
 
 sidebar: true                           # whether or not using Sidebar.
 sidebar-about-description: "对任何技术永远充满敬畏之心"

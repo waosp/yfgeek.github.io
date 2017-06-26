@@ -17,7 +17,7 @@ keyword: "Web前端,极客,渗透"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
-url: http://blog.yfgeek.com
+url: http://www.yfgeek.com
 root: /
 permalink: :year/:month/:day/:title/
 permalink_defaults:

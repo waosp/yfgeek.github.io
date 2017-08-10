@@ -79,14 +79,6 @@ layout: layout
                 <% if(page.comments) { %>
                     <hr>
 
-                    <% if(config['disqus_username']) { %>
-                    <!-- disqus 评论框 start -->
-                    <div class="comment">
-                        <div id="disqus_thread" class="disqus-thread"></div>
-                    </div>
-                    <!-- disqus 评论框 end -->
-                    <% } %>
-
                     <% if(config['duoshuo_username']) { %>
                     <!-- 多说评论框 start -->
                     <div class="comment">
@@ -99,7 +91,13 @@ layout: layout
                     <!-- 多说评论框 end -->
                     <% } %>
 
-                    
+                    <% if(config['disqus_username']) { %>
+                    <!-- disqus 评论框 start -->
+                    <div class="comment">
+                        <div id="disqus_thread" class="disqus-thread"></div>
+                    </div>
+                    <!-- disqus 评论框 end -->
+                    <% } %>
 
 
 
@@ -258,30 +256,19 @@ layout: layout
                 <% }%>
                 <!-- Comments List -->
                 <hr>
-                  <h5>COMMENTS</h5>
+                  <h5>RECOMMENDED</h5>
                 	<div class="widget">
-                		<ul class="ds-recent-comments" data-num-items="5" data-show-avatars="1" data-show-time="1" data-show-title="1" data-show-admin="0" data-excerpt-length="20"></ul>
+                        <ul class="ds-recent-comments" data-num-items="5" data-excerpt-length="20"style="padding: 0 5px;margin: 0;">
+                        <li><a href="/2017/02/04/react/" target="_blank">我眼中的React</a></li>
+                        <li><a href="/2017/02/11/currying/" target="_blank">浅谈函数式编程柯里化</a></li>
+                        <li><a href="/2016/12/18/poisontap/" target="_blank">30秒内盗取任意PC的Cookie神器</a></li>
+                        <li><a href="/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/" target="_blank">OTR(Off-the-Record)技术探讨</a></li>
+                        <li><a href="/2016/11/22/docker-SQLServer/" target="_blank">Docker下配置SQL Server for Linux</a></li>
+                        <li><a href="/2017/01/12/network-zero-web/" target="_blank">用Raspberry Pi Zero打造“即插即用”的Web服务器</a></li>
+                        <li><a href="/2016/12/21/network-zero/" target="_blank">Raspberry Pi Zero联网奇妙记</a></li>
+                        <li><a href="/2016/11/27/badusb/" target="_blank">Arduino Leonardo 打造 Bad USB</a></li>
+                        </ul>
                 	</div>
-
-                    <% if(config['duoshuo_username']) { %>
-                    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
-                    <script type="text/javascript">
-                        // dynamic User by Hux
-                        var _user = '<%= config['duoshuo_username'] %>';
-
-                        // duoshuo comment query.
-                        var duoshuoQuery = {short_name: _user };
-                        (function() {
-                            var ds = document.createElement('script');
-                            ds.type = 'text/javascript';ds.async = true;
-                            ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
-                            ds.charset = 'UTF-8';
-                            (document.getElementsByTagName('head')[0]
-                             || document.getElementsByTagName('body')[0]).appendChild(ds);
-                        })();
-                    </script>
-                    <!-- 多说公共JS代码 end -->
-                    <% } %>
         <%} %>
     </div>
 </div>

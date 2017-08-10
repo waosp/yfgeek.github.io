@@ -17,7 +17,7 @@
         
     </title>
 
-    <link rel="canonical" href="http://blog.yfgeek.com/tags/">
+    <link rel="canonical" href="http://www.yfgeek.com/tags/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -162,15 +162,17 @@ var _hmt = _hmt || [];
             <!-- 标签云 -->
             <div id='tag_cloud' class="tags">
                 
+                    <a href="#心情" title="心情" rel="1">心情</a>
+                
                     <a href="#Hack" title="Hack" rel="11">Hack</a>
                 
-                    <a href="#心情" title="心情" rel="1">心情</a>
+                    <a href="#Blockchain" title="Blockchain" rel="1">Blockchain</a>
                 
                     <a href="#Docker" title="Docker" rel="2">Docker</a>
                 
                     <a href="#Linux" title="Linux" rel="4">Linux</a>
                 
-                    <a href="#Web" title="Web" rel="8">Web</a>
+                    <a href="#Web" title="Web" rel="9">Web</a>
                 
                     <a href="#Github" title="Github" rel="2">Github</a>
                 
@@ -198,6 +200,28 @@ var _hmt = _hmt || [];
 
             <!-- 标签列表 -->
 
+            
+            <div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="心情">
+                    <span class="tag-text">心情</span>
+                </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2016/12/31/2017/">
+                        <h2 class="post-title">
+                            2016，2017
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
+                
+            </div>
             
             <div class="one-tag-list">
                 <span class="fa fa-tag listing-seperator" id="Hack">
@@ -372,8 +396,8 @@ var _hmt = _hmt || [];
             </div>
             
             <div class="one-tag-list">
-                <span class="fa fa-tag listing-seperator" id="心情">
-                    <span class="tag-text">心情</span>
+                <span class="fa fa-tag listing-seperator" id="Blockchain">
+                    <span class="tag-text">Blockchain</span>
                 </span>
                 
                   <!-- <li class="listing-item">
@@ -381,9 +405,9 @@ var _hmt = _hmt || [];
                   <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
                   </li> -->
                  <div class="post-preview">
-                     <a href="/2016/12/31/2017/">
+                     <a href="/2017/08/10/blockvotes/">
                         <h2 class="post-title">
-                            2016，2017
+                            BlockVotes 一个基于区块链的环签名投票系统
                         </h2>
                         
                     </a>
@@ -501,6 +525,21 @@ var _hmt = _hmt || [];
                 <span class="fa fa-tag listing-seperator" id="Web">
                     <span class="tag-text">Web</span>
                 </span>
+                
+                  <!-- <li class="listing-item">
+                  <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+                  <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+                  </li> -->
+                 <div class="post-preview">
+                     <a href="/2017/06/26/ppd/">
+                        <h2 class="post-title">
+                            拍拍哒投资平台
+                        </h2>
+                        
+                    </a>
+                    <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+                </div>
+                <hr>
                 
                   <!-- <li class="listing-item">
                   <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
@@ -1138,7 +1177,7 @@ var _hmt = _hmt || [];
 <script>
     // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
-        async("http://blog.yfgeek.com/js/jquery.tagcloud.js",function(){
+        async("http://www.yfgeek.com/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
                 //size: {start: 1, end: 1, unit: 'em'},
                 color: {start: '#bbbbee', end: '#0085a1'},

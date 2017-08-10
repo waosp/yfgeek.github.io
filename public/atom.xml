@@ -4,9 +4,9 @@
   <subtitle>Web前端 &amp; 极客 &amp; 渗透</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://blog.yfgeek.com/"/>
-  <updated>2017-03-08T19:05:11.000Z</updated>
-  <id>http://blog.yfgeek.com/</id>
+  <link href="http://www.yfgeek.com/"/>
+  <updated>2017-08-10T03:29:16.000Z</updated>
+  <id>http://www.yfgeek.com/</id>
   
   <author>
     <name>Ivan</name>
@@ -16,11 +16,210 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>BlockVotes 一个基于区块链的环签名投票系统</title>
+    <link href="http://www.yfgeek.com/2017/08/10/blockvotes/"/>
+    <id>http://www.yfgeek.com/2017/08/10/blockvotes/</id>
+    <published>2017-08-10T00:10:41.000Z</published>
+    <updated>2017-08-10T03:29:16.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>好久好久没有写Blog了，最近在忙我的论文，题目是一个基于区块链的环签名投票系统。</p>
+<p>听着名字挺绕的，实际上也是挺绕的，我做这个题目实际上是将三个学术领域的东西放在了一起：</p>
+<ul>
+<li>电子投票 (e-voting) 属于密码学</li>
+<li>区块链(blockchain) 属于密码学的应用</li>
+<li>环签名(ring-signature) 属于密码学</li>
+</ul>
+<p>如果对以上三个概念无任何了解，基本上就告别理解我做的东西了。这个项目目前处于私有项目状态之中，由于存在毕业设计可能会代码查重的问题，在九月初，将会对本项目彻底开源。</p>
+<h1 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h1><p><img src="/content/images/blockvotes/logo.png" width="300" style="margin: 0;"></p>
+<h2 id="电子投票？"><a href="#电子投票？" class="headerlink" title="电子投票？"></a>电子投票？</h2><p>实际上，这个学术命题属于电子投票方向的，在电子投票学术方向上属于创新型，在区块链上属于应用型，在谈及这些问题之前，得先说说学术上的电子投票的一些概念：</p>
+<p><img src="/content/images/blockvotes/security.png" alt=""></p>
+<p><strong>隐私性:</strong></p>
+<ul>
+<li>选票保密性 (BP): 任何攻击者都无法把用户所投的票和投票者的身份联系起来。</li>
+<li>无收据性 (RF): 投票者在投票后不能证明他是怎么投票的。系统不允许投票者在投票后证明这些。</li>
+<li>不可强制性 (CR): 任何攻击者都无法强制用户生成自己不想投的票据。 攻击者不会强迫选民得到相应的收据以供强迫者检查。</li>
+</ul>
+<p><strong>可验证性:</strong></p>
+<ul>
+<li>个体可验证性：每个投票者可以验证自己的投票是不是倍正确计入所有投票。</li>
+<li>全局验证性：任何投票者都可以验证其他投票者所投票的合法性。</li>
+</ul>
+<p><strong>不可重投性:</strong></p>
+<p>不可重投性指的是，任何投票者无法对相同的消息进行两次投票。</p>
+<p><strong>公平性:</strong></p>
+<p>公平性指的是，任何人都无法提前知道选票的结果，以及无法影响选票的结果。</p>
+<p>其实还有很多很多概念，具体可以参考引用中的第一个论文。</p>
+<p>实际上，隐私性和可验证性在一定程度上是互相矛盾的，保障可验证性的情况下就可能无法保证隐私，我们在电子投票的方面的目标是尽可能的保障以上的目标。</p>
+<p>所以，设计一个系统是从隐私性和可验证性的角度上出发的，这也就解释了，为什么用区块链，为什么用环签名。</p>
+<h2 id="为什么用区块链"><a href="#为什么用区块链" class="headerlink" title="为什么用区块链"></a>为什么用区块链</h2><p>区块链是什么？区块链可以理解为“分布式公共账本”，按照计算机的角度上，如果你对区块链一窍不通，<strong>你可以理解为一个可 增加、查找 却不能修改、删除的 分布式实时数据库</strong>。而比特币中的交易信息就是存在这个数据库之中的。</p>
+<p>如果你还是不理解，请<strong>千万不要到互联网上搜索什么是比特币、比特币挖矿原理、什么是区块链，只会让你更加疑惑</strong>，他们试图把区块链描述的非常高大上，迷惑你，并且告诉外人，这是很高大上的东西，其实不是，如果你真正研究过区块链的协议，你会觉得其实不是那么回事。在此，对于那些故作玄虚的文章，我想引用《LaTeX新人教程，30分钟从完全陌生到基本入门》文章所说的一句话表达我的心情：</p>
+<blockquote>
+<p>我要严厉警告和强烈声讨那些自以为是advanced LaTeX user的人。请你们不要为了自己那一点可怜可悲的虚荣心，去刻意渲染LaTeX有多么高端多么不容易学习，这和孔乙己炫耀茴香豆的茴字有四种写法有什么区别么？混账！LaTeX到底有多“难”你们自己清楚好么？</p>
+</blockquote>
+<p>所以，我附了一篇论文[3]，不过是英文版的，但是都是纯白话口语讲述到底什么是区块链，比特币的挖矿原理，实际上是非常浅显易懂的。如果有时间，恰当的时候，我也可以翻译成中文。</p>
+<hr>
+<p>世界上第一个区块链是比特币创造的，比特币需要区块链才能够叫做区块链，为什么？</p>
+<p>因为作为“货币“，最根本的存在的意义是什么？</p>
+<p>证明资产？自己是富二代？不不不，不是的。</p>
+<p>根本意义实际上是交易，人类社会，有了交易，才有了货币，货币是一般等价物，这个我们在中学都学过。</p>
+<p>那么作为一种货币，货币是要流通的，如果顾客买了商家的东西，是不是要顾客给商家付款呀？天经地义的。</p>
+<p>这个过程就是交易，那么，如何证明顾客已经把钱付给了商家？</p>
+<p>在现实生活中，太简单了，根本不用证明，顾客直接把钱给商家就行了。</p>
+<p>但是，如果顾客用银行卡或者支付宝呢？</p>
+<p>好！我们的概念来了，这个概念叫 账本。</p>
+<p>什么是账本？实际上就是银行的这笔交易的流水，在你用银行卡划卡支付的过程中，实际上是顾客和商家都信任银行，认为银行记下来的这个账是正确无误的，并且银行也把顾客的钱减少了，把商家的钱增加了。那么这个记账的媒介，该笔账单，可以说是账本的一部分。</p>
+<p>如果你的银行账户消费的内容足够多，那么这就是一个账本，上面记录着你的所有的交易信息，交易信息和你的账户余额的值一一对应，在这种情况下，你相信银行，你相信账本，银行作为第三方支付方式，你也就自然就信任了。</p>
+<p>可是我为什么要提出账本的概念呢？</p>
+<p>区块链就是一个分布式的公共记账账本。凡是下载了比特币(或XX币，我这里用比特币举例)的客户端的人，都会自动下载这个账本，这个账本储存着全球所有人的通过比特币交易信息。这个信息只能增加，不可以删除、修改，否则就无法解决同步的问题。</p>
+<p>那么我们就可以理解区块链，就是一个分布式的不可删改的数据库，现在理解了吧？</p>
+<p>回归正题，为什么要用区块链，因为区块链的广播机制是通过比特币进行交易而储存的，每个交易中都会有一个东西叫做附言(OP_RETURN)，在附言位置可以留自己的转账信息比如：</p>
+<blockquote>
+<p>哈，这笔交易你收好！是小明转给你的</p>
+</blockquote>
+<p>这个信息是随意的，可以写任何东西。</p>
+<p><a href="https://www.blocktrail.com/tBTC/tx/cb83c02e94d41851d75cfaa31b5318250267cbc043e72740562fdaf8c612b0cf" target="_blank" rel="external">真实的例子</a> 附言内容是 haha</p>
+<p>那么聪明的人来了，这段信息是不是可以用来储存东西，虽然有容量限制，但是储存的东西就是永久的不会被更改的。</p>
+<p>不错，我创建一个公共的计票的比特币的账户，并且公开地址，每个投票者对这个地址进行转账，并且附上自己的投票信息，比如候选人什么的作为附言，然后进行转账，内容就是相当于“发布到了区块链”上了。</p>
+<blockquote>
+<p>区块链技术基于去中心化的对等网络，用开源软件把密码学原理、时序数据和共识机制相结合，来保障分布式数据库中各节点的连贯和持续，使信息能即时验证、可追溯、但难以篡改和无法屏蔽，从而创造了一套隐私、高效、安全的共享价值体系。</p>
+</blockquote>
+<p>高判立下，这样每个投票者的投票信息就是公开的可以验证的，但是又由于比特币地址本身具有匿名性，谁也不知道发布投票信息的人是谁，这又符合了隐私性。</p>
+<p>你看，是不是完美了？</p>
+<h2 id="为什么用环签名"><a href="#为什么用环签名" class="headerlink" title="为什么用环签名"></a>为什么用环签名</h2><p>不是，并不完美。</p>
+<p>为什么？</p>
+<p>那在这种情况下，岂不是任何人都可以投票了，不经过投票中心认证的人，都可以瞎投，扰乱视听，而且投票者无法验证整体性。</p>
+<p>没错，这个时候伟大的环签名来了。</p>
+<p>在理解环签名之前，你需要对密码学的签名机制有所了解，如果不了解，请<a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="external">点击这里</a>。</p>
+<p>环签名，实际上是一种特殊的群签名。你不用理解什么是群签名，只需要听我继续往下讲什么是环签名。</p>
+<p><img src="/content/images/blockvotes/ring1.png" alt=""></p>
+<p><img src="/content/images/blockvotes/ring2.png" alt=""></p>
+<p>你看，我附了一个山东大学一个优秀的博士<a href="https://wenku.baidu.com/view/5e43126f25c52cc58bd6be40.html" target="_blank" rel="external">论文</a>截图，是不是瞬间就显得高大上？</p>
+<p>其实也没有什么的。</p>
+<p>环签名是对一个特定的内容进行签名。</p>
+<p>在签名之前，所有人围城一个环，每个人生成一个自己的私钥Si，并且告诉其他人自己的公钥(P1,P2,P3…Pn)。</p>
+<p>接下来就是开始签名，每个人用自己的私钥Si和所有人的公钥(P1,P2,P3…Pn)对内容m进行签名，可以得到签名s。</p>
+<p>注意：</p>
+<ul>
+<li>每个人的得到的签名都是不一样的</li>
+<li>签名的长度取决于公钥的个数</li>
+</ul>
+<p>这样，我们把m替换为我们的投票内容，这样就可以在组织投票之前，对能够投票的人进行圈定，只有在这个圈子里的人才能投票。</p>
+<p>环签名具有天然的可验证性，任何人都可以验证自己，只需要根据得到的签名和所有人的公钥就可以得出自己是不是真正的投票了。</p>
+<p>如果把签名信息s也随着信息m一起广播到区块链上，那是不是就能够保障整体验证性与个体验证性？</p>
+<p>好了，我们投票的主要矛盾解决了！现在，真的解决了！</p>
+<p>你可能一句都没看懂我上面在说什么，也可能看懂了一点，没事，摸摸头，是我表达能力太差了，其实都是非常简单的东西。</p>
+<h2 id="具体投票协议"><a href="#具体投票协议" class="headerlink" title="具体投票协议"></a>具体投票协议</h2><p>我不告诉你哈哈哈哈哈哈，会在九月份公开。</p>
+<p>都是一些数学表达，发了也得花大量篇幅去解释，费劲。</p>
+<p>因为内容可能会查重，即使是中文版本现在我也不想发。</p>
+<h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><p><img src="/content/images/blockvotes/stack.png" alt=""></p>
+<p>后端语言：PHP</p>
+<p>后端数据库：MySQL</p>
+<p>区块链：比特币BTC/比特币测试网络TESTNET</p>
+<p>PHP MVC 框架：Slim</p>
+<p>PHP DAO 框架：Illuminate Database</p>
+<p>PHP 依赖管理： Composer</p>
+<p>PHP 模板引擎：TWIG</p>
+<p>前端包管理：NPM</p>
+<p>前端CSS预处理器：Sass</p>
+<p>前端代码打包工具：Gulp</p>
+<p>前端预编译器：browserify</p>
+<p>版本控制：Git</p>
+<p>说句实话，技术挺复杂的，用到了很多第三方类库、框架、工具，感谢很多第三方类库的帮助，在我写代码的时候，也发现了一个第三方类库的Bug，并随手修复了，也算是对开源社区的回馈吧。</p>
+<p><img src="/content/images/blockvotes/fixedbug.png" alt=""></p>
+<h1 id="关于开源"><a href="#关于开源" class="headerlink" title="关于开源"></a>关于开源</h1><p>项目会开源的，我知道，区块链最近创业很多，我的这个项目也可以用来创业，但是我根本不在乎这些金钱的东西，<strong>我更享受开源所带来的快感</strong>。</p>
+<p>但是如果拿去用来做商业用途，我还是很不爽的，所以我的这个项目禁止用于商业用途，但是非营利用途都是可以的。</p>
+<h1 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h1><p>可能不是最终版，先尝鲜一下</p>
+<p><img src="/content/images/blockvotes/1.png" alt=""></p>
+<p><img src="/content/images/blockvotes/2.png" alt=""></p>
+<p><img src="/content/images/blockvotes/3.png" alt=""></p>
+<p><img src="/content/images/blockvotes/4.png" alt=""></p>
+<p><img src="/content/images/blockvotes/5.png" alt=""></p>
+<p><img src="/content/images/blockvotes/6.png" alt=""></p>
+<p><img src="/content/images/blockvotes/7.png" alt=""></p>
+<p><img src="/content/images/blockvotes/8.png" alt=""></p>
+<p><img src="/content/images/blockvotes/9.png" alt=""></p>
+<p><img src="/content/images/blockvotes/10.png" alt=""></p>
+<h1 id="本文参考文献"><a href="#本文参考文献" class="headerlink" title="本文参考文献"></a>本文参考文献</h1><p>[1] Jonker H, Mauw S, Pang J. Privacy and verifiability in voting systems: Methods, developments and trends[J]. Computer Science Review, 2013, 10:1-30.</p>
+<p>[2] 张江霄, 李舟军, 刘霞,等. 基于群盲签名的多授权电子投票系统[J]. 中国科技论文, 2015(8):980-983.</p>
+<p>[3] Mercer R. Privacy on the Blockchain: Unique Ring Signatures[J]. 2016.</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;好久好久没有写Blog了，最近在忙我的论文，题目是一个基于区块链的环签名投票系统。&lt;/p&gt;
+&lt;p&gt;听着名字挺绕的，实际上也是挺绕的，我做这个题目实际上是将三个学术领域的东西放在了一起：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;电子投票 (e-voting) 属于密码学&lt;/li&gt;
+&lt;li&gt;
+    
+    </summary>
+    
+      <category term="Blockchain" scheme="http://www.yfgeek.com/categories/Blockchain/"/>
+    
+    
+      <category term="Blockchain" scheme="http://www.yfgeek.com/tags/Blockchain/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拍拍哒投资平台</title>
+    <link href="http://www.yfgeek.com/2017/06/26/ppd/"/>
+    <id>http://www.yfgeek.com/2017/06/26/ppd/</id>
+    <published>2017-06-26T00:05:25.000Z</published>
+    <updated>2017-07-12T01:27:17.000Z</updated>
+    
+    <content type="html"><![CDATA[<p>本文是近期状况的一些小记录，无技术探讨。</p>
+<p>最近参加了一个小比赛，第二届魔镜杯数据应用大赛，大概就是做一个金融数据产品，用了两天码了一些代码，还是学习到了一些知识。</p>
+<p>至少学到了怎么在前端获取标准的oAuth，其实很简单，事情实践起来总是好的。</p>
+<p>至于开发语言方面，本来是想用python的，后来因为工期紧，就用Thinkphp改了改，事实上发现，之前做的任何事情都是有用的。</p>
+<p>具体做了两个平台：</p>
+<p>模拟平台——从已有的数据库读取数据，供用户学习</p>
+<p>投资平台——获取真实数据，实时分析，真实交易</p>
+<p>在这期间，做了这些工作：</p>
+<ul>
+<li>完整的用户登录、注册逻辑</li>
+<li>集成拍拍贷SDK到框架里，依赖RSA算法</li>
+<li>可以通过拍拍贷的OAuth授权到用户上</li>
+<li>不同用户可以储存不同的token信息</li>
+<li>构建了一个API用于读取特定的信息，可以批量读取投资信息</li>
+<li>构建了一个API用于读取单个的信息</li>
+<li>真实的模拟投资系统，根据日期的变化，改变可选投资项</li>
+<li>真实的投资功能</li>
+<li>数据可视化</li>
+<li>用缓存机制存储分析数据，高效快速</li>
+<li>基于神经网络算法进行逾期率预测</li>
+</ul>
+<h2 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h2><p><img src="/content/images/ppd/1.png" alt=""></p>
+<p><img src="/content/images/ppd/2.png" alt=""></p>
+<p><img src="/content/images/ppd/3.png" alt=""></p>
+<p><img src="/content/images/ppd/4.png" alt=""></p>
+<p><img src="/content/images/ppd/5.png" alt=""></p>
+<p><img src="/content/images/ppd/6.png" alt=""></p>
+<p><img src="/content/images/ppd/7.png" alt=""></p>
+<p><img src="/content/images/ppd/8.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;本文是近期状况的一些小记录，无技术探讨。&lt;/p&gt;
+&lt;p&gt;最近参加了一个小比赛，第二届魔镜杯数据应用大赛，大概就是做一个金融数据产品，用了两天码了一些代码，还是学习到了一些知识。&lt;/p&gt;
+&lt;p&gt;至少学到了怎么在前端获取标准的oAuth，其实很简单，事情实践起来总是好的。&lt;/p
+    
+    </summary>
+    
+      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
+    
+    
+      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
     <title>揭秘utf8=✓背后的小秘密</title>
-    <link href="http://blog.yfgeek.com/2017/02/17/utf8true/"/>
-    <id>http://blog.yfgeek.com/2017/02/17/utf8true/</id>
+    <link href="http://www.yfgeek.com/2017/02/17/utf8true/"/>
+    <id>http://www.yfgeek.com/2017/02/17/utf8true/</id>
     <published>2017-02-17T16:51:18.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>你可能和我一样疑惑，为什么github等网站，在POST数据的时候，经常带有<code>utf8=✓</code>字符，显然这种方式看起来很难以接受，因为Unicode编码错误的话会导致很多问题，毕竟用户的浏览器是不一样的。</p>
 <p>为什么不用<code>utf8=true</code>来代替呢？</p>
@@ -38,19 +237,19 @@
     
     </summary>
     
-      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
     
     
-      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title>浅谈函数式编程柯里化</title>
-    <link href="http://blog.yfgeek.com/2017/02/11/currying/"/>
-    <id>http://blog.yfgeek.com/2017/02/11/currying/</id>
+    <link href="http://www.yfgeek.com/2017/02/11/currying/"/>
+    <id>http://www.yfgeek.com/2017/02/11/currying/</id>
     <published>2017-02-11T18:27:57.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>百度百科里对柯里化的定义是</p>
 <blockquote>
@@ -106,19 +305,19 @@
     
     </summary>
     
-      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
     
     
-      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title>什么才是优秀的程序代码</title>
-    <link href="http://blog.yfgeek.com/2017/02/08/awesome-code/"/>
-    <id>http://blog.yfgeek.com/2017/02/08/awesome-code/</id>
+    <link href="http://www.yfgeek.com/2017/02/08/awesome-code/"/>
+    <id>http://www.yfgeek.com/2017/02/08/awesome-code/</id>
     <published>2017-02-08T17:35:13.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>首先，我想说的是，我谈及的“优秀程序代码”，不是指“优秀程序”，也不是更易阅读的“代码”，恰恰相反，我可能想写的是更不易阅读的代码，这里的“优秀”指的是高效、快速。</p>
 <p>在写之前，我想先用一个原则引入这个文章：</p>
@@ -182,19 +381,19 @@
     
     </summary>
     
-      <category term="CodeStyle" scheme="http://blog.yfgeek.com/categories/CodeStyle/"/>
+      <category term="CodeStyle" scheme="http://www.yfgeek.com/categories/CodeStyle/"/>
     
     
-      <category term="CodeStyle" scheme="http://blog.yfgeek.com/tags/CodeStyle/"/>
+      <category term="CodeStyle" scheme="http://www.yfgeek.com/tags/CodeStyle/"/>
     
   </entry>
   
   <entry>
     <title>我眼中的React</title>
-    <link href="http://blog.yfgeek.com/2017/02/04/react/"/>
-    <id>http://blog.yfgeek.com/2017/02/04/react/</id>
+    <link href="http://www.yfgeek.com/2017/02/04/react/"/>
+    <id>http://www.yfgeek.com/2017/02/04/react/</id>
     <published>2017-02-04T14:35:03.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>前两天，用React把 之前的 <a href="https://github.com/yfgeek/rpi-TempRuntime" target="_blank" rel="external">基于树莓派3B,DHT11/DHT22,LCD1602的一个实时温度湿度检测系统</a> 的Web部分重构了一下。</p>
 <p>这个项目之前是用Semantic UI + eCharts + JQuery Datapicker写的，由于这个项目的实现过程比较经典，几乎把所有的感觉React的基础思想都实现了一遍。</p>
@@ -347,19 +546,19 @@
     
     </summary>
     
-      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
     
     
-      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title>用Raspberry Pi Zero打造“即插即用”的Web服务器</title>
-    <link href="http://blog.yfgeek.com/2017/01/12/network-zero-web/"/>
-    <id>http://blog.yfgeek.com/2017/01/12/network-zero-web/</id>
+    <link href="http://www.yfgeek.com/2017/01/12/network-zero-web/"/>
+    <id>http://www.yfgeek.com/2017/01/12/network-zero-web/</id>
     <published>2017-01-12T02:04:44.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>虽然Raspberry Pi Zero只有4.5英镑，非常便宜，但确实具有局限性，由于缺少网口、WiFi，功能比较单一，可曾设想，用Raspberry Pi Zero打造一个完美的“即插即用”的Web服务器？</p>
 <p><img src="/content/images/zeroweb/0.jpg" alt=""></p>
@@ -423,19 +622,19 @@
     
     </summary>
     
-      <category term="Rasberry" scheme="http://blog.yfgeek.com/categories/Rasberry/"/>
+      <category term="Rasberry" scheme="http://www.yfgeek.com/categories/Rasberry/"/>
     
     
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
+      <category term="Raspberry" scheme="http://www.yfgeek.com/tags/Raspberry/"/>
     
   </entry>
   
   <entry>
     <title>Git 文件、文件夹区分大小写</title>
-    <link href="http://blog.yfgeek.com/2017/01/07/gitcase/"/>
-    <id>http://blog.yfgeek.com/2017/01/07/gitcase/</id>
+    <link href="http://www.yfgeek.com/2017/01/07/gitcase/"/>
+    <id>http://www.yfgeek.com/2017/01/07/gitcase/</id>
     <published>2017-01-07T02:25:32.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>其实非常简单，只是提醒一个小常识，Git默认是不区分文件，文件夹大小写的。</p>
 <p>这会给很多人带来很多困扰，比如文件改了名，在严格区分大小写的系统下，实际上是两个不同名字的文件，但是Git不区分大小写机制导致无法正常的commit。</p>
@@ -453,19 +652,19 @@
     
     </summary>
     
-      <category term="Github" scheme="http://blog.yfgeek.com/categories/Github/"/>
+      <category term="Github" scheme="http://www.yfgeek.com/categories/Github/"/>
     
     
-      <category term="Github" scheme="http://blog.yfgeek.com/tags/Github/"/>
+      <category term="Github" scheme="http://www.yfgeek.com/tags/Github/"/>
     
   </entry>
   
   <entry>
     <title>iOS 10 iMessage字符崩溃Bug又来了</title>
-    <link href="http://blog.yfgeek.com/2017/01/02/iOS-10-iMessage%E5%AD%97%E7%AC%A6%E5%B4%A9%E6%BA%83Bug%E5%8F%88%E6%9D%A5%E4%BA%86/"/>
-    <id>http://blog.yfgeek.com/2017/01/02/iOS-10-iMessage字符崩溃Bug又来了/</id>
+    <link href="http://www.yfgeek.com/2017/01/02/iOS-10-iMessage%E5%AD%97%E7%AC%A6%E5%B4%A9%E6%BA%83Bug%E5%8F%88%E6%9D%A5%E4%BA%86/"/>
+    <id>http://www.yfgeek.com/2017/01/02/iOS-10-iMessage字符崩溃Bug又来了/</id>
     <published>2017-01-02T03:49:54.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>这是一篇本人发表到Freebuf的文章。</p>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>近日，黑客@vincedes3发现了一个从iOS 8 到 iOS 10.2.1 b2通用的iMessage字符崩溃Bug，该Bug同样利用了和当年iOS 8的iMessage短信Bug的类似手法，将一段恶意代码发送给受害者，受害者在接收短信后，浏览短信即可中招，此后短信应用陷入死机状态，除非打开修复网页程序，否则再也无法打开短信应用。</p>
@@ -498,19 +697,19 @@
     
     </summary>
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/categories/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
     
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   
   <entry>
     <title>2016，2017</title>
-    <link href="http://blog.yfgeek.com/2016/12/31/2017/"/>
-    <id>http://blog.yfgeek.com/2016/12/31/2017/</id>
+    <link href="http://www.yfgeek.com/2016/12/31/2017/"/>
+    <id>http://www.yfgeek.com/2016/12/31/2017/</id>
     <published>2016-12-31T14:51:23.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>似乎每年写年终总结已经成为习惯，2007年开始写博客，2009年开始，每年都象征性的写一个年终报告，或许是元旦或许是新年。</p>
 <p>每年这个时候，都会自觉地打开cnbeta.com看每一年的<a href="http://www.cnbeta.com/articles/572451.htm" target="_blank" rel="external">新年祝福</a>。今年，也不例外，这么一看，已经9年过去了。</p>
@@ -533,19 +732,19 @@
     
     </summary>
     
-      <category term="心情" scheme="http://blog.yfgeek.com/categories/%E5%BF%83%E6%83%85/"/>
+      <category term="心情" scheme="http://www.yfgeek.com/categories/%E5%BF%83%E6%83%85/"/>
     
     
-      <category term="心情" scheme="http://blog.yfgeek.com/tags/%E5%BF%83%E6%83%85/"/>
+      <category term="心情" scheme="http://www.yfgeek.com/tags/%E5%BF%83%E6%83%85/"/>
     
   </entry>
   
   <entry>
     <title>Emoji 表情域名 引领未来</title>
-    <link href="http://blog.yfgeek.com/2016/12/27/emoji/"/>
-    <id>http://blog.yfgeek.com/2016/12/27/emoji/</id>
+    <link href="http://www.yfgeek.com/2016/12/27/emoji/"/>
+    <id>http://www.yfgeek.com/2016/12/27/emoji/</id>
     <published>2016-12-27T03:37:27.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂</p>
 <p><img src="/content/images/emoji/1.jpg" alt=""></p>
@@ -571,19 +770,19 @@
     
     </summary>
     
-      <category term="Web" scheme="http://blog.yfgeek.com/categories/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
     
     
-      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
     
   </entry>
   
   <entry>
     <title>Raspberry Pi Zero联网奇妙记</title>
-    <link href="http://blog.yfgeek.com/2016/12/21/network-zero/"/>
-    <id>http://blog.yfgeek.com/2016/12/21/network-zero/</id>
+    <link href="http://www.yfgeek.com/2016/12/21/network-zero/"/>
+    <id>http://www.yfgeek.com/2016/12/21/network-zero/</id>
     <published>2016-12-21T23:01:26.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>说句实话，Zero真的不适合把玩，想让他连上网，太难了。</p>
 <h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><ul>
@@ -690,19 +889,19 @@
     
     </summary>
     
-      <category term="Rasberry" scheme="http://blog.yfgeek.com/categories/Rasberry/"/>
+      <category term="Rasberry" scheme="http://www.yfgeek.com/categories/Rasberry/"/>
     
     
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
+      <category term="Raspberry" scheme="http://www.yfgeek.com/tags/Raspberry/"/>
     
   </entry>
   
   <entry>
     <title>Wat 吐槽JavaScript</title>
-    <link href="http://blog.yfgeek.com/2016/12/21/wat/"/>
-    <id>http://blog.yfgeek.com/2016/12/21/wat/</id>
+    <link href="http://www.yfgeek.com/2016/12/21/wat/"/>
+    <id>http://www.yfgeek.com/2016/12/21/wat/</id>
     <published>2016-12-21T01:17:26.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽JavaScript的视频，简直搞笑，不过也挺客观的，毕竟是一个10天内攒出来的语言，虽然现在发展有ES支撑，但是依然非常零散，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。</p>
 <h1 id="Wat"><a href="#Wat" class="headerlink" title="Wat"></a>Wat</h1><p><a href="https://www.destroyallsoftware.com/talks/wat" target="_blank" rel="external"><img src="https://www.destroyallsoftware.com/images/posters/talks/wat.poster.png" alt=""></a></p>
@@ -722,21 +921,21 @@
     
     </summary>
     
-      <category term="笑话" scheme="http://blog.yfgeek.com/categories/%E7%AC%91%E8%AF%9D/"/>
+      <category term="笑话" scheme="http://www.yfgeek.com/categories/%E7%AC%91%E8%AF%9D/"/>
     
     
-      <category term="Web" scheme="http://blog.yfgeek.com/tags/Web/"/>
+      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
     
-      <category term="笑话" scheme="http://blog.yfgeek.com/tags/%E7%AC%91%E8%AF%9D/"/>
+      <category term="笑话" scheme="http://www.yfgeek.com/tags/%E7%AC%91%E8%AF%9D/"/>
     
   </entry>
   
   <entry>
     <title>30秒内盗取任意PC的Cookie神器 PoisonTap</title>
-    <link href="http://blog.yfgeek.com/2016/12/18/poisontap/"/>
-    <id>http://blog.yfgeek.com/2016/12/18/poisontap/</id>
+    <link href="http://www.yfgeek.com/2016/12/18/poisontap/"/>
+    <id>http://www.yfgeek.com/2016/12/18/poisontap/</id>
     <published>2016-12-18T18:44:51.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。</p>
 <p>是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。</p>
@@ -799,19 +998,19 @@
     
     </summary>
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/categories/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
     
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   
   <entry>
     <title>Raspberry Pi Zero 无需键盘网络 配置教程</title>
-    <link href="http://blog.yfgeek.com/2016/12/17/raspizero/"/>
-    <id>http://blog.yfgeek.com/2016/12/17/raspizero/</id>
+    <link href="http://www.yfgeek.com/2016/12/17/raspizero/"/>
+    <id>http://www.yfgeek.com/2016/12/17/raspizero/</id>
     <published>2016-12-17T21:58:26.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。</p>
 <p>上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。</p>
@@ -888,19 +1087,19 @@
     
     </summary>
     
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/categories/Raspberry/"/>
+      <category term="Raspberry" scheme="http://www.yfgeek.com/categories/Raspberry/"/>
     
     
-      <category term="Raspberry" scheme="http://blog.yfgeek.com/tags/Raspberry/"/>
+      <category term="Raspberry" scheme="http://www.yfgeek.com/tags/Raspberry/"/>
     
   </entry>
   
   <entry>
     <title>Google镜像站的搭建</title>
-    <link href="http://blog.yfgeek.com/2016/12/11/Google%E9%95%9C%E5%83%8F%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
-    <id>http://blog.yfgeek.com/2016/12/11/Google镜像站的搭建/</id>
+    <link href="http://www.yfgeek.com/2016/12/11/Google%E9%95%9C%E5%83%8F%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
+    <id>http://www.yfgeek.com/2016/12/11/Google镜像站的搭建/</id>
     <published>2016-12-11T19:21:59.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>前两天，Google开发者大会高调的宣布Google Developers 网站终于正式上线了，希望Google能够解决一切问题，早日回归大陆市场。</p>
 <a id="more"></a>
@@ -925,19 +1124,19 @@
     
     </summary>
     
-      <category term="Ops" scheme="http://blog.yfgeek.com/categories/Ops/"/>
+      <category term="Ops" scheme="http://www.yfgeek.com/categories/Ops/"/>
     
     
-      <category term="Ops" scheme="http://blog.yfgeek.com/tags/Ops/"/>
+      <category term="Ops" scheme="http://www.yfgeek.com/tags/Ops/"/>
     
   </entry>
   
   <entry>
     <title>OTR(Off-the-Record) 技术探讨</title>
-    <link href="http://blog.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/"/>
-    <id>http://blog.yfgeek.com/2016/12/06/OTR技术探讨/</id>
+    <link href="http://www.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/"/>
+    <id>http://www.yfgeek.com/2016/12/06/OTR技术探讨/</id>
     <published>2016-12-06T20:25:59.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。</p>
 <a id="more"></a>
@@ -1008,19 +1207,19 @@
     
     </summary>
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/categories/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
     
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   
   <entry>
     <title>Arduino Leonardo 打造 Bad USB</title>
-    <link href="http://blog.yfgeek.com/2016/11/27/badusb/"/>
-    <id>http://blog.yfgeek.com/2016/11/27/badusb/</id>
+    <link href="http://www.yfgeek.com/2016/11/27/badusb/"/>
+    <id>http://www.yfgeek.com/2016/11/27/badusb/</id>
     <published>2016-11-27T02:48:23.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>嘿嘿嘿，又是一篇猥琐小文。</p>
 <a id="more"></a>
@@ -1063,19 +1262,19 @@
     
     </summary>
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/categories/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
     
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   
   <entry>
     <title>TOR暗网的秘密</title>
-    <link href="http://blog.yfgeek.com/2016/11/26/TOR%E6%9A%97%E7%BD%91%E7%9A%84%E7%A7%98%E5%AF%86/"/>
-    <id>http://blog.yfgeek.com/2016/11/26/TOR暗网的秘密/</id>
+    <link href="http://www.yfgeek.com/2016/11/26/TOR%E6%9A%97%E7%BD%91%E7%9A%84%E7%A7%98%E5%AF%86/"/>
+    <id>http://www.yfgeek.com/2016/11/26/TOR暗网的秘密/</id>
     <published>2016-11-26T01:00:34.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>TOR 是一个不可以吃的洋葱，众所周知洋葱新闻美国一个非常严谨的讽刺新闻公司，所以这个文章跟洋葱新闻没什么关系。</p>
 <p>以下内容纯属虚构。</p>
@@ -1125,19 +1324,19 @@
     
     </summary>
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/categories/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
     
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   
   <entry>
     <title>再玩Monyer的Hack Game</title>
-    <link href="http://blog.yfgeek.com/2016/11/23/%E5%86%8D%E7%8E%A9Monyer%E7%9A%84Hack-Game/"/>
-    <id>http://blog.yfgeek.com/2016/11/23/再玩Monyer的Hack-Game/</id>
+    <link href="http://www.yfgeek.com/2016/11/23/%E5%86%8D%E7%8E%A9Monyer%E7%9A%84Hack-Game/"/>
+    <id>http://www.yfgeek.com/2016/11/23/再玩Monyer的Hack-Game/</id>
     <published>2016-11-23T19:15:20.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
+    <updated>2017-06-26T00:02:17.000Z</updated>
     
     <content type="html"><![CDATA[<p>之前混百度空间混久了，认识很多大牛，不乏monyer大牛。很早很早以前，他做了一个黑客小游戏，当时还不太会玩，现在突然打开发现，网站竟然还活着，决定重温经典。</p>
 <a id="more"></a>
@@ -1274,99 +1473,10 @@
     
     </summary>
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/categories/Hack/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
     
     
-      <category term="Hack" scheme="http://blog.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Docker下配置SQL Server for Linux</title>
-    <link href="http://blog.yfgeek.com/2016/11/22/docker-SQLServer/"/>
-    <id>http://blog.yfgeek.com/2016/11/22/docker-SQLServer/</id>
-    <published>2016-11-22T14:44:06.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>微软已经不再是以前的那个微软了，如果微软SQL Server早开源几年，估计现在数据库方面就没有Oracle什么事情了。</p>
-<p>Canonical 技术主管 Dustin Kirkland 表示：「微软和 Canonical 继续在 Windows 世界和 Linux 世界之间建立桥梁。 SQL Server on Ubuntu 便是这种趋势的又一示例。」</p>
-<a id="more"></a>
-<p><img src="/content/images/sqldocker/micosoft.png" alt=""></p>
-<h1 id="配置要求"><a href="#配置要求" class="headerlink" title="配置要求"></a>配置要求</h1><ul>
-<li>Docker版本在 1.8 以上</li>
-<li>至少 4GB 硬盘空间</li>
-<li>至少 4GB 内存</li>
-</ul>
-<p><img src="/content/images/sqldocker/0.jpg" alt=""></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><h2 id="拉取docker镜像"><a href="#拉取docker镜像" class="headerlink" title="拉取docker镜像"></a>拉取docker镜像</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker pull microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
-<h2 id="运行docker镜像"><a href="#运行docker镜像" class="headerlink" title="运行docker镜像"></a>运行docker镜像</h2><p><code>YourStrong!Passw0rd</code> 为你的密码</p>
-<p><code>1433</code> 为对外端口<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
-<p>🌰 例子<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure></p>
-<h2 id="设置-宿主机保存数据目录-暂不支持"><a href="#设置-宿主机保存数据目录-暂不支持" class="headerlink" title="设置 宿主机保存数据目录(暂不支持)"></a>设置 宿主机保存数据目录(暂不支持)</h2><p><code>&lt;host directory&gt;</code> 为目录</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker run -e &apos;ACCEPT_EULA=Y&apos; -e &apos;SA_PASSWORD=&lt;YourStrong!Passw0rd&gt;&apos; -p 1433:1433 -v &lt;host directory&gt;:/var/opt/mssql -d microsoft/mssql-server-linux</div></pre></td></tr></table></figure>
-<h2 id="查看容器的ip-调试用"><a href="#查看容器的ip-调试用" class="headerlink" title="查看容器的ip(调试用)"></a>查看容器的ip(调试用)</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">docker inspect --format=&apos;&#123;&#123;.NetworkSettings.IPAddress&#125;&#125;&apos; 容器id</div></pre></td></tr></table></figure>
-<p>172.17.0.2</p>
-<h1 id="连接"><a href="#连接" class="headerlink" title="连接"></a>连接</h1><p>用户名是SA</p>
-<p>密码是用户自己设置的</p>
-<p><img src="/content/images/sqldocker/1.jpg" alt=""></p>
-<p>连接成功！</p>
-<p><img src="/content/images/sqldocker/2.jpg" alt=""></p>
-<h1 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h1><p>内存占用情况</p>
-<p><img src="/content/images/sqldocker/3.jpg" alt=""></p>
-<p>我们一起默念<strong> 微软大法好 </strong> <strong> 微软大法好 </strong> <strong> 微软大法好 </strong> 。</p>
-<p>谢谢微软为开源世界做的一切！</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://docs.microsoft.com/zh-cn/sql/linux/sql-server-linux-setup-docker" target="_blank" rel="external">https://docs.microsoft.com/zh-cn/sql/linux/sql-server-linux-setup-docker</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;微软已经不再是以前的那个微软了，如果微软SQL Server早开源几年，估计现在数据库方面就没有Oracle什么事情了。&lt;/p&gt;
-&lt;p&gt;Canonical 技术主管 Dustin Kirkland 表示：「微软和 Canonical 继续在 Windows 世界和 Linux 世界之间建立桥梁。 SQL Server on Ubuntu 便是这种趋势的又一示例。」&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Docker" scheme="http://blog.yfgeek.com/categories/Docker/"/>
-    
-    
-      <category term="Docker" scheme="http://blog.yfgeek.com/tags/Docker/"/>
-    
-      <category term="SQLserver" scheme="http://blog.yfgeek.com/tags/SQLserver/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>当我关注3万Github用户后发生了什么</title>
-    <link href="http://blog.yfgeek.com/2016/11/19/github3k/"/>
-    <id>http://blog.yfgeek.com/2016/11/19/github3k/</id>
-    <published>2016-11-19T11:36:26.000Z</published>
-    <updated>2017-03-08T19:05:11.000Z</updated>
-    
-    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。</p>
-<p>于是乎我利用这个关注了3万人的Github，可是关注后<del>除了同性交友</del>似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。<br><a id="more"></a><br><img src="/content/images/githubauto/1.jpg" alt=""></p>
-<p>翻都翻不过来，那么同时还存在一些“无用( <del>垃圾</del> )项目”，star和fork数量很少，点开没有意义。那么能否写一个python小程序，把“高质量”的项目来源于好友follow的项目都爬出来呢？</p>
-<p>经过短暂的编码，<code>GithubAwesome.py</code>诞生了。</p>
-<p>现在进入<a href="https://github.com/yfgeek/AutoGithub" target="_blank" rel="external">AutoGithub</a>项目就可以看到GithubAwesome.py项目</p>
-<h1 id="规则"><a href="#规则" class="headerlink" title="规则"></a>规则</h1><p>设置一个规则，如果关注的人的动态里刷出来的项目 star数量 大于 最少 star  或 大于 最少 fork，那么就把他输出出来。</p>
-<p>举个🌰<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">最少 star 数: 50</div><div class="line">最少 fork 数: 50</div></pre></td></tr></table></figure></p>
-<p>效果如图</p>
-<p><img src="/content/images/githubauto/awesomesnap.png" alt=""></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>首先，确保你安装了<code>beautifulsoup4</code>.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pip install beautifulsoup4</div></pre></td></tr></table></figure>
-<p>然后编辑<code>GithubAwesome.py</code>文件，请原谅如此土的方式。<br><figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">ga = GithubAwesome(<span class="string">'username'</span>,<span class="string">'password'</span>)</div><div class="line"><span class="comment"># login</span></div><div class="line">ga.login()</div><div class="line">ga.get_awesome(<span class="number">1</span>,<span class="number">20</span>,<span class="number">50</span>) <span class="comment"># 第一页 规则 min star 20 min or fork 20</span></div></pre></td></tr></table></figure></p>
-<h1 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后"></a>写在最后</h1><p>当你关注超过1K的用户，你会感叹，每天都有精品项目推送的感觉，真好！😁</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。&lt;/p&gt;
-&lt;p&gt;于是乎我利用这个关注了3万人的Github，可是关注后&lt;del&gt;除了同性交友&lt;/del&gt;似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。&lt;br&gt;
-    
-    </summary>
-    
-      <category term="Github" scheme="http://blog.yfgeek.com/categories/Github/"/>
-    
-    
-      <category term="Github" scheme="http://blog.yfgeek.com/tags/Github/"/>
+      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   

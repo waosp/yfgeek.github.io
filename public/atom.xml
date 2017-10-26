@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2017-08-10T03:29:16.000Z</updated>
+  <updated>2017-10-26T14:36:56.397Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -16,11 +16,91 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>“我是如何收集校友的”之爬虫模块</title>
+    <link href="http://www.yfgeek.com/2017/10/26/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%94%B6%E9%9B%86%E6%A0%A1%E5%8F%8B%E7%9A%84%E4%B9%8B%E7%88%AC%E8%99%AB/"/>
+    <id>http://www.yfgeek.com/2017/10/26/我是如何收集校友的之爬虫/</id>
+    <published>2017-10-26T13:01:49.000Z</published>
+    <updated>2017-10-26T14:36:56.397Z</updated>
+    
+    <content type="html"><![CDATA[<p>打开伯明翰大学的百科，发现与某相邻学校相比，中国校友实在太少，可能是校友过于低调。于是萌生一个想法，写一个爬虫找出百度百科里所有与“伯明翰”大学有关的校友，然后自动汇总，生成人物梗概，按照知名度排序。</p>
+<p>需求大概就是这样，也就是说，我们需要以下几个模块：</p>
+<ol>
+<li>爬虫程序——抓取全百度百科与“伯明翰大学”相关的数据</li>
+<li>提取人名——利用HMM-Viterbi进行人名筛选与提取</li>
+<li>数据去重——用布隆过滤器去掉抓取相同的URL或相同的名称</li>
+<li>下载器——下载所有数据库中数据清洗过的URL，并存入数据库</li>
+<li>人物Ranking——按照一定的排名方式，对人物进行知名度排名</li>
+<li>人物梗概——利用NLP相关库，对提取的人物进行自动化梗概</li>
+</ol>
+<p>话不多说，现在开始进行爬虫部分。</p>
+<p>爬虫部分分为两类：信息获取器、URL管理器</p>
+<p>信息获取器自动抓取百度搜索结果内容，并将其存入URL管理器</p>
+<p>首先建立数据库uob，并且建立一个表明为list的表用于存储百度百科基础数据</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">SET</span> <span class="keyword">NAMES</span> utf8;</div><div class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> <span class="string">`list`</span> (</div><div class="line">  <span class="string">`id`</span> <span class="built_in">int</span>(<span class="number">11</span>) <span class="keyword">NOT</span> <span class="literal">NULL</span> AUTO_INCREMENT,</div><div class="line">  <span class="string">`name`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`url`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  <span class="string">`description`</span> <span class="built_in">varchar</span>(<span class="number">255</span>) <span class="keyword">DEFAULT</span> <span class="literal">NULL</span>,</div><div class="line">  PRIMARY <span class="keyword">KEY</span> (<span class="string">`id`</span>)</div><div class="line">) <span class="keyword">ENGINE</span>=<span class="keyword">InnoDB</span> AUTO_INCREMENT=<span class="number">1</span> <span class="keyword">DEFAULT</span> <span class="keyword">CHARSET</span>=utf8;</div></pre></td></tr></table></figure>
+<p>spider.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"><span class="comment">#python version：2.7</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> urllib</div><div class="line"><span class="keyword">import</span> urllib2</div><div class="line"><span class="keyword">import</span> time</div><div class="line"><span class="keyword">from</span> bs4 <span class="keyword">import</span> BeautifulSoup <span class="keyword">as</span> BS</div><div class="line"></div><div class="line"><span class="keyword">from</span> urlmanager <span class="keyword">import</span> UrlManager</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Spider</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.urls = UrlManager()    <span class="comment">#url管理器</span></div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">baidusearch</span><span class="params">(self,word,page)</span>:</span></div><div class="line">        baseUrl = <span class="string">'http://www.baidu.com/s'</span></div><div class="line"></div><div class="line">        data = &#123;<span class="string">'wd'</span>: word, <span class="string">'pn'</span>: str(page - <span class="number">1</span>) + <span class="string">'0'</span>, <span class="string">'tn'</span>: <span class="string">'baidurt'</span>, <span class="string">'ie'</span>: <span class="string">'utf-8'</span>, <span class="string">'bsst'</span>: <span class="string">'1'</span>&#125;</div><div class="line">        data = urllib.urlencode(data)</div><div class="line">        url = baseUrl + <span class="string">'?'</span> + data</div><div class="line"></div><div class="line">        <span class="keyword">try</span>:</div><div class="line">            request = urllib2.Request(url)</div><div class="line">            response = urllib2.urlopen(request)</div><div class="line">        <span class="keyword">except</span> urllib2.HttpError, e:</div><div class="line">            <span class="keyword">print</span> e.code</div><div class="line">            exit(<span class="number">0</span>)</div><div class="line">        <span class="keyword">except</span> urllib2.URLError, e:</div><div class="line">            <span class="keyword">print</span> e.reason</div><div class="line">            exit(<span class="number">0</span>)</div><div class="line"></div><div class="line">        html = response.read()</div><div class="line">        soup = BS(html, <span class="string">"lxml"</span>)</div><div class="line">        td = soup.find_all(class_=<span class="string">'f'</span>)</div><div class="line"></div><div class="line">        <span class="keyword">for</span> t <span class="keyword">in</span> td:</div><div class="line">            name = t.h3.a.get_text().replace(<span class="string">' '</span>, <span class="string">''</span>).replace(<span class="string">'	'</span>, <span class="string">''</span>).replace(<span class="string">'\n'</span>, <span class="string">''</span>).replace(<span class="string">u'_百度百科'</span>,<span class="string">''</span>)</div><div class="line">            <span class="comment"># print name</span></div><div class="line">            url = t.h3.a[<span class="string">'href'</span>].replace(<span class="string">' '</span>, <span class="string">''</span>).replace(<span class="string">'\n'</span>, <span class="string">''</span>)</div><div class="line"></div><div class="line">            <span class="comment"># print url</span></div><div class="line"></div><div class="line">            font_str = t.find_all(<span class="string">'font'</span>, attrs=&#123;<span class="string">'size'</span>: <span class="string">'-1'</span>&#125;)[<span class="number">0</span>].get_text()</div><div class="line">            start = <span class="number">0</span>  <span class="comment"># 起始</span></div><div class="line">            realtime = t.find_all(<span class="string">'div'</span>, attrs=&#123;<span class="string">'class'</span>: <span class="string">'realtime'</span>&#125;)</div><div class="line">            <span class="keyword">if</span> realtime:</div><div class="line">                realtime_str = realtime[<span class="number">0</span>].get_text()</div><div class="line">                start = len(realtime_str)</div><div class="line">                <span class="comment"># print realtime_str</span></div><div class="line">            end = font_str.find(<span class="string">'...'</span>)</div><div class="line">            <span class="comment"># print font_str[start:end+3],'\n'</span></div><div class="line">            self.urls.add_new_url(name, url, font_str[start:end+<span class="number">3</span>].replace(<span class="string">' '</span>, <span class="string">''</span>).replace(<span class="string">'	'</span>, <span class="string">''</span>).replace(<span class="string">'\n'</span>, <span class="string">''</span>))</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__==<span class="string">"__main__"</span>:</div><div class="line">    obj_spider = Spider()</div><div class="line">    <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">1</span>,<span class="number">200</span>):</div><div class="line">        obj_spider.baidusearch(<span class="string">'伯明翰大学 site:baike.baidu.com'</span>, x)</div><div class="line">        time.sleep(<span class="number">3</span>)</div></pre></td></tr></table></figure>
+<p>urlmanager.py</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment">#coding=utf-8</span></div><div class="line"><span class="comment">#python version：2.7</span></div><div class="line"><span class="keyword">import</span> pymysql</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">UrlManager</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.new_urls = dict()  <span class="comment"># 待爬取url</span></div><div class="line">        self.old_urls = dict()  <span class="comment"># 已爬取url</span></div><div class="line">        self.db = pymysql.connect(<span class="string">"localhost"</span>, <span class="string">"root"</span>, <span class="string">""</span>, <span class="string">"uob"</span> ,use_unicode=<span class="keyword">True</span>, charset=<span class="string">"utf8"</span>)</div><div class="line">        self.cursor = self.db.cursor()</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">add_new_url</span><span class="params">(self, name, url, description)</span>:</span>  <span class="comment"># 向管理器中添加一个新的url</span></div><div class="line">        <span class="keyword">if</span> url <span class="keyword">is</span> <span class="keyword">None</span>:</div><div class="line">            <span class="keyword">return</span></div><div class="line">        <span class="keyword">if</span> url <span class="keyword">not</span> <span class="keyword">in</span> self.new_urls <span class="keyword">and</span> url <span class="keyword">not</span> <span class="keyword">in</span> self.old_urls:</div><div class="line">            self.new_urls[name] = url</div><div class="line">            sql = <span class="string">u"INSERT INTO list (name,  url, description) VALUES (\""</span> + name  +  <span class="string">u"\", \""</span> + url + <span class="string">u"\", \""</span> + description + <span class="string">u"\");"</span></div><div class="line"></div><div class="line">            <span class="keyword">print</span> sql</div><div class="line">            <span class="keyword">try</span>:</div><div class="line">                <span class="comment"># 执行sql语句</span></div><div class="line">                self.cursor.execute(sql)</div><div class="line">                <span class="comment"># 提交到数据库执行</span></div><div class="line">                self.db.commit()</div><div class="line">                <span class="comment"># print "success"</span></div><div class="line">            <span class="keyword">except</span>:</div><div class="line">                <span class="comment"># Rollback in case there is any error</span></div><div class="line">                self.db.rollback()</div><div class="line">                <span class="keyword">print</span> <span class="string">"error"</span></div></pre></td></tr></table></figure>
+<p>将数据存入数据库，最后获取信息如下：</p>
+<p><img src="/content/images/uob/1.png" alt=""></p>
+<p><img src="/content/images/uob/2.png" alt=""></p>
+<p>明日更新：“我是如何收集校友的”之NLP人名去重</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;打开伯明翰大学的百科，发现与某相邻学校相比，中国校友实在太少，可能是校友过于低调。于是萌生一个想法，写一个爬虫找出百度百科里所有与“伯明翰”大学有关的校友，然后自动汇总，生成人物梗概，按照知名度排序。&lt;/p&gt;
+&lt;p&gt;需求大概就是这样，也就是说，我们需要以下几个模块：&lt;/p&gt;
+    
+    </summary>
+    
+      <category term="Python" scheme="http://www.yfgeek.com/categories/Python/"/>
+    
+    
+      <category term="数据" scheme="http://www.yfgeek.com/tags/%E6%95%B0%E6%8D%AE/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>记一次MySQL无法启动及修复经历</title>
+    <link href="http://www.yfgeek.com/2017/08/18/%E8%AE%B0%E4%B8%80%E6%AC%A1Mysql%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E5%8F%8A%E4%BF%AE%E5%A4%8D%E7%BB%8F%E5%8E%86/"/>
+    <id>http://www.yfgeek.com/2017/08/18/记一次Mysql无法启动及修复经历/</id>
+    <published>2017-08-18T12:27:29.000Z</published>
+    <updated>2017-10-26T12:59:55.527Z</updated>
+    
+    <content type="html"><![CDATA[<p>记得有次本地的MySQL无法启动，网上说，去删掉InnoDB日志就行，我就傻乎乎的去删掉了InnoDB相关的文件，果然，没有任何问题，正常启动了。</p>
+<p>可是谁曾想，过了几天，故障复现了，我就按部就班的又去删除，结果，又解决了。</p>
+<p>可是，现在棘手的问题又出现了，数据库，彻底的挂掉了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[ERROR] InnoDB: Attempted to open a previously opened tablespace</div><div class="line">2017-08-18 20:07:04 140736493900736 [ERROR] InnoDB: Attempted to open a previously opened tablespace. Previous tablespace blockvotes/vote uses space ID: 7 at filepath: ./blockvotes/vote.ibd. Cannot open tablespace phpmyadmin/pma__pdf_pages which uses space ID: 7 at filepath: ./phpmyadmin/pma__pdf_pages.ibd</div><div class="line">2017-08-18 20:07:04 7fffc4b9d3c0  InnoDB: Operating system error number 2 in a file operation.</div><div class="line">InnoDB: The error means the system cannot find the path specified.</div><div class="line">InnoDB: If you are installing InnoDB, remember that you must create</div><div class="line">InnoDB: directories yourself, InnoDB does not create them.</div><div class="line">InnoDB: Error: could not open single-table tablespace file ./phpmyadmin/pma__pdf_pages.ibd</div></pre></td></tr></table></figure>
+<p>按照网上的说法，没救了，因为第一次删除了InnoDB的<code>ibdata1</code>文件，这个文件是共享表空间，是不可以随便乱删的。</p>
+<p>可是想着我的数据库里还存着很多东西，不能就这样放弃。</p>
+<p>终于，找到了强力解决方法！</p>
+<p>修复方法，打开my.cnf文件，把开启mysql的innodb强制修复属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line"></div><div class="line">innodb_force_recovery = 1</div></pre></td></tr></table></figure>
+<p>启动服务后，瞬间好了，数据完好无损，没有丢失。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;记得有次本地的MySQL无法启动，网上说，去删掉InnoDB日志就行，我就傻乎乎的去删掉了InnoDB相关的文件，果然，没有任何问题，正常启动了。&lt;/p&gt;
+&lt;p&gt;可是谁曾想，过了几天，故障复现了，我就按部就班的又去删除，结果，又解决了。&lt;/p&gt;
+&lt;p&gt;可是，现在棘手的问题又
+    
+    </summary>
+    
+      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
+    
+    
+      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
+    
+  </entry>
+  
+  <entry>
     <title>BlockVotes 一个基于区块链的环签名投票系统</title>
     <link href="http://www.yfgeek.com/2017/08/10/blockvotes/"/>
     <id>http://www.yfgeek.com/2017/08/10/blockvotes/</id>
-    <published>2017-08-10T00:10:41.000Z</published>
-    <updated>2017-08-10T03:29:16.000Z</updated>
+    <published>2017-08-09T17:10:41.000Z</published>
+    <updated>2017-10-26T12:59:55.515Z</updated>
     
     <content type="html"><![CDATA[<p>好久好久没有写Blog了，最近在忙我的论文，题目是一个基于区块链的环签名投票系统。</p>
 <p>听着名字挺绕的，实际上也是挺绕的，我做这个题目实际上是将三个学术领域的东西放在了一起：</p>
@@ -165,8 +245,8 @@
     <title>拍拍哒投资平台</title>
     <link href="http://www.yfgeek.com/2017/06/26/ppd/"/>
     <id>http://www.yfgeek.com/2017/06/26/ppd/</id>
-    <published>2017-06-26T00:05:25.000Z</published>
-    <updated>2017-07-12T01:27:17.000Z</updated>
+    <published>2017-06-25T17:05:25.000Z</published>
+    <updated>2017-10-26T12:59:55.526Z</updated>
     
     <content type="html"><![CDATA[<p>本文是近期状况的一些小记录，无技术探讨。</p>
 <p>最近参加了一个小比赛，第二届魔镜杯数据应用大赛，大概就是做一个金融数据产品，用了两天码了一些代码，还是学习到了一些知识。</p>
@@ -218,8 +298,8 @@
     <title>揭秘utf8=✓背后的小秘密</title>
     <link href="http://www.yfgeek.com/2017/02/17/utf8true/"/>
     <id>http://www.yfgeek.com/2017/02/17/utf8true/</id>
-    <published>2017-02-17T16:51:18.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2017-02-17T08:51:18.000Z</published>
+    <updated>2017-10-26T12:59:55.526Z</updated>
     
     <content type="html"><![CDATA[<p>你可能和我一样疑惑，为什么github等网站，在POST数据的时候，经常带有<code>utf8=✓</code>字符，显然这种方式看起来很难以接受，因为Unicode编码错误的话会导致很多问题，毕竟用户的浏览器是不一样的。</p>
 <p>为什么不用<code>utf8=true</code>来代替呢？</p>
@@ -248,8 +328,8 @@
     <title>浅谈函数式编程柯里化</title>
     <link href="http://www.yfgeek.com/2017/02/11/currying/"/>
     <id>http://www.yfgeek.com/2017/02/11/currying/</id>
-    <published>2017-02-11T18:27:57.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2017-02-11T10:27:57.000Z</published>
+    <updated>2017-10-26T12:59:55.523Z</updated>
     
     <content type="html"><![CDATA[<p>百度百科里对柯里化的定义是</p>
 <blockquote>
@@ -316,8 +396,8 @@
     <title>什么才是优秀的程序代码</title>
     <link href="http://www.yfgeek.com/2017/02/08/awesome-code/"/>
     <id>http://www.yfgeek.com/2017/02/08/awesome-code/</id>
-    <published>2017-02-08T17:35:13.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2017-02-08T09:35:13.000Z</published>
+    <updated>2017-10-26T12:59:55.523Z</updated>
     
     <content type="html"><![CDATA[<p>首先，我想说的是，我谈及的“优秀程序代码”，不是指“优秀程序”，也不是更易阅读的“代码”，恰恰相反，我可能想写的是更不易阅读的代码，这里的“优秀”指的是高效、快速。</p>
 <p>在写之前，我想先用一个原则引入这个文章：</p>
@@ -392,8 +472,8 @@
     <title>我眼中的React</title>
     <link href="http://www.yfgeek.com/2017/02/04/react/"/>
     <id>http://www.yfgeek.com/2017/02/04/react/</id>
-    <published>2017-02-04T14:35:03.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2017-02-04T06:35:03.000Z</published>
+    <updated>2017-10-26T12:59:55.525Z</updated>
     
     <content type="html"><![CDATA[<p>前两天，用React把 之前的 <a href="https://github.com/yfgeek/rpi-TempRuntime" target="_blank" rel="external">基于树莓派3B,DHT11/DHT22,LCD1602的一个实时温度湿度检测系统</a> 的Web部分重构了一下。</p>
 <p>这个项目之前是用Semantic UI + eCharts + JQuery Datapicker写的，由于这个项目的实现过程比较经典，几乎把所有的感觉React的基础思想都实现了一遍。</p>
@@ -557,8 +637,8 @@
     <title>用Raspberry Pi Zero打造“即插即用”的Web服务器</title>
     <link href="http://www.yfgeek.com/2017/01/12/network-zero-web/"/>
     <id>http://www.yfgeek.com/2017/01/12/network-zero-web/</id>
-    <published>2017-01-12T02:04:44.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2017-01-11T18:04:44.000Z</published>
+    <updated>2017-10-26T12:59:55.527Z</updated>
     
     <content type="html"><![CDATA[<p>虽然Raspberry Pi Zero只有4.5英镑，非常便宜，但确实具有局限性，由于缺少网口、WiFi，功能比较单一，可曾设想，用Raspberry Pi Zero打造一个完美的“即插即用”的Web服务器？</p>
 <p><img src="/content/images/zeroweb/0.jpg" alt=""></p>
@@ -633,8 +713,8 @@
     <title>Git 文件、文件夹区分大小写</title>
     <link href="http://www.yfgeek.com/2017/01/07/gitcase/"/>
     <id>http://www.yfgeek.com/2017/01/07/gitcase/</id>
-    <published>2017-01-07T02:25:32.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2017-01-06T18:25:32.000Z</published>
+    <updated>2017-10-26T12:59:55.517Z</updated>
     
     <content type="html"><![CDATA[<p>其实非常简单，只是提醒一个小常识，Git默认是不区分文件，文件夹大小写的。</p>
 <p>这会给很多人带来很多困扰，比如文件改了名，在严格区分大小写的系统下，实际上是两个不同名字的文件，但是Git不区分大小写机制导致无法正常的commit。</p>
@@ -663,8 +743,8 @@
     <title>iOS 10 iMessage字符崩溃Bug又来了</title>
     <link href="http://www.yfgeek.com/2017/01/02/iOS-10-iMessage%E5%AD%97%E7%AC%A6%E5%B4%A9%E6%BA%83Bug%E5%8F%88%E6%9D%A5%E4%BA%86/"/>
     <id>http://www.yfgeek.com/2017/01/02/iOS-10-iMessage字符崩溃Bug又来了/</id>
-    <published>2017-01-02T03:49:54.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2017-01-01T19:49:54.000Z</published>
+    <updated>2017-10-26T12:59:55.522Z</updated>
     
     <content type="html"><![CDATA[<p>这是一篇本人发表到Freebuf的文章。</p>
 <h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>近日，黑客@vincedes3发现了一个从iOS 8 到 iOS 10.2.1 b2通用的iMessage字符崩溃Bug，该Bug同样利用了和当年iOS 8的iMessage短信Bug的类似手法，将一段恶意代码发送给受害者，受害者在接收短信后，浏览短信即可中招，此后短信应用陷入死机状态，除非打开修复网页程序，否则再也无法打开短信应用。</p>
@@ -708,8 +788,8 @@
     <title>2016，2017</title>
     <link href="http://www.yfgeek.com/2016/12/31/2017/"/>
     <id>http://www.yfgeek.com/2016/12/31/2017/</id>
-    <published>2016-12-31T14:51:23.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-31T06:51:23.000Z</published>
+    <updated>2017-10-26T12:59:55.514Z</updated>
     
     <content type="html"><![CDATA[<p>似乎每年写年终总结已经成为习惯，2007年开始写博客，2009年开始，每年都象征性的写一个年终报告，或许是元旦或许是新年。</p>
 <p>每年这个时候，都会自觉地打开cnbeta.com看每一年的<a href="http://www.cnbeta.com/articles/572451.htm" target="_blank" rel="external">新年祝福</a>。今年，也不例外，这么一看，已经9年过去了。</p>
@@ -743,8 +823,8 @@
     <title>Emoji 表情域名 引领未来</title>
     <link href="http://www.yfgeek.com/2016/12/27/emoji/"/>
     <id>http://www.yfgeek.com/2016/12/27/emoji/</id>
-    <published>2016-12-27T03:37:27.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-26T19:37:27.000Z</published>
+    <updated>2017-10-26T12:59:55.517Z</updated>
     
     <content type="html"><![CDATA[<p>国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂</p>
 <p><img src="/content/images/emoji/1.jpg" alt=""></p>
@@ -781,8 +861,8 @@
     <title>Raspberry Pi Zero联网奇妙记</title>
     <link href="http://www.yfgeek.com/2016/12/21/network-zero/"/>
     <id>http://www.yfgeek.com/2016/12/21/network-zero/</id>
-    <published>2016-12-21T23:01:26.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-21T15:01:26.000Z</published>
+    <updated>2017-10-26T12:59:55.520Z</updated>
     
     <content type="html"><![CDATA[<p>说句实话，Zero真的不适合把玩，想让他连上网，太难了。</p>
 <h1 id="痛点"><a href="#痛点" class="headerlink" title="痛点"></a>痛点</h1><ul>
@@ -900,8 +980,8 @@
     <title>Wat 吐槽JavaScript</title>
     <link href="http://www.yfgeek.com/2016/12/21/wat/"/>
     <id>http://www.yfgeek.com/2016/12/21/wat/</id>
-    <published>2016-12-21T01:17:26.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-20T17:17:26.000Z</published>
+    <updated>2017-10-26T12:59:55.522Z</updated>
     
     <content type="html"><![CDATA[<p>今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽JavaScript的视频，简直搞笑，不过也挺客观的，毕竟是一个10天内攒出来的语言，虽然现在发展有ES支撑，但是依然非常零散，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。</p>
 <h1 id="Wat"><a href="#Wat" class="headerlink" title="Wat"></a>Wat</h1><p><a href="https://www.destroyallsoftware.com/talks/wat" target="_blank" rel="external"><img src="https://www.destroyallsoftware.com/images/posters/talks/wat.poster.png" alt=""></a></p>
@@ -934,8 +1014,8 @@
     <title>30秒内盗取任意PC的Cookie神器 PoisonTap</title>
     <link href="http://www.yfgeek.com/2016/12/18/poisontap/"/>
     <id>http://www.yfgeek.com/2016/12/18/poisontap/</id>
-    <published>2016-12-18T18:44:51.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-18T10:44:51.000Z</published>
+    <updated>2017-10-26T12:59:55.515Z</updated>
     
     <content type="html"><![CDATA[<p>著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。</p>
 <p>是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。</p>
@@ -1009,8 +1089,8 @@
     <title>Raspberry Pi Zero 无需键盘网络 配置教程</title>
     <link href="http://www.yfgeek.com/2016/12/17/raspizero/"/>
     <id>http://www.yfgeek.com/2016/12/17/raspizero/</id>
-    <published>2016-12-17T21:58:26.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-17T13:58:26.000Z</published>
+    <updated>2017-10-26T12:59:55.520Z</updated>
     
     <content type="html"><![CDATA[<p>我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。</p>
 <p>上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。</p>
@@ -1098,8 +1178,8 @@
     <title>Google镜像站的搭建</title>
     <link href="http://www.yfgeek.com/2016/12/11/Google%E9%95%9C%E5%83%8F%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/"/>
     <id>http://www.yfgeek.com/2016/12/11/Google镜像站的搭建/</id>
-    <published>2016-12-11T19:21:59.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-11T11:21:59.000Z</published>
+    <updated>2017-10-26T12:59:55.518Z</updated>
     
     <content type="html"><![CDATA[<p>前两天，Google开发者大会高调的宣布Google Developers 网站终于正式上线了，希望Google能够解决一切问题，早日回归大陆市场。</p>
 <a id="more"></a>
@@ -1135,8 +1215,8 @@
     <title>OTR(Off-the-Record) 技术探讨</title>
     <link href="http://www.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/"/>
     <id>http://www.yfgeek.com/2016/12/06/OTR技术探讨/</id>
-    <published>2016-12-06T20:25:59.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-12-06T12:25:59.000Z</published>
+    <updated>2017-10-26T12:59:55.519Z</updated>
     
     <content type="html"><![CDATA[<p>中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。</p>
 <a id="more"></a>
@@ -1218,8 +1298,8 @@
     <title>Arduino Leonardo 打造 Bad USB</title>
     <link href="http://www.yfgeek.com/2016/11/27/badusb/"/>
     <id>http://www.yfgeek.com/2016/11/27/badusb/</id>
-    <published>2016-11-27T02:48:23.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
+    <published>2016-11-26T18:48:23.000Z</published>
+    <updated>2017-10-26T12:59:55.515Z</updated>
     
     <content type="html"><![CDATA[<p>嘿嘿嘿，又是一篇猥琐小文。</p>
 <a id="more"></a>
@@ -1259,217 +1339,6 @@
     <summary type="html">
     
       &lt;p&gt;嘿嘿嘿，又是一篇猥琐小文。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
-    
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>TOR暗网的秘密</title>
-    <link href="http://www.yfgeek.com/2016/11/26/TOR%E6%9A%97%E7%BD%91%E7%9A%84%E7%A7%98%E5%AF%86/"/>
-    <id>http://www.yfgeek.com/2016/11/26/TOR暗网的秘密/</id>
-    <published>2016-11-26T01:00:34.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>TOR 是一个不可以吃的洋葱，众所周知洋葱新闻美国一个非常严谨的讽刺新闻公司，所以这个文章跟洋葱新闻没什么关系。</p>
-<p>以下内容纯属虚构。</p>
-<a id="more"></a>
-<h1 id="另一个互联网世界"><a href="#另一个互联网世界" class="headerlink" title="另一个互联网世界"></a>另一个互联网世界</h1><p>Tor 内网是另一个世界，另一个世界规则。在Tor 内网，有各种违禁交易，交易一般都是使用比特币的，保证了绝对的匿名性。</p>
-<p>Tor 内网很有趣，几乎什么都有，甚至连搜索引擎，VPS服务，云服务都有。</p>
-<p>下面 我们来逛一逛都有什么 奇葩的 py交易。</p>
-<h3 id="虚拟主机交易"><a href="#虚拟主机交易" class="headerlink" title="虚拟主机交易"></a>虚拟主机交易</h3><p><img src="/content/images/torworld/1.png" alt=""></p>
-<h3 id="免费盗版市场"><a href="#免费盗版市场" class="headerlink" title="免费盗版市场"></a>免费盗版市场</h3><p>盗版书</p>
-<p><img src="/content/images/torworld/2.png" alt=""></p>
-<p>盗版音乐</p>
-<p><img src="/content/images/torworld/13.png" alt=""></p>
-<h3 id="英国枪支弹药交易"><a href="#英国枪支弹药交易" class="headerlink" title="英国枪支弹药交易"></a>英国枪支弹药交易</h3><p><img src="/content/images/torworld/3.png" alt=""></p>
-<p>比特币交易，一个Glock 19 - 9mm枪 500磅，比特币交易，当前交易金额相当于1.028比特币。</p>
-<p>（英国持枪是合法的，但是我不感兴趣）</p>
-<h3 id="暗网iPhone交易"><a href="#暗网iPhone交易" class="headerlink" title="暗网iPhone交易"></a>暗网iPhone交易</h3><p>不知道iPhone的货源，很便宜。</p>
-<p><img src="/content/images/torworld/4.png" alt=""></p>
-<h3 id="办证类"><a href="#办证类" class="headerlink" title="办证类"></a>办证类</h3><p>美国护照</p>
-<p><img src="/content/images/torworld/5.png" alt=""></p>
-<p>美国假身份证</p>
-<p><img src="/content/images/torworld/7.png" alt=""></p>
-<p>英国护照</p>
-<p><img src="/content/images/torworld/6.png" alt=""></p>
-<p>我只能感叹一句，这要是在我大中国，这价格绝对倒闭。太贵了。</p>
-<h3 id="博客"><a href="#博客" class="headerlink" title="博客"></a>博客</h3><p><img src="/content/images/torworld/8.png" alt=""></p>
-<p>此外还有很多，没什么意思</p>
-<h3 id="电子邮箱"><a href="#电子邮箱" class="headerlink" title="电子邮箱"></a>电子邮箱</h3><p><img src="/content/images/torworld/9.png" alt=""></p>
-<p>几乎是全匿名的电子邮箱，用比特message登录的</p>
-<h3 id="政治"><a href="#政治" class="headerlink" title="政治"></a>政治</h3><p>各种资本主义反动派论坛</p>
-<p><img src="/content/images/torworld/10.png" alt=""></p>
-<p><img src="/content/images/torworld/11.png" alt=""></p>
-<h3 id="雇佣黑阔"><a href="#雇佣黑阔" class="headerlink" title="雇佣黑阔"></a>雇佣黑阔</h3><p><img src="/content/images/torworld/12.png" alt=""></p>
-<p>日一个网站500欧元，还是挺赚的。</p>
-<h3 id="其他的"><a href="#其他的" class="headerlink" title="其他的"></a>其他的</h3><p>当然还有社工 库，😍情，各种其他的东西，这个不能写在这里，嘿嘿嘿。</p>
-<h2 id="导航站"><a href="#导航站" class="headerlink" title="导航站"></a>导航站</h2><p><a href="http://dirnxxdraygbifgc.onion/" target="_blank" rel="external">http://dirnxxdraygbifgc.onion/</a></p>
-<p><a href="http://torlinkbgs6aabns.onion/" target="_blank" rel="external">http://torlinkbgs6aabns.onion/</a></p>
-<p><a href="http://32rfckwuorlf4dlv.onion/" target="_blank" rel="external">http://32rfckwuorlf4dlv.onion/</a></p>
-<p><a href="http://torwikignoueupfm.onion/" target="_blank" rel="external">http://torwikignoueupfm.onion/</a></p>
-<p><a href="http://torlinkbgs6aabns.onion/" target="_blank" rel="external">http://torlinkbgs6aabns.onion/</a></p>
-<h2 id="搜索引擎"><a href="#搜索引擎" class="headerlink" title="搜索引擎"></a>搜索引擎</h2><p><a href="http://xmh57jrzrnw6insl.onion/" target="_blank" rel="external">http://xmh57jrzrnw6insl.onion/</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;TOR 是一个不可以吃的洋葱，众所周知洋葱新闻美国一个非常严谨的讽刺新闻公司，所以这个文章跟洋葱新闻没什么关系。&lt;/p&gt;
-&lt;p&gt;以下内容纯属虚构。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
-    
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>再玩Monyer的Hack Game</title>
-    <link href="http://www.yfgeek.com/2016/11/23/%E5%86%8D%E7%8E%A9Monyer%E7%9A%84Hack-Game/"/>
-    <id>http://www.yfgeek.com/2016/11/23/再玩Monyer的Hack-Game/</id>
-    <published>2016-11-23T19:15:20.000Z</published>
-    <updated>2017-06-26T00:02:17.000Z</updated>
-    
-    <content type="html"><![CDATA[<p>之前混百度空间混久了，认识很多大牛，不乏monyer大牛。很早很早以前，他做了一个黑客小游戏，当时还不太会玩，现在突然打开发现，网站竟然还活着，决定重温经典。</p>
-<a id="more"></a>
-<h1 id="第零关"><a href="#第零关" class="headerlink" title="第零关"></a>第零关</h1><p><a href="http://monyer.com/game/game1/" target="_blank" rel="external">http://monyer.com/game/game1/</a></p>
-<blockquote>
-<p>请点击链接进入第1关： 连接在左边→ ←连接在右边</p>
-</blockquote>
-<p>可是我们看不到链接地址，直接打开审查工具。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>连接在左边→<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"first.php"</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">span</span>&gt;</span>←连接在右边<span class="tag">&lt;/<span class="name">span</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>好的输入地址，我么进入第一关</p>
-<h1 id="第一关"><a href="#第一关" class="headerlink" title="第一关"></a>第一关</h1><p><a href="http://monyer.com/game/game1/first.php" target="_blank" rel="external">http://monyer.com/game/game1/first.php</a></p>
-<p>打开页面依然是什么都没有，这很正常。审查工具看代码。</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">'txt'</span>).value==<span class="string">"  "</span>)&#123;</div><div class="line">            <span class="built_in">window</span>.location.href=<span class="string">"hello.php"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            alert(<span class="string">"密码错误"</span>);</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>好了 我们知道密码了，并且知道下一关的文件是hello.php</p>
-<h1 id="第二关"><a href="#第二关" class="headerlink" title="第二关"></a>第二关</h1><p><a href="http://monyer.com/game/game1/hello.php" target="_blank" rel="external">http://monyer.com/game/game1/hello.php</a></p>
-<p>审查工具看源代码，head中</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">"text/rocketscript"</span> <span class="attr">data-rocketoptimized</span>=<span class="string">"true"</span>&gt;</span><span class="javascript"></span></div><div class="line">    <span class="built_in">document</span>.oncontextmenu=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span> <span class="literal">false</span>&#125;;</div><div class="line"></div><div class="line">    <span class="keyword">var</span> a,b,c,d,e,f,g;</div><div class="line">    a = <span class="number">3.14</span>;</div><div class="line">    b = a * <span class="number">2</span>;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = <span class="built_in">Math</span>.floor(a);</div><div class="line"></div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">"txt"</span>).value==a)&#123;</div><div class="line">            <span class="built_in">window</span>.location.href=a + <span class="string">".php"</span>;</div><div class="line">        &#125;<span class="keyword">else</span>&#123;</div><div class="line">            alert(<span class="string">"密码错误"</span>);</div><div class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></div></pre></td></tr></table></figure>
-<p>现在是2016年了，我们不需要手算和计算器了。直接在chrome的console里输入<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> a,b,c,d,e,f,g;</div><div class="line">    a = <span class="number">3.14</span>;</div><div class="line">    b = a * <span class="number">2</span>;</div><div class="line">    c = a + b;</div><div class="line">    d = c / b + a;</div><div class="line">    e = c - d * b + a;</div><div class="line">    f = e + d /c -b * a;</div><div class="line">    g = f * e - d + c * b + a;</div><div class="line">    a = g * g;</div><div class="line">    a = <span class="built_in">Math</span>.floor(a);</div><div class="line">    </div><div class="line"><span class="number">424178</span></div></pre></td></tr></table></figure></p>
-<p>好的我们知道a的值是424178，输入，进入下一关</p>
-<h1 id="第三关"><a href="#第三关" class="headerlink" title="第三关"></a>第三关</h1><p><a href="http://monyer.com/game/game1/424178.php" target="_blank" rel="external">http://monyer.com/game/game1/424178.php</a></p>
-<p>head中存在js</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/rocketscript"</span> data-rocketoptimized=<span class="string">"true"</span>&gt;</div><div class="line">    <span class="built_in">eval</span>(<span class="built_in">String</span>.fromCharCode(<span class="number">102</span>,<span class="number">117</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">116</span>,<span class="number">105</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">32</span>,<span class="number">99</span>,<span class="number">104</span>,<span class="number">101</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">40</span>,<span class="number">41</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">97</span>,<span class="number">32</span>,<span class="number">61</span>,<span class="number">32</span>,<span class="number">39</span>,<span class="number">100</span>,<span class="number">52</span>,<span class="number">103</span>,<span class="number">39</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">105</span>,<span class="number">102</span>,<span class="number">40</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">117</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">46</span>,<span class="number">103</span>,<span class="number">101</span>,<span class="number">116</span>,<span class="number">69</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">66</span>,<span class="number">121</span>,<span class="number">73</span>,<span class="number">100</span>,<span class="number">40</span>,<span class="number">39</span>,<span class="number">116</span>,<span class="number">120</span>,<span class="number">116</span>,<span class="number">39</span>,<span class="number">41</span>,<span class="number">46</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">108</span>,<span class="number">117</span>,<span class="number">101</span>,<span class="number">61</span>,<span class="number">61</span>,<span class="number">97</span>,<span class="number">41</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">09</span>,<span class="number">119</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">119</span>,<span class="number">46</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">97</span>,<span class="number">116</span>,<span class="number">105</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">46</span>,<span class="number">104</span>,<span class="number">114</span>,<span class="number">101</span>,<span class="number">102</span>,<span class="number">61</span>,<span class="number">97</span>,<span class="number">43</span>,<span class="number">34</span>,<span class="number">46</span>,<span class="number">112</span>,<span class="number">104</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">125</span>,<span class="number">101</span>,<span class="number">108</span>,<span class="number">115</span>,<span class="number">101</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">09</span>,<span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">34</span>,<span class="number">23494</span>,<span class="number">30721</span>,<span class="number">38169</span>,<span class="number">35823</span>,<span class="number">34</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>));</div><div class="line"><span class="xml"><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span></div></pre></td></tr></table></figure>
-<p>新时代无须解释，直接上chrome consle<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">String</span>.fromCharCode(<span class="number">102</span>,<span class="number">117</span>,<span class="number">110</span>,<span class="number">99</span>,<span class="number">116</span>,<span class="number">105</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">32</span>,<span class="number">99</span>,<span class="number">104</span>,<span class="number">101</span>,<span class="number">99</span>,<span class="number">107</span>,<span class="number">40</span>,<span class="number">41</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">114</span>,<span class="number">32</span>,<span class="number">97</span>,<span class="number">32</span>,<span class="number">61</span>,<span class="number">32</span>,<span class="number">39</span>,<span class="number">100</span>,<span class="number">52</span>,<span class="number">103</span>,<span class="number">39</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">105</span>,<span class="number">102</span>,<span class="number">40</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">117</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">46</span>,<span class="number">103</span>,<span class="number">101</span>,<span class="number">116</span>,<span class="number">69</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">109</span>,<span class="number">101</span>,<span class="number">110</span>,<span class="number">116</span>,<span class="number">66</span>,<span class="number">121</span>,<span class="number">73</span>,<span class="number">100</span>,<span class="number">40</span>,<span class="number">39</span>,<span class="number">116</span>,<span class="number">120</span>,<span class="number">116</span>,<span class="number">39</span>,<span class="number">41</span>,<span class="number">46</span>,<span class="number">118</span>,<span class="number">97</span>,<span class="number">108</span>,<span class="number">117</span>,<span class="number">101</span>,<span class="number">61</span>,<span class="number">61</span>,<span class="number">97</span>,<span class="number">41</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">09</span>,<span class="number">119</span>,<span class="number">105</span>,<span class="number">110</span>,<span class="number">100</span>,<span class="number">111</span>,<span class="number">119</span>,<span class="number">46</span>,<span class="number">108</span>,<span class="number">111</span>,<span class="number">99</span>,<span class="number">97</span>,<span class="number">116</span>,<span class="number">105</span>,<span class="number">111</span>,<span class="number">110</span>,<span class="number">46</span>,<span class="number">104</span>,<span class="number">114</span>,<span class="number">101</span>,<span class="number">102</span>,<span class="number">61</span>,<span class="number">97</span>,<span class="number">43</span>,<span class="number">34</span>,<span class="number">46</span>,<span class="number">112</span>,<span class="number">104</span>,<span class="number">112</span>,<span class="number">34</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">125</span>,<span class="number">101</span>,<span class="number">108</span>,<span class="number">115</span>,<span class="number">101</span>,<span class="number">123</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">09</span>,<span class="number">97</span>,<span class="number">108</span>,<span class="number">101</span>,<span class="number">114</span>,<span class="number">116</span>,<span class="number">40</span>,<span class="number">34</span>,<span class="number">23494</span>,<span class="number">30721</span>,<span class="number">38169</span>,<span class="number">35823</span>,<span class="number">34</span>,<span class="number">41</span>,<span class="number">59</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">09</span>,<span class="number">125</span>,<span class="number">13</span>,<span class="number">10</span>,<span class="number">125</span>)</div></pre></td></tr></table></figure></p>
-<p>输出为<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>)</span>&#123;</div><div class="line">	<span class="keyword">var</span> a = <span class="string">'d4g'</span>;</div><div class="line">	<span class="keyword">if</span>(<span class="built_in">document</span>.getElementById(<span class="string">'txt'</span>).value==a)&#123;</div><div class="line">		<span class="built_in">window</span>.location.href=a+<span class="string">".php"</span>;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		alert(<span class="string">"密码错误"</span>);</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>好了我们知道了，密码是d4g，下一关！</p>
-<h1 id="第四关"><a href="#第四关" class="headerlink" title="第四关"></a>第四关</h1><p><a href="http://monyer.com/game/game1/d4g.php" target="_blank" rel="external">http://monyer.com/game/game1/d4g.php</a></p>
-<p>这一关非常猥琐，页面会自动跳转，稍有不注意，就跳走了。<br>打开后立即按esc停止。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;script type=<span class="string">"text/rocketscript"</span> data-rocketoptimized=<span class="string">"true"</span>&gt;</div><div class="line">    <span class="built_in">eval</span>(<span class="function"><span class="keyword">function</span>(<span class="params">p,a,c,k,e,d</span>)</span>&#123;e=<span class="function"><span class="keyword">function</span>(<span class="params">c</span>)</span>&#123;<span class="keyword">return</span> c.toString(<span class="number">36</span>)&#125;;<span class="keyword">if</span>(!<span class="string">''</span>.replace(<span class="regexp">/^/</span>,<span class="built_in">String</span>))&#123;<span class="keyword">while</span>(c--)d[c.toString(a)]=k[c]||c.toString(a);k=[<span class="function"><span class="keyword">function</span>(<span class="params">e</span>)</span>&#123;<span class="keyword">return</span> d[e]&#125;];e=<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;<span class="keyword">return</span><span class="string">'\\w+'</span>&#125;;c=<span class="number">1</span>&#125;;<span class="keyword">while</span>(c--)<span class="keyword">if</span>(k[c])p=p.replace(<span class="keyword">new</span> <span class="built_in">RegExp</span>(<span class="string">'\\b'</span>+e(c)+<span class="string">'\\b'</span>,<span class="string">'g'</span>),k[c]);<span class="keyword">return</span> p&#125;(<span class="string">'a="e";d c()&#123;b(9.8(\'7\').6==a)&#123;5.4.3=a+".2"&#125;1&#123;0("密码错误")&#125;&#125;'</span>,<span class="number">15</span>,<span class="number">15</span>,<span class="string">'alert|else|php|href|location|window|value|txt|getElementById|document||if|check|function|3bhe'</span>.split(<span class="string">'|'</span>),<span class="number">0</span>,&#123;&#125;))</div><div class="line">&lt;<span class="regexp">/script&gt;</span></div></pre></td></tr></table></figure>
-<p>显然这是一个加密的js，我们需要解密，上解密工具：</p>
-<p><a href="http://tool.lu/js/" target="_blank" rel="external">http://tool.lu/js/</a></p>
-<p>解密后：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">a = <span class="string">"3bhe"</span>;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">check</span>(<span class="params"></span>) </span>&#123;</div><div class="line">	<span class="keyword">if</span> (<span class="built_in">document</span>.getElementById(<span class="string">'txt'</span>).value == a) &#123;</div><div class="line">		<span class="built_in">window</span>.location.href = a + <span class="string">".php"</span></div><div class="line">	&#125; <span class="keyword">else</span> &#123;</div><div class="line">		alert(<span class="string">"密码错误"</span>)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>密码是 3bhe 下一关</p>
-<p>诶？怎么不对？仔细检查源代码发现下面还有一行<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">eval</span>(<span class="string">"\141\75\141\56\164\157\125\160\160\145\162\103\141\163\145\50\51\53\61\73"</span>);</div></pre></td></tr></table></figure></p>
-<p>解密！<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">a = a.toUpperCase() + <span class="number">1</span>;</div></pre></td></tr></table></figure></p>
-<p>.toUpperCase()是转换大写，所以密码是 3BHE1 下一关 go</p>
-<h1 id="第五关"><a href="#第五关" class="headerlink" title="第五关"></a>第五关</h1><p><a href="http://monyer.com/game/game1/3BHE1.php" target="_blank" rel="external">http://monyer.com/game/game1/3BHE1.php</a></p>
-<blockquote>
-<p>密码在哪儿？额，我藏在页面里了哦！</p>
-</blockquote>
-<p>这题的难点在于 找到不密码藏在哪里了 搜索了个遍 就是找不到密码 看看http头呢？</p>
-<p>找到了，在cookie里</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">monyer:the password for the next level is asdf</div></pre></td></tr></table></figure>
-<p>下一关！</p>
-<h1 id="第六关"><a href="#第六关" class="headerlink" title="第六关"></a>第六关</h1><p><a href="http://monyer.com/game/game1/asdf.php" target="_blank" rel="external">http://monyer.com/game/game1/asdf.php</a></p>
-<p>是个线索题目</p>
-<p>Get the latest fashion, beauty, dating, and health tips. Plus, win freebies, take quizzes, and check your daily horoscope! Girl Games - 9000+ Free Games for Girls …</p>
-<p>真蛋疼<br>把这个线索在网上一搜 第一个已经是一个结题方案了，看来monyer的游戏已经成功干过一个网站了。</p>
-<p>这个答案是；seventeen</p>
-<h1 id="第七关"><a href="#第七关" class="headerlink" title="第七关"></a>第七关</h1><p><a href="http://monyer.com/game/game1/seventeen7.php" target="_blank" rel="external">http://monyer.com/game/game1/seventeen7.php</a></p>
-<p>社工题</p>
-<p>先解密md5吧</p>
-<p>5e023995fb3f5e840ee684784f8f0799</p>
-<p><a href="http://www.somd5.com/" target="_blank" rel="external">http://www.somd5.com/</a></p>
-<p>解密出  eighteen8</p>
-<p>下一关</p>
-<h1 id="第八关"><a href="#第八关" class="headerlink" title="第八关"></a>第八关</h1><p><a href="http://monyer.com/game/game1/eighteen8.php" target="_blank" rel="external">http://monyer.com/game/game1/eighteen8.php</a></p>
-<p>直接看到 一个404 不要着急 审查工具</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">&lt;p style=&quot;display:none&quot;&gt;</div><div class="line">第8关</div><div class="line">朋友您好，第8关欢迎您！</div><div class="line">我对您的聪明才智感到惊讶！</div><div class="line">相信我，现在世界上85%以上的人都在你之下，</div><div class="line">所以你可以大步向前，义无反顾地进行你的事业了。</div><div class="line">因为只要你肯努力，不畏惧挫折，这个世界上没有难倒你的事。</div><div class="line">那么继续我们的约定，我将告诉你第9关的入口：</div><div class="line">10000以内所有质数和.php</div><div class="line">&lt;/p&gt;</div></pre></td></tr></table></figure>
-<p>10000以内所有质数和，so easy！写个javascript 算一下。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div></pre></td><td class="code"><pre><div class="line">var sum = 0;</div><div class="line">for (var i = 2; i &lt; 10000; i++) &#123;</div><div class="line">	var flag = true;</div><div class="line">	for (var j = 2; j &lt;= Math.sqrt(i); j++) &#123;</div><div class="line">		if (i % j == 0) flag = false ;</div><div class="line">	&#125;</div><div class="line">    if(flag) &#123;sum = sum + i;&#125;</div><div class="line">&#125;</div><div class="line">console.log(sum);</div><div class="line"></div><div class="line">5736396</div></pre></td></tr></table></figure>
-<p>下一关</p>
-<h1 id="第九关"><a href="#第九关" class="headerlink" title="第九关"></a>第九关</h1><p><a href="http://monyer.com/game/game1/5736396.php" target="_blank" rel="external">http://monyer.com/game/game1/5736396.php</a></p>
-<p>在命令行里输入：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget http://monyer.com/game/game1/img/4681851790659554.jpg</div><div class="line">cat 4681851790659554.jpg</div></pre></td></tr></table></figure></p>
-<p>密码藏在图片里<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">���^�v��*&#123;I�z��^�iؾSRW�V�6�Z��(����H�����ٹ�����</div><div class="line">�Ǿ���ʽ�ʲô���ţ�</div><div class="line">�ԣ�������������������......��</div><div class="line">��ϲ�㣡</div><div class="line">��ʮ������Ϊ��MonyerLikeYou_the10level</div><div class="line">�����ڿ�ʼ�漰������Ķ�̬���������㶼���԰���ʾ������ɵģ�</div><div class="line">�����Լ���û��ģ�%</div></pre></td></tr></table></figure></p>
-<p>MonyerLikeYou_the10level</p>
-<h1 id="第十关"><a href="#第十关" class="headerlink" title="第十关"></a>第十关</h1><p><a href="http://monyer.com/game/game1/MonyerLikeYou_the10level.php" target="_blank" rel="external">http://monyer.com/game/game1/MonyerLikeYou_the10level.php</a></p>
-<blockquote>
-<p>当前用户身份为simpleuser 不是admin，无法显示下一关密码</p>
-</blockquote>
-<p>很显然这是一道session/cookie欺骗题</p>
-<p>在console里直接输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie=&quot;username=admin&quot;</div></pre></td></tr></table></figure></p>
-<p>刷新</p>
-<blockquote>
-<p>好聪明哦！下一关密码为：doyouknow</p>
-</blockquote>
-<p>下一关！</p>
-<h1 id="第十一关"><a href="#第十一关" class="headerlink" title="第十一关"></a>第十一关</h1><p><a href="http://monyer.com/game/game1/doyouknow.php?action=show_login_false" target="_blank" rel="external">http://monyer.com/game/game1/doyouknow.php?action=show_login_false</a></p>
-<blockquote>
-<p>你的session不是passer，不能查看下一关密码</p>
-</blockquote>
-<p>在console里直接输入<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">document.cookie=&quot;username=passer&quot;</div></pre></td></tr></table></figure></p>
-<p>刷新，好像不对哦，monyer骗我，哼！</p>
-<p>再看标题 action=show_login_false </p>
-<p><a href="http://monyer.com/game/game1/doyouknow.php?action=show_login_true" target="_blank" rel="external">http://monyer.com/game/game1/doyouknow.php?action=show_login_true</a></p>
-<blockquote>
-<p>您的session为passer，所以您可以查看下一关密码：smartboy</p>
-</blockquote>
-<p>下一关！</p>
-<h1 id="第十二关"><a href="#第十二关" class="headerlink" title="第十二关"></a>第十二关</h1><p><a href="http://monyer.com/game/game1/smartboy.php" target="_blank" rel="external">http://monyer.com/game/game1/smartboy.php</a></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">JTRBJTU0JTYzJTdBJTRBJTU0JTVBJTQ3JTRBJTU0JTU5JTc5JTRBJTU0JTU5JTMxJTRBJTU0JTU5JTc4JTRBJTU0JTYzJTMxJTRBJTU0JTYzJTMwJTRBJTU0JTU5JTM1JTRBJTU0JTU5JTMyJTRBJTU0JTYzJTMxJTRBJTU0JTVBJTQ0JTRBJTU0JTRBJTQ2JTRBJTU0JTYzJTc3JTRBJTU0JTU5JTM0JTRBJTU0JTYzJTc3</div></pre></td></tr></table></figure>
-<p>直觉告诉我，这显然是Base64 解密<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">%4A%54%63%7A%4A%54%5A%47%4A%54%59%79%4A%54%59%31%4A%54%59%78%4A%54%63%31%4A%54%63%30%4A%54%59%35%4A%54%59%32%4A%54%63%31%4A%54%5A%44%4A%54%4A%46%4A%54%63%77%4A%54%59%34%4A%54%63%77</div></pre></td></tr></table></figure></p>
-<p>直觉告诉我，这显然是 UrlEncode 解密</p>
-<p>JTczJTZGJTYyJTY1JTYxJTc1JTc0JTY5JTY2JTc1JTZDJTJFJTcwJTY4JTcw</p>
-<p>直觉再次告诉我，这显然是 Base64 解密</p>
-<p>%73%6F%62%65%61%75%74%69%66%75%6C%2E%70%68%70</p>
-<p>直觉再次告诉我，这显然是  UrlEncode 解密</p>
-<p>sobeautiful.php</p>
-<p>不错 密码就是sobeautiful</p>
-<h1 id="第十三关"><a href="#第十三关" class="headerlink" title="第十三关"></a>第十三关</h1><p><a href="http://monyer.com/game/game1/sobeautiful.php" target="_blank" rel="external">http://monyer.com/game/game1/sobeautiful.php</a></p>
-<blockquote>
-<p>本页禁止盗链！</p>
-</blockquote>
-<p>wtf..显然他判断了http来源，需要伪造http referer，那么我们在之前的第十二关的审查代码中加入：</p>
-<figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>= <span class="string">"http://monyer.com/game/game1/sobeautiful.php"</span>&gt;</span> 简便伪造referer<span class="tag">&lt;/<span class="name">a</span>&gt;</span></div></pre></td></tr></table></figure>
-<blockquote>
-<p>欢迎您来到第13关</p>
-<p>请输入密码进入第14关：</p>
-<p>没有输入密码 或 密码错误 或 系统错误！</p>
-</blockquote>
-<p>看源代码有post提交</p>
-<p>这是一道SQL 注入题</p>
-<p>试试我大万能密码！<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&apos; or 1=1</div></pre></td></tr></table></figure></p>
-<p>万能密码熟记于心</p>
-<blockquote>
-<p>下一关密码：whatyouneverknow</p>
-</blockquote>
-<p>下一关！</p>
-<h1 id="第十四关"><a href="#第十四关" class="headerlink" title="第十四关"></a>第十四关</h1><p><a href="http://monyer.com/game/game1/whatyouneverknow.php" target="_blank" rel="external">http://monyer.com/game/game1/whatyouneverknow.php</a></p>
-<p>感谢@Echowxsy提供第14关解密过程</p>
-<p><img src="/content/images/monyerhack/01.jpg" alt=""></p>
-<p><img src="/content/images/monyerhack/02.jpg" alt=""></p>
-<p><img src="/content/images/monyerhack/03.jpg" alt=""></p>
-<p><img src="/content/images/monyerhack/1.jpg" alt=""></p>
-<p><img src="/content/images/monyerhack/2.jpg" alt=""></p>
-<p><img src="/content/images/monyerhack/3.jpg" alt=""></p>
-<p><img src="/content/images/monyerhack/5.jpg" alt=""></p>
-<h1 id="第十五关"><a href="#第十五关" class="headerlink" title="第十五关"></a>第十五关</h1><p><img src="/content/images/monyerhack/4.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;之前混百度空间混久了，认识很多大牛，不乏monyer大牛。很早很早以前，他做了一个黑客小游戏，当时还不太会玩，现在突然打开发现，网站竟然还活着，决定重温经典。&lt;/p&gt;
     
     </summary>
     

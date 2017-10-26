@@ -13,11 +13,11 @@
 <meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
     <title>
         
-          Ivan&#39;s Blog
+          记一次MySQL无法启动及修复经历 - Ivan&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.yfgeek.com/page/3/">
+    <link rel="canonical" href="http://www.yfgeek.com/2017/08/18/记一次Mysql无法启动及修复经历/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -139,355 +139,183 @@ var _hmt = _hmt || [];
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/content/images/2016/08/wall.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://www.yfgeek.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/content/images/2016/08/wall.jpg')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Ivan&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Web前端 &amp; 极客 &amp; 渗透</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Web" title="Web">Web</a>
+                        
+                    </div>
+                    <h1>记一次MySQL无法启动及修复经历</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Ivan on
+                        2017-08-18
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-                <!-- Main Content -->
-
-
-<div class="post-preview">
-
-    <a href="/2017/01/02/iOS-10-iMessage字符崩溃Bug又来了/">
-        <h2 class="post-title">
-            iOS 10 iMessage字符崩溃Bug又来了
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            这是一篇本人发表到Freebuf的文章。
-介绍近日，黑客@vincedes3发现了一个从iOS 8 到 iOS 10.2.1 b2通用的iMessage字符崩溃Bug，该Bug同样利用了和当年iOS 8的iMessage短信Bug的类似手法，将一段恶意代码发送给受害者，受害者在接收短信后，浏览短信即可中招，此后短信应用陷入死机状态，除非打开修复网页程序，否则再也无法打开短信应用。
-
-利用1.......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2017-01-02
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/31/2017/">
-        <h2 class="post-title">
-            2016，2017
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            似乎每年写年终总结已经成为习惯，2007年开始写博客，2009年开始，每年都象征性的写一个年终报告，或许是元旦或许是新年。
-每年这个时候，都会自觉地打开cnbeta.com看每一年的新年祝福。今年，也不例外，这么一看，已经9年过去了。
-2016在2016年，这一年励志在Github上取得更大的成就，知乎上娱乐为主。
-截止2016年12月31日，知乎累计收获了1388个赞，获得 252 次感谢......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-12-31
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/27/emoji/">
-        <h2 class="post-title">
-            Emoji 表情域名 引领未来
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂
-
-Emoji 等 Unicode 字符，浏览器Punycode的方式将 Unicode字符用ASCII进行编码。
-我也顺势跟风，注册了一个坑爹的TK域名。
-💌.tk
-
-查询在chrome浏览器上直接......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-12-27
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/21/network-zero/">
-        <h2 class="post-title">
-            Raspberry Pi Zero联网奇妙记
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            说句实话，Zero真的不适合把玩，想让他连上网，太难了。
-痛点
-住公寓，有WiFi/Lan登录认证系统
-公寓的网络动态分配范围很大，很难快速找到树莓派的IP
-公寓的网络防止扫描端口，有惩罚策略
-没有显示器 无法查看树莓派Zero的状态
-树莓派Zero只有一个OTG USB接口
-树莓派Zero没有内置以太网Lan
-树莓派Zero没有无线网卡WiFi
-树莓派Zero没有蓝牙 更没有蓝牙局域网
-树......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-12-21
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/12/21/wat/">
-        <h2 class="post-title">
-            Wat 吐槽JavaScript
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            今天晚上在研究React技术栈头疼的时候，突然看到一个吐槽JavaScript的视频，简直搞笑，不过也挺客观的，毕竟是一个10天内攒出来的语言，虽然现在发展有ES支撑，但是依然非常零散，不过我按照视频里的做法试了一下，似乎有的返回结果不太一样。
-Wat
-1234567891011121314[] + []""[] + &#123;&#125;"[object Object]"&#123;&#......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-12-21
-
-    </p>
-
-</div>
-<hr>
+                <p>记得有次本地的MySQL无法启动，网上说，去删掉InnoDB日志就行，我就傻乎乎的去删掉了InnoDB相关的文件，果然，没有任何问题，正常启动了。</p>
+<p>可是谁曾想，过了几天，故障复现了，我就按部就班的又去删除，结果，又解决了。</p>
+<p>可是，现在棘手的问题又出现了，数据库，彻底的挂掉了。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">[ERROR] InnoDB: Attempted to open a previously opened tablespace</div><div class="line">2017-08-18 20:07:04 140736493900736 [ERROR] InnoDB: Attempted to open a previously opened tablespace. Previous tablespace blockvotes/vote uses space ID: 7 at filepath: ./blockvotes/vote.ibd. Cannot open tablespace phpmyadmin/pma__pdf_pages which uses space ID: 7 at filepath: ./phpmyadmin/pma__pdf_pages.ibd</div><div class="line">2017-08-18 20:07:04 7fffc4b9d3c0  InnoDB: Operating system error number 2 in a file operation.</div><div class="line">InnoDB: The error means the system cannot find the path specified.</div><div class="line">InnoDB: If you are installing InnoDB, remember that you must create</div><div class="line">InnoDB: directories yourself, InnoDB does not create them.</div><div class="line">InnoDB: Error: could not open single-table tablespace file ./phpmyadmin/pma__pdf_pages.ibd</div></pre></td></tr></table></figure>
+<p>按照网上的说法，没救了，因为第一次删除了InnoDB的<code>ibdata1</code>文件，这个文件是共享表空间，是不可以随便乱删的。</p>
+<p>可是想着我的数据库里还存着很多东西，不能就这样放弃。</p>
+<p>终于，找到了强力解决方法！</p>
+<p>修复方法，打开my.cnf文件，把开启mysql的innodb强制修复属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">[mysqld]</div><div class="line"></div><div class="line">innodb_force_recovery = 1</div></pre></td></tr></table></figure>
+<p>启动服务后，瞬间好了，数据完好无损，没有丢失。</p>
 
 
+                <hr>
 
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/page/2/">&larr; 上一篇</a>
-        </li>
-    
-    
-        <li class="next">
-            <a href="/page/4/">下一篇 &rarr;</a>
-        </li>
-    
-</ul>
-
-
-                <!-- 如果开启评论功能 -->
                 
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/10/26/我是如何收集校友的之爬虫/" data-toggle="tooltip" data-placement="top" title="“我是如何收集校友的”之爬虫模块">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/08/10/blockvotes/" data-toggle="tooltip" data-placement="top" title="BlockVotes 一个基于区块链的环签名投票系统">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                
+                <!-- disqus 评论框 start -->
+                <div class="comment">
+                    <div id="disqus_thread" class="disqus-thread"></div>
+                </div>
+                <!-- disqus 评论框 end -->
+                
+
+                
+
+               
 
             </div>
-    <!-- Sidebar Container -->
+    <!-- Side Catalog Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
                 sidebar-container
-            ">
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
-                            
-                        
-                            
-                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-                            
-                        
-                            
-                            <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
-                            
-                        
-                            
-                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Mac" title="Mac" rel="2">Mac</a>
-                            
-                        
-                            
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="8">Raspberry</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                    </div>
-                </section>
-                
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about.html">ABOUT ME</a></h5>
-                    <div class="short-about">
+    <!-- Sidebar Container -->
 
-                        
-                            <img src="/img/logo.jpg" />
-                        
-
-                        
-                            <p>对任何技术永远充满敬畏之心</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                                <li>
-                                    <a href="/feed.xml">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="http://weibo.com/yfss">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/yfgeek">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-
-                            
-                        </ul>
-                    </div>
-                </section>
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+                <!-- GUESTS Blog -->
+                <hr>
+                <h5>GUESTS</h5>
+                <div class="ds-recent-visitors" data-num-items="17" data-avatar-size="32" id="ds-recent-visitors"></div>
 
                 <!-- Friends Blog -->
                 
-                <!-- Comments List -->
-                <hr>
-                  <h5>RECOMMENDED</h5>
-                	<div class="widget">
-                        <ul class="ds-recent-comments" data-num-items="5" data-excerpt-length="20"style="padding: 0 5px;margin: 0;">
-                        <li><a href="/2017/02/04/react/" target="_blank">我眼中的React</a></li>
-                        <li><a href="/2017/02/11/currying/" target="_blank">浅谈函数式编程柯里化</a></li>
-                        <li><a href="/2016/12/18/poisontap/" target="_blank">30秒内盗取任意PC的Cookie神器</a></li>
-                        <li><a href="/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/" target="_blank">OTR(Off-the-Record)技术探讨</a></li>
-                        <li><a href="/2016/11/22/docker-SQLServer/" target="_blank">Docker下配置SQL Server for Linux</a></li>
-                        <li><a href="/2017/01/12/network-zero-web/" target="_blank">用Raspberry Pi Zero打造“即插即用”的Web服务器</a></li>
-                        <li><a href="/2016/12/21/network-zero/" target="_blank">Raspberry Pi Zero联网奇妙记</a></li>
-                        <li><a href="/2016/11/27/badusb/" target="_blank">Arduino Leonardo 打造 Bad USB</a></li>
-                        </ul>
-                	</div>
-        
+
+
+            </div>
+
+        </div>
     </div>
-</div>
+</article>
+
+
+
+
+<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
+<script type="text/javascript">
+    /* * * CONFIGURATION VARIABLES * * */
+    var disqus_shortname = "yfgeek";
+    var disqus_identifier = "http://www.yfgeek.com/2017/08/18/记一次Mysql无法启动及修复经历/";
+    var disqus_url = "http://www.yfgeek.com/2017/08/18/记一次Mysql无法启动及修复经历/";
+
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<!-- disqus 公共JS代码 end -->
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

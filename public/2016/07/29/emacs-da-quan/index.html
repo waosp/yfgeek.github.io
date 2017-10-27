@@ -58,6 +58,8 @@ var _hmt = _hmt || [];
   s.parentNode.insertBefore(hm, s);
 })();
 </script>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
 </head>
 
 
@@ -305,13 +307,7 @@ C-x C-q : 修改buffer的只读属性</pre>
                     
                 </ul>
 
-                
-                <!-- disqus 评论框 start -->
-                <div class="comment">
-                    <div id="disqus_thread" class="disqus-thread"></div>
-                </div>
-                <!-- disqus 评论框 end -->
-                
+                 <div id="gitcomments"></div>
 
                 
 
@@ -339,11 +335,6 @@ C-x C-q : 修改buffer的只读属性</pre>
                 col-lg-8 col-lg-offset-2
                 col-md-10 col-md-offset-1
                 sidebar-container">
-                <!-- GUESTS Blog -->
-                <hr>
-                <h5>GUESTS</h5>
-                <div class="ds-recent-visitors" data-num-items="17" data-avatar-size="32" id="ds-recent-visitors"></div>
-
                 <!-- Friends Blog -->
                 
 
@@ -353,24 +344,19 @@ C-x C-q : 修改buffer的只读属性</pre>
         </div>
     </div>
 </article>
-
-
-
-
-<!-- disqus 公共JS代码 start (一个网页只需插入一次) -->
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname = "yfgeek";
-    var disqus_identifier = "http://www.yfgeek.com/2016/07/29/emacs-da-quan/";
-    var disqus_url = "http://www.yfgeek.com/2016/07/29/emacs-da-quan/";
-
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
+<script>
+var gitment = new Gitment({
+  owner: 'yfgeek',
+  repo: 'yfgeek.github.io',
+  oauth: {
+    client_id: '62ad5643d4dd88174261',
+    client_secret: '72d853a4534da2a5896129a9c9f4cb4c85cab387',
+  },
+})
+gitment.render('gitcomments')
 </script>
-<!-- disqus 公共JS代码 end -->
+
+
 
 
 

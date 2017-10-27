@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "dtrace-provider": "^0.8.0",
+    "gitment": "0.0.3",
     "hexo": "^3.2.0",
     "hexo-admin": "^2.1.0",
     "hexo-deployer-git": "^0.2.0",

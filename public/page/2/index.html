@@ -178,6 +178,32 @@ var _hmt = _hmt || [];
 
 <div class="post-preview">
 
+    <a href="/2017/02/17/utf8true/">
+        <h2 class="post-title">
+            揭秘utf8=✓背后的小秘密
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            你可能和我一样疑惑，为什么github等网站，在POST数据的时候，经常带有utf8=✓字符，显然这种方式看起来很难以接受，因为Unicode编码错误的话会导致很多问题，毕竟用户的浏览器是不一样的。
+为什么不用utf8=true来代替呢？
+答案恰恰相反！
+utf8=✓就是为了让浏览器在POST数据时强制使用utf-8的编码方式，进而在后端代码中无需考虑字符串编码转换问题，以免带来困扰。
+在I......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-02-17
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/02/11/currying/">
         <h2 class="post-title">
             浅谈函数式编程柯里化
@@ -281,33 +307,6 @@ KISS原则  *Keep It Simple, Stupid*
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/01/07/gitcase/">
-        <h2 class="post-title">
-            Git 文件、文件夹区分大小写
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            其实非常简单，只是提醒一个小常识，Git默认是不区分文件，文件夹大小写的。
-这会给很多人带来很多困扰，比如文件改了名，在严格区分大小写的系统下，实际上是两个不同名字的文件，但是Git不区分大小写机制导致无法正常的commit。
-开启Git区分大小写
-1git config core.ignorecase false
-最近爱上了给别人找bug，Pull Request，❤️Github。
-任何......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2017-01-07
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -346,9 +345,11 @@ KISS原则  *Keep It Simple, Stupid*
                     <div class="tags">
                         
                             
+                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
+                            
                         
                             
-                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
+                        
                             
                         
                             
@@ -356,13 +357,11 @@ KISS原则  *Keep It Simple, Stupid*
                             
                         
                             
-                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-                            
-                        
-                            
-                        
-                            
                             <a href="/tags/#Web" title="Web" rel="10">Web</a>
+                            
+                        
+                            
+                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
                             
                         
                             
@@ -385,6 +384,8 @@ KISS原则  *Keep It Simple, Stupid*
                             <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
                             
                         
+                            
+                            <a href="/tags/#数据" title="数据" rel="2">数据</a>
                             
                         
                             

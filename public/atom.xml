@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2017-10-28T15:15:40.587Z</updated>
+  <updated>2017-10-29T09:53:28.357Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -16,11 +16,68 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>实战树莓派安装Windows XP</title>
+    <link href="http://www.yfgeek.com/2017/10/29/rasp-xp/"/>
+    <id>http://www.yfgeek.com/2017/10/29/rasp-xp/</id>
+    <published>2017-10-29T07:36:24.000Z</published>
+    <updated>2017-10-29T09:53:28.357Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="序"><a href="#序" class="headerlink" title="序"></a>序</h1><p>记得小时候，家里的电脑一直安装着Windows 98，天天骂windows难用，虽然没有别的最新的操作系统可以用，也看不出来Windows 98的设计风格有多么古朴，只是bug奇多，动不动就崩溃，系统级别的崩溃，蓝屏，甚至直接坏掉再也无法开机。</p>
+<p>直到有一天，偶然的机会，姐姐家里新买来的电脑，过去一看，大不一样，蓝色的界面，巨好看的任务栏、窗体样式，却不知道什么系统，感觉像是windows 却觉得清晰稳定了许多。</p>
+<p>后来，我逐渐的了解到，这个系统的名字叫Windows XP，那是2002年，漂亮的界面，清脆优雅的提示音，可爱的图标，让我永远无法忘怀。</p>
+<p>回家后，求人把家里的电脑装成Windows XP，却被告知电脑内存只有256MB，硬盘只有30GB，cpu只有800MHZ的配置装的话可能会很卡。无奈之下，我也只好选择接受现实。</p>
+<p>有时候，人越没有却得不到的东西，往往是美好的。一见钟情的Windows XP甚至到做梦都会梦到，能梦到Windows meida player、Windows XP之类的把玩，虽然梦里的情节似乎有些不对，但是那种兴奋的感觉，至今无法忘怀。</p>
+<p>朝思暮想，什么时候能够玩一玩这个系统，那个时候互联网并不发达，并非是没有网络，只是网络搜不到你想搜的东西，也不是任何一个东西都能在网络上下载到，你说：用迅雷呗？不不不，那个时候没有迅雷，只有——网络蚂蚁。</p>
+<p>用Windows 98是痛苦的，经常崩溃甚至需要重新安装系统，我有没有想过过渡产品，比如Windows 2000，对的，有的，其中的过程中我装过几次，但是Windows 2000给我的感觉不是很理想。</p>
+<p>2003年，直到有一天，忍无可忍的我，去盗版盘零售店，花了10块钱买了一张Windows XP SP2的安装光盘，我的幸福人生从此开始——</p>
+<p>时至今日，我仍然十分喜欢Windows XP，尽管已经过去14年之久，人很难忘记短暂的美好的东西。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>下面回归正文，本文写写如何用树莓派 3（Raspberry Pi 3）安装Windows XP。</p>
+<p>其实这是一个伪命题，arm架构怎么能够安装Windows XP呢？充其量应该算是模拟，没错，答题思路就是在系统上安装虚拟机，用arm虚拟机模拟x86架构安装Windows XP。</p>
+<p>其实方法很简单，进入终端，首先：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div></pre></td></tr></table></figure>
+<p>确认无误后，我们开始安装qemu和kvm：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install qemu-kvm qemu virt-manager virt-viewer libvirt-bin</div></pre></td></tr></table></figure>
+<p>网速快的话，应该很快就装完了，这时候一定要重启电脑，否则会提示 <code>libvirt</code>未启动：</p>
+<p><img src="/content/images/rasp-xp/1.jpg" alt=""></p>
+<p>重启后，<a href="http://www.mediafire.com/?ynv5hvh7pmt" target="_blank" rel="external">下载精简版XP MicroXP</a> 密码：warez-bb，当然你愿意安装完整版，也不是不可以。只要下载好并且把iso文件复制到系统里即可。</p>
+<p>接下来的事情很简单，创建虚拟机：</p>
+<p>应用程序-系统工具-虚拟系统管理器</p>
+<p>随后：文件-新建虚拟机</p>
+<p>弹出来的对话框里，配置系统架构为x86_64，内存为256mb，所占空间按照自己比例分配，建议1.5GB-2GB。</p>
+<p>然后开始启动就可以安装了，安装过程大概需要3-4个小时。</p>
+<h1 id="图鉴"><a href="#图鉴" class="headerlink" title="图鉴"></a>图鉴</h1><p>以下是一些图鉴，敬请欣赏。</p>
+<p><img src="/content/images/rasp-xp/2.jpg" alt=""></p>
+<p><img src="/content/images/rasp-xp/3.jpg" alt=""></p>
+<p><img src="/content/images/rasp-xp/4.jpg" alt=""></p>
+<p><img src="/content/images/rasp-xp/5.jpg" alt=""></p>
+<p><img src="/content/images/rasp-xp/6.jpg" alt=""></p>
+<p><img src="/content/images/rasp-xp/7.jpg" alt=""></p>
+<p><img src="/content/images/rasp-xp/8.png" alt=""></p>
+<p><img src="/content/images/rasp-xp/9.png" alt=""></p>
+<p><img src="/content/images/rasp-xp/10.png" alt=""></p>
+<p><img src="/content/images/rasp-xp/11.png" alt=""></p>
+<p>本文谨纪念美好的童年时代。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;序&quot;&gt;&lt;a href=&quot;#序&quot; class=&quot;headerlink&quot; title=&quot;序&quot;&gt;&lt;/a&gt;序&lt;/h1&gt;&lt;p&gt;记得小时候，家里的电脑一直安装着Windows 98，天天骂windows难用，虽然没有别的最新的操作系统可以用，也看不出来Windows 98的设
+    
+    </summary>
+    
+      <category term="Raspberry" scheme="http://www.yfgeek.com/categories/Raspberry/"/>
+    
+    
+      <category term="Raspberry" scheme="http://www.yfgeek.com/tags/Raspberry/"/>
+    
+  </entry>
+  
+  <entry>
     <title>“我是如何收集校友的”之数据去重</title>
-    <link href="http://www.yfgeek.com/2017/10/27/%E2%80%9C%E6%88%91%E6%98%AF%E5%A6%82%E4%BD%95%E6%94%B6%E9%9B%86%E6%A0%A1%E5%8F%8B%E7%9A%84%E2%80%9D%E4%B9%8B%E6%95%B0%E6%8D%AE%E5%8E%BB%E9%87%8D/"/>
-    <id>http://www.yfgeek.com/2017/10/27/“我是如何收集校友的”之数据去重/</id>
+    <link href="http://www.yfgeek.com/2017/10/27/uob2/"/>
+    <id>http://www.yfgeek.com/2017/10/27/uob2/</id>
     <published>2017-10-27T15:35:52.000Z</published>
-    <updated>2017-10-28T15:15:40.587Z</updated>
+    <updated>2017-10-28T15:17:04.836Z</updated>
     
     <content type="html"><![CDATA[<p>按照上文讲到，我们已经抓取到了所有与“伯明翰大学”相关的数据，我们接下来要做的就是做数据清洗工作。</p>
 <p><img src="/content/images/uob/2.png" alt=""></p>
@@ -1259,89 +1316,6 @@
     
     
       <category term="Ops" scheme="http://www.yfgeek.com/tags/Ops/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>OTR(Off-the-Record) 技术探讨</title>
-    <link href="http://www.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/"/>
-    <id>http://www.yfgeek.com/2016/12/06/OTR技术探讨/</id>
-    <published>2016-12-06T12:25:59.000Z</published>
-    <updated>2017-10-26T12:59:55.519Z</updated>
-    
-    <content type="html"><![CDATA[<p>中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。</p>
-<a id="more"></a>
-<p>通过OTR技术，能够实现:</p>
-<ul>
-<li>加密聊天内容</li>
-<li>证明与你聊天的人就是与你聊天的人（防止中间人攻击）</li>
-<li>服务器无法记录你的真实聊天内容</li>
-</ul>
-<h1 id="原理"><a href="#原理" class="headerlink" title="原理"></a>原理</h1><h2 id="消息鉴别码-MAC"><a href="#消息鉴别码-MAC" class="headerlink" title="消息鉴别码(MAC)"></a>消息鉴别码(MAC)</h2><p>在密码学中，消息鉴别码(Message Authentication Code)是经过特定算法后产生的一小段信息，检查某段消息的完整性，以及作身份验证。</p>
-<p><img src="/content/images/otr/1.png" alt=""></p>
-<p>假设有两个聊天用户，一个叫Alice，一个叫Bob。</p>
-<p><img src="/content/images/otr/2.jpg" alt=""></p>
-<p>例如：Alice要给一个叫Bob发信，Alice将明文MK使用Hash算法进行摘要提取，提取结果为Hash(MK)，之后用Alice的私钥对摘要进行签名SA[Hash(MK)]，之后将MK和SA[Hash(MK)]一同发给Bob。</p>
-<p>其中SA[Hash(MK)]便可称之为消息鉴别码（MAC）。</p>
-<p>它可以用来检查在消息传递过程中，其内容是否被更改过，不管更改的原因是来自意外或是蓄意攻击。同时可以作为消息来源的身份验证，确认消息的来源。</p>
-<h2 id="过程"><a href="#过程" class="headerlink" title="过程"></a>过程</h2><p>第一步，使用Diffie-Hellman双方交换公钥，确认公钥可以信任（只大概叙述，取mod运算被简化）。</p>
-<ul>
-<li>Alice（用A表示）和Bob（用B表示）每人分别取一个数x,y,并且取一个g</li>
-<li>A-&gt;B: Alice 生成g^x，并且签名SignAlice(g^x)</li>
-<li>B-&gt;A: Bob 生成g^y，并且签名SignBob(g^y)</li>
-<li>SS=g^xy: 生成共享的公钥</li>
-</ul>
-<p>第二步，使用公钥加密消息，消息传递。</p>
-<ul>
-<li>计算EK=Hash(SS), MK=Hash(EK) </li>
-<li>A-&gt;B: Encek(M), MAC(Encek(M),MK)</li>
-<li>Enc采用对称加密算法，比如AES算法用EK作为密钥</li>
-<li>Bob 用MK验证MAC, 用EK解密M</li>
-<li>保密性和真实性得到了保证</li>
-</ul>
-<p>第三步，更新密钥</p>
-<ul>
-<li>Alice and Bob 再取一个x’,y’</li>
-<li>A-&gt;B: g^x’, MAC(g^x’, MK)</li>
-<li>B-&gt;A: g^y’, MAC(g^y’, MK)</li>
-<li>SS’ = H(g^x’y’)</li>
-<li>EK’ = H(SS’), MK’=H(EK’)</li>
-<li>随后，Alice和Bob安全清除掉之前的SS, x, y, EK</li>
-</ul>
-<p>第四步，继续保留 MK</p>
-<ul>
-<li>Alice 和 Bob 并不需要去清除MK</li>
-<li>事实上，在他们发下一条消息的时候还用着之前的MK</li>
-<li>这让中间人攻击者只能伪造过去的消息，并不能对现在的消息造成影响</li>
-</ul>
-<p>从宏观的角度上来看，假设是Alice是消息发送方 发给 Bob是消息接受方，大致步骤可以分为：</p>
-<ol>
-<li>Alice 和 Bob 都自行生成一对公私钥对，并将自己的公钥发送给对方</li>
-<li>若消息Alice打算发送消息M，则发送方首先用Bob的公钥和自己的私钥对M进行加密、签名，得到M1</li>
-<li>M1经由服务器被发送给消息接收方</li>
-<li>Bob用自己的私钥和Alice的公钥对M1进行解密、签名校验，最终还原出M</li>
-</ol>
-<h1 id="Awesome-OTRs"><a href="#Awesome-OTRs" class="headerlink" title="Awesome OTRs"></a>Awesome OTRs</h1><p>官网: <a href="https://otr.cypherpunks.ca/" target="_blank" rel="external">https://otr.cypherpunks.ca/</a></p>
-<p>pidgin-otr: <a href="https://otr.cypherpunks.ca/gentoo-install/otr-setup.html" target="_blank" rel="external">https://otr.cypherpunks.ca/gentoo-install/otr-setup.html</a></p>
-<p>JavaScript 实现: <a href="https://github.com/arlolra/otr" target="_blank" rel="external">https://github.com/arlolra/otr</a></p>
-<p>otr.to源代码(JS): <a href="https://github.com/OTRMan/otr.to-chat" target="_blank" rel="external">https://github.com/OTRMan/otr.to-chat</a></p>
-<p>一个python的otr项目: <a href="https://github.com/SpiralP/HexChat-otr" target="_blank" rel="external">https://github.com/SpiralP/HexChat-otr</a></p>
-<p>otrtalk(JS): <a href="https://github.com/mnaamani/otrtalk" target="_blank" rel="external">https://github.com/mnaamani/otrtalk</a></p>
-<p>Facebook的OTR实现Chrome插件:<a href="https://github.com/osnr/otron" target="_blank" rel="external">https://github.com/osnr/otron</a></p>
-<p>一个基于OTR技术的P2P聊天系统: <a href="https://github.com/mehrvarz/P2pChatOTR" target="_blank" rel="external">https://github.com/mehrvarz/P2pChatOTR</a></p>
-<h1 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h1><p>研究算法的过程很有趣，也很累，每次应用OTR技术聊天的时候，我都强烈的感受到我的数据包被加密解密的过程，不知道为什么，感觉，异常，舒爽…</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
-    
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   

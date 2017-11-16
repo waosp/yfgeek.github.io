@@ -195,6 +195,20 @@ Sunny Rainy Rainy
 
 Viterbi被广泛应用到分词，词性标注等应用场景。
 
+**以上内容均为引用。**
+
+# HanLP 原理
+
+上面引用铺垫了那么多，为了解释清楚HanLP是用什么算法对中国名字进行分词的。具体的，HanLP实现了论文[《基于角色标注的中国人名自动识别研究》](http://nlp.ict.ac.cn/Admin/kindeditor/attached/file/20130508/20130508094537_92322.pdf)。
+
+如果有兴趣，可以快速理解此文，看这些段落：
+
+![](/content/images/uob/6.png)
+
+![](/content/images/uob/7.png)
+
+如果你掌握贝叶斯公式，并且看了上述文章，了解马尔科夫假设并不难理解。
+
 # HanLP应用
 
 HanLP是一个优秀的NLP库，可是是用Java写的，这里我们需要用`jpype`包帮助pyhton调用Jar包。
@@ -324,7 +338,7 @@ if __name__ == "__main__":
 
 其实效果并非非常理想，还是有很多无用信息和漏下来的信息，但是总体上还是不错的。
 
-![](/content/images/uob/4.png)
+![](/content/images/uob/5.png)
 
 
 

@@ -34,7 +34,7 @@ permalink: uob3
 
 假设我手里有三个不同的骰子。第一个骰子是我们平常见的骰子（称这个骰子为D6），6个面，每个面（1，2，3，4，5，6）出现的概率是1/6。第二个骰子是个四面体（称这个骰子为D4），每个面（1，2，3，4）出现的概率是1/4。第三个骰子有八个面（称这个骰子为D8），每个面（1，2，3，4，5，6，7，8）出现的概率是1/8。
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450315321886.png)](http://images0.cnblogs.com/blog/133059/201507/161450305163828.png)
+![](/content/images/uob/hmm-0.png)
 
 假设我们开始掷骰子，我们先从三个骰子里挑一个，挑到每一个骰子的概率都是1/3。然后我们掷骰子，得到一个数字，1，2，3，4，5，6，7，8中的一个。不停的重复上述过程，我们会得到一串数字，每个数字都是1，2，3，4，5，6，7，8中的一个。例如我们可能得到这么一串数字（掷骰子10次）：1 6 3 5 2 7 3 5 2 4
 
@@ -44,9 +44,9 @@ permalink: uob3
 
 同样的，尽管可见状态之间没有转换概率，但是隐含状态和可见状态之间有一个概率叫做输出概率（emission probability）。就我们的例子来说，六面骰（D6）产生1的输出概率是1/6。产生2，3，4，5，6的概率也都是1/6。我们同样可以对输出概率进行其他定义。比如，我有一个被赌场动过手脚的六面骰子，掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450330639383.png)](http://images0.cnblogs.com/blog/133059/201507/161450321576527.png)
+![](/content/images/uob/hmm-1.png)
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450345487598.png)](http://images0.cnblogs.com/blog/133059/201507/161450339544712.png)
+![](/content/images/uob/hmm-2.png)
 
 其实对于HMM来说，如果提前知道所有隐含状态之间的转换概率和所有隐含状态到所有可见状态之间的输出概率，做模拟是相当容易的。但是应用HMM模型时候呢，往往是缺失了一部分信息的，有时候你知道骰子有几种，每种骰子是什么，但是不知道掷出来的骰子序列；有时候你只是看到了很多次掷骰子的结果，剩下的什么都不知道。如果应用算法去估计这些缺失的信息，就成了一个很重要的问题。这些算法我会在下面详细讲。
 
@@ -70,7 +70,7 @@ permalink: uob3
 其实这个问题实用价值不高。由于对下面较难的问题有帮助，所以先在这里提一下。 
 知道骰子有几种，每种骰子是什么，每次掷的都是什么骰子，根据掷骰子掷出的结果，求产生这个结果的概率。
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450356269168.png)](http://images0.cnblogs.com/blog/133059/201507/161450350489511.png)
+![](/content/images/uob/hmm-3.png)
 
 解法无非就是概率相乘： 
 ![img](http://zhihu.com/equation?tex=P%3DP%28D6%29%2AP%28D6%5Crightarrow+1%29%2AP%28D6%5Crightarrow+D8%29%2AP%28D8%5Crightarrow+6%29%2AP%28D8%5Crightarrow+D8%29%2AP%28D8%5Crightarrow+3%29) 
@@ -83,12 +83,12 @@ permalink: uob3
 ​      另外一种很有名的算法叫做Viterbi algorithm. 要理解这个算法，我们先看几个简单的列子。 
 ​      首先，如果我们只掷一次骰子：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450366738982.png)](http://images0.cnblogs.com/blog/133059/201507/161450361262083.png)
+![](/content/images/uob/hmm-4.png)
 
 看到结果为1.对应的最大概率骰子序列就是D4，因为D4产生1的概率是1/4，高于1/6和1/8. 
 ​      把这个情况拓展，我们掷两次骰子：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450373608137.png)](http://images0.cnblogs.com/blog/133059/201507/161450369701425.png)
+![](/content/images/uob/hmm-5.png)
 
 结果为1，6.这时问题变得复杂起来，我们要计算三个值，分别是第二个骰子是D6，D4，D8的最大概率。显然，要取到最大概率，第一个骰子必须为D4。这时，第二个骰子取到D6的最大概率是 
 ![img](http://zhihu.com/equation?tex=P2%28D6%29%3DP%28D4%29%2AP%28D4%5Crightarrow+1%29%2AP%28D4%5Crightarrow+D6%29%2AP%28D6%5Crightarrow+6%29) 
@@ -96,7 +96,7 @@ permalink: uob3
 ​      同样的，我们可以计算第二个骰子是D4或D8时的最大概率。我们发现，第二个骰子取到D6的概率最大。而使这个概率最大时，第一个骰子为D4。所以最大概率骰子序列就是D4 D6。 
 继续拓展，我们掷三次骰子：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450394547765.png)](http://images0.cnblogs.com/blog/133059/201507/161450384543938.png)
+![](/content/images/uob/hmm-6.png)
 
 同样，我们计算第三个骰子分别是D6，D4，D8的最大概率。我们再次发现，要取到最大概率，第二个骰子必须为D6。这时，第三个骰子取到D4的最大概率是![img](http://zhihu.com/equation?tex=P3%28D4%29%3DP2%28D6%29%2AP%28D6%5Crightarrow+D4%29%2AP%28D4%5Crightarrow+3%29) 
 ![img](http://zhihu.com/equation?tex=%3D%5Cfrac%7B1%7D%7B216%7D+%2A%5Cfrac%7B1%7D%7B3%7D+%2A%5Cfrac%7B1%7D%7B4%7D) 
@@ -106,33 +106,34 @@ permalink: uob3
 **2.谁动了我的骰子？** 
 ​      比如说你怀疑自己的六面骰被赌场动过手脚了，有可能被换成另一种六面骰，这种六面骰掷出来是1的概率更大，是1/2，掷出来是2，3，4，5，6的概率是1/10。你怎么办么？答案很简单，算一算正常的三个骰子掷出一段序列的概率，再算一算不正常的六面骰和另外两个正常骰子掷出这段序列的概率。如果前者比后者小，你就要小心了。 
 ​      比如说掷骰子的结果是： 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450406884821.png)](http://images0.cnblogs.com/blog/133059/201507/161450402987108.png)
+
+![](/content/images/uob/hmm-7.png)
 
 要算用正常的三个骰子掷出这个结果的概率，其实就是将所有可能情况的概率进行加和计算。同样，简单而暴力的方法就是把穷举所有的骰子序列，还是计算每个骰子序列对应的概率，但是这回，我们不挑最大值了，而是把所有算出来的概率相加，得到的总概率就是我们要求的结果。这个方法依然不能应用于太长的骰子序列（马尔可夫链）。 
 ​      我们会应用一个和前一个问题类似的解法，只不过前一个问题关心的是概率最大值，这个问题关心的是概率之和。解决这个问题的算法叫做前向算法（forward algorithm）。 
 首先，如果我们只掷一次骰子：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450419851092.png)](http://images0.cnblogs.com/blog/133059/201507/161450412515950.png)
+![](/content/images/uob/hmm-9.png)
 
 看到结果为1.产生这个结果的总概率可以按照如下计算，总概率为0.18：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450434381848.png)](http://images0.cnblogs.com/blog/133059/201507/161450427046706.png)
+![](/content/images/uob/hmm-10.png)
 
 把这个情况拓展，我们掷两次骰子：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450445489876.png)](http://images0.cnblogs.com/blog/133059/201507/161450442206677.png)
+![](/content/images/uob/hmm-11.png)
 
 看到结果为1，6.产生这个结果的总概率可以按照如下计算，总概率为0.05：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450459079660.png)](http://images0.cnblogs.com/blog/133059/201507/161450450328560.png)
+![](/content/images/uob/hmm-12.png)
 
 继续拓展，我们掷三次骰子：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450480322045.png)](http://images0.cnblogs.com/blog/133059/201507/161450469549473.png)
+![](/content/images/uob/hmm-13.png)
 
 看到结果为1，6，3.产生这个结果的总概率可以按照如下计算，总概率为0.03：
 
-[![image](http://images0.cnblogs.com/blog/133059/201507/161450513459200.png)](http://images0.cnblogs.com/blog/133059/201507/161450499388728.png)
+![](/content/images/uob/hmm-14.png)
 
 同样的，我们一步一步的算，有多长算多长，再长的马尔可夫链总能算出来的。用同样的方法，也可以算出不正常的六面骰和另外两个正常骰子掷出这段序列的概率，然后我们比较一下这两个概率大小，就能知道你的骰子是不是被人换了。
 
@@ -150,7 +151,7 @@ HMM（隐马尔可夫模型）是用来描述隐含未知参数的统计模型�
 :param emit_p: 发射概率 （隐状态表现为显状态的概率）
 ```
 
-[![6cbb8645gw1egs40a3bpmj208n09574o](http://images0.cnblogs.com/blog/133059/201507/161450536414597.jpg)](http://images0.cnblogs.com/blog/133059/201507/161450524231771.jpg)
+[![](/content/images/uob/hmm-15.jpg)
 
 伪码如下：
 

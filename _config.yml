@@ -90,7 +90,7 @@ baidusitemap:
 disqus_username: yfgeek
 
 sidebar: true                           # whether or not using Sidebar.
-sidebar-about-description: "对任何技术永远充满敬畏之心。本博客乃娱乐消遣之用，非求职之用。欢迎转载文章，不收取稿费，任何机构及微信公众号转载，请加引用链接，谢谢！"
+sidebar-about-description: "对任何技术永远充满敬畏之心"
 sidebar-avatar: img/logo.jpg
 
 featured-tags: true                     # whether or not using Feature-Tags

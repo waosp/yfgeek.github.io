@@ -205,8 +205,6 @@ Viterbi被广泛应用到分词，词性标注等应用场景。
 
 ![](/content/images/uob/6.png)
 
-![](/content/images/uob/7.png)
-
 如果你掌握贝叶斯公式，并且看了上述文章，了解马尔科夫假设并不难理解。
 
 # HanLP应用

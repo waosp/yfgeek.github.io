@@ -70,9 +70,9 @@ apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 ```javascript
 import {createIconSetFromIcoMoon } from 'react-native-vector-icons';
 
-import fontelloConfig from '../icon/selection.json';
+import icoMoonConfig from '../icon/selection.json';
 
-const Iconfontello = createIconSetFromIcoMoon(fontelloConfig);
+const Icon = createIconSetFromIcoMoon(icoMoonConfig);
 
 export default Iconfontello;
 ```
@@ -80,6 +80,6 @@ export default Iconfontello;
 第九步，作为组件调用
 
 ```jsx
-<Iconfontello name="btc" size={32} />;
+<Icon name="btc" size={32} />;
 ```
 

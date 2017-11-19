@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2017-11-16T06:11:39.189Z</updated>
+  <updated>2017-11-19T15:29:33.942Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -14,6 +14,57 @@
   </author>
   
   <generator uri="http://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>React Native 添加自定义图标库</title>
+    <link href="http://www.yfgeek.com/2017/11/19/react-native-icon/"/>
+    <id>http://www.yfgeek.com/2017/11/19/react-native-icon/</id>
+    <published>2017-11-19T15:02:32.000Z</published>
+    <updated>2017-11-19T15:29:33.942Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！</p>
+<p>本文讲述用<code>react-native-vector-icons</code>库，封装一个自己的图标库，也就是说添加自定义图标库，下面讲讲如何添加。</p>
+<p>通俗易懂，而且本文只讲一种方式，方便各位网友学习，我讲的方式就是最简单的<code>createIconSetFromIcoMoon</code>方法。</p>
+<p>第一步，准备好你的素材，最好是<code>svg</code>格式</p>
+<p>第二步，进入网址：<a href="https://icomoon.io/app/#/select" target="_blank" rel="external">https://icomoon.io/app/#/select</a></p>
+<p>点击Import Icons按钮，将图标<strong>批量</strong>导入，如图下所示：</p>
+<p><img src="/content/images/react-icon/1.png" alt=""></p>
+<p>第三步，点击Generate Font按钮。</p>
+<p>第四步，点击Download按钮。</p>
+<p>这时候，你会下载到如图所示结构的zip文件，将其解压，拷贝到项目根目录。</p>
+<p><img src="/content/images/react-icon/2.png" alt=""></p>
+<p>第五步，在Xcode中添加压缩包里的<code>icomoon.ttf</code>文件。</p>
+<p>用Xcode打开工程文件，将<code>icomoon.ttf</code>文件复制一份，并拖动到Resources目录中，如图所示</p>
+<p><img src="/content/images/react-icon/3.png" alt=""></p>
+<p>第六步，点开<code>Info.plist</code>，在<code>Fonts provided by application</code>属性中添加这个字体的名称<code>icomoon.ttf</code>的键值。</p>
+<p><img src="/content/images/react-icon/4.png" alt=""></p>
+<p>第七步，在项目配置中的Build Phases中的Copy Bundle Resources 中添加该字体。</p>
+<p><img src="/content/images/react-icon/8.png" alt=""></p>
+<p>第七步，在项目根目录下，运行终端命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install react-native-vector-icons --save</div><div class="line">react-native link</div></pre></td></tr></table></figure>
+<p><img src="/content/images/react-icon/5.png" alt=""></p>
+<p>第八步，配置安卓：</p>
+<p>编辑 <code>android/app/build.gradle</code> ，添加如下内容，可以说非常简单</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">project.ext.vectoricons = [</div><div class="line">    iconFontNames: [ <span class="string">'icomoon.ttf'</span>] </div><div class="line">]</div><div class="line">apply <span class="keyword">from</span>: <span class="string">"../../node_modules/react-native-vector-icons/fonts.gradle"</span></div></pre></td></tr></table></figure>
+<p>第八步，在代码中写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;createIconSetFromIcoMoon &#125; <span class="keyword">from</span> <span class="string">'react-native-vector-icons'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> fontelloConfig <span class="keyword">from</span> <span class="string">'../icon/selection.json'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Iconfontello = createIconSetFromIcoMoon(fontelloConfig);</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Iconfontello;</div></pre></td></tr></table></figure>
+<p>第九步，作为组件调用</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Iconfontello name=<span class="string">"icon-btc"</span> size=&#123;w&#125; /&gt;;</div></pre></td></tr></table></figure>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！&lt;/p&gt;
+&lt;p&gt;本文讲述用&lt;code&gt;react-native-vector-icons&lt;/code&gt;库，封装一个自己的图标库
+    
+    </summary>
+    
+      <category term="React-Native" scheme="http://www.yfgeek.com/categories/React-Native/"/>
+    
+    
+      <category term="React-Native" scheme="http://www.yfgeek.com/tags/React-Native/"/>
+    
+  </entry>
   
   <entry>
     <title>“我是如何收集校友的”之利用基于HMM-Viterbi的HanLP进行人名提取</title>
@@ -1312,95 +1363,6 @@
     
     
       <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Raspberry Pi Zero 无需键盘网络 配置教程</title>
-    <link href="http://www.yfgeek.com/2016/12/17/raspizero/"/>
-    <id>http://www.yfgeek.com/2016/12/17/raspizero/</id>
-    <published>2016-12-17T13:58:26.000Z</published>
-    <updated>2017-10-26T12:59:55.520Z</updated>
-    
-    <content type="html"><![CDATA[<p>我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。</p>
-<p>上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。</p>
-<a id="more"></a> 
-<p>请注意，不要认为所谓的4磅很便宜，毕竟，我还多掏了2.50磅的邮费。树莓派Zero在中国并不便宜，因为树莓派Zero的产能有限，每周只能供很少的货，买树莓派Zero就像抢12306一样，我抢了两周，也正是因为这个原因，树莓派Zero在亚马逊的黄牛卖家卖20磅，淘宝卖120元左右，实际上原价只有40元左右。</p>
-<h1 id="信仰充值"><a href="#信仰充值" class="headerlink" title="信仰充值"></a>信仰充值</h1><p>滴！信仰充值成功！</p>
-<p><img src="/content/images/raspizero/mail.jpg" alt=""></p>
-<p>没有错，你没有看错，就是这么小，但是小也有小的坏处，没有USB口，没有Wi-Fi，没有网线接口，似乎什么都没有用。</p>
-<ul>
-<li>1Ghz, Single-core CPU</li>
-<li>512MB RAM</li>
-<li>Mini HDMI and USB On-The-Go ports</li>
-<li>Micro USB power</li>
-<li>HAT-compatible 40-pin header</li>
-<li>Composite video and reset headers</li>
-</ul>
-<p>不过值得一提的是，USB On-The-Go接口也可以用来供电。</p>
-<h1 id="发车"><a href="#发车" class="headerlink" title="发车"></a>发车</h1><p>网络上关于树莓派Zero如何连接配置大概有以下几种：</p>
-<ul>
-<li>OTG口转USB 接 USB以太网适配器</li>
-<li>OTG口转USB 接 USB Wi-Fi</li>
-<li>OTG口转USB 接 USB键盘 且 用HDMI接显示器</li>
-<li>GPIO接以太网适配器</li>
-</ul>
-<p>但是以上，都太麻烦了，对不对？</p>
-<p>那么关键问题就来了，如何才能在 没有网口、没有Wi-Fi、没有显示器、没有鼠标、没有键盘的情况下 配置可爱的树莓派Zero呢？</p>
-<p>我们 可以 把 树莓派 虚拟为 网卡，然后在内网连接它。</p>
-<p>1.下载完整版 Raspbian Jessie 或 Raspbian Jessie Lite 系统，并且刷到你的SD Card里，Windows用Win32 Disk Imager， Mac/Linux 用命令，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">diskutil list</div><div class="line">diskutil unmountDisk /dev/SD卡的标号 <span class="comment">#如disk2</span></div><div class="line"><span class="built_in">cd</span> /Users/ivan/Downloads/2016-11-25-raspbian-jessie <span class="comment">#进入目录</span></div><div class="line">sudo dd bs=1m <span class="keyword">if</span>=2016-11-25-raspbian-jessie.img of=/dev/rdisk2</div></pre></td></tr></table></figure>
-<p>2.刷好系统后编辑<code>config.txt</code>文件，在最后一行下，另起一行添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dtoverlay=dwc2</div></pre></td></tr></table></figure></p>
-<p>保存文件</p>
-<p>3.最后，打开<code>cmdline.txt</code>文件。<br>找到单词<code>rootwait</code>，在其之后添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">modules-load=dwc2,g_ether</div></pre></td></tr></table></figure>
-<p>4.添加一个文件名为<code>ssh</code>到根目录下，内容为空</p>
-<p>5.把SD Card放到树莓派Zero，用安卓数据线与电脑连接，USB口接OTG口，等待60-90s，电脑会发现网卡并且自动配置ip地址。</p>
-<p><img src="/content/images/raspizero/1.png" alt=""></p>
-<p>6.Ping 一下raspberrypi.local看是否能通</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PING raspberrypi.local (169.254.70.245): 56 data bytes</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=0 ttl=64 time=0.570 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=1 ttl=64 time=0.338 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=2 ttl=64 time=0.316 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=3 ttl=64 time=0.344 ms</div></pre></td></tr></table></figure>
-<p>7.ssh连接raspberrypi.local，默认密码为raspberry<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pi@raspberrypi.local</div></pre></td></tr></table></figure></p>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>因为没有网络，只能通过下载离线安装文件，传输到树莓派内，再在树莓派里安装。</p>
-<h2 id="配置树莓派"><a href="#配置树莓派" class="headerlink" title="配置树莓派"></a>配置树莓派</h2><p>通过直接运行<code>raspi-config</code>命令</p>
-<p>你需要做</p>
-<ul>
-<li>容量扩展</li>
-<li>更改系统时区</li>
-<li>更改系统密码</li>
-</ul>
-<p>同时你需要通过执行<code>sudo passwd root</code>更改root密码</p>
-<h2 id="安装vnc-server"><a href="#安装vnc-server" class="headerlink" title="安装vnc-server"></a>安装vnc-server</h2><p>首先，去<a href="https://www.realvnc.com/download/vnc/raspberrypi/" target="_blank" rel="external">VNC官网</a>下载最新版本的vnc-server</p>
-<p>用scp命令传到树莓派上</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp /Users/ivan/Downloads/VNC-5.3.2-Linux-ARM-DEB.tar.gz  pi@raspberrypi.local:~</div></pre></td></tr></table></figure>
-<p>在树莓派shell下，安装VNC<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">tar xvf VNC-5.3.2-Linux-ARM-DEB.tar.gz</div><div class="line">sudo dpkg -i VNC-Server-5.3.2-Linux-ARM.deb</div></pre></td></tr></table></figure></p>
-<p><img src="/content/images/raspizero/2.png" alt=""></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">vncpasswd -user  # 设置连接密码</div><div class="line">vncserver  # 启动vncserver</div></pre></td></tr></table></figure>
-<p>连接raspberry.local:1测试成功</p>
-<p><img src="/content/images/raspizero/3.png" alt=""></p>
-<h2 id="设置代理"><a href="#设置代理" class="headerlink" title="设置代理"></a>设置代理</h2><p>本来想着，既然把它虚拟为网卡了，能否NAT网络给他让他上网？事实上，是失败的。</p>
-<p>那么我们有一个临时解决方案，就是设置代理</p>
-<p>首先，在本机搭建一个squid</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install squid</div></pre></td></tr></table></figure>
-<p>然后下载<a href="http://squidman.net/squidman/" target="_blank" rel="external">SquidMan</a>，安装。<br>在本机开启端口为8080的HTTP代理服务，并把本机名称更为Mac。</p>
-<p>进入树莓派shell，输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/apt/apt.conf.d</div><div class="line">sudo vi /etc/apt/apt.conf.d</div></pre></td></tr></table></figure></p>
-<p>最后一行加入一句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Acquire::http::Proxy &quot;http://Mac.local:8080&quot;;</div></pre></td></tr></table></figure></p>
-<p>保存</p>
-<p>apt-get update一下，怎么样是不是能装软件了？</p>
-<h1 id="感想"><a href="#感想" class="headerlink" title="感想"></a>感想</h1><p>这块小板子，我太喜欢了，好精致</p>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md" target="_blank" rel="external">https://gist.github.com/gbaman/975e2db164b3ca2b51ae11e45e8fd40a#file-howtootgfast-md</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;我大概是个Raspberry Pi粉丝，到了英国后总感觉不买点树莓派的东西亏，可是之前已经在中国买了树莓派3了，于是决定买点特别的，做点有意思的事情。&lt;/p&gt;
-&lt;p&gt;上个月，鉴于我在英国的巨大地理优势的缘故，买了一个4磅的Raspberry Pi Zero，不过网络上关于树莓派Zero的文章真的甚少，因为实在太难原价买到了。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Raspberry" scheme="http://www.yfgeek.com/categories/Raspberry/"/>
-    
-    
-      <category term="Raspberry" scheme="http://www.yfgeek.com/tags/Raspberry/"/>
     
   </entry>
   

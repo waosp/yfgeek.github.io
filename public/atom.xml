@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2017-11-19T15:29:33.942Z</updated>
+  <updated>2017-11-20T09:35:04.935Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -16,11 +16,56 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>轻松几步让Redux实现数据持久化</title>
+    <link href="http://www.yfgeek.com/2017/11/20/react-persist/"/>
+    <id>http://www.yfgeek.com/2017/11/20/react-persist/</id>
+    <published>2017-11-20T08:47:37.000Z</published>
+    <updated>2017-11-20T09:35:04.935Z</updated>
+    
+    <content type="html"><![CDATA[<p>在开发的过程中，数据用redux管理，觉得希望将数据持久化保存，也就是说当用户下一次打开app或网站的时候，我们希望浏览器/APP自动加载出上次的数据，怎么办？有没有一个🙆‍♂统一的方式？</p>
+<p>有的，这就是简单易用的<code>redux-persist</code>，事情比想象的简单太多了。</p>
+<p>话不多说，上代码！官方示例代码：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123; PersistGate &#125; <span class="keyword">from</span> <span class="string">'redux-persist/es/integration/react'</span></div><div class="line"></div><div class="line"><span class="keyword">import</span> configureStore <span class="keyword">from</span> <span class="string">'./store/configureStore'</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> &#123; persistor, store &#125; = configureStore()</div><div class="line"></div><div class="line"><span class="keyword">const</span> onBeforeLift = <span class="function"><span class="params">()</span> =&gt;</span> &#123;</div><div class="line">  <span class="comment">// take some action before the gate lifts</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> () =&gt; (</div><div class="line">  &lt;Provider store=&#123;store&#125;&gt;</div><div class="line">    &lt;PersistGate </div><div class="line">      loading=&#123;&lt;Loading /&gt;&#125;</div><div class="line">      onBeforeLift=&#123;onBeforeLift&#125;</div><div class="line">      persistor=&#123;persistor&#125;&gt;</div><div class="line">      &lt;App /&gt;</div><div class="line">    &lt;/PersistGate&gt;</div><div class="line">  &lt;/Provider&gt;</div><div class="line">)</div></pre></td></tr></table></figure>
+<p>首先你的结构应该是拥有<code>reducers</code>的，在我的代码中，我还加入了<code>redux-thunk</code>中间件，如果你不懂，可以忽略这个。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"> <span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;		</div><div class="line"> <span class="keyword">import</span> &#123;AppRegistry&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;		</div><div class="line"> <span class="keyword">import</span> &#123; createStore ,applyMiddleware &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"> <span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span>		</div><div class="line"> <span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">"./src/App"</span>;		</div><div class="line"> <span class="keyword">import</span> reducers <span class="keyword">from</span> <span class="string">'./src/reducers/reducers'</span>	</div><div class="line"> <span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span>;		</div><div class="line"> <span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">CoinOnline</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;		</div><div class="line">   render() &#123;</div><div class="line">     <span class="keyword">const</span> store = createStore(App,applyMiddleware(thunk));	</div><div class="line">     <span class="keyword">return</span> (</div><div class="line">       &lt;Provider store=&#123;store&#125;&gt;</div><div class="line">        &lt;App /&gt;</div><div class="line">       &lt;/Provider&gt;		</div><div class="line">       );</div><div class="line">     &#125;</div><div class="line"> &#125;</div><div class="line">AppRegistry.registerComponent(<span class="string">'CoinOnline'</span>, () =&gt; CoinOnline);</div></pre></td></tr></table></figure>
+<p>我是怎么应用的？</p>
+<p>第一步，引入我们需要的方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;persistStore, persistCombineReducers&#125; <span class="keyword">from</span> <span class="string">'redux-persist'</span>;</div><div class="line"><span class="keyword">import</span> &#123; PersistGate &#125; <span class="keyword">from</span> <span class="string">'redux-persist/es/integration/react'</span>;</div></pre></td></tr></table></figure>
+<p>第二步，重新封装reducer，用<code>persistCombineReducers()</code>方法加载配置和reducer</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> config = &#123;</div><div class="line">    <span class="attr">key</span>: <span class="string">'root'</span>,</div><div class="line">    storage,</div><div class="line">&#125;;</div><div class="line"><span class="keyword">let</span> reducer = persistCombineReducers(config, reducers);</div></pre></td></tr></table></figure>
+<p>第三步，在redux的<code>&lt;Provider&gt;&lt;/Provider&gt;</code>内层嵌套<code>&lt;PersistGate&gt;&lt;/PersistGate&gt;</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">  &lt;Provider store=&#123;store&#125;&gt;</div><div class="line">                &lt;PersistGate persistor=&#123;persistor&#125;&gt;</div><div class="line">                    &lt;App /&gt;</div><div class="line">                &lt;/PersistGate&gt;</div><div class="line">&lt;<span class="regexp">/Provider&gt;</span></div></pre></td></tr></table></figure>
+<p>轻松三步，简单吧！话不多说直接上代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123;</div><div class="line">    AppRegistry,</div><div class="line">&#125; <span class="keyword">from</span> <span class="string">'react-native'</span>;</div><div class="line"><span class="keyword">import</span> &#123; createStore ,applyMiddleware, compose &#125; <span class="keyword">from</span> <span class="string">'redux'</span></div><div class="line"><span class="keyword">import</span> &#123; Provider &#125; <span class="keyword">from</span> <span class="string">'react-redux'</span></div><div class="line"><span class="keyword">import</span> App <span class="keyword">from</span> <span class="string">"./src/App"</span>;</div><div class="line"><span class="keyword">import</span> reducers <span class="keyword">from</span> <span class="string">'./src/reducers/reducers'</span></div><div class="line"><span class="keyword">import</span> thunk <span class="keyword">from</span> <span class="string">'redux-thunk'</span>;</div><div class="line"><span class="keyword">import</span> &#123;persistStore, persistCombineReducers&#125; <span class="keyword">from</span> <span class="string">'redux-persist'</span>;</div><div class="line"><span class="keyword">import</span> &#123; PersistGate &#125; <span class="keyword">from</span> <span class="string">'redux-persist/es/integration/react'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> storage <span class="keyword">from</span> <span class="string">'redux-persist/es/storage'</span> <span class="comment">// default: localStorage if web, AsyncStorage if react-native</span></div><div class="line"></div><div class="line"><span class="keyword">const</span> config = &#123;</div><div class="line">    <span class="attr">key</span>: <span class="string">'root'</span>,</div><div class="line">    storage,</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">configureStore</span>(<span class="params"></span>)</span>&#123;</div><div class="line">    <span class="keyword">let</span> reducer = persistCombineReducers(config, reducers);</div><div class="line">    <span class="keyword">let</span> store = createStore(reducer, applyMiddleware(thunk));</div><div class="line">    <span class="keyword">let</span> persistor = persistStore(store);</div><div class="line">    <span class="keyword">return</span> &#123; persistor, store &#125;</div><div class="line">&#125;</div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="class"><span class="keyword">class</span> <span class="title">CoinOnline</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">const</span> &#123; persistor, store &#125; = configureStore();</div><div class="line">        <span class="keyword">return</span> (</div><div class="line">            &lt;Provider store=&#123;store&#125;&gt;</div><div class="line">                &lt;PersistGate persistor=&#123;persistor&#125;&gt;</div><div class="line">                    &lt;App /&gt;</div><div class="line">                &lt;/PersistGate&gt;</div><div class="line">            &lt;/Provider&gt;</div><div class="line"></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line">AppRegistry.registerComponent(<span class="string">'CoinOnline'</span>, () =&gt; CoinOnline);</div></pre></td></tr></table></figure>
+<p>多说一句，如果<code>createStore</code>有需要加载多个参数，需要用<code>compose</code>将其拼装起来。</p>
+<p>比如在测试时我还使用了<code>remote-redux-devtools</code>调试神器，代码如下</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> store = createStore(reducer, compose(applyMiddleware(thunk),devToolsEnhancer(&#123; <span class="attr">realtime</span>: <span class="literal">true</span>, <span class="attr">port</span>: <span class="number">8000</span> &#125;)));</div></pre></td></tr></table></figure>
+<p>下次，每次启动之前<code>redux-persit</code>都会默认先<code>dispatch</code>两个动作</p>
+<p>PERSIT和REHYDRATE，会把上一次的redux中的states注入到当前组件中，即完成了持久化。</p>
+<p><img src="/content/images/redux-persist/1.png" alt=""></p>
+<p><img src="/content/images/redux-persist/2.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;在开发的过程中，数据用redux管理，觉得希望将数据持久化保存，也就是说当用户下一次打开app或网站的时候，我们希望浏览器/APP自动加载出上次的数据，怎么办？有没有一个🙆‍♂统一的方式？&lt;/p&gt;
+&lt;p&gt;有的，这就是简单易用的&lt;code&gt;redux-persist&lt;/co
+    
+    </summary>
+    
+      <category term="Redux  React Redux" scheme="http://www.yfgeek.com/categories/Redux-React-Redux/"/>
+    
+    
+      <category term="React-Native" scheme="http://www.yfgeek.com/tags/React-Native/"/>
+    
+  </entry>
+  
+  <entry>
     <title>React Native 添加自定义图标库</title>
     <link href="http://www.yfgeek.com/2017/11/19/react-native-icon/"/>
     <id>http://www.yfgeek.com/2017/11/19/react-native-icon/</id>
     <published>2017-11-19T15:02:32.000Z</published>
-    <updated>2017-11-19T15:29:33.942Z</updated>
+    <updated>2017-11-19T15:33:36.673Z</updated>
     
     <content type="html"><![CDATA[<p>最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！</p>
 <p>本文讲述用<code>react-native-vector-icons</code>库，封装一个自己的图标库，也就是说添加自定义图标库，下面讲讲如何添加。</p>
@@ -47,9 +92,9 @@
 <p>编辑 <code>android/app/build.gradle</code> ，添加如下内容，可以说非常简单</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">project.ext.vectoricons = [</div><div class="line">    iconFontNames: [ <span class="string">'icomoon.ttf'</span>] </div><div class="line">]</div><div class="line">apply <span class="keyword">from</span>: <span class="string">"../../node_modules/react-native-vector-icons/fonts.gradle"</span></div></pre></td></tr></table></figure>
 <p>第八步，在代码中写：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;createIconSetFromIcoMoon &#125; <span class="keyword">from</span> <span class="string">'react-native-vector-icons'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> fontelloConfig <span class="keyword">from</span> <span class="string">'../icon/selection.json'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Iconfontello = createIconSetFromIcoMoon(fontelloConfig);</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Iconfontello;</div></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;createIconSetFromIcoMoon &#125; <span class="keyword">from</span> <span class="string">'react-native-vector-icons'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> icoMoonConfig <span class="keyword">from</span> <span class="string">'../icon/selection.json'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Icon = createIconSetFromIcoMoon(icoMoonConfig);</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Iconfontello;</div></pre></td></tr></table></figure>
 <p>第九步，作为组件调用</p>
-<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Iconfontello name=<span class="string">"icon-btc"</span> size=&#123;w&#125; /&gt;;</div></pre></td></tr></table></figure>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Icon name=<span class="string">"btc"</span> size=&#123;<span class="number">32</span>&#125; /&gt;;</div></pre></td></tr></table></figure>
 ]]></content>
     
     <summary type="html">
@@ -1288,81 +1333,6 @@
       <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
     
       <category term="笑话" scheme="http://www.yfgeek.com/tags/%E7%AC%91%E8%AF%9D/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>30秒内盗取任意PC的Cookie神器 PoisonTap</title>
-    <link href="http://www.yfgeek.com/2016/12/18/poisontap/"/>
-    <id>http://www.yfgeek.com/2016/12/18/poisontap/</id>
-    <published>2016-12-18T10:44:51.000Z</published>
-    <updated>2017-10-26T12:59:55.515Z</updated>
-    
-    <content type="html"><![CDATA[<p>著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。</p>
-<p>是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。</p>
-<a id="more"></a>
-<h1 id="介绍"><a href="#介绍" class="headerlink" title="介绍"></a>介绍</h1><p>PoisonTap 通吃 Windows/Mac/Linux系统。其实现原理十分猥琐。</p>
-<p><img src="/content/images/poisontap/1.gif" alt=""></p>
-<p>把自己伪装成有线网卡，一旦插入系统中，众所周知，所有的操作系统的规则都是这样的：</p>
-<blockquote>
-<p>有线网络&gt;无线网络</p>
-</blockquote>
-<p>也就是说，如果他连接着Wi-Fi，没关系，系统会以我的伪网卡为最高优先级。在系统处于锁屏状态下，只要有网络通信，无论系统通信哪个都会被强制跳转到我用于 攻击你的页面 ，成批量的窃取你的Cookie和Session。</p>
-<p>没错，就是你猜到的MITM，中间人攻击。通过PoisonTap，我们可以：</p>
-<ul>
-<li>模拟成一个伪USB网卡</li>
-<li>不需要解锁电脑就可以实现攻击</li>
-<li>劫持系统所有网络连接的所有流量 包括局域网</li>
-<li>窃取储存Alexa前一百万的网站的Cookie和Session</li>
-<li>用远程outbound的方式进行WebSocket或DNS重绑定攻击</li>
-<li>用HTTP的JS缓存禁止对该PC进行web后门安装，缓存涉及到上千个域名和cdn js缓存供应商</li>
-<li>截取Cookie后可以使用该PC的Cookie进行登录，实现中间人攻击的最终目标</li>
-</ul>
-<p><img src="/content/images/poisontap/2.gif" alt=""></p>
-<p>PoisonTap比你想象的更强大的是，PoisonTap能够突破以下普通MITM办不到的几点：</p>
-<ul>
-<li>锁屏密码</li>
-<li>路由表ARP的优先级设置和网络适配器优先级设置</li>
-<li>同源策略 (Same-Origin Policy)</li>
-<li>X-Frame-Options 响应头攻击</li>
-<li>Cookie的HttpOnly安全设置</li>
-<li>Cookie的SameSite安全属性</li>
-<li>两步/多步验证密码(2FA/MFA)</li>
-<li>DNS劫持</li>
-<li>跨域资源共享CORS</li>
-<li>HTTPS cookie 保护</li>
-</ul>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>接着昨天的零网络配置，我们不需要任何网口 WiFi 蓝牙 就可以完成配置。</p>
-<p>注意！配置前请保证<code>apt-get</code>命令是可以用的且可以联网的，配置过程中不允许出错，否则会出大问题。</p>
-<p>首先，我们在本机下载下来这个神器Poisontap</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/samyk/poisontap</div></pre></td></tr></table></figure>
-<p>然后，我们用scp命令把Poisontap传到Raspberry Pi Zero上。<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">scp -r poisontap pi@zero.local:~</div></pre></td></tr></table></figure></p>
-<p>登录到树莓派上，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> poisontap</div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"\nauto usb0\nallow-hotplug usb0\niface usb0 inet static\n\taddress 1.0.0.1\n\tnetmask 0.0.0.0"</span> &gt;&gt; /etc/network/interfaces</div><div class="line"><span class="built_in">echo</span> <span class="string">"dtoverlay=dwc2"</span> &gt;&gt; /boot/config.txt</div><div class="line"><span class="built_in">echo</span> <span class="_">-e</span> <span class="string">"dwc2\ng_ether"</span> &gt;&gt; /etc/modules</div><div class="line">sudo sed --in-place <span class="string">"/exit 0/d"</span> /etc/rc.local</div><div class="line"><span class="built_in">echo</span> <span class="string">"/bin/sh /home/pi/poisontap/pi_startup.sh"</span> &gt;&gt; /etc/rc.local</div><div class="line">mkdir /home/pi/poisontap</div><div class="line">chown -R pi /home/pi/poisontap</div><div class="line">apt-get update &amp;&amp; apt-get upgrade</div><div class="line">apt-get -y install isc-dhcp-server dsniff screen nodejs</div></pre></td></tr></table></figure></p>
-<p>确保以上都成功后，运行<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">sudo cp dhcpd.conf /etc/dhcp/dhcpd.conf</div><div class="line">reboot</div></pre></td></tr></table></figure></p>
-<p>好了，已经安装好了，接下来我们可以Hack啦~</p>
-<h1 id="Hack"><a href="#Hack" class="headerlink" title="Hack"></a>Hack</h1><h2 id="Cookie-和-Session窃取"><a href="#Cookie-和-Session窃取" class="headerlink" title="Cookie 和 Session窃取"></a>Cookie 和 Session窃取</h2><p>把配置好的树莓派重新插入电脑里，这时他已经变成了黑阔神器了。</p>
-<p>为了使攻击过程可视化，我们访问 www.google.com</p>
-<p><img src="/content/images/poisontap/4.png" alt=""></p>
-<p>动画非常炫酷，这时候已经在窃取成千上万的网站的Cookie了，吃个小饼干。</p>
-<p><img src="/content/images/poisontap/5.png" alt=""></p>
-<p>打开Chrome的工具看一看，哇。</p>
-<p>随后，Cookie都被保存在树莓派里了，我们连接上树莓派的SSH，看一下，成功。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">cat poisontap.cookies.log</div></pre></td></tr></table></figure>
-<p><img src="/content/images/poisontap/3.png" alt=""></p>
-<h2 id="伪造网站"><a href="#伪造网站" class="headerlink" title="伪造网站"></a>伪造网站</h2><h2 id="远程后门"><a href="#远程后门" class="headerlink" title="远程后门"></a>远程后门</h2><h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/samyk/poisontap" target="_blank" rel="external">https://github.com/samyk/poisontap</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;著名黑阔Samy Kamkar利用Raspberry Pi Zero黑客神器PoisonTap，只需30秒，就可以窃取有任意密码的电脑系统下的Cookie和Session，并实现长期后门安装。PoisonTap不是暴力破解密码，而是绕过密码。&lt;/p&gt;
-&lt;p&gt;是的，买了Raspberry Pi Zero，有幸尝试了一下这个基于Node的工具，真乃神器。&lt;/p&gt;
-    
-    </summary>
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
-    
-    
-      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
     
   </entry>
   

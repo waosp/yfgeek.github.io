@@ -178,18 +178,42 @@ var _hmt = _hmt || [];
 
 <div class="post-preview">
 
-    <a href="/2017/11/20/react-persist/">
+    <a href="/2017/11/21/react-native-icon-2/">
         <h2 class="post-title">
-            轻松几步让Redux实现数据持久化
+            React Native 封装彩色自定义图标库
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            在开发的过程中，数据用redux管理，觉得希望将数据持久化保存，也就是说当用户下一次打开app或网站的时候，我们希望浏览器/APP自动加载出上次的数据，怎么办？有没有一个🙆‍♂统一的方式？
-有的，这就是简单易用的redux-persist，事情比想象的简单太多了。
-话不多说，上代码！官方示例代码：
-1234567891011121314151617181920import &#123; P......
+            问题描述本文接上篇React Native 添加自定义图标库，上篇介绍的很基础，但是有没有发现一个问题，通过这种react-native-vector-icons方式封装下来的图标，都只有黑白图标，颜色需要自己手动设置，但是对于我这种彩色绚丽的图标，手动设置？不存在的…
+
+那么本文就在上文的基础上讲讲，我是如何办到的自动彩色图标。
+答题思路是创建一个色彩配置文件，等到加载的时候，按照标签去加......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-11-21
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/20/react-native-icon/">
+        <h2 class="post-title">
+            React Native 添加自定义图标库
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！
+本文讲述用react-native-vector-icons库，封装一个自己的图标库，也就是说添加自定义图标库，下面讲讲如何添加。
+通俗易懂，而且本文只讲一种方式，方便各位网友学习，我讲的方式就是最简单的createIconSetFromIco......
         </div>
     </a>
     <p class="post-meta">
@@ -203,17 +227,18 @@ var _hmt = _hmt || [];
 
 <div class="post-preview">
 
-    <a href="/2017/11/19/react-native-icon/">
+    <a href="/2017/11/19/react-persist/">
         <h2 class="post-title">
-            React Native 添加自定义图标库
+            轻松几步让Redux实现数据持久化
         </h2>
         <h3 class="post-subtitle">
             
         </h3>
         <div class="post-content-preview">
-            最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！
-本文讲述用react-native-vector-icons库，封装一个自己的图标库，也就是说添加自定义图标库，下面讲讲如何添加。
-通俗易懂，而且本文只讲一种方式，方便各位网友学习，我讲的方式就是最简单的createIconSetFromIco......
+            在开发的过程中，数据用redux管理，觉得希望将数据持久化保存，也就是说当用户下一次打开app或网站的时候，我们希望浏览器/APP自动加载出上次的数据，怎么办？有没有一个🙆‍♂统一的方式？
+有的，这就是简单易用的redux-persist，事情比想象的简单太多了。
+话不多说，上代码！官方示例代码：
+1234567891011121314151617181920import &#123; P......
         </div>
     </a>
     <p class="post-meta">
@@ -277,36 +302,6 @@ var _hmt = _hmt || [];
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/10/27/uob2/">
-        <h2 class="post-title">
-            “我是如何收集校友的”之数据去重
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            按照上文讲到，我们已经抓取到了所有与“伯明翰大学”相关的数据，我们接下来要做的就是做数据清洗工作。
-
-我们当前进度：2
-
-爬虫程序——抓取全百度百科与“伯明翰大学”相关的数据
-数据去重——用pandas去掉抓取相同的URL或相同的名称
-提取人名——利用HMM-Viterbi进行人名筛选与提取
-下载器——下载所有数据库中数据清洗过的URL，并存入数据库
-人物Ranking——按照一定的排名方式......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2017-10-27
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -361,9 +356,9 @@ var _hmt = _hmt || [];
                             
                         
                             
-                        
-                            
                             <a href="/tags/#Github" title="Github" rel="2">Github</a>
+                            
+                        
                             
                         
                             
@@ -373,11 +368,11 @@ var _hmt = _hmt || [];
                             
                         
                             
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
+                            <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a>
                             
                         
                             
-                            <a href="/tags/#React-Native" title="React-Native" rel="2">React-Native</a>
+                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
                             
                         
                             
@@ -387,11 +382,9 @@ var _hmt = _hmt || [];
                             
                         
                             
+                        
+                            
                             <a href="/tags/#数据" title="数据" rel="3">数据</a>
-                            
-                        
-                            
-                        
                             
                         
                             
@@ -475,20 +468,17 @@ var _hmt = _hmt || [];
                 
                 <!-- statement List -->
                 <hr>
-                  <h5>Statement</h5>
+                  <h5>STATEMENTS</h5>
                     <div class="widget">
-                      <p style="margin:0; color:#333">欢迎转载本博客</p>
-                      <p style="margin:0; color:#333">如有转载，请加入文章地址</p>
-                      <p style="margin:0; color:#333">如发现未加地址，一律举报</p>
-                      <p style="margin:0; color:#333">文章免费，没有稿费</p>
-                      <p style="margin:0; color:#333">博主兴趣广泛</p>
-                      <p style="margin:0; color:#333">写文章实为消遣、交友</p>                      
-                      <p style="margin:0; color:#333">并<strong>非求职、学术</strong>之用</p>
+                      <p style="margin:0; color:#555">欢迎转载本博客</p>
+                      <p style="margin:0; color:#555">如有转载，请加入文章地址</p>
+                      <p style="margin:0; color:#555">如发现未加地址，一律举报</p>
+                      <p style="margin:0; color:#555">文章免费，没有稿费</p>             
                     </div>
 
                 <!-- Comments List -->
                 <hr>
-                  <h5>RECOMMENDED</h5>
+                  <h5>RECOMMENDATION</h5>
                 	<div class="widget">
                         <ul class="ds-recent-comments" data-num-items="5" data-excerpt-length="20"style="padding: 0 5px;margin: 0;">
                         <li><a href="/2017/02/04/react/" target="_blank">我眼中的React</a></li>

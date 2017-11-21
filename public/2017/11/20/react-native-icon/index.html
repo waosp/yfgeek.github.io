@@ -13,11 +13,11 @@
 <meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
     <title>
         
-          Ivan&#39;s Blog
+          React Native 添加自定义图标库 - Ivan&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.yfgeek.com/page/7/">
+    <link rel="canonical" href="http://www.yfgeek.com/2017/11/20/react-native-icon/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -141,358 +141,187 @@ var _hmt = _hmt || [];
 
 
     <!-- Main Content -->
-    <!-- Page Header -->
-<header class="intro-header" style="background-image: url('/content/images/2016/08/wall.jpg')">
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://www.yfgeek.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/content/images/react/wall.png')
+    }
+</style>
+<header class="intro-header" >
     <div class="container">
         <div class="row">
-            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
-                <div class="site-heading">
-                    <h1>Ivan&#39;s Blog</h1>
-                    <!--<hr class="small">-->
-                    <span class="subheading">Web前端 &amp; 极客 &amp; 渗透</span>
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#React-Native" title="React-Native">React-Native</a>
+                        
+                    </div>
+                    <h1>React Native 添加自定义图标库</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Ivan on
+                        2017-11-20
+                    </span>
                 </div>
             </div>
         </div>
     </div>
 </header>
 
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
 
-
-<!-- Main Content -->
-<div class="container">
-    <div class="row">
-        
-
-<!-- USE SIDEBAR -->
     <!-- Post Container -->
             <div class="
-                col-lg-8 col-lg-offset-1
-                col-md-8 col-md-offset-1
-                col-sm-12
-                col-xs-12
-                post-container
-            ">
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
 
-                <!-- Main Content -->
-
-
-<div class="post-preview">
-
-    <a href="/2016/11/17/opt-rpi-project/">
-        <h2 class="post-title">
-            树莓派实时温度湿度监测 优化后续
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            树莓派这个项目已经过去了两月了，一直没有维护，直到我到了英国后发现，在英国连接北京的树莓派网速堪忧，只有100kb/s，每次想查看家里的温度情况，都要等待很长时间才能加载出来，有时候会丢包，这让我很不爽，于是我决定小小的优化一下。 
-优化css js之前写的css与js一直没有压缩，这次决定用gulp压缩一下
-安装 gulp1npm install -g gulp
-安装 gulp-uglif......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-11-17
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/11/08/Github Follow 及 BaiduBlogTransfer 项目/">
-        <h2 class="post-title">
-            Github Follow 及 BaiduBlogTransfer 项目
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            最近总是有莫名其妙的人关注我的Github，于是乎突发奇想，做了一个Github批量跟随的Python小程序。
-用Python做这种事情最过瘾，Python短小、精炼、库多，非常好用，用了不到2个小时就把整个小程序完成了。项目地址：
-点击进入项目
-除此之外，我还整理了只去百度空间的Blogs放到了Github封存。
-https://github.com/yfgeek/Blog
-目录是用一个p......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-11-08
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/10/15/Docker-Compose—简化复杂应用的利器/">
-        <h2 class="post-title">
-            Docker Compose—简化复杂应用的利器 
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            Compose是用于定义和运行复杂Docker应用的工具。你可以在一个文件中定义一个多容器的应用，然后使用一条命令来启动你的应用，然后所有相关的操作都会被自动完成。 
-1. 安装Docker和Compose1234567# 当前最新的Docker是1.6.2，Compose为1.2.0curl -s https://get.docker.io/ubuntu/ | sudo shsudo ap......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-10-15
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/10/12/程序员鄙视链/">
-        <h2 class="post-title">
-            程序员鄙视链
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            纯粹的一些梗，比较搞笑。来源知乎和其他网站。 
-编辑器Emacs → Vim → Sublime → Word → Power PointVim →→ Emacs + evil插件notepad++ → notepadall → Source Insight → notepad
-语言asm → C ↔ C++ ↔ Java ↔ C# → JavaScript → VB → VBScriptC......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-10-12
-
-    </p>
-
-</div>
-<hr>
-
-<div class="post-preview">
-
-    <a href="/2016/10/11/JavaScript创建对象的七种模式/">
-        <h2 class="post-title">
-            JavaScript创建对象的七种模式
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;ECMA-262把对象定义为：”无需属性的集合，其属性可以包含基本值、对象或者函数。”严格来讲，这就相当于说明对象是一组没有特定顺序的值。对象的每个属性或方法都有一个名字，而每个名字都映射到一个值。正因为这样，我们可以把ECMAScript的对象想象成散列表：无非就是一组名对值，其中值可以是数据或......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-10-11
-
-    </p>
-
-</div>
-<hr>
+                <p>最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！</p>
+<p>本文讲述用<code>react-native-vector-icons</code>库，封装一个自己的图标库，也就是说添加自定义图标库，下面讲讲如何添加。</p>
+<p>通俗易懂，而且本文只讲一种方式，方便各位网友学习，我讲的方式就是最简单的<code>createIconSetFromIcoMoon</code>方法。</p>
+<p>第一步，准备好你的素材，最好是<code>svg</code>格式</p>
+<p>第二步，进入网址：<a href="https://icomoon.io/app/#/select" target="_blank" rel="external">https://icomoon.io/app/#/select</a></p>
+<p>点击Import Icons按钮，将图标<strong>批量</strong>导入，如图下所示：</p>
+<p><img src="/content/images/react-icon/1.png" alt=""></p>
+<p>第三步，点击Generate Font按钮。</p>
+<p>第四步，点击Download按钮。</p>
+<p>这时候，你会下载到如图所示结构的zip文件，将其解压，拷贝到项目根目录。</p>
+<p><img src="/content/images/react-icon/2.png" alt=""></p>
+<p>第五步，在Xcode中添加压缩包里的<code>icomoon.ttf</code>文件。</p>
+<p>用Xcode打开工程文件，将<code>icomoon.ttf</code>文件复制一份，并拖动到Resources目录中，如图所示</p>
+<p><img src="/content/images/react-icon/3.png" alt=""></p>
+<p>第六步，点开<code>Info.plist</code>，在<code>Fonts provided by application</code>属性中添加这个字体的名称<code>icomoon.ttf</code>的键值。</p>
+<p><img src="/content/images/react-icon/4.png" alt=""></p>
+<p>第七步，在项目配置中的Build Phases中的Copy Bundle Resources 中添加该字体。</p>
+<p><img src="/content/images/react-icon/8.png" alt=""></p>
+<p>第七步，在项目根目录下，运行终端命令：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">npm install react-native-vector-icons --save</div><div class="line">react-native link</div></pre></td></tr></table></figure>
+<p><img src="/content/images/react-icon/5.png" alt=""></p>
+<p>第八步，配置安卓：</p>
+<p>编辑 <code>android/app/build.gradle</code> ，添加如下内容，可以说非常简单</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">project.ext.vectoricons = [</div><div class="line">    iconFontNames: [ <span class="string">'icomoon.ttf'</span>] </div><div class="line">]</div><div class="line">apply <span class="keyword">from</span>: <span class="string">"../../node_modules/react-native-vector-icons/fonts.gradle"</span></div></pre></td></tr></table></figure>
+<p>第八步，在代码中写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> &#123;createIconSetFromIcoMoon &#125; <span class="keyword">from</span> <span class="string">'react-native-vector-icons'</span>;</div><div class="line"></div><div class="line"><span class="keyword">import</span> icoMoonConfig <span class="keyword">from</span> <span class="string">'../icon/selection.json'</span>;</div><div class="line"></div><div class="line"><span class="keyword">const</span> Icon = createIconSetFromIcoMoon(icoMoonConfig);</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> Iconfontello;</div></pre></td></tr></table></figure>
+<p>第九步，作为组件调用</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&lt;Icon name=<span class="string">"btc"</span> size=&#123;<span class="number">32</span>&#125; /&gt;;</div></pre></td></tr></table></figure>
 
 
+                <hr>
 
-<!-- Pager -->
-
-<ul class="pager">
-    
-        <li class="previous">
-            <a href="/page/6/">&larr; 上一篇</a>
-        </li>
-    
-    
-        <li class="next">
-            <a href="/page/8/">下一篇 &rarr;</a>
-        </li>
-    
-</ul>
-
-
-                <!-- 如果开启评论功能 -->
                 
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/11/21/react-native-icon-2/" data-toggle="tooltip" data-placement="top" title="React Native 封装彩色自定义图标库">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/11/19/react-persist/" data-toggle="tooltip" data-placement="top" title="轻松几步让Redux实现数据持久化">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                 <div id="gitcomments"></div>
+
+                
+
+               
 
             </div>
-    <!-- Sidebar Container -->
+    <!-- Side Catalog Container -->
             <div class="
-                col-lg-3 col-lg-offset-0
-                col-md-3 col-md-offset-0
-                col-sm-12
-                col-xs-12
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
                 sidebar-container
-            ">
-                <!-- Featured Tags -->
-                
-                <section>
-                    <!-- no hr -->
-                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
-                    <div class="tags">
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Hack" title="Hack" rel="11">Hack</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-                            
-                        
-                            
-                            <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
-                            
-                        
-                            
-                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
-                            
-                        
-                            
-                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#Mac" title="Mac" rel="2">Mac</a>
-                            
-                        
-                            
-                            <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a>
-                            
-                        
-                            
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
-                            
-                        
-                            
-                        
-                            
-                            <a href="/tags/#数据" title="数据" rel="3">数据</a>
-                            
-                        
-                            
-                        
-                            
-                        
-                            
-                        
-                    </div>
-                </section>
-                
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
 
-                <!-- Short About -->
-                <section class="visible-md visible-lg">
-                    <hr><h5><a href="/about.html">ABOUT ME</a></h5>
-                    <div class="short-about">
+    <!-- Sidebar Container -->
 
-                        
-                            <img src="/img/logo.jpg" />
-                        
-
-                        
-                            <p>对任何技术永远充满敬畏之心</p>
-                        
-
-                        <!-- SNS Link -->
-                        <ul class="list-inline">
-                            
-                                <li>
-                                    <a href="/feed.xml">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-                            
-                            
-                                <li>
-                                    <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-                                <li>
-                                    <a target="_blank" href="http://weibo.com/yfss">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-                            
-
-                            
-                                <li>
-                                    <a target="_blank"  href="https://github.com/yfgeek">
-                                        <span class="fa-stack fa-lg">
-                                            <i class="fa fa-circle fa-stack-2x"></i>
-                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
-                                        </span>
-                                    </a>
-                                </li>
-                            
-
-
-                            
-                        </ul>
-                    </div>
-                </section>
-
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
                 <!-- Friends Blog -->
                 
-                <!-- statement List -->
-                <hr>
-                  <h5>STATEMENTS</h5>
-                    <div class="widget">
-                      <p style="margin:0; color:#555">欢迎转载本博客</p>
-                      <p style="margin:0; color:#555">如有转载，请加入文章地址</p>
-                      <p style="margin:0; color:#555">如发现未加地址，一律举报</p>
-                      <p style="margin:0; color:#555">文章免费，没有稿费</p>             
-                    </div>
 
-                <!-- Comments List -->
-                <hr>
-                  <h5>RECOMMENDATION</h5>
-                	<div class="widget">
-                        <ul class="ds-recent-comments" data-num-items="5" data-excerpt-length="20"style="padding: 0 5px;margin: 0;">
-                        <li><a href="/2017/02/04/react/" target="_blank">我眼中的React</a></li>
-                        <li><a href="/tags/#%E6%95%B0%E6%8D%AE" target="_blank">我是如何收集校友的</a></li>
-                        <li><a href="/2016/12/18/poisontap/" target="_blank">30秒内盗取任意PC的Cookie神器</a></li>
-                        <li><a href="/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/" target="_blank">OTR(Off-the-Record)技术探讨</a></li>
-                        <li><a href="/2016/11/22/docker-SQLServer/" target="_blank">Docker下配置SQL Server for Linux</a></li>
-                        <li><a href="/2017/01/12/network-zero-web/" target="_blank">用Raspberry Pi Zero打造“即插即用”的Web服务器</a></li>
-                        <li><a href="/2016/12/21/network-zero/" target="_blank">Raspberry Pi Zero联网奇妙记</a></li>
-                        <li><a href="/2016/11/27/badusb/" target="_blank">Arduino Leonardo 打造 Bad USB</a></li>
-                        </ul>
-                	</div>
-        
+
+            </div>
+
+        </div>
     </div>
-</div>
+</article>
+<script>
+var md5 = function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){var I,d,F,H,x;F=(G&2147483648);H=(k&2147483648);I=(G&1073741824);d=(k&1073741824);x=(G&1073741823)+(k&1073741823);if(I&d){return(x^2147483648^F^H)}if(I|d){if(x&1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&F)|((~d)&k)}function q(d,F,k){return(d&k)|(F&(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)*16;var aa=Array(I-1);var d=0;var H=0;while(H<F){Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=(aa[Z]| (G.charCodeAt(H)<<d));H++}Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=aa[Z]|(128<<d);aa[I-2]=F<<3;aa[I-1]=F>>>29;return aa}function B(x){var k="",F="",G,d;for(d=0;d<=3;d++){G=(x>>>(d*8))&255;F="0"+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/rn/g,"n");var d="";for(var F=0;F<k.length;F++){var x=k.charCodeAt(F);if(x<128){d+=String.fromCharCode(x)}else{if((x>127)&&(x<2048)){d+=String.fromCharCode((x>>6)|192);d+=String.fromCharCode((x&63)|128)}else{d+=String.fromCharCode((x>>12)|224);d+=String.fromCharCode(((x>>6)&63)|128);d+=String.fromCharCode((x&63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P<C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};
+
+var gitment = new Gitment({
+  id: md5(location.href),
+  owner: 'yfgeek',
+  repo: 'yfgeek.github.io',
+  oauth: {
+    client_id: '62ad5643d4dd88174261',
+    client_secret: '72d853a4534da2a5896129a9c9f4cb4c85cab387',
+  },
+})
+gitment.render('gitcomments')
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
 
 
     <!-- Footer -->

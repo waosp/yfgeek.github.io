@@ -211,6 +211,7 @@ ColorConfig.forEach((item,index)=>{if(item.cuy === cuy)  color = item.color});
                     alignItems:'center',
                     justifyContent:'center',
                     borderRadius: w/2,
+                    overflow: 'hidden',
                     backgroundColor : '#ffffff',
                 }}>
                    <Icon name={cuy} size={w} color={color}/>;

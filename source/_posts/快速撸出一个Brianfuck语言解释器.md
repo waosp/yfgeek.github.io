@@ -1,5 +1,5 @@
 ---
-title: 快速撸出一个Brianfuck语言解释器
+title: 快速撸出一个Brainfuck语言解释器
 date: 2017-11-30 22:27:24
 tags: Brainfuck
 categories: Brainfuck React-Native

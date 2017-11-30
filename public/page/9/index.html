@@ -178,6 +178,30 @@ var _hmt = _hmt || [];
 
 <div class="post-preview">
 
+    <a href="/2016/09/13/ss-server/">
+        <h2 class="post-title">
+            树莓派搭建ss服务器
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            简介树莓派打算长期放在家里了，为了方便我身居海外还能方便的听上网易云音乐，顺利的看上国内的优酷爱奇艺，打算在树莓派上搭ss服务器
+为什么不用pptp vpn这是个好问题，实际上我已经搭建了pptp vpn，只是连不上，大概是因为国内运营商中国电信做了端口屏蔽限制，目前发现已经屏蔽的端口有80和PPTP的端口。
+一键配置脚本1234wget http://mirrors.linuxeye.co......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-09-13
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/09/12/GHOST搬迁到HEXO-Github-Pages-指南/">
         <h2 class="post-title">
             GHOST搬迁到HEXO(Github Pages)指南
@@ -285,33 +309,6 @@ Nginx/Apache (请自行提前安装)
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/08/25/rpi-tmp-hdt-platform/">
-        <h2 class="post-title">
-            基于树莓派的实时温度湿度监测平台
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言很早就入了树莓派，一直没有折腾GPIO功能，虽然我是学自动化的，但是我对引脚之类的一窍不通，做这个也是为了预习一下本专业的知识，而更多的，是乐趣。
-在淘宝上网购了原料之后，回家发现网上并没有树莓派3B的教程，大部分都是树莓派2B的教程，而树莓派3B的GPIO图都发生了变化，因此写本文的目的还在于帮助更多的人，填补互联网的空白。 
-知识储备
-数字电子技术基础
-微机原理与接口技术
-pytho......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-08-25
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -358,19 +355,15 @@ pytho......
                             
                         
                             
-                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-                            
-                        
-                            
                             <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
+                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
                             
                         
                             
-                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
+                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
                             
                         
                             
@@ -382,13 +375,15 @@ pytho......
                             
                         
                             
+                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
+                            
+                        
+                            
                             <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a>
                             
                         
                             
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
-                            
-                        
+                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
                             
                         
                             
@@ -398,7 +393,11 @@ pytho......
                             
                         
                             
+                        
+                            
                             <a href="/tags/#数据" title="数据" rel="3">数据</a>
+                            
+                        
                             
                         
                             
@@ -769,72 +768,6 @@ $(function(){
 
 <!--page counter part-->
 <script>
-function addCount (Counter) {
-        url=$('.article-date').attr('href').trim();
-        title = $('.article-title').text().trim();
-        var query=new AV.Query(Counter);
-        //use url as unique idnetfication
-        query.equalTo("url",url);
-        query.find({
-            success: function(results){
-                if(results.length>0)
-                {
-                    var counter=results[0];
-                    counter.fetchWhenSave(true); //get recent result
-                    counter.increment("time");
-                    counter.save();
-                }
-                else
-                {
-                    var newcounter=new Counter();
-                    newcounter.set("title",title);
-                    newcounter.set("url",url);
-                    newcounter.set("time",1);
-                    newcounter.save(null,{
-                        success: function(newcounter){
-                        //console.log('New object created');
-                        },
-                        error: function(newcounter,error){
-                        console.log('Failed to create');
-                        }
-                        });
-                }
-            },
-            error: function(error){
-                //find null is not a error
-                console.log('Error:'+error.code+" "+error.message);
-            }
-        });
-}
-$(function(){
-        var Counter=AV.Object.extend("Counter");
-        //only increse visit counting when intering a page
-        if ($('.article-title').length == 1)
-           addCount(Counter);
-        var query=new AV.Query(Counter);
-        query.descending("time");
-        // the sum of popular posts
-        query.limit(10);
-        query.find({
-            success: function(results){
-                    for(var i=0;i<results.length;i++)
-                    {
-                        var counter=results[i];
-                        title=counter.get("title");
-                        url=counter.get("url");
-                        time=counter.get("time");
-                        // add to the popularlist widget
-                        showcontent=title+" ("+time+")";
-                        //notice the "" in href
-                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
-                    }
-                },
-            error: function(error){
-                console.log("Error:"+error.code+" "+error.message);
-            }
-            }
-        )
-        });
 </script>
 
 

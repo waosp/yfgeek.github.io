@@ -178,6 +178,30 @@ var _hmt = _hmt || [];
 
 <div class="post-preview">
 
+    <a href="/2017/11/30/快速撸出一个Brianfuck语言解释器/">
+        <h2 class="post-title">
+            快速撸出一个Brianfuck语言解释器
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一直都知道一个很有趣的语言，Brainfuck，只是一直尚未研究，今天晚上看了一下，竟然不是那么难，而且还撸出来了一个解释器。这是一种极小化的计算机语言，它是由Urban Müller在1993年创建的。
+就象它的名字所暗示的，brainfuck程序很难读懂。尽管如此，brainfuck图灵机一样可以完成任何计算任务。虽然brainfuck的计算方式如此与众不同，但它确实能够正确运行。
+这种......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-11-30
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/11/21/react-native-icon-2/">
         <h2 class="post-title">
             React Native 封装彩色自定义图标库
@@ -279,29 +303,6 @@ var _hmt = _hmt || [];
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/10/29/rasp-xp/">
-        <h2 class="post-title">
-            实战树莓派安装Windows XP
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            序记得小时候，家里的电脑一直安装着Windows 98，天天骂windows难用，虽然没有别的最新的操作系统可以用，也看不出来Windows 98的设计风格有多么古朴，只是bug奇多，动不动就崩溃，系统级别的崩溃，蓝屏，甚至直接坏掉再也无法开机。
-直到有一天，偶然的机会，姐姐家里新买来的电脑，过去一看，大不一样，蓝色的界面，巨好看的任务栏、窗体样式，却不知道什么系统，感觉像是windows ......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2017-10-29
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -344,19 +345,15 @@ var _hmt = _hmt || [];
                             
                         
                             
-                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-                            
-                        
-                            
                             <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
+                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
                             
                         
                             
-                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
+                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
                             
                         
                             
@@ -368,13 +365,15 @@ var _hmt = _hmt || [];
                             
                         
                             
+                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
+                            
+                        
+                            
                             <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a>
                             
                         
                             
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
-                            
-                        
+                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
                             
                         
                             
@@ -384,7 +383,11 @@ var _hmt = _hmt || [];
                             
                         
                             
+                        
+                            
                             <a href="/tags/#数据" title="数据" rel="3">数据</a>
+                            
+                        
                             
                         
                             
@@ -755,72 +758,6 @@ $(function(){
 
 <!--page counter part-->
 <script>
-function addCount (Counter) {
-        url=$('.article-date').attr('href').trim();
-        title = $('.article-title').text().trim();
-        var query=new AV.Query(Counter);
-        //use url as unique idnetfication
-        query.equalTo("url",url);
-        query.find({
-            success: function(results){
-                if(results.length>0)
-                {
-                    var counter=results[0];
-                    counter.fetchWhenSave(true); //get recent result
-                    counter.increment("time");
-                    counter.save();
-                }
-                else
-                {
-                    var newcounter=new Counter();
-                    newcounter.set("title",title);
-                    newcounter.set("url",url);
-                    newcounter.set("time",1);
-                    newcounter.save(null,{
-                        success: function(newcounter){
-                        //console.log('New object created');
-                        },
-                        error: function(newcounter,error){
-                        console.log('Failed to create');
-                        }
-                        });
-                }
-            },
-            error: function(error){
-                //find null is not a error
-                console.log('Error:'+error.code+" "+error.message);
-            }
-        });
-}
-$(function(){
-        var Counter=AV.Object.extend("Counter");
-        //only increse visit counting when intering a page
-        if ($('.article-title').length == 1)
-           addCount(Counter);
-        var query=new AV.Query(Counter);
-        query.descending("time");
-        // the sum of popular posts
-        query.limit(10);
-        query.find({
-            success: function(results){
-                    for(var i=0;i<results.length;i++)
-                    {
-                        var counter=results[i];
-                        title=counter.get("title");
-                        url=counter.get("url");
-                        time=counter.get("time");
-                        // add to the popularlist widget
-                        showcontent=title+" ("+time+")";
-                        //notice the "" in href
-                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
-                    }
-                },
-            error: function(error){
-                console.log("Error:"+error.code+" "+error.message);
-            }
-            }
-        )
-        });
 </script>
 
 

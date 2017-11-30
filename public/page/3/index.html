@@ -178,6 +178,33 @@ var _hmt = _hmt || [];
 
 <div class="post-preview">
 
+    <a href="/2017/06/26/ppd/">
+        <h2 class="post-title">
+            拍拍哒投资平台
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            本文是近期状况的一些小记录，无技术探讨。
+最近参加了一个小比赛，第二届魔镜杯数据应用大赛，大概就是做一个金融数据产品，用了两天码了一些代码，还是学习到了一些知识。
+至少学到了怎么在前端获取标准的oAuth，其实很简单，事情实践起来总是好的。
+至于开发语言方面，本来是想用python的，后来因为工期紧，就用Thinkphp改了改，事实上发现，之前做的任何事情都是有用的。
+具体做了两个平台：
+模......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-06-26
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2017/02/17/utf8true/">
         <h2 class="post-title">
             揭秘utf8=✓背后的小秘密
@@ -280,33 +307,6 @@ KISS原则  *Keep It Simple, Stupid*
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2017/01/12/network-zero-web/">
-        <h2 class="post-title">
-            用Raspberry Pi Zero打造“即插即用”的Web服务器
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            虽然Raspberry Pi Zero只有4.5英镑，非常便宜，但确实具有局限性，由于缺少网口、WiFi，功能比较单一，可曾设想，用Raspberry Pi Zero打造一个完美的“即插即用”的Web服务器？
-
-何为即插即用？
-类似于优盘一样，插上电脑，等待几秒，直接识别为网卡，直接输入树莓派的网址，连接就是自己的网站。
-有什么用？
-实现本地web本地化，随着前端、后端技术的发展，web应用......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2017-01-12
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -353,19 +353,15 @@ KISS原则  *Keep It Simple, Stupid*
                             
                         
                             
-                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-                            
-                        
-                            
                             <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
+                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
                             
                         
                             
-                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
+                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
                             
                         
                             
@@ -377,13 +373,15 @@ KISS原则  *Keep It Simple, Stupid*
                             
                         
                             
+                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
+                            
+                        
+                            
                             <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a>
                             
                         
                             
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
-                            
-                        
+                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
                             
                         
                             
@@ -393,7 +391,11 @@ KISS原则  *Keep It Simple, Stupid*
                             
                         
                             
+                        
+                            
                             <a href="/tags/#数据" title="数据" rel="3">数据</a>
+                            
+                        
                             
                         
                             
@@ -764,72 +766,6 @@ $(function(){
 
 <!--page counter part-->
 <script>
-function addCount (Counter) {
-        url=$('.article-date').attr('href').trim();
-        title = $('.article-title').text().trim();
-        var query=new AV.Query(Counter);
-        //use url as unique idnetfication
-        query.equalTo("url",url);
-        query.find({
-            success: function(results){
-                if(results.length>0)
-                {
-                    var counter=results[0];
-                    counter.fetchWhenSave(true); //get recent result
-                    counter.increment("time");
-                    counter.save();
-                }
-                else
-                {
-                    var newcounter=new Counter();
-                    newcounter.set("title",title);
-                    newcounter.set("url",url);
-                    newcounter.set("time",1);
-                    newcounter.save(null,{
-                        success: function(newcounter){
-                        //console.log('New object created');
-                        },
-                        error: function(newcounter,error){
-                        console.log('Failed to create');
-                        }
-                        });
-                }
-            },
-            error: function(error){
-                //find null is not a error
-                console.log('Error:'+error.code+" "+error.message);
-            }
-        });
-}
-$(function(){
-        var Counter=AV.Object.extend("Counter");
-        //only increse visit counting when intering a page
-        if ($('.article-title').length == 1)
-           addCount(Counter);
-        var query=new AV.Query(Counter);
-        query.descending("time");
-        // the sum of popular posts
-        query.limit(10);
-        query.find({
-            success: function(results){
-                    for(var i=0;i<results.length;i++)
-                    {
-                        var counter=results[i];
-                        title=counter.get("title");
-                        url=counter.get("url");
-                        time=counter.get("time");
-                        // add to the popularlist widget
-                        showcontent=title+" ("+time+")";
-                        //notice the "" in href
-                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
-                    }
-                },
-            error: function(error){
-                console.log("Error:"+error.code+" "+error.message);
-            }
-            }
-        )
-        });
 </script>
 
 

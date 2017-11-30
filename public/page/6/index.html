@@ -178,6 +178,36 @@ var _hmt = _hmt || [];
 
 <div class="post-preview">
 
+    <a href="/2016/12/06/OTR技术探讨/">
+        <h2 class="post-title">
+            OTR(Off-the-Record) 技术探讨
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            中文网络上对OTR(Off-the-record)技术文章甚少，实际上聊天上采用OTR技术具有极大的安全性。OTR是一种结合Diffie-Hellman密钥交换算法、AES算法、SHA-1哈希算法的加密在明文情况下传输的技术。
+
+通过OTR技术，能够实现:
+
+加密聊天内容
+证明与你聊天的人就是与你聊天的人（防止中间人攻击）
+服务器无法记录你的真实聊天内容
+
+原理消息鉴别码(MAC)在密码学中......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2016-12-06
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
     <a href="/2016/11/27/badusb/">
         <h2 class="post-title">
             Arduino Leonardo 打造 Bad USB
@@ -287,30 +317,6 @@ Docker版本在 1......
 </div>
 <hr>
 
-<div class="post-preview">
-
-    <a href="/2016/11/19/github3k/">
-        <h2 class="post-title">
-            当我关注3万Github用户后发生了什么
-        </h2>
-        <h3 class="post-subtitle">
-            
-        </h3>
-        <div class="post-content-preview">
-            前言16天前，写了一个小python程序，自动关注Github里的人，python真是尤物，能快速麻出想做的程序。
-于是乎我利用这个关注了3万人的Github，可是关注后除了同性交友似乎没有什么用，而我发现一件事，就是我的首页动态变化如同刷新浪微博一样，每个人都在star或fork各种项目，不乏很多精品资源。
-翻都翻不过来，那么同时还存在一些“无用( 垃圾 )项目”，star和fork数量很......
-        </div>
-    </a>
-    <p class="post-meta">
-        Posted by Ivan on
-        2016-11-19
-
-    </p>
-
-</div>
-<hr>
-
 
 
 <!-- Pager -->
@@ -357,19 +363,15 @@ Docker版本在 1......
                             
                         
                             
-                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
-                            
-                        
-                            
                             <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
                             
                         
                             
-                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
+                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
                             
                         
                             
-                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
+                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
                             
                         
                             
@@ -381,13 +383,15 @@ Docker版本在 1......
                             
                         
                             
+                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
+                            
+                        
+                            
                             <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a>
                             
                         
                             
-                            <a href="/tags/#Raspberry" title="Raspberry" rel="9">Raspberry</a>
-                            
-                        
+                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
                             
                         
                             
@@ -397,7 +401,11 @@ Docker版本在 1......
                             
                         
                             
+                        
+                            
                             <a href="/tags/#数据" title="数据" rel="3">数据</a>
+                            
+                        
                             
                         
                             
@@ -768,72 +776,6 @@ $(function(){
 
 <!--page counter part-->
 <script>
-function addCount (Counter) {
-        url=$('.article-date').attr('href').trim();
-        title = $('.article-title').text().trim();
-        var query=new AV.Query(Counter);
-        //use url as unique idnetfication
-        query.equalTo("url",url);
-        query.find({
-            success: function(results){
-                if(results.length>0)
-                {
-                    var counter=results[0];
-                    counter.fetchWhenSave(true); //get recent result
-                    counter.increment("time");
-                    counter.save();
-                }
-                else
-                {
-                    var newcounter=new Counter();
-                    newcounter.set("title",title);
-                    newcounter.set("url",url);
-                    newcounter.set("time",1);
-                    newcounter.save(null,{
-                        success: function(newcounter){
-                        //console.log('New object created');
-                        },
-                        error: function(newcounter,error){
-                        console.log('Failed to create');
-                        }
-                        });
-                }
-            },
-            error: function(error){
-                //find null is not a error
-                console.log('Error:'+error.code+" "+error.message);
-            }
-        });
-}
-$(function(){
-        var Counter=AV.Object.extend("Counter");
-        //only increse visit counting when intering a page
-        if ($('.article-title').length == 1)
-           addCount(Counter);
-        var query=new AV.Query(Counter);
-        query.descending("time");
-        // the sum of popular posts
-        query.limit(10);
-        query.find({
-            success: function(results){
-                    for(var i=0;i<results.length;i++)
-                    {
-                        var counter=results[i];
-                        title=counter.get("title");
-                        url=counter.get("url");
-                        time=counter.get("time");
-                        // add to the popularlist widget
-                        showcontent=title+" ("+time+")";
-                        //notice the "" in href
-                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
-                    }
-                },
-            error: function(error){
-                console.log("Error:"+error.code+" "+error.message);
-            }
-            }
-        )
-        });
 </script>
 
 

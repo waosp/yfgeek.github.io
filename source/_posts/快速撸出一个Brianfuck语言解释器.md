@@ -3,6 +3,7 @@ title: 快速撸出一个Brianfuck语言解释器
 date: 2017-11-30 22:27:24
 tags: Brainfuck
 categories: Brainfuck React-Native
+permalink: brainfuck
 ---
 
 一直都知道一个很有趣的语言，Brainfuck，只是一直尚未研究，今天晚上看了一下，竟然不是那么难，而且还撸出来了一个解释器。这是一种极小化的计算机语言，它是由Urban Müller在1993年创建的。

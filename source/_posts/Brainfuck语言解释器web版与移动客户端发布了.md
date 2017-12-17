@@ -22,6 +22,6 @@ BrainfuckIDE(Web版):https://github.com/yfgeek/BrainfuckIDE
 
 # 图鉴
 
-![](/content/images/brainfuck/brainfuck.png)
+![](/content/images/brainfuck/snap.png)
 
 ![](/content/images/brainfuck/ios.png)

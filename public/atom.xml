@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2017-11-30T14:41:00.775Z</updated>
+  <updated>2018-02-23T09:47:23.435Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -16,11 +16,106 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>快速撸出一个Brianfuck语言解释器</title>
-    <link href="http://www.yfgeek.com/2017/11/30/%E5%BF%AB%E9%80%9F%E6%92%B8%E5%87%BA%E4%B8%80%E4%B8%AABrianfuck%E8%AF%AD%E8%A8%80%E8%A7%A3%E9%87%8A%E5%99%A8/"/>
-    <id>http://www.yfgeek.com/2017/11/30/快速撸出一个Brianfuck语言解释器/</id>
+    <title>用HomeAssistant + HomeBridge树莓派构建智能家居中枢</title>
+    <link href="http://www.yfgeek.com/2018/02/23/%E7%94%A8%E6%A0%91%E8%8E%93%E6%B4%BE%E6%9E%84%E5%BB%BA%E6%99%BA%E8%83%BD%E5%AE%B6%E5%B1%85%E4%B8%AD%E6%9E%A2-HomeAssistant-Home-Bridge/"/>
+    <id>http://www.yfgeek.com/2018/02/23/用树莓派构建智能家居中枢-HomeAssistant-Home-Bridge/</id>
+    <published>2018-02-23T07:45:03.000Z</published>
+    <updated>2018-02-23T09:47:23.435Z</updated>
+    
+    <content type="html"><![CDATA[<p> 好久没有更新文章啦，最近接了一个私活，也是人越来越懒，懒得更新。</p>
+<p>想着不行必须得更新一篇，那就写写最近构建的树莓派吧，话不多说，先上图。</p>
+<p><img src="/content/images/rasp-home/1.jpg" alt=""></p>
+<h1 id="需要的原料"><a href="#需要的原料" class="headerlink" title="需要的原料"></a>需要的原料</h1><ul>
+<li>树莓派</li>
+<li>Hass.io或Hassbian或Raspbian系统</li>
+<li>DHT22传感器</li>
+<li>尽可能多的智能设备</li>
+</ul>
+<h1 id="Home-Assistant"><a href="#Home-Assistant" class="headerlink" title="Home Assistant"></a>Home Assistant</h1><p>Home Assistant 是一个好系统，可以这么说，Home Assistant是一个包装好的智能家居控制系统的中心，在2018年看，可扩展性强，社区强大。</p>
+<p>我建议安装Hassbian系统，安静纯粹，安装过程如下。</p>
+<ol>
+<li><p><a href="https://github.com/home-assistant/pi-gen/releases/latest" target="_blank" rel="external">下载最新的Hassbian景象</a> (364 MB)</p>
+</li>
+<li><p>用 <a href="https://etcher.io/" target="_blank" rel="external">Etcher</a> 刷入你的树莓派储存卡。</p>
+</li>
+<li><p>如果你是Wi-Fi链接，请先配置你的网络连接，重新插入sd卡，在根目录下，建立<code>wpa_supplicant.conf</code>文件，修改内容并保存。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">country=SE</div><div class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</div><div class="line">update_config=1</div><div class="line"></div><div class="line">network=&#123;</div><div class="line">    ssid="YOUR_SSID"</div><div class="line">    psk="YOUR_PASSWORD"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>插入SD卡，开机等待，刷新<a href="http://hassbian.local:8123/，直到出现页面。" target="_blank" rel="external">http://hassbian.local:8123/，直到出现页面。</a></p>
+</li>
+</ol>
+<p>小提示</p>
+<ul>
+<li>Etcher一定要使用最新版1.3.1，旧版本可能导致无法开机</li>
+<li>不要相信官网所说的等待五分钟，由于中国的网络环境，很可能需要等待一小时到五小时，都是正常的，只要没有出现网页，就不要进入ssh</li>
+<li>出现页面后，可以ssh链接进页面，用户名是pi，密码是raspberry，用passwd重置密码。</li>
+<li>如果超过五个小时没有页面显示，这时候你再输入<code>sudo systemctl start install_homeassistant.service</code>重试。</li>
+</ul>
+<p><img src="/content/images/rasp-home/2.png" alt=""></p>
+<h1 id="HomeBridge"><a href="#HomeBridge" class="headerlink" title="HomeBridge"></a>HomeBridge</h1><p>HomeBridge可以让你的Hassbian支持iOS的Homekit，所以，这个插件一定要安装。</p>
+<p>安装方法如下：</p>
+<ol>
+<li><p>ssh进入你的树莓派</p>
+</li>
+<li><p>安装node</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">curl <span class="_">-s</span>L https://deb.nodesource.com/setup_6.x | sudo -E bash </div><div class="line">sudo apt-get install -y nodejs</div><div class="line">sudo apt-get install -y build-essential</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装avahi</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install libavahi-compat-libdnssd-dev</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装homebridge</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g --unsafe-perm homebridge</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>好了，homebridge安装好后，我们输入homebridge试试可不可以运行？</p>
+<p><img src="/content/images/rasp-home/3.png" alt=""></p>
+<p>看到这样的二维码，我们就可以打卡iPhone的家庭.app，然后扫描二维码，添加我们的树莓派中继。</p>
+<h1 id="温度和湿度传感器"><a href="#温度和湿度传感器" class="headerlink" title="温度和湿度传感器"></a>温度和湿度传感器</h1><p>我们添加一个温度和湿度，接线方式</p>
+<p>接线需要并联一个10K电阻</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">DHT22有3个脚,VCC,DATA,GND</div><div class="line"></div><div class="line">VCC,接 3.3V,PIN 01</div><div class="line"></div><div class="line">DATA,接 GPIO04,PIN 07</div><div class="line"></div><div class="line">GND,接地,PIN 09</div><div class="line"></div><div class="line">其中DATA和VCC之间用10k电阻相连</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/yfgeek/rpi-TempRuntime/blob/master/images/5.png" target="_blank" rel="external"><img src="https://raw.githubusercontent.com/yfgeek/rpi-TempRuntime/master/images/5.png" alt="img"></a></p>
+<p>随后，执行以下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/NorthernMan54/homebridge-dht</div><div class="line"><span class="built_in">cd</span> homebridge-dht</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install pigpio python-pigpio python3-pigpio</div><div class="line">sudo cp dht22 /usr/<span class="built_in">local</span>/bin/dht22</div><div class="line">sudo chmod a+x /usr/<span class="built_in">local</span>/bin/dht22</div><div class="line">dht22</div></pre></td></tr></table></figure>
+<p>如果看到显示正常的温度，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pi@hassbian:~ $ dht22</div><div class="line">0 25.5 C 14.5 %</div></pre></td></tr></table></figure>
+<h2 id="智能电视"><a href="#智能电视" class="headerlink" title="智能电视"></a>智能电视</h2><p>因为我家有一台三星的智能电视，也可以用homebridge控制，在npm上找到了相应的包，迅速安装，迅速安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g homebridge-samsungtv2016</div></pre></td></tr></table></figure>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>随后我们配置homebridge</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line"><span class="built_in">cd</span> .homebridge</div><div class="line">vi config.json</div></pre></td></tr></table></figure>
+<p>编辑内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"bridge"</span>: &#123;</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"Yifan Home"</span>,</div><div class="line">        <span class="attr">"username"</span>: <span class="string">"CC:22:3D:E3:CE:30"</span>,</div><div class="line">        <span class="attr">"port"</span>: <span class="number">51826</span>,</div><div class="line">        <span class="attr">"pin"</span>: <span class="string">"031-45-154"</span></div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">"description"</span>: <span class="string">"Yifan Home"</span>,</div><div class="line"></div><div class="line">    <span class="attr">"accessories"</span>: [</div><div class="line">        &#123;</div><div class="line">           <span class="attr">"accessory"</span>: <span class="string">"Dht"</span>,</div><div class="line">           <span class="attr">"name"</span>: <span class="string">"dht22"</span>,</div><div class="line">           <span class="attr">"name_temperature"</span>: <span class="string">"Temperature"</span>,</div><div class="line">           <span class="attr">"name_humidity"</span>: <span class="string">"Humidity"</span>,</div><div class="line">           <span class="attr">"service"</span>: <span class="string">"dht22"</span>,</div><div class="line">           <span class="attr">"gpio"</span>: <span class="string">"4"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">                        <span class="attr">"accessory"</span>: <span class="string">"SamsungTV2016"</span>,</div><div class="line">                        <span class="attr">"name"</span>: <span class="string">"Bedroom TV"</span>,</div><div class="line">                        <span class="attr">"ip_address"</span>: <span class="string">"192.168.1.8"</span>,</div><div class="line">                        <span class="attr">"mac_address"</span>: <span class="string">"84:A4:66:F1:C7:09"</span></div><div class="line">                &#125;</div><div class="line">    ],</div><div class="line"></div><div class="line">    <span class="attr">"platforms"</span>: [</div><div class="line">        ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，我们打上<code>homebridge</code>，打开手机的家庭.app，扫描二维码，添加设备，大功告成！</p>
+<p>小提示：</p>
+<ul>
+<li>如果之前添加错误，想重新配置，请进入<code>~/.homebridge</code>文件夹删除<code>accessories</code>和<code>persist</code>目录即可重新配置。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://home-assistant.io/docs/installation/hassbian/installation/" target="_blank" rel="external">https://home-assistant.io/docs/installation/hassbian/installation/</a></p>
+<p><a href="https://www.jianshu.com/p/ec79b2711bd5" target="_blank" rel="external">https://www.jianshu.com/p/ec79b2711bd5</a></p>
+<p><a href="http://www.instructables.com/id/RPIHomeBridge-TemperatureHumidity-Sensor/" target="_blank" rel="external">http://www.instructables.com/id/RPIHomeBridge-TemperatureHumidity-Sensor/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt; 好久没有更新文章啦，最近接了一个私活，也是人越来越懒，懒得更新。&lt;/p&gt;
+&lt;p&gt;想着不行必须得更新一篇，那就写写最近构建的树莓派吧，话不多说，先上图。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/content/images/rasp-home/1.jpg&quot; alt=&quot;&quot;&gt;&lt;/p
+    
+    </summary>
+    
+      <category term="Raspberry" scheme="http://www.yfgeek.com/categories/Raspberry/"/>
+    
+    
+      <category term="Raspberry" scheme="http://www.yfgeek.com/tags/Raspberry/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>快速撸出一个Brainfuck语言解释器</title>
+    <link href="http://www.yfgeek.com/2017/11/30/brainfuck/"/>
+    <id>http://www.yfgeek.com/2017/11/30/brainfuck/</id>
     <published>2017-11-30T14:27:24.000Z</published>
-    <updated>2017-11-30T14:41:00.775Z</updated>
+    <updated>2017-11-30T14:44:16.615Z</updated>
     
     <content type="html"><![CDATA[<p>一直都知道一个很有趣的语言，Brainfuck，只是一直尚未研究，今天晚上看了一下，竟然不是那么难，而且还撸出来了一个解释器。这是一种极小化的计算机语言，它是由Urban Müller在1993年创建的。</p>
 <p>就象它的名字所暗示的，brainfuck程序很难读懂。尽管如此，brainfuck图灵机一样可以完成任何计算任务。虽然brainfuck的计算方式如此与众不同，但它确实能够正确运行。</p>
@@ -83,6 +178,36 @@
     </summary>
     
       <category term="Brainfuck React-Native" scheme="http://www.yfgeek.com/categories/Brainfuck-React-Native/"/>
+    
+    
+      <category term="Brainfuck" scheme="http://www.yfgeek.com/tags/Brainfuck/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Brainfuck语言解释器Web版与移动客户端版 beta</title>
+    <link href="http://www.yfgeek.com/2017/11/30/brainfuck-web/"/>
+    <id>http://www.yfgeek.com/2017/11/30/brainfuck-web/</id>
+    <published>2017-11-30T14:27:24.000Z</published>
+    <updated>2017-12-17T14:24:18.598Z</updated>
+    
+    <content type="html"><![CDATA[<p>其实不是多难的东西，有了上文<a href="http://blog.yfgeek.com/2017/11/30/brainfuck/" target="_blank" rel="external">快速撸出一个Brainfuck语言解释器</a>的核心解释器源码做基础，做两个客户端版本并不难。</p>
+<p>用React+Redux撸了一个Web版，一个移动版。两者都尚未完成，但是在同时进行。</p>
+<p>用React persist使数据持久化，也就是说即使你关闭了浏览器，下次不清空缓存的话，程序依然会为你保存。</p>
+<h1 id="开源"><a href="#开源" class="headerlink" title="开源"></a>开源</h1><p>开源地址如下：</p>
+<p>Beef(移动版): <a href="https://github.com/yfgeek/Beef-react-native" target="_blank" rel="external">https://github.com/yfgeek/Beef-react-native</a></p>
+<p>BrainfuckIDE(Web版):<a href="https://github.com/yfgeek/BrainfuckIDE" target="_blank" rel="external">https://github.com/yfgeek/BrainfuckIDE</a></p>
+<h1 id="图鉴"><a href="#图鉴" class="headerlink" title="图鉴"></a>图鉴</h1><p><img src="/content/images/brainfuck/snap.png" alt=""></p>
+<p><img src="/content/images/brainfuck/ios.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;其实不是多难的东西，有了上文&lt;a href=&quot;http://blog.yfgeek.com/2017/11/30/brainfuck/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;快速撸出一个Brainfuck语言解释器&lt;/a&gt;的核心解释器源码做基础，做
+    
+    </summary>
+    
+      <category term="Brainfuck React-Native React" scheme="http://www.yfgeek.com/categories/Brainfuck-React-Native-React/"/>
     
     
       <category term="Brainfuck" scheme="http://www.yfgeek.com/tags/Brainfuck/"/>
@@ -1233,79 +1358,6 @@
     
     
       <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>2016，2017</title>
-    <link href="http://www.yfgeek.com/2016/12/31/2017/"/>
-    <id>http://www.yfgeek.com/2016/12/31/2017/</id>
-    <published>2016-12-31T06:51:23.000Z</published>
-    <updated>2017-10-26T12:59:55.514Z</updated>
-    
-    <content type="html"><![CDATA[<p>似乎每年写年终总结已经成为习惯，2007年开始写博客，2009年开始，每年都象征性的写一个年终报告，或许是元旦或许是新年。</p>
-<p>每年这个时候，都会自觉地打开cnbeta.com看每一年的<a href="http://www.cnbeta.com/articles/572451.htm" target="_blank" rel="external">新年祝福</a>。今年，也不例外，这么一看，已经9年过去了。</p>
-<h1 id="2016"><a href="#2016" class="headerlink" title="2016"></a>2016</h1><p>在2016年，这一年励志在Github上取得更大的成就，知乎上娱乐为主。</p>
-<p>截止2016年12月31日，知乎累计收获了1388个赞，获得 252 次感谢，209 次收藏。</p>
-<p>Github获得Star总数88个，607次代码贡献次数，702个粉丝。</p>
-<p>同时，2016年是忙碌的一年，是纠结的一年，是辛苦的一年。在这一年里，顺利的通过了雅思考试，在这一年里顺利的本科毕业，在这一年里励志转行计算机。</p>
-<p>在这一年里，好朋友各奔东西，都有了自己的发展方向与人生目标，而我却还在迷茫之中。</p>
-<h1 id="2017"><a href="#2017" class="headerlink" title="2017"></a>2017</h1><p>2017年是关键的一年，决定着人生发展方向，人生充满机遇，未来的事情，谁说的好呢？</p>
-<p>我不去想，</p>
-<p>是否能够成功 ，</p>
-<p>既然选择了远方 ，</p>
-<p>便只顾风雨兼程。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;似乎每年写年终总结已经成为习惯，2007年开始写博客，2009年开始，每年都象征性的写一个年终报告，或许是元旦或许是新年。&lt;/p&gt;
-&lt;p&gt;每年这个时候，都会自觉地打开cnbeta.com看每一年的&lt;a href=&quot;http://www.cnbeta.com/articles
-    
-    </summary>
-    
-      <category term="心情" scheme="http://www.yfgeek.com/categories/%E5%BF%83%E6%83%85/"/>
-    
-    
-      <category term="心情" scheme="http://www.yfgeek.com/tags/%E5%BF%83%E6%83%85/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Emoji 表情域名 引领未来</title>
-    <link href="http://www.yfgeek.com/2016/12/27/emoji/"/>
-    <id>http://www.yfgeek.com/2016/12/27/emoji/</id>
-    <published>2016-12-26T19:37:27.000Z</published>
-    <updated>2017-10-26T12:59:55.517Z</updated>
-    
-    <content type="html"><![CDATA[<p>国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂</p>
-<p><img src="/content/images/emoji/1.jpg" alt=""></p>
-<p>Emoji 等 Unicode 字符，浏览器Punycode的方式将 Unicode字符用ASCII进行编码。</p>
-<p>我也顺势跟风，注册了一个坑爹的TK域名。</p>
-<p><a href="http://💌.tk" target="_blank" rel="external">💌.tk</a></p>
-<p><img src="/content/images/emoji/emoji.jpg" alt=""></p>
-<h1 id="查询"><a href="#查询" class="headerlink" title="查询"></a>查询</h1><p>在chrome浏览器上直接输入[想要注册的表情].com</p>
-<p>按下回车键，chrome浏览器会自动帮你转换为ASCII编码方式的格式。</p>
-<p>💌.tk</p>
-<p>转换为：</p>
-<p><a href="http://xn--rr8h.tk/" target="_blank" rel="external">http://xn--rr8h.tk/</a></p>
-<h1 id="注册"><a href="#注册" class="headerlink" title="注册"></a>注册</h1><p>拿着自己的域名转换后的字符，比如xn–rr8h，去Godaddy或者别的域名网站直接搜就好啦。</p>
-<p>注意：</p>
-<p>.com域名目前无法注册任何包含emoji表情字符的域名，尚未开发，一旦开放，又是一笔巨大的商机。</p>
-<h1 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h1><p><a href="http://🌶️🐔.ws" target="_blank" rel="external">🐔.ws</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;国外媒体报道，《牛津词典》(Oxford Dictionaries)今日公布了2015年年度词汇。今年的年度“词汇”很难发音，因为它并不是由字母组成，而是一个黄色的卡通笑脸，带着两滴眼泪。😂&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/content/images/emoji/1
-    
-    </summary>
-    
-      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
-    
-    
-      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
     
   </entry>
   

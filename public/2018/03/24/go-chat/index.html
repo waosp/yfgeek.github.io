@@ -13,11 +13,11 @@
 <meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
     <title>
         
-          用HomeAssistant + HomeBridge树莓派构建智能家居中枢 - Ivan&#39;s Blog
+          两个加密聊天项目 - Ivan&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.yfgeek.com/2018/02/23/用树莓派构建智能家居中枢-HomeAssistant-Home-Bridge/">
+    <link rel="canonical" href="http://www.yfgeek.com/2018/03/24/go-chat/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -159,14 +159,14 @@ var _hmt = _hmt || [];
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#Raspberry" title="Raspberry">Raspberry</a>
+                          <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
                         
                     </div>
-                    <h1>用HomeAssistant + HomeBridge树莓派构建智能家居中枢</h1>
+                    <h1>两个加密聊天项目</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Ivan on
-                        2018-02-23
+                        2018-03-24
                     </span>
                 </div>
             </div>
@@ -185,77 +185,42 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p> 好久没有更新文章啦，最近接了一个私活，也是人越来越懒，懒得更新。</p>
-<p>想着不行必须得更新一篇，那就写写最近构建的树莓派吧，话不多说，先上图。</p>
-<p><img src="/content/images/rasp-home/1.jpg" alt=""></p>
-<h1 id="需要的原料"><a href="#需要的原料" class="headerlink" title="需要的原料"></a>需要的原料</h1><ul>
-<li>树莓派</li>
-<li>Hass.io或Hassbian或Raspbian系统</li>
-<li>DHT22传感器</li>
-<li>尽可能多的智能设备</li>
-</ul>
-<h1 id="Home-Assistant"><a href="#Home-Assistant" class="headerlink" title="Home Assistant"></a>Home Assistant</h1><p>Home Assistant 是一个好系统，可以这么说，Home Assistant是一个包装好的智能家居控制系统的中心，在2018年看，可扩展性强，社区强大。</p>
-<p>我建议安装Hassbian系统，安静纯粹，安装过程如下。</p>
+                <p>许多小伙伴看到我的GitHub最近动态关注了很多Golang的项目，不禁私信问我，是不是在学Go语言，没错，确实在学。本文探讨这两个项目是什么，并且解释一下如何使用<code>golang.org/x/crypto/otr</code>包。</p>
+<h1 id="为什么学Golang？"><a href="#为什么学Golang？" class="headerlink" title="为什么学Golang？"></a>为什么学Golang？</h1><p> <img src="http://i.imgur.com/UEdZpr4.png" alt="golang"></p>
+<p>因为Golang十分优秀呀，能够轻而易举的写很多服务端程序，并发能力十足且简单，不禁引起了我的注意。</p>
+<p>作为初学者，撸了两个项目，作为学习经验，代码很渣，只为实现功能，做一个小demo。</p>
+<h1 id="第一周-UDP加密聊天室"><a href="#第一周-UDP加密聊天室" class="headerlink" title="第一周 UDP加密聊天室"></a>第一周 UDP加密聊天室</h1><p><strong><a href="https://github.com/yfgeek/chatroom" target="_blank" rel="external">chatroom</a> - UDP加密聊天室</strong></p>
+<p>众所周知，做聊天室是作为学习服务端/客户端的最佳例子，但是单纯的撸一个聊天室未必太无聊了。</p>
+<p>这个项目的特色在于：</p>
 <ol>
-<li><p><a href="https://github.com/home-assistant/pi-gen/releases/latest" target="_blank" rel="external">下载最新的Hassbian景象</a> (364 MB)</p>
-</li>
-<li><p>用 <a href="https://etcher.io/" target="_blank" rel="external">Etcher</a> 刷入你的树莓派储存卡。</p>
-</li>
-<li><p>如果你是Wi-Fi链接，请先配置你的网络连接，重新插入sd卡，在根目录下，建立<code>wpa_supplicant.conf</code>文件，修改内容并保存。</p>
-<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">country=SE</div><div class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</div><div class="line">update_config=1</div><div class="line"></div><div class="line">network=&#123;</div><div class="line">    ssid="YOUR_SSID"</div><div class="line">    psk="YOUR_PASSWORD"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>​</p>
-</li>
-<li><p>插入SD卡，开机等待，刷新<a href="http://hassbian.local:8123/，直到出现页面。" target="_blank" rel="external">http://hassbian.local:8123/，直到出现页面。</a></p>
-</li>
+<li>能够自行生成配置文件，类似于某影的方式，客户端和服务端分别导入配置文件，就可以启动了。</li>
+<li>服务端自动生成AES-256的key，客户端记住base64形式的KEY文件就可以进行加密通信。</li>
 </ol>
-<p>小提示</p>
-<ul>
-<li>Etcher一定要使用最新版1.3.1，旧版本可能导致无法开机</li>
-<li>不要相信官网所说的等待五分钟，由于中国的网络环境，很可能需要等待一小时到五小时，都是正常的，只要没有出现网页，就不要进入ssh</li>
-<li>出现页面后，可以ssh链接进页面，用户名是pi，密码是raspberry，用passwd重置密码。</li>
-<li>如果超过五个小时没有页面显示，这时候你再输入<code>sudo systemctl start install_homeassistant.service</code>重试。</li>
-</ul>
-<p><img src="/content/images/rasp-home/2.png" alt=""></p>
-<h1 id="HomeBridge"><a href="#HomeBridge" class="headerlink" title="HomeBridge"></a>HomeBridge</h1><p>HomeBridge可以让你的Hassbian支持iOS的Homekit，所以，这个插件一定要安装。</p>
-<p>安装方法如下：</p>
+<p>强调安全性，是我一直的目的。</p>
+<p>配置文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"listen"</span>: <span class="string">":52915"</span>,</div><div class="line">	<span class="attr">"remote"</span>: <span class="string">"127.0.0.1"</span>,</div><div class="line">	<span class="attr">"key"</span>: <span class="string">"AzonXhdbWCYoAA52GTE9FnldZEN4KhEsInFJe1oHYAgzQTRsCyEdUlBOPzd3HxgFbTAudDZobiU8TQYbURBFWVdvMisNSn5UIw8kei0gcjl1cGkeFTV9U0tEY2YaCkdPYl9nZRQSBGsMQgFzVlxhL0hGAlV/O0A+OGoJfBwpE0w="</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="第二周-OTR-端对端加密聊天"><a href="#第二周-OTR-端对端加密聊天" class="headerlink" title="第二周 OTR 端对端加密聊天"></a>第二周 OTR 端对端加密聊天</h1><p><strong><a href="https://github.com/yfgeek/otrchat" target="_blank" rel="external">otrchat</a> - OTR 端对端加密聊天</strong></p>
+<p>不要认为第一周和第二周的内容大同小异，其实区别大了。</p>
+<p>聊天室和聊天的区别在于：</p>
 <ol>
-<li><p>ssh进入你的树莓派</p>
-</li>
-<li><p>安装node</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">curl <span class="_">-s</span>L https://deb.nodesource.com/setup_6.x | sudo -E bash </div><div class="line">sudo apt-get install -y nodejs</div><div class="line">sudo apt-get install -y build-essential</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装avahi</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install libavahi-compat-libdnssd-dev</div></pre></td></tr></table></figure>
-</li>
-<li><p>安装homebridge</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g --unsafe-perm homebridge</div></pre></td></tr></table></figure>
-</li>
+<li>服务器要端对端的将消息传递给不同的客户端，不能单纯的广播给所有人</li>
+<li>要有查询所有在线用户并且选择性聊天功能</li>
 </ol>
-<p>好了，homebridge安装好后，我们输入homebridge试试可不可以运行？</p>
-<p><img src="/content/images/rasp-home/3.png" alt=""></p>
-<p>看到这样的二维码，我们就可以打卡iPhone的家庭.app，然后扫描二维码，添加我们的树莓派中继。</p>
-<h1 id="温度和湿度传感器"><a href="#温度和湿度传感器" class="headerlink" title="温度和湿度传感器"></a>温度和湿度传感器</h1><p>我们添加一个温度和湿度，接线方式</p>
-<p>接线需要并联一个10K电阻</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">DHT22有3个脚,VCC,DATA,GND</div><div class="line"></div><div class="line">VCC,接 3.3V,PIN 01</div><div class="line"></div><div class="line">DATA,接 GPIO04,PIN 07</div><div class="line"></div><div class="line">GND,接地,PIN 09</div><div class="line"></div><div class="line">其中DATA和VCC之间用10k电阻相连</div></pre></td></tr></table></figure>
-<p><a href="https://github.com/yfgeek/rpi-TempRuntime/blob/master/images/5.png" target="_blank" rel="external"><img src="https://raw.githubusercontent.com/yfgeek/rpi-TempRuntime/master/images/5.png" alt="img"></a></p>
-<p>随后，执行以下代码</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/NorthernMan54/homebridge-dht</div><div class="line"><span class="built_in">cd</span> homebridge-dht</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install pigpio python-pigpio python3-pigpio</div><div class="line">sudo cp dht22 /usr/<span class="built_in">local</span>/bin/dht22</div><div class="line">sudo chmod a+x /usr/<span class="built_in">local</span>/bin/dht22</div><div class="line">dht22</div></pre></td></tr></table></figure>
-<p>如果看到显示正常的温度，如</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pi@hassbian:~ $ dht22</div><div class="line">0 25.5 C 14.5 %</div></pre></td></tr></table></figure>
-<h2 id="智能电视"><a href="#智能电视" class="headerlink" title="智能电视"></a>智能电视</h2><p>因为我家有一台三星的智能电视，也可以用homebridge控制，在npm上找到了相应的包，迅速安装，迅速安装</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g homebridge-samsungtv2016</div></pre></td></tr></table></figure>
-<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>随后我们配置homebridge</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line"><span class="built_in">cd</span> .homebridge</div><div class="line">vi config.json</div></pre></td></tr></table></figure>
-<p>编辑内容：</p>
-<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"bridge"</span>: &#123;</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"Yifan Home"</span>,</div><div class="line">        <span class="attr">"username"</span>: <span class="string">"CC:22:3D:E3:CE:30"</span>,</div><div class="line">        <span class="attr">"port"</span>: <span class="number">51826</span>,</div><div class="line">        <span class="attr">"pin"</span>: <span class="string">"031-45-154"</span></div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">"description"</span>: <span class="string">"Yifan Home"</span>,</div><div class="line"></div><div class="line">    <span class="attr">"accessories"</span>: [</div><div class="line">        &#123;</div><div class="line">           <span class="attr">"accessory"</span>: <span class="string">"Dht"</span>,</div><div class="line">           <span class="attr">"name"</span>: <span class="string">"dht22"</span>,</div><div class="line">           <span class="attr">"name_temperature"</span>: <span class="string">"Temperature"</span>,</div><div class="line">           <span class="attr">"name_humidity"</span>: <span class="string">"Humidity"</span>,</div><div class="line">           <span class="attr">"service"</span>: <span class="string">"dht22"</span>,</div><div class="line">           <span class="attr">"gpio"</span>: <span class="string">"4"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">                        <span class="attr">"accessory"</span>: <span class="string">"SamsungTV2016"</span>,</div><div class="line">                        <span class="attr">"name"</span>: <span class="string">"Bedroom TV"</span>,</div><div class="line">                        <span class="attr">"ip_address"</span>: <span class="string">"192.168.1.8"</span>,</div><div class="line">                        <span class="attr">"mac_address"</span>: <span class="string">"84:A4:66:F1:C7:09"</span></div><div class="line">                &#125;</div><div class="line">    ],</div><div class="line"></div><div class="line">    <span class="attr">"platforms"</span>: [</div><div class="line">        ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>最后，我们打上<code>homebridge</code>，打开手机的家庭.app，扫描二维码，添加设备，大功告成！</p>
-<p>小提示：</p>
-<ul>
-<li>如果之前添加错误，想重新配置，请进入<code>~/.homebridge</code>文件夹删除<code>accessories</code>和<code>persist</code>目录即可重新配置。</li>
-</ul>
-<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://home-assistant.io/docs/installation/hassbian/installation/" target="_blank" rel="external">https://home-assistant.io/docs/installation/hassbian/installation/</a></p>
-<p><a href="https://www.jianshu.com/p/ec79b2711bd5" target="_blank" rel="external">https://www.jianshu.com/p/ec79b2711bd5</a></p>
-<p><a href="http://www.instructables.com/id/RPIHomeBridge-TemperatureHumidity-Sensor/" target="_blank" rel="external">http://www.instructables.com/id/RPIHomeBridge-TemperatureHumidity-Sensor/</a></p>
+<p>此外，在这一周内还增加了：<strong>OTR协议</strong></p>
+<p>简单的说OTR协议有点类似于Telegram的“secret chat”功能，可以对聊天内容进行加密，任何第三方包括服务器都无法查看两者聊天的内容，在此前我也写过<a href="http://blog.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/" target="_blank" rel="external">一篇文章</a>专门用于解释该协议。</p>
+<p>关于<code>golang.org/x/crypto/otr</code>包的使用经验，可以概括如下：</p>
+<p>首先，发起聊天者A需要向被聊者发送数据包</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c.sendMessages &lt;- otr.QueryMessage</div></pre></td></tr></table></figure>
+<p>此后，<code>golang.org/x/crypto/otr</code>包会自动处理所有通信，包括互相发送公钥、签名、验证消息可靠性。</p>
+<p>发送</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">msgToPeer, err := otrConv.Send([]<span class="keyword">byte</span>(msg))</div><div class="line">			checkError(err,<span class="string">"otr conv sending"</span>)</div><div class="line">			<span class="keyword">for</span> _, m := <span class="keyword">range</span> msgToPeer &#123;</div><div class="line">				c.sendMessages &lt;- <span class="keyword">string</span>(m)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接手及显示</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> err error</div><div class="line">out, encrypted, _, msgToPeer, err := otrConv.Receive(bytes)</div><div class="line">checkError(err,<span class="string">"new chat"</span>)</div><div class="line"><span class="keyword">if</span> <span class="built_in">len</span>(out) &gt; <span class="number">0</span> &#123;</div><div class="line">	<span class="keyword">if</span> !encrypted &#123;</div><div class="line">		color.Red(<span class="string">"&lt;OTR&gt; Conversation not yet encrypted!"</span>)</div><div class="line">		color.Red(<span class="string">"%s [%s] : %s"</span>, m.UserName, m.Time, <span class="keyword">string</span>(out))</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		color.Blue(<span class="string">"%s [%s] : %s"</span>, m.UserName, m.Time, <span class="keyword">string</span>(out))</div><div class="line">	&#125;</div><div class="line">	&#125;</div><div class="line"><span class="keyword">if</span> <span class="built_in">len</span>(msgToPeer) &gt; <span class="number">0</span> &#123;</div><div class="line">	<span class="keyword">for</span> _, msg := <span class="keyword">range</span> msgToPeer &#123;</div><div class="line">	c.sendMessages &lt;-<span class="keyword">string</span>(msg)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>msgToPeer</code> 表示OTR协议中需要完成额外的消息交换，所以需要单独的发送一遍。</p>
+<p>由于<code>otr</code>包的相关帮助甚少，坑很多，不明白为什么这个世界不大力推广端对端加密聊天。</p>
+<p>OTR协议下服务端所看到的通信内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">From 1 To 2 Message： ?OTRv2?</div><div class="line">From 2 To 1 Message： ?OTR:AAICAAAAxB+Iywuwg8aZG0gPZxY6anFes2KW4YT/rRrBZK50CC7kr+0p+jLXeU3VirUQMTW/eJkA8gKz9y2xYSxRRwLga0ATOx2AkOlENYT1MyXJFkAjgMD6SF6uPDy+apIIJkOiopW5T7vpON9Ogsh3XmV8i4T1yui9gs6mAuMT7PsLQ7b8rvd1WulRtquJtO9LKA1flDU7XsCAn4h4pobpCjOS7qQ6aZstlhFtNXD1ylLXrpJos3vBG7LZsH3zvouvG9FR94YlYuMAAAAg5t62vP0C+/LxRI7OJTWC5pMbv2yZqHE/yDQGclCsz0Q=.</div><div class="line">From 1 To 2 Message： ?OTR:AAIKAAAAwDem/luw0prZM/Nv23/7Q+6/HrpQ199BVm+hcA2YMSHm85MJhS+ym24EAy4lg45O2e8LX5BylK1CM+w55VqUIJ7QOBwN3WazIWuiYKXXTuIdSBLi52P4dulhaGydKPfqFFqRM3hL2etO5p9xdJ8LbF/4+8PEK8//R56gIZLPLZNTPD8onxLKF5UnWJS3A8OfvJFykKQtXLc6573Y3BsGZ1ywfs0jyMukE/szOV5goTqLOaAhQfpw7gRuaMMqmHYXoA==.</div><div class="line">From 2 To 1 Message： ?OTR:AAIRAAAAELaWJ2vpiHI8fmmdLgdFJ/0AAAHS43l5bWsQarN0F8UEWtJjgr/lxOT01s6PmNsY+WFAio3kzOBQnzleaqemtbmQMwfczDm9fLH2h1+qlf4q8b4SLco/MpLKjvNEjDNbrQ1d1hXRwiyTtcz7zGYxCcFc3xdHLuueL/zcTpcwcq8J1HSmLv+F2aoEzCywOW9sWtLzbikeUjA2mUSWr79krG9rkAHz2KVGL++rX1LWC/PQOVTzzmFKz1o4aK1qpna/9ef9ju6zxd9wvoOuXGJJi3NWGlkHUxXov8689j8HNJWkkl/YXxwit8Bk49WPvH/AKnhTwqBkfblguaEsHTPTli36yqNm3YKp+oP2IjrVzue9BWieT93c7BbpJUO8Fej1EBGGWxtPu+YE/ZlH+PwawUcjWCck16GbHr4fFPTYh4tVX3c2tJSEqVkpttRf7r70ucu1fqB+qrK95rcbkVIABRPg4xSuslRCQxhz/BwiN3ECmfRAI19jLBp/MO9FkqaqYc3Bws/50n13slet7mk7IVGt1xjZgdfuZEYGXDZzmUomraKp4Wnt6YsLI10zoEBUw4U0Vug4OJ+EY2gdpNTYYhJFLAUH6B+ktCO8c18pKglxtJJnSiBBNRpaAVwsldwWD77/vLekToFQRZeG6H7x0cuH23ZBqonHHHJX.</div><div class="line">From 1 To 2 Message： ?OTR:AAISAAAB0qTCp5GMIr0w9szym5OPRrrk5/DSuaO1xuwnLp9ic+JUsO0//k9Ju7qVdpNFValQOvdePheZsp1fbaRoa8dCjJWeZDQF9Rik0tjz+5xgepzmaUXxDtKH2kiYWvBMp+AI0BosDGXRsupMZNGTon7G08wEaSbi8UYLouPrylrswC09PYwiN6+yTxwOE4dv/4vnIXo2k4868I4Ag9kRQ56grPlWpa3jG1Hrgwvm8510MtvBD+UwGTFHXFz8MieimBtIdI/Do/9svh9LhNrvAlQCqxaf5b6Eaoz0mRI0XU3PSPi6Qu8ivsti0LbIho75uvqZYk6xo/nX0UQrs48vsAVmZzXyRYMZ4M9JC+VumnEtxl92oQ4SQzetfEusQ76<span class="built_in">cap</span>BH9YJVfjej6xvC8n4k0I4rGKi9WSWgd4pYi6JOfRI2Nl9xh22PO+g5PdxKyGMzjpqkj9jm4yyc5l6ukfA/FpPSdNJjd6AbAu8HI3Zmw6fHhx+t+znAvnaMbw2gQG9gxe0WlmhM4ySOOvAGTG7wf1Md7AcRfxxNWeyInHmf+JJ1T3O74cPh1a6H0QQxh2UkXjS03adQMwGXng4pejRZhcSAEIY/cMfdAFYohfsdlDhOiv9E3NdbDU1sBIMPMKkD<span class="keyword">fi</span>5vPUJEoecarQ==.</div><div class="line">From 1 To 2 Message： ?OTR:AAIDAAAAAAEAAAABAAAAwO0jWIHSjaPxrZ7MtjgPYEbl9DGrA9idRzJA4vmdS6Lcc+JZbEdBqRH036j4Ie85mXLCWvqlPjYwKZNlQFbX5Rg+MMbqGl1Qcdk+Hfmd93pZf6Feg/yjlyBJOaCBWpTTpWzDyh+E2XZ3lZvlJxw1ogwatQn1VhicUXZzfDBSg1Dhw/jcAcXTn2wI+mmZ98rR9taBwgv41FN4mO7HhTkzUMQnJKPL9/zqtV6kWfwVYzXhaPoTnnbKa8L9hbYEMzy/OQAAAAAAAAABAAABADfvoGL7+tXt8VKqBj4JMwOsfhuH6PMlq47YQGf7l/5Dmszn2yVv+lemLj+YrcVxLOYO5WU0CGBjmr+52g+x/w3Dj0b+ak25y6H8bX3sPmcX/ZSgqTi+zt+IHqn207autlQVzvpt37g1grzWZvbn68a0obQqQp32jIXfOlYUFUv6cJDOvHk+3+1lRJdFFLjeP40OehnZ3AeOvT2wo6gNdEMFM4zgPtiskQtRxTFtFqs+KW/rkzefThdYhWpbMY/Nvpcf1S0Sy6HKLIqGwa7bkMa1coDfNma5fQzw856VWDFhQSq/PXT5aV4dDmXtYuBUs3YJoyWFGft03GDtZfdMQiqMDkTIJC2mB3O16CoDJBgXeM/0AQAAAAA=.</div><div class="line">From 2 To 1 Message： ?OTR:AAIDAAAAAAEAAAACAAAAwMpbV5DJJNyJODVA4cZmMXf76Ra+UJ0RtBqzbIbaWFfVoMWQwFypi+qktOnwFmYhuQr4O30Yy76xReJi1DRP72uWUudiyrFSJzSHPGLUqZ2RqVB+ovSifkuW8nQnq6UAbxQuWtYuKLOiaoK7EZ9+2RMcXOLx+h57Sd1x4IL2aZ+1y+X+vco1<span class="built_in">fc</span>HTW79qcz1TCT0qfn7+cI9O1HaKt/O15C51Btemu0rthK5W+mId5ueTIKcove1Ao6BRxy0GvMewMwAAAAAAAAABAAABAH78/obuj6XrBlIb55u2fDpmu93ILP8pI9f2ozxwKpfi20f6sL<span class="keyword">if</span>3cKPVN4of7i0iivtGcXBKf4g4Bo4hLx3nD33E9/aAeuxpy9Dr+uuHak9mUQA7HC07Yg2PrVUiNhV4QVj/XPg6A0xE040NRvNs5Ww9cZjHSOMg998zsGjaz528HkNQw9n06tF8uCRLh+XXkQnuV9Ln/JLd1wbWybJGMlQh82SYhgW+B/GONUG2nBo0ClBRU8aAWEGEsYVa6K6PQJzWBUjDInLdiYYauP7uo0nmkYxsTJNPbhA00RXER4LXpJq87lN4gihq+7cxr77plQEPi3Z/HwIWKmzgLlfi3W85bNg8E4gH8w1DEBMjZIgzADE/AAAAAA=.</div></pre></td></tr></table></figure>
+<p>安全的无可匹敌！</p>
 
 
                 <hr>
@@ -266,7 +231,7 @@ var _hmt = _hmt || [];
                     
                     
                         <li class="next">
-                            <a href="/2017/11/30/brainfuck/" data-toggle="tooltip" data-placement="top" title="快速撸出一个Brainfuck语言解释器">Next Post &rarr;</a>
+                            <a href="/2018/02/23/rasp-home/" data-toggle="tooltip" data-placement="top" title="用HomeAssistant + HomeBridge树莓派构建智能家居中枢">Next Post &rarr;</a>
                         </li>
                     
                 </ul>

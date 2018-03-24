@@ -13,11 +13,11 @@
 <meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
     <title>
         
-          快速撸出一个Brainfuck语言解释器 - Ivan&#39;s Blog
+          用HomeAssistant + HomeBridge树莓派构建智能家居中枢 - Ivan&#39;s Blog
         
     </title>
 
-    <link rel="canonical" href="http://www.yfgeek.com/2017/11/30/brainfuck/">
+    <link rel="canonical" href="http://www.yfgeek.com/2018/02/23/rasp-home/">
 
     <!-- Bootstrap Core CSS -->
     <link rel="stylesheet" href="/css/bootstrap.min.css">
@@ -159,14 +159,14 @@ var _hmt = _hmt || [];
                 <div class="post-heading">
                     <div class="tags">
                         
-                          <a class="tag" href="/tags/#Brainfuck" title="Brainfuck">Brainfuck</a>
+                          <a class="tag" href="/tags/#Raspberry" title="Raspberry">Raspberry</a>
                         
                     </div>
-                    <h1>快速撸出一个Brainfuck语言解释器</h1>
+                    <h1>用HomeAssistant + HomeBridge树莓派构建智能家居中枢</h1>
                     <h2 class="subheading"></h2>
                     <span class="meta">
                         Posted by Ivan on
-                        2017-11-30
+                        2018-02-23
                     </span>
                 </div>
             </div>
@@ -185,57 +185,77 @@ var _hmt = _hmt || [];
                 col-md-10 col-md-offset-1
                 post-container">
 
-                <p>一直都知道一个很有趣的语言，Brainfuck，只是一直尚未研究，今天晚上看了一下，竟然不是那么难，而且还撸出来了一个解释器。这是一种极小化的计算机语言，它是由Urban Müller在1993年创建的。</p>
-<p>就象它的名字所暗示的，brainfuck程序很难读懂。尽管如此，brainfuck图灵机一样可以完成任何计算任务。虽然brainfuck的计算方式如此与众不同，但它确实能够正确运行。</p>
-<p>这种语言基于一个简单的机器模型，除了指令，这个机器还包括：一个以字节为单位、被初始化为零的数组、一个指向该数组的指针（初始时指向数组的第一个字节）、以及用于输入输出的两个字节流。</p>
-<p>下面是这八种状态的描述，其中每个状态由一个字符标识：</p>
-<table>
-<thead>
-<tr>
-<th>字符</th>
-<th>含义</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>&gt;</code></td>
-<td>指针加一</td>
-</tr>
-<tr>
-<td><code>&lt;</code></td>
-<td>指针减一</td>
-</tr>
-<tr>
-<td><code>+</code></td>
-<td>指针指向的字节的值加一</td>
-</tr>
-<tr>
-<td><code>-</code></td>
-<td>指针指向的字节的值减一</td>
-</tr>
-<tr>
-<td><code>.</code></td>
-<td>输出指针指向的单元内容（ASCII码）</td>
-</tr>
-<tr>
-<td><code>,</code></td>
-<td>输入内容到指针指向的单元（ASCII码）</td>
-</tr>
-<tr>
-<td><code>[</code></td>
-<td>如果指针指向的单元值为零，向后跳转到对应的<code>]</code>指令的次一指令处</td>
-</tr>
-<tr>
-<td><code>]</code></td>
-<td>如果指针指向的单元值不为零，向前跳转到对应的<code>[</code>指令的次一指令处</td>
-</tr>
-</tbody>
-</table>
-<p>举个例子，hello world</p>
-<script src="https://gist.github.com/kidk/44b8cd699c5879f1084f.js"></script>
-
-<p>自己看下原理并不难，于是自己撸了一个解释器，话不多说直接上代码，用es6写的。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div></pre></td><td class="code"><pre><div class="line"><span class="comment">/**</span></div><div class="line"> * Brainfuck Interpreter</div><div class="line"> * author: yfgeek</div><div class="line"> * https://github.com/yfgeek</div><div class="line"> */</div><div class="line"><span class="meta">'use strict'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">Interpreter</span></span>&#123;</div><div class="line">    <span class="keyword">constructor</span>(code,input) &#123;</div><div class="line">        <span class="keyword">this</span>.code = code.trim().replace(<span class="regexp">/ /g</span>, <span class="string">""</span>).replace(<span class="regexp">/(\r\n|\n|\r)/gm</span>,<span class="string">""</span>).split(<span class="string">""</span>);</div><div class="line">        <span class="keyword">this</span>.input = input || [];</div><div class="line">        <span class="keyword">this</span>.pointer = <span class="number">0</span>;</div><div class="line">        <span class="keyword">this</span>.codePointer = <span class="number">0</span> ;</div><div class="line">        <span class="keyword">this</span>.dataset = [];</div><div class="line">        <span class="keyword">this</span>.bracketStack = [];</div><div class="line">        <span class="keyword">this</span>.output = [];</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    operation(str)&#123;</div><div class="line"></div><div class="line">        <span class="keyword">switch</span>(str)&#123;</div><div class="line">            <span class="keyword">case</span> <span class="string">'+'</span>:  &#123;</div><div class="line">                <span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer] = <span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer] || <span class="number">0</span>;</div><div class="line">                ++<span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer];</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">case</span>  <span class="string">'-'</span>:  &#123;</div><div class="line">                <span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer] = <span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer] || <span class="number">0</span>;</div><div class="line">                --<span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer];</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">case</span>  <span class="string">'&lt;'</span>:&#123;</div><div class="line">                <span class="keyword">this</span>.pointer = --<span class="keyword">this</span>.pointer&lt;<span class="number">0</span> ? <span class="number">0</span>: <span class="keyword">this</span>.pointer;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">case</span> <span class="string">'&gt;'</span>: &#123;</div><div class="line">                <span class="keyword">this</span>.pointer++;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">case</span> <span class="string">'.'</span>:&#123;</div><div class="line">                <span class="keyword">this</span>.output.push(<span class="built_in">String</span>.fromCharCode(<span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer]));</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">case</span> <span class="string">','</span>:&#123;</div><div class="line">                <span class="keyword">let</span> c = <span class="keyword">this</span>.input.shift();</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">typeof</span> c === <span class="string">"string"</span>) &#123;</div><div class="line">                    <span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer] = c.charCodeAt(<span class="number">0</span>);</div><div class="line">                &#125;</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">case</span> <span class="string">'['</span>: &#123;</div><div class="line">                <span class="keyword">this</span>.leftBracket();</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line"></div><div class="line">            <span class="keyword">case</span> <span class="string">']'</span>: &#123;</div><div class="line">                <span class="keyword">this</span>.rightBracket();</div><div class="line">                <span class="keyword">break</span>;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line"></div><div class="line">    &#125;;</div><div class="line"></div><div class="line">    leftBracket()&#123;</div><div class="line">        <span class="keyword">let</span> openBrackets = <span class="number">1</span>;</div><div class="line">        <span class="keyword">if</span> (<span class="keyword">this</span>.dataset[<span class="keyword">this</span>.pointer]) &#123;</div><div class="line">            <span class="keyword">this</span>.bracketStack.push(<span class="keyword">this</span>.codePointer);</div><div class="line">        &#125; <span class="keyword">else</span> &#123;</div><div class="line">            <span class="keyword">while</span> (openBrackets &amp;&amp; <span class="keyword">this</span>.code[++<span class="keyword">this</span>.codePointer]) &#123;</div><div class="line">                <span class="keyword">if</span> (<span class="keyword">this</span>.code[<span class="keyword">this</span>.codePointer] === <span class="string">']'</span>) &#123;</div><div class="line">                    openBrackets--;</div><div class="line">                &#125; <span class="keyword">else</span> <span class="keyword">if</span> (<span class="keyword">this</span>.code[<span class="keyword">this</span>.codePointer] === <span class="string">'['</span>) &#123;</div><div class="line">                    openBrackets++;</div><div class="line">                &#125;</div><div class="line">            &#125;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    rightBracket()&#123;</div><div class="line">        <span class="keyword">this</span>.codePointer =  <span class="keyword">this</span>.bracketStack.pop() - <span class="number">1</span>;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    run()&#123;</div><div class="line">        <span class="keyword">let</span> list = [<span class="string">'+'</span>,<span class="string">'-'</span>,<span class="string">'&lt;'</span>,<span class="string">'&gt;'</span>,<span class="string">'.'</span>,<span class="string">','</span>,<span class="string">'['</span>,<span class="string">']'</span>];</div><div class="line">        <span class="keyword">do</span>&#123;</div><div class="line">           <span class="keyword">let</span> c = <span class="keyword">this</span>.code[<span class="keyword">this</span>.codePointer];</div><div class="line">           <span class="keyword">if</span>(list.indexOf(c) &gt;= <span class="number">0</span>)  <span class="keyword">this</span>.operation(c);</div><div class="line">        &#125;<span class="keyword">while</span>(++<span class="keyword">this</span>.codePointer &lt; <span class="keyword">this</span>.code.length);</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.output;</div><div class="line">    &#125;</div><div class="line"></div><div class="line">    toString()&#123;</div><div class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.run().join(<span class="string">''</span>);</div><div class="line">    &#125;</div><div class="line"></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">let</span> code = <span class="string">'++++++++++[&gt;+++++++&gt;++++++++++&gt;+++&gt;+&lt;&lt;&lt;&lt;-]&gt;++.&gt;+.+++++++..+++.&gt;++.&lt;&lt;+++++++++++++++.&gt;.+++.------.--------.&gt;+.&gt;.'</span>;</div><div class="line"><span class="keyword">let</span> i = <span class="keyword">new</span> Interpreter(code,[]);</div><div class="line"><span class="built_in">console</span>.log(i.toString());</div></pre></td></tr></table></figure>
+                <p> 好久没有更新文章啦，最近接了一个私活，也是人越来越懒，懒得更新。</p>
+<p>想着不行必须得更新一篇，那就写写最近构建的树莓派吧，话不多说，先上图。</p>
+<p><img src="/content/images/rasp-home/1.jpg" alt=""></p>
+<h1 id="需要的原料"><a href="#需要的原料" class="headerlink" title="需要的原料"></a>需要的原料</h1><ul>
+<li>树莓派</li>
+<li>Hass.io或Hassbian或Raspbian系统</li>
+<li>DHT22传感器</li>
+<li>尽可能多的智能设备</li>
+</ul>
+<h1 id="Home-Assistant"><a href="#Home-Assistant" class="headerlink" title="Home Assistant"></a>Home Assistant</h1><p>Home Assistant 是一个好系统，可以这么说，Home Assistant是一个包装好的智能家居控制系统的中心，在2018年看，可扩展性强，社区强大。</p>
+<p>我建议安装Hassbian系统，安静纯粹，安装过程如下。</p>
+<ol>
+<li><p><a href="https://github.com/home-assistant/pi-gen/releases/latest" target="_blank" rel="external">下载最新的Hassbian景象</a> (364 MB)</p>
+</li>
+<li><p>用 <a href="https://etcher.io/" target="_blank" rel="external">Etcher</a> 刷入你的树莓派储存卡。</p>
+</li>
+<li><p>如果你是Wi-Fi链接，请先配置你的网络连接，重新插入sd卡，在根目录下，建立<code>wpa_supplicant.conf</code>文件，修改内容并保存。</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">country=SE</div><div class="line">ctrl_interface=DIR=/var/run/wpa_supplicant GROUP=netdev</div><div class="line">update_config=1</div><div class="line"></div><div class="line">network=&#123;</div><div class="line">    ssid="YOUR_SSID"</div><div class="line">    psk="YOUR_PASSWORD"</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>​</p>
+</li>
+<li><p>插入SD卡，开机等待，刷新<a href="http://hassbian.local:8123/，直到出现页面。" target="_blank" rel="external">http://hassbian.local:8123/，直到出现页面。</a></p>
+</li>
+</ol>
+<p>小提示</p>
+<ul>
+<li>Etcher一定要使用最新版1.3.1，旧版本可能导致无法开机</li>
+<li>不要相信官网所说的等待五分钟，由于中国的网络环境，很可能需要等待一小时到五小时，都是正常的，只要没有出现网页，就不要进入ssh</li>
+<li>出现页面后，可以ssh链接进页面，用户名是pi，密码是raspberry，用passwd重置密码。</li>
+<li>如果超过五个小时没有页面显示，这时候你再输入<code>sudo systemctl start install_homeassistant.service</code>重试。</li>
+</ul>
+<p><img src="/content/images/rasp-home/2.png" alt=""></p>
+<h1 id="HomeBridge"><a href="#HomeBridge" class="headerlink" title="HomeBridge"></a>HomeBridge</h1><p>HomeBridge可以让你的Hassbian支持iOS的Homekit，所以，这个插件一定要安装。</p>
+<p>安装方法如下：</p>
+<ol>
+<li><p>ssh进入你的树莓派</p>
+</li>
+<li><p>安装node</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo apt-get update</div><div class="line">curl <span class="_">-s</span>L https://deb.nodesource.com/setup_6.x | sudo -E bash </div><div class="line">sudo apt-get install -y nodejs</div><div class="line">sudo apt-get install -y build-essential</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装avahi</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install libavahi-compat-libdnssd-dev</div></pre></td></tr></table></figure>
+</li>
+<li><p>安装homebridge</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo npm install -g --unsafe-perm homebridge</div></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>好了，homebridge安装好后，我们输入homebridge试试可不可以运行？</p>
+<p><img src="/content/images/rasp-home/3.png" alt=""></p>
+<p>看到这样的二维码，我们就可以打卡iPhone的家庭.app，然后扫描二维码，添加我们的树莓派中继。</p>
+<h1 id="温度和湿度传感器"><a href="#温度和湿度传感器" class="headerlink" title="温度和湿度传感器"></a>温度和湿度传感器</h1><p>我们添加一个温度和湿度，接线方式</p>
+<p>接线需要并联一个10K电阻</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">DHT22有3个脚,VCC,DATA,GND</div><div class="line"></div><div class="line">VCC,接 3.3V,PIN 01</div><div class="line"></div><div class="line">DATA,接 GPIO04,PIN 07</div><div class="line"></div><div class="line">GND,接地,PIN 09</div><div class="line"></div><div class="line">其中DATA和VCC之间用10k电阻相连</div></pre></td></tr></table></figure>
+<p><a href="https://github.com/yfgeek/rpi-TempRuntime/blob/master/images/5.png" target="_blank" rel="external"><img src="https://raw.githubusercontent.com/yfgeek/rpi-TempRuntime/master/images/5.png" alt="img"></a></p>
+<p>随后，执行以下代码</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> https://github.com/NorthernMan54/homebridge-dht</div><div class="line"><span class="built_in">cd</span> homebridge-dht</div><div class="line">sudo apt-get update</div><div class="line">sudo apt-get install pigpio python-pigpio python3-pigpio</div><div class="line">sudo cp dht22 /usr/<span class="built_in">local</span>/bin/dht22</div><div class="line">sudo chmod a+x /usr/<span class="built_in">local</span>/bin/dht22</div><div class="line">dht22</div></pre></td></tr></table></figure>
+<p>如果看到显示正常的温度，如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">pi@hassbian:~ $ dht22</div><div class="line">0 25.5 C 14.5 %</div></pre></td></tr></table></figure>
+<h2 id="智能电视"><a href="#智能电视" class="headerlink" title="智能电视"></a>智能电视</h2><p>因为我家有一台三星的智能电视，也可以用homebridge控制，在npm上找到了相应的包，迅速安装，迅速安装</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">npm install -g homebridge-samsungtv2016</div></pre></td></tr></table></figure>
+<h1 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h1><p>随后我们配置homebridge</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line"><span class="built_in">cd</span> .homebridge</div><div class="line">vi config.json</div></pre></td></tr></table></figure>
+<p>编辑内容：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">    <span class="attr">"bridge"</span>: &#123;</div><div class="line">        <span class="attr">"name"</span>: <span class="string">"Yifan Home"</span>,</div><div class="line">        <span class="attr">"username"</span>: <span class="string">"CC:22:3D:E3:CE:30"</span>,</div><div class="line">        <span class="attr">"port"</span>: <span class="number">51826</span>,</div><div class="line">        <span class="attr">"pin"</span>: <span class="string">"031-45-154"</span></div><div class="line">    &#125;,</div><div class="line"></div><div class="line">    <span class="attr">"description"</span>: <span class="string">"Yifan Home"</span>,</div><div class="line"></div><div class="line">    <span class="attr">"accessories"</span>: [</div><div class="line">        &#123;</div><div class="line">           <span class="attr">"accessory"</span>: <span class="string">"Dht"</span>,</div><div class="line">           <span class="attr">"name"</span>: <span class="string">"dht22"</span>,</div><div class="line">           <span class="attr">"name_temperature"</span>: <span class="string">"Temperature"</span>,</div><div class="line">           <span class="attr">"name_humidity"</span>: <span class="string">"Humidity"</span>,</div><div class="line">           <span class="attr">"service"</span>: <span class="string">"dht22"</span>,</div><div class="line">           <span class="attr">"gpio"</span>: <span class="string">"4"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">                        <span class="attr">"accessory"</span>: <span class="string">"SamsungTV2016"</span>,</div><div class="line">                        <span class="attr">"name"</span>: <span class="string">"Bedroom TV"</span>,</div><div class="line">                        <span class="attr">"ip_address"</span>: <span class="string">"192.168.1.8"</span>,</div><div class="line">                        <span class="attr">"mac_address"</span>: <span class="string">"84:A4:66:F1:C7:09"</span></div><div class="line">                &#125;</div><div class="line">    ],</div><div class="line"></div><div class="line">    <span class="attr">"platforms"</span>: [</div><div class="line">        ]</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>最后，我们打上<code>homebridge</code>，打开手机的家庭.app，扫描二维码，添加设备，大功告成！</p>
+<p>小提示：</p>
+<ul>
+<li>如果之前添加错误，想重新配置，请进入<code>~/.homebridge</code>文件夹删除<code>accessories</code>和<code>persist</code>目录即可重新配置。</li>
+</ul>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://home-assistant.io/docs/installation/hassbian/installation/" target="_blank" rel="external">https://home-assistant.io/docs/installation/hassbian/installation/</a></p>
+<p><a href="https://www.jianshu.com/p/ec79b2711bd5" target="_blank" rel="external">https://www.jianshu.com/p/ec79b2711bd5</a></p>
+<p><a href="http://www.instructables.com/id/RPIHomeBridge-TemperatureHumidity-Sensor/" target="_blank" rel="external">http://www.instructables.com/id/RPIHomeBridge-TemperatureHumidity-Sensor/</a></p>
 
 
                 <hr>
@@ -245,12 +265,12 @@ var _hmt = _hmt || [];
                 <ul class="pager">
                     
                         <li class="previous">
-                            <a href="/2018/02/23/rasp-home/" data-toggle="tooltip" data-placement="top" title="用HomeAssistant + HomeBridge树莓派构建智能家居中枢">&larr; Previous Post</a>
+                            <a href="/2018/03/24/go-chat/" data-toggle="tooltip" data-placement="top" title="两个加密聊天项目">&larr; Previous Post</a>
                         </li>
                     
                     
                         <li class="next">
-                            <a href="/2017/11/30/brainfuck-web/" data-toggle="tooltip" data-placement="top" title="Brainfuck语言解释器Web版与移动客户端版 beta">Next Post &rarr;</a>
+                            <a href="/2017/11/30/brainfuck/" data-toggle="tooltip" data-placement="top" title="快速撸出一个Brainfuck语言解释器">Next Post &rarr;</a>
                         </li>
                     
                 </ul>

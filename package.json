@@ -8,6 +8,12 @@
   "dependencies": {
     "dtrace-provider": "^0.8.0",
     "gitment": "0.0.3",
+    "gulp": "^3.9.1",
+    "gulp-clean-css": "^3.9.3",
+    "gulp-htmlmin": "^4.0.0",
+    "gulp-imagemin": "^4.1.0",
+    "gulp-uglify": "^3.0.0",
+    "gulp-uncss": "^1.0.6",
     "hexo": "^3.2.0",
     "hexo-admin": "^2.1.0",
     "hexo-deployer-git": "^0.2.0",

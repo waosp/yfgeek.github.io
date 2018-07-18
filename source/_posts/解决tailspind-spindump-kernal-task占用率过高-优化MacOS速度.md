@@ -3,6 +3,7 @@ title: '优化Mac OS速度 关闭tailspind与spindump'
 date: 2018-07-18 11:08:31
 tags: Mac
 categories: Mac
+permalink: mac-optimization
 ---
 
 最近安装了Mojave，发现卡了不少，其实问题不在系统，在于beta版bug比较多，有两个进程是专门用于生成应用程序调试快照的，对于我们普通用户来讲，没有什么用处，关闭，可以大大的提升系统的速度。

@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2018-03-24T07:36:25.245Z</updated>
+  <updated>2018-09-18T07:55:21.395Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -16,11 +16,170 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>iOS App Hook逆向全过程纪实</title>
+    <link href="http://www.yfgeek.com/2018/09/18/ios-hook/"/>
+    <id>http://www.yfgeek.com/2018/09/18/ios-hook/</id>
+    <published>2018-09-18T01:26:08.000Z</published>
+    <updated>2018-09-18T07:55:21.395Z</updated>
+    
+    <content type="html"><![CDATA[<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>微信抢红包、修改定位、语音转发，很火，自己足不出户可以走遍天下，这很酷。最近研究了iOS的hook技术，发现门道不少，特意写个纪实blog，本文非教程，部分内容可能看不懂</p>
+<h1 id="下载APP"><a href="#下载APP" class="headerlink" title="下载APP"></a>下载APP</h1><h2 id="对于App-Store的应用"><a href="#对于App-Store的应用" class="headerlink" title="对于App Store的应用"></a>对于App Store的应用</h2><p>App Store中的应用都加密过，直接用是不行的，有两种方法：</p>
+<ul>
+<li>如果通过PP助手下载的app，直接将XXX.app通过iFunBox提取到mac上，直接提供class-dump使用。</li>
+<li>越狱后的App目录在/var/mobile/Applications/xxxxxx/ 下，通过iFunBox可以直接把dumpdecrypted.dylib文件放到Documents下，用命令砸壳，用到的砸壳工具就是<a href="https://github.com/stefanesser/dumpdecrypted" target="_blank" rel="external">dumpdecrypted</a></li>
+</ul>
+<p>最后得到最终的ipa文件</p>
+<p>##Safari里安装的企业应用</p>
+<p>在电脑上，打开企业提供的网址，找到iOS安装入口，点击下载，会自动下载一个<code>.plist</code>文件，打开如下：</p>
+<figure class="highlight xml"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div></pre></td><td class="code"><pre><div class="line">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</div><div class="line"><span class="meta">&lt;!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd"&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">plist</span> <span class="attr">version</span>=<span class="string">"1.0"</span>&gt;</span></div><div class="line"><span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">key</span>&gt;</span>items<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">	<span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line">		<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">key</span>&gt;</span>assets<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">array</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">key</span>&gt;</span>kind<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">string</span>&gt;</span>software-package<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">key</span>&gt;</span>url<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">string</span>&gt;</span>https://**/下载地址/<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">key</span>&gt;</span>kind<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">string</span>&gt;</span>display-image<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">key</span>&gt;</span>url<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">					<span class="tag">&lt;<span class="name">string</span>&gt;</span>https://**/ios-icon/<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">				<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">array</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">key</span>&gt;</span>metadata<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">			<span class="tag">&lt;<span class="name">dict</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">key</span>&gt;</span>bundle-identifier<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">string</span>&gt;</span>xxx.xxx.com<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">key</span>&gt;</span>bundle-version<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">string</span>&gt;</span>1.0.0<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">key</span>&gt;</span>kind<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">string</span>&gt;</span>software<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">key</span>&gt;</span>title<span class="tag">&lt;/<span class="name">key</span>&gt;</span></div><div class="line">				<span class="tag">&lt;<span class="name">string</span>&gt;</span>软件名字<span class="tag">&lt;/<span class="name">string</span>&gt;</span></div><div class="line">			<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line">		<span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line">	<span class="tag">&lt;/<span class="name">array</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">dict</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">plist</span>&gt;</span></div></pre></td></tr></table></figure>
+<p>找到<code>software-package</code>中的<code>url</code>值，复制到浏览器，会自动请求服务器，下载一个带有企业签名的ipa文件。</p>
+<h1 id="确认是否脱壳解密"><a href="#确认是否脱壳解密" class="headerlink" title="确认是否脱壳解密"></a>确认是否脱壳解密</h1><p>把ipa文件后缀改成zip，然后解压，会看到.app文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">file /Users/ivan/Desktop/Payload/xxx.app/xxx</div><div class="line">/Users/ivan/Desktop/Payload/xxx.app/xxx: Mach-O universal binary with 2 architectures: [arm_v7:Mach-O executable arm_v7] [arm64]</div><div class="line">/Users/ivan/Desktop/Payload/xxx.app/xxx (<span class="keyword">for</span> architecture armv7):	Mach-O executable arm_v7</div><div class="line">/Users/ivan/Desktop/Payload/xxx.app/xxx (<span class="keyword">for</span> architecture arm64):	Mach-O 64-bit executable arm64</div></pre></td></tr></table></figure>
+<p>可见，xxx包含armv7和arm64两个版本。</p>
+<p>otool可以输出app的load commands，然后通过查看cryptid这个标志位来判断app是否被加密。1代表加密了，0代表被解密了：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div></pre></td><td class="code"><pre><div class="line">otool <span class="_">-l</span> /Users/ivan/Desktop/Payload/xxx.app/xxx   | grep -B 2 crypt</div><div class="line">          cmd LC_ENCRYPTION_INFO</div><div class="line">      cmdsize 20</div><div class="line">     cryptoff 16384</div><div class="line">    cryptsize 4161536</div><div class="line">      cryptid 0</div><div class="line">--</div><div class="line">          cmd LC_ENCRYPTION_INFO_64</div><div class="line">      cmdsize 24</div><div class="line">     cryptoff 16384</div><div class="line">    cryptsize 4866048</div><div class="line">      cryptid 0</div></pre></td></tr></table></figure>
+<p>可见，xxx为0状态，企业级app不在app stroe上发布，没有被加密。</p>
+<h1 id="测试重新签名"><a href="#测试重新签名" class="headerlink" title="测试重新签名"></a>测试重新签名</h1><h2 id="重新签名打包"><a href="#重新签名打包" class="headerlink" title="重新签名打包"></a>重新签名打包</h2><p>GitHub上的<code>Urinx</code>大佬为我们准备了一键化的重新签名工具<code>Appsign</code>，非常好用，下载地址：</p>
+<p><a href="https://github.com/Urinx/iOSAppHook/releases" target="_blank" rel="external">https://github.com/Urinx/iOSAppHook/releases</a></p>
+<p>下载后，测试能否重新签名，因为我们的最终目的是将程序重新打包签名，将带有tweak的程序安装到手机上，这一步骤至关重要。</p>
+<p>赋予执行权限</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">chomd +x /Users/ivan/Downloads/AppResign</div></pre></td></tr></table></figure>
+<p>执行命令，按照AppResign的要求，命令为<code>AppResign input output</code></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line">/Users/ivan/Downloads/AppResign  /Users/ivan/Desktop/要被签名的文件.ipa  /Users/ivan/Desktop/output/输出的文件xxx.ipa</div><div class="line">=============================</div><div class="line">[*] Configure Resigning</div><div class="line">Choose Signing Ceritificate:</div><div class="line">[0] iPhone Developer: aabb@foxmail.com (3N2H*****3)</div><div class="line">[1] *****</div><div class="line">[2] iPhone Developer: xxxxx@icloud.com (4*****6T9C)</div><div class="line">&gt; 2</div><div class="line">Use Certificate: iPhone Developer: xxxx@icloud.com (4*****6T9C)</div><div class="line"></div><div class="line">Choose Provisioning Profile:</div><div class="line">[0] iOS Team Provisioning Profile: cc.caver.SimulateLocation (KHER5U9877)</div><div class="line">Use Profile: iOS Team Provisioning Profile: cc.caver.SimulateLocation (KHER5U9877)</div><div class="line">Position: /Users/ivan/Library/MobileDevice/Provisioning Profiles/xxxx-ec15-xxxx-bf8d-xxxx.mobileprovision</div><div class="line"></div><div class="line">Use default bundle ID: cc.caver.SimulateLocation</div><div class="line"></div><div class="line">Set App Display Name: pojieapp</div><div class="line">Delete url schemes (y/n): n</div><div class="line">=============================</div><div class="line">[*] Start Resigning App</div><div class="line">Extracting ipa file</div><div class="line">Copying provisioning profile to app bundle</div><div class="line">Parsing entitlements</div><div class="line">Changing App ID to cc.caver.SimulateLocation</div><div class="line">Changing Display Name to yuanqu</div><div class="line">Codesigning /xxx.app with entitlements</div><div class="line">Packaging IPA</div><div class="line">Done, output at /Users/ivan/Desktop/output/输出的文件xxx.ipa</div></pre></td></tr></table></figure>
+<h2 id="安装测试"><a href="#安装测试" class="headerlink" title="安装测试"></a>安装测试</h2><p>打开Xcode，点击Window，点击<code>Devices and Simulators</code></p>
+<p>看到如下界面，点击加号，添加刚刚<code>output</code>出的ipa，稍等片刻，安装到手机。</p>
+<p><img src="/content/images/hook/2.jpg" alt=""></p>
+<p>信任证书后，如果能成功安装并且打开，说明没毛病。</p>
+<h1 id="安装Theos"><a href="#安装Theos" class="headerlink" title="安装Theos"></a>安装Theos</h1><h2 id="安装-iOS-SDK"><a href="#安装-iOS-SDK" class="headerlink" title="安装 iOS SDK"></a>安装 iOS SDK</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">xcode-select --install</div></pre></td></tr></table></figure>
+<h2 id="环境变量"><a href="#环境变量" class="headerlink" title="环境变量"></a>环境变量</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">echo</span> <span class="string">"export THEOS=~/theos"</span> &gt;&gt; ~/.profile</div></pre></td></tr></table></figure>
+<h2 id="下载Theos"><a href="#下载Theos" class="headerlink" title="下载Theos"></a>下载Theos</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git <span class="built_in">clone</span> --recursive https://github.com/theos/theos.git <span class="variable">$THEOS</span></div></pre></td></tr></table></figure>
+<h2 id="安装ldid"><a href="#安装ldid" class="headerlink" title="安装ldid"></a>安装ldid</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">brew install ldid</div></pre></td></tr></table></figure>
+<h2 id="安装ghostbin"><a href="#安装ghostbin" class="headerlink" title="安装ghostbin"></a>安装ghostbin</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">curl https://ghostbin.com/ghost.sh -o <span class="variable">$THEOS</span>/bin/ghost</div><div class="line">chmod +x <span class="variable">$THEOS</span>/bin/ghost</div></pre></td></tr></table></figure>
+<h1 id="编写Hook"><a href="#编写Hook" class="headerlink" title="编写Hook"></a>编写Hook</h1><h2 id="创建Tweak"><a href="#创建Tweak" class="headerlink" title="创建Tweak"></a>创建Tweak</h2><p>在命令中输入 <code>nic.pl</code>选13，后面内容自行填写</p>
+<p><img src="/content/images/hook/1.png" alt=""></p>
+<h2 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">-(void)locationManager:(CLLocationManager *)manager didUpdateLocations:(NSArray *)locations &#123;    </div><div class="line">    CLLocation *newLocation = locations[0];</div><div class="line">    CLLocationCoordinate2D coordinate = newLocation.coordinate;  </div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们试着实现</p>
+<p>通过引用LocationTracker框架后,开始获取位置后,便会通过locationManager这个代理来回调,并通过 CLLocationCoordinate2D coordinate = newLocation.coordinate. 这句来获取到位置信息. 明白原理就简单了,接下来我们只需要在app内部hook到CLLocation的coordinate,并返回我们想要的地理位置就可以啦,源代码如下:</p>
+<h2 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h2><h2 id="代码"><a href="#代码" class="headerlink" title="代码"></a>代码</h2><p>location.plist</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">&#123; Filter = &#123; Bundles = ( "com.caver.SimulateLocation" ); &#125;; &#125;</div></pre></td></tr></table></figure>
+<p>Tweak.xm</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">#import &lt;CoreLocation/CoreLocation.h&gt;</div><div class="line"></div><div class="line">%hook LocationTracker</div><div class="line">-(CLLocationCoordinate2D) coordinate&#123;</div><div class="line">  CLLocationCoordinate2D oldCoordinate = %orig;</div><div class="line">  oldCoordinate.latitude = 39.0010750000; </div><div class="line">  oldCoordinate.longitude = 116.0096720000;</div><div class="line">  return oldCoordinate;</div><div class="line">&#125;</div><div class="line">%end</div></pre></td></tr></table></figure>
+<h2 id="编译"><a href="#编译" class="headerlink" title="编译"></a>编译</h2><p>在目录下执行<code>make</code>，将编译好的复制到本层目录</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> project/location</div><div class="line">make</div><div class="line">cp .theos/obj/debug/location.dylib ./</div></pre></td></tr></table></figure>
+<h2 id="检查依赖"><a href="#检查依赖" class="headerlink" title="检查依赖"></a>检查依赖</h2><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">otool -L location.dylib</div><div class="line">location.dylib (architecture armv7):</div><div class="line">	/Library/MobileSubstrate/DynamicLibraries/location.dylib (compatibility version 0.0.0, current version 0.0.0)</div><div class="line">	/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 228.0.0)</div><div class="line">	/System/Library/Frameworks/Foundation.framework/Foundation (compatibility version 300.0.0, current version 1452.23.0)</div><div class="line">	/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation (compatibility version 150.0.0, current version 1452.23.0)</div><div class="line">	/Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate (compatibility version 0.0.0, current version 0.0.0)</div><div class="line">	/usr/lib/libstdc++.6.dylib (compatibility version 7.0.0, current version 104.2.0)</div><div class="line">	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1252.50.4)</div><div class="line">location.dylib (architecture arm64):</div><div class="line">	/Library/MobileSubstrate/DynamicLibraries/location.dylib (compatibility version 0.0.0, current version 0.0.0)</div><div class="line">	/usr/lib/libobjc.A.dylib (compatibility version 1.0.0, current version 228.0.0)</div><div class="line">	/System/Library/Frameworks/Foundation.framework/Foundation (compatibility version 300.0.0, current version 1452.23.0)</div><div class="line">	/System/Library/Frameworks/CoreFoundation.framework/CoreFoundation (compatibility version 150.0.0, current version 1452.23.0)</div><div class="line">	/Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate (compatibility version 0.0.0, current version 0.0.0)</div><div class="line">	/usr/lib/libstdc++.6.dylib (compatibility version 7.0.0, current version 104.2.0)</div><div class="line">	/usr/lib/libSystem.B.dylib (compatibility version 1.0.0, current version 1252.50.4)</div></pre></td></tr></table></figure>
+<h2 id="解决不存在的依赖"><a href="#解决不存在的依赖" class="headerlink" title="解决不存在的依赖"></a>解决不存在的依赖</h2><p><img src="/content/images/hook/3.png" alt=""></p>
+<p>因为<code>MobileSubstrate</code>是越狱后才有的，必须在注入前替换掉这个库，相应的，<code>libsubstrate.dylib</code>下载地址：</p>
+<p><a href="https://pan.baidu.com/s/1o8PPVGu" target="_blank" rel="external">https://pan.baidu.com/s/1o8PPVGu</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">install_name_tool -change /Library/Frameworks/CydiaSubstrate.framework/CydiaSubstrate @loader_path/libsubstrate.dylib location.dylib</div></pre></td></tr></table></figure>
+<p>再次用<code>otool</code>检查，没有<code>MobileSubstrate</code>后可以继续下一步</p>
+<h2 id="重新签名dylib"><a href="#重新签名dylib" class="headerlink" title="重新签名dylib"></a>重新签名dylib</h2><p>在钥匙串访问中能找到一个名为 <code>Developer ID Application: Your Company Name</code> 的证书。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">codesign -f -s &apos;iPhone Developer: xxxx@icloud.com (4*****6T9C)&apos; libsubstrate.dylib</div><div class="line">libsubstrate.dylib: replacing existing signature</div></pre></td></tr></table></figure>
+<h1 id="动态库注入"><a href="#动态库注入" class="headerlink" title="动态库注入"></a>动态库注入</h1><p>动态库的注入,可以使用这个工具 <a href="https://github.com/Tyilo/insert_dylib.git" target="_blank" rel="external">insert_dylib脚本</a>.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">insert_dylib --all-yes @executable_path/test.dylib Payload/WeChat.app/WeChat</div></pre></td></tr></table></figure>
+<p><code>@executable_path/test.dylib</code> 表示动态库的加载路径,<code>@executable_path</code> 表示可执行文件所在的路径, 所以我们要把动态库放到可执行文件一级的目录.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git clone http://www.github.com/Tyilo/insert_dylib</div></pre></td></tr></table></figure>
+<p>然后在xcode中运行，提取Products中的insert_dylib二进制文件</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">/Users/ivan/d/tweak/insert_dylib  --all-yes /Users/ivan/d/tweak/location/.theos/obj/debug/location.dylib  /Users/ivan/Desktop/Payload/xxx.app/xxx</div><div class="line">Binary is a fat binary with 2 archs.</div><div class="line">LC_CODE_SIGNATURE load <span class="built_in">command</span> found. Remove it? [y/n] y</div><div class="line">LC_CODE_SIGNATURE load <span class="built_in">command</span> found. Remove it? [y/n] y</div><div class="line">Added LC_LOAD_DYLIB to all archs <span class="keyword">in</span> /Users/ivan/Desktop/Payload/xxx.app/xxx_patched</div></pre></td></tr></table></figure>
+<p>修改<code>xxx_patched</code>名字为<code>xxx</code>，将刚刚生成的两个dylib复制到目录里。</p>
+<h1 id="安装APP"><a href="#安装APP" class="headerlink" title="安装APP"></a>安装APP</h1><p>过程同测试重新签名，内容为纪实，仅供测试与学习过程。</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://github.com/Urinx/iOSAppHook" target="_blank" rel="external">https://github.com/Urinx/iOSAppHook</a></p>
+<p><a href="http://iosre.com/t/iosopendev-theos/8524" target="_blank" rel="external">http://iosre.com/t/iosopendev-theos/8524</a></p>
+<p><a href="http://iosre.com/t/app/3917" target="_blank" rel="external">http://iosre.com/t/app/3917</a></p>
+<p><a href="https://pandara.xyz/2016/08/14/fake_wechat_location2/" target="_blank" rel="external">https://pandara.xyz/2016/08/14/fake_wechat_location2/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;h1 id=&quot;前言&quot;&gt;&lt;a href=&quot;#前言&quot; class=&quot;headerlink&quot; title=&quot;前言&quot;&gt;&lt;/a&gt;前言&lt;/h1&gt;&lt;p&gt;微信抢红包、修改定位、语音转发，很火，自己足不出户可以走遍天下，这很酷。最近研究了iOS的hook技术，发现门道不少，特意写个纪实blog，
+    
+    </summary>
+    
+      <category term="Hack" scheme="http://www.yfgeek.com/categories/Hack/"/>
+    
+    
+      <category term="Hack" scheme="http://www.yfgeek.com/tags/Hack/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>+[__NSPlaceholderDate initialize] may have been in progress in another thread when fork() was called. 解决方法</title>
+    <link href="http://www.yfgeek.com/2018/09/11/mac-multiprocessing/"/>
+    <id>http://www.yfgeek.com/2018/09/11/mac-multiprocessing/</id>
+    <published>2018-09-11T02:59:03.000Z</published>
+    <updated>2018-09-11T03:04:04.363Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近在用python3写一个多线程工具，发现频繁报错：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">objc[27880]: +[__NSPlaceholderDate initialize] may have been <span class="keyword">in</span> progress <span class="keyword">in</span> another thread when fork() was called.</div><div class="line">objc[27880]: +[__NSPlaceholderDate initialize] may have been <span class="keyword">in</span> progress <span class="keyword">in</span> another thread when fork() was called. We cannot safely call it or ignore it <span class="keyword">in</span> the fork() child process. Crashing instead. Set a breakpoint on objc_initializeAfterForkError to debug.</div></pre></td></tr></table></figure>
+<p>一直以为是代码的问题，不断的检查代码，其实是macOS的High Sierra以上的操作系统对多线程的限制，别无其它原因。</p>
+<h2 id="临时调试方法"><a href="#临时调试方法" class="headerlink" title="临时调试方法"></a>临时调试方法</h2><p>在终端中输入 <code>export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES</code></p>
+<p>不要关闭当前终端，再次运行python程序</p>
+<h2 id="解决方法"><a href="#解决方法" class="headerlink" title="解决方法"></a>解决方法</h2><p>打开终端 输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> ~</div><div class="line">sudo vim .bash_profile</div></pre></td></tr></table></figure>
+<p>在最后一行加入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">export OBJC_DISABLE_INITIALIZE_FORK_SAFETY=YES</div></pre></td></tr></table></figure>
+<p>重启终端就解决了。</p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近在用python3写一个多线程工具，发现频繁报错：&lt;/p&gt;
+&lt;figure class=&quot;highlight bash&quot;&gt;&lt;table&gt;&lt;tr&gt;&lt;td class=&quot;gutter&quot;&gt;&lt;pre&gt;&lt;div class=&quot;line&quot;&gt;1&lt;/div&gt;&lt;div class=&quot;li
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://www.yfgeek.com/categories/Mac/"/>
+    
+    
+      <category term="Mac" scheme="http://www.yfgeek.com/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>优化Mac OS速度 解决tailspind、spindump、kernel_task问题</title>
+    <link href="http://www.yfgeek.com/2018/07/18/mac-optimization/"/>
+    <id>http://www.yfgeek.com/2018/07/18/mac-optimization/</id>
+    <published>2018-07-18T03:08:31.000Z</published>
+    <updated>2018-07-18T03:22:25.919Z</updated>
+    
+    <content type="html"><![CDATA[<p>最近安装了Mojave，发现卡了不少，其实问题不在系统，在于beta版bug比较多，有两个进程是专门用于生成应用程序调试快照的，对于我们普通用户来讲，没有什么用处，关闭，可以大大的提升系统的速度。</p>
+<h1 id="关闭-tailspind-与-spindump"><a href="#关闭-tailspind-与-spindump" class="headerlink" title="关闭 tailspind 与 spindump"></a>关闭 tailspind 与 spindump</h1><p>第一步，重启，开机的时候按住<code>Command+R</code></p>
+<p>第二步，选择终端，并且输入 <code>csrutil disable</code>，这是为了关闭SIP保护机制</p>
+<p>第三步，重启，进入系统，在终端中输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.spindump.plist</div><div class="line">sudo launchctl unload -w /System/Library/LaunchDaemons/com.apple.tailspind.plist</div><div class="line">sudo mv /System/Library/LaunchDaemons/com.apple.spindump.plist /System/Library/LaunchDaemons/com.apple.spindump.plist.bak</div><div class="line">sudo mv /System/Library/LaunchDaemons/com.apple.tailspind.plist /System/Library/LaunchDaemons/com.apple.tailspind.plist.bak</div></pre></td></tr></table></figure>
+<p>第四步，重启，完成</p>
+<h1 id="kernel-task-占用率过高"><a href="#kernel-task-占用率过高" class="headerlink" title="kernel_task 占用率过高"></a>kernel_task 占用率过高</h1><p>在日常使用中，我们总能发现kernel_task占用很高的内存和CPU，通过以下方法可以解决：</p>
+<p>第一步，重启，开机的时候按住<code>Command+R</code></p>
+<p>第二步，选择终端，并且输入 <code>csrutil disable</code>，这是为了关闭SIP保护机制</p>
+<p>第三步，重启，进入系统，在终端中输入</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo mv /System/Library/Extensions/IOPlatformPluginFamily.kext /System/Library/Extensions/IOPlatformPluginFamily.kext.bak</div></pre></td></tr></table></figure>
+<p>第四步，重启，完成</p>
+<h1 id="开启SIP"><a href="#开启SIP" class="headerlink" title="开启SIP"></a>开启SIP</h1><p>之前的操作，我们无形中关闭了SIP机制，为了使系统更安全，我们需要</p>
+<p>第一步，重启，开机的时候按住<code>Command+R</code></p>
+<p>第二步，选择终端，并且输入 <code>csrutil enable</code>，重新开启mac OS保护机制</p>
+<h1 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h1><p><a href="https://www.macobserver.com/tips/how-to/disable-tailspind-spindump-macos-cpu-speed/" target="_blank" rel="external">https://www.macobserver.com/tips/how-to/disable-tailspind-spindump-macos-cpu-speed/</a></p>
+<p><a href="https://blog.csdn.net/liumx2007/article/details/77164795" target="_blank" rel="external">https://blog.csdn.net/liumx2007/article/details/77164795</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;最近安装了Mojave，发现卡了不少，其实问题不在系统，在于beta版bug比较多，有两个进程是专门用于生成应用程序调试快照的，对于我们普通用户来讲，没有什么用处，关闭，可以大大的提升系统的速度。&lt;/p&gt;
+&lt;h1 id=&quot;关闭-tailspind-与-spindump&quot;&gt;&lt;
+    
+    </summary>
+    
+      <category term="Mac" scheme="http://www.yfgeek.com/categories/Mac/"/>
+    
+    
+      <category term="Mac" scheme="http://www.yfgeek.com/tags/Mac/"/>
+    
+  </entry>
+  
+  <entry>
     <title>两个加密聊天项目</title>
     <link href="http://www.yfgeek.com/2018/03/24/go-chat/"/>
     <id>http://www.yfgeek.com/2018/03/24/go-chat/</id>
     <published>2018-03-24T07:09:46.000Z</published>
-    <updated>2018-03-24T07:36:25.245Z</updated>
+    <updated>2018-03-24T07:37:10.815Z</updated>
     
     <content type="html"><![CDATA[<p>许多小伙伴看到我的GitHub最近动态关注了很多Golang的项目，不禁私信问我，是不是在学Go语言，没错，确实在学。本文探讨这两个项目是什么，并且解释一下如何使用<code>golang.org/x/crypto/otr</code>包。</p>
 <h1 id="为什么学Golang？"><a href="#为什么学Golang？" class="headerlink" title="为什么学Golang？"></a>为什么学Golang？</h1><p> <img src="http://i.imgur.com/UEdZpr4.png" alt="golang"></p>
@@ -57,6 +216,7 @@
 <p>由于<code>otr</code>包的相关帮助甚少，坑很多，不明白为什么这个世界不大力推广端对端加密聊天。</p>
 <p>OTR协议下服务端所看到的通信内容如下：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">From 1 To 2 Message： ?OTRv2?</div><div class="line">From 2 To 1 Message： ?OTR:AAICAAAAxB+Iywuwg8aZG0gPZxY6anFes2KW4YT/rRrBZK50CC7kr+0p+jLXeU3VirUQMTW/eJkA8gKz9y2xYSxRRwLga0ATOx2AkOlENYT1MyXJFkAjgMD6SF6uPDy+apIIJkOiopW5T7vpON9Ogsh3XmV8i4T1yui9gs6mAuMT7PsLQ7b8rvd1WulRtquJtO9LKA1flDU7XsCAn4h4pobpCjOS7qQ6aZstlhFtNXD1ylLXrpJos3vBG7LZsH3zvouvG9FR94YlYuMAAAAg5t62vP0C+/LxRI7OJTWC5pMbv2yZqHE/yDQGclCsz0Q=.</div><div class="line">From 1 To 2 Message： ?OTR:AAIKAAAAwDem/luw0prZM/Nv23/7Q+6/HrpQ199BVm+hcA2YMSHm85MJhS+ym24EAy4lg45O2e8LX5BylK1CM+w55VqUIJ7QOBwN3WazIWuiYKXXTuIdSBLi52P4dulhaGydKPfqFFqRM3hL2etO5p9xdJ8LbF/4+8PEK8//R56gIZLPLZNTPD8onxLKF5UnWJS3A8OfvJFykKQtXLc6573Y3BsGZ1ywfs0jyMukE/szOV5goTqLOaAhQfpw7gRuaMMqmHYXoA==.</div><div class="line">From 2 To 1 Message： ?OTR:AAIRAAAAELaWJ2vpiHI8fmmdLgdFJ/0AAAHS43l5bWsQarN0F8UEWtJjgr/lxOT01s6PmNsY+WFAio3kzOBQnzleaqemtbmQMwfczDm9fLH2h1+qlf4q8b4SLco/MpLKjvNEjDNbrQ1d1hXRwiyTtcz7zGYxCcFc3xdHLuueL/zcTpcwcq8J1HSmLv+F2aoEzCywOW9sWtLzbikeUjA2mUSWr79krG9rkAHz2KVGL++rX1LWC/PQOVTzzmFKz1o4aK1qpna/9ef9ju6zxd9wvoOuXGJJi3NWGlkHUxXov8689j8HNJWkkl/YXxwit8Bk49WPvH/AKnhTwqBkfblguaEsHTPTli36yqNm3YKp+oP2IjrVzue9BWieT93c7BbpJUO8Fej1EBGGWxtPu+YE/ZlH+PwawUcjWCck16GbHr4fFPTYh4tVX3c2tJSEqVkpttRf7r70ucu1fqB+qrK95rcbkVIABRPg4xSuslRCQxhz/BwiN3ECmfRAI19jLBp/MO9FkqaqYc3Bws/50n13slet7mk7IVGt1xjZgdfuZEYGXDZzmUomraKp4Wnt6YsLI10zoEBUw4U0Vug4OJ+EY2gdpNTYYhJFLAUH6B+ktCO8c18pKglxtJJnSiBBNRpaAVwsldwWD77/vLekToFQRZeG6H7x0cuH23ZBqonHHHJX.</div><div class="line">From 1 To 2 Message： ?OTR:AAISAAAB0qTCp5GMIr0w9szym5OPRrrk5/DSuaO1xuwnLp9ic+JUsO0//k9Ju7qVdpNFValQOvdePheZsp1fbaRoa8dCjJWeZDQF9Rik0tjz+5xgepzmaUXxDtKH2kiYWvBMp+AI0BosDGXRsupMZNGTon7G08wEaSbi8UYLouPrylrswC09PYwiN6+yTxwOE4dv/4vnIXo2k4868I4Ag9kRQ56grPlWpa3jG1Hrgwvm8510MtvBD+UwGTFHXFz8MieimBtIdI/Do/9svh9LhNrvAlQCqxaf5b6Eaoz0mRI0XU3PSPi6Qu8ivsti0LbIho75uvqZYk6xo/nX0UQrs48vsAVmZzXyRYMZ4M9JC+VumnEtxl92oQ4SQzetfEusQ76<span class="built_in">cap</span>BH9YJVfjej6xvC8n4k0I4rGKi9WSWgd4pYi6JOfRI2Nl9xh22PO+g5PdxKyGMzjpqkj9jm4yyc5l6ukfA/FpPSdNJjd6AbAu8HI3Zmw6fHhx+t+znAvnaMbw2gQG9gxe0WlmhM4ySOOvAGTG7wf1Md7AcRfxxNWeyInHmf+JJ1T3O74cPh1a6H0QQxh2UkXjS03adQMwGXng4pejRZhcSAEIY/cMfdAFYohfsdlDhOiv9E3NdbDU1sBIMPMKkD<span class="keyword">fi</span>5vPUJEoecarQ==.</div><div class="line">From 1 To 2 Message： ?OTR:AAIDAAAAAAEAAAABAAAAwO0jWIHSjaPxrZ7MtjgPYEbl9DGrA9idRzJA4vmdS6Lcc+JZbEdBqRH036j4Ie85mXLCWvqlPjYwKZNlQFbX5Rg+MMbqGl1Qcdk+Hfmd93pZf6Feg/yjlyBJOaCBWpTTpWzDyh+E2XZ3lZvlJxw1ogwatQn1VhicUXZzfDBSg1Dhw/jcAcXTn2wI+mmZ98rR9taBwgv41FN4mO7HhTkzUMQnJKPL9/zqtV6kWfwVYzXhaPoTnnbKa8L9hbYEMzy/OQAAAAAAAAABAAABADfvoGL7+tXt8VKqBj4JMwOsfhuH6PMlq47YQGf7l/5Dmszn2yVv+lemLj+YrcVxLOYO5WU0CGBjmr+52g+x/w3Dj0b+ak25y6H8bX3sPmcX/ZSgqTi+zt+IHqn207autlQVzvpt37g1grzWZvbn68a0obQqQp32jIXfOlYUFUv6cJDOvHk+3+1lRJdFFLjeP40OehnZ3AeOvT2wo6gNdEMFM4zgPtiskQtRxTFtFqs+KW/rkzefThdYhWpbMY/Nvpcf1S0Sy6HKLIqGwa7bkMa1coDfNma5fQzw856VWDFhQSq/PXT5aV4dDmXtYuBUs3YJoyWFGft03GDtZfdMQiqMDkTIJC2mB3O16CoDJBgXeM/0AQAAAAA=.</div><div class="line">From 2 To 1 Message： ?OTR:AAIDAAAAAAEAAAACAAAAwMpbV5DJJNyJODVA4cZmMXf76Ra+UJ0RtBqzbIbaWFfVoMWQwFypi+qktOnwFmYhuQr4O30Yy76xReJi1DRP72uWUudiyrFSJzSHPGLUqZ2RqVB+ovSifkuW8nQnq6UAbxQuWtYuKLOiaoK7EZ9+2RMcXOLx+h57Sd1x4IL2aZ+1y+X+vco1<span class="built_in">fc</span>HTW79qcz1TCT0qfn7+cI9O1HaKt/O15C51Btemu0rthK5W+mId5ueTIKcove1Ao6BRxy0GvMewMwAAAAAAAAABAAABAH78/obuj6XrBlIb55u2fDpmu93ILP8pI9f2ozxwKpfi20f6sL<span class="keyword">if</span>3cKPVN4of7i0iivtGcXBKf4g4Bo4hLx3nD33E9/aAeuxpy9Dr+uuHak9mUQA7HC07Yg2PrVUiNhV4QVj/XPg6A0xE040NRvNs5Ww9cZjHSOMg998zsGjaz528HkNQw9n06tF8uCRLh+XXkQnuV9Ln/JLd1wbWybJGMlQh82SYhgW+B/GONUG2nBo0ClBRU8aAWEGEsYVa6K6PQJzWBUjDInLdiYYauP7uo0nmkYxsTJNPbhA00RXER4LXpJq87lN4gihq+7cxr77plQEPi3Z/HwIWKmzgLlfi3W85bNg8E4gH8w1DEBMjZIgzADE/AAAAAA=.</div></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/yfgeek/otrchat/master/img/otr-1.png" alt=""></p>
 <p>安全的无可匹敌！</p>
 ]]></content>
     
@@ -170,36 +330,6 @@
   </entry>
   
   <entry>
-    <title>Brainfuck语言解释器Web版与移动客户端版 beta</title>
-    <link href="http://www.yfgeek.com/2017/11/30/brainfuck-web/"/>
-    <id>http://www.yfgeek.com/2017/11/30/brainfuck-web/</id>
-    <published>2017-11-30T14:27:24.000Z</published>
-    <updated>2017-12-17T14:24:18.598Z</updated>
-    
-    <content type="html"><![CDATA[<p>其实不是多难的东西，有了上文<a href="http://blog.yfgeek.com/2017/11/30/brainfuck/" target="_blank" rel="external">快速撸出一个Brainfuck语言解释器</a>的核心解释器源码做基础，做两个客户端版本并不难。</p>
-<p>用React+Redux撸了一个Web版，一个移动版。两者都尚未完成，但是在同时进行。</p>
-<p>用React persist使数据持久化，也就是说即使你关闭了浏览器，下次不清空缓存的话，程序依然会为你保存。</p>
-<h1 id="开源"><a href="#开源" class="headerlink" title="开源"></a>开源</h1><p>开源地址如下：</p>
-<p>Beef(移动版): <a href="https://github.com/yfgeek/Beef-react-native" target="_blank" rel="external">https://github.com/yfgeek/Beef-react-native</a></p>
-<p>BrainfuckIDE(Web版):<a href="https://github.com/yfgeek/BrainfuckIDE" target="_blank" rel="external">https://github.com/yfgeek/BrainfuckIDE</a></p>
-<h1 id="图鉴"><a href="#图鉴" class="headerlink" title="图鉴"></a>图鉴</h1><p><img src="/content/images/brainfuck/snap.png" alt=""></p>
-<p><img src="/content/images/brainfuck/ios.png" alt=""></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;其实不是多难的东西，有了上文&lt;a href=&quot;http://blog.yfgeek.com/2017/11/30/brainfuck/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;快速撸出一个Brainfuck语言解释器&lt;/a&gt;的核心解释器源码做基础，做
-    
-    </summary>
-    
-      <category term="Brainfuck React-Native React" scheme="http://www.yfgeek.com/categories/Brainfuck-React-Native-React/"/>
-    
-    
-      <category term="Brainfuck" scheme="http://www.yfgeek.com/tags/Brainfuck/"/>
-    
-  </entry>
-  
-  <entry>
     <title>快速撸出一个Brainfuck语言解释器</title>
     <link href="http://www.yfgeek.com/2017/11/30/brainfuck/"/>
     <id>http://www.yfgeek.com/2017/11/30/brainfuck/</id>
@@ -267,6 +397,36 @@
     </summary>
     
       <category term="Brainfuck React-Native" scheme="http://www.yfgeek.com/categories/Brainfuck-React-Native/"/>
+    
+    
+      <category term="Brainfuck" scheme="http://www.yfgeek.com/tags/Brainfuck/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Brainfuck语言解释器Web版与移动客户端版 beta</title>
+    <link href="http://www.yfgeek.com/2017/11/30/brainfuck-web/"/>
+    <id>http://www.yfgeek.com/2017/11/30/brainfuck-web/</id>
+    <published>2017-11-30T14:27:24.000Z</published>
+    <updated>2017-12-17T14:24:18.598Z</updated>
+    
+    <content type="html"><![CDATA[<p>其实不是多难的东西，有了上文<a href="http://blog.yfgeek.com/2017/11/30/brainfuck/" target="_blank" rel="external">快速撸出一个Brainfuck语言解释器</a>的核心解释器源码做基础，做两个客户端版本并不难。</p>
+<p>用React+Redux撸了一个Web版，一个移动版。两者都尚未完成，但是在同时进行。</p>
+<p>用React persist使数据持久化，也就是说即使你关闭了浏览器，下次不清空缓存的话，程序依然会为你保存。</p>
+<h1 id="开源"><a href="#开源" class="headerlink" title="开源"></a>开源</h1><p>开源地址如下：</p>
+<p>Beef(移动版): <a href="https://github.com/yfgeek/Beef-react-native" target="_blank" rel="external">https://github.com/yfgeek/Beef-react-native</a></p>
+<p>BrainfuckIDE(Web版):<a href="https://github.com/yfgeek/BrainfuckIDE" target="_blank" rel="external">https://github.com/yfgeek/BrainfuckIDE</a></p>
+<h1 id="图鉴"><a href="#图鉴" class="headerlink" title="图鉴"></a>图鉴</h1><p><img src="/content/images/brainfuck/snap.png" alt=""></p>
+<p><img src="/content/images/brainfuck/ios.png" alt=""></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;其实不是多难的东西，有了上文&lt;a href=&quot;http://blog.yfgeek.com/2017/11/30/brainfuck/&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;快速撸出一个Brainfuck语言解释器&lt;/a&gt;的核心解释器源码做基础，做
+    
+    </summary>
+    
+      <category term="Brainfuck React-Native React" scheme="http://www.yfgeek.com/categories/Brainfuck-React-Native-React/"/>
     
     
       <category term="Brainfuck" scheme="http://www.yfgeek.com/tags/Brainfuck/"/>
@@ -1101,277 +1261,6 @@
     
     
       <category term="CodeStyle" scheme="http://www.yfgeek.com/tags/CodeStyle/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我眼中的React</title>
-    <link href="http://www.yfgeek.com/2017/02/04/react/"/>
-    <id>http://www.yfgeek.com/2017/02/04/react/</id>
-    <published>2017-02-04T06:35:03.000Z</published>
-    <updated>2017-10-26T12:59:55.525Z</updated>
-    
-    <content type="html"><![CDATA[<p>前两天，用React把 之前的 <a href="https://github.com/yfgeek/rpi-TempRuntime" target="_blank" rel="external">基于树莓派3B,DHT11/DHT22,LCD1602的一个实时温度湿度检测系统</a> 的Web部分重构了一下。</p>
-<p>这个项目之前是用Semantic UI + eCharts + JQuery Datapicker写的，由于这个项目的实现过程比较经典，几乎把所有的感觉React的基础思想都实现了一遍。</p>
-<p>无疑，React给前端带来了各种新的想法与思想，声明式、虚拟Dom、单向数据流、JSX、组件化、Flux、以JavaScript为中心、React Native。</p>
-<p><img src="/content/images/react/0.png" alt=""></p>
-<h1 id="虚拟Dom"><a href="#虚拟Dom" class="headerlink" title="虚拟Dom"></a>虚拟Dom</h1><p>React是以JS为中心的，而非HTML，虚拟Dom是一个至关重要的概念。</p>
-<p>在jQuery出现之前，我们一般都是直接操作Dom，方法“暴力、简单”，也存在兼容性的问题。在jQuery出现之后，jQuery的选择器帮助我们简单、高效的操作Dom，也就是在jQuery出现之后，前端就开始大爆发了。</p>
-<p>但是随着发展，这种简单暴力的操作Dom的方法对于很多大型系统性工程来说，从软件工程的角度上讲，是杂乱、无序的，一旦时间久远，项目越来越大，维护成本就变大。于是，我们有了各种前端MVC、MVVM框架，典型的有Angular、React、vue.js，MVVM给我们带来一种全新的思想，数据绑定。</p>
-<p>不过，与此同时，React给我们带来了一种全新的思想，虚拟Dom，从此，我们再也不用直接操作Dom了，而是用虚拟Dom更新Dom。</p>
-<p>你可能会问，这样做，效率岂不是更低了？</p>
-<p>是的，也不是。其实没有那么明显，一般来讲，操作Dom树的Diff算法应该是O(n^3)，而React把效率降低到了O(n)。</p>
-<p><img src="/content/images/react/1.png" alt=""></p>
-<p>简单来讲，如图所示，React只会比较相同层级的Dom，从而简化了Dom Diff的复杂度，虽然有所舍弃，但是全局比较是没有必要的。</p>
-<p>通过在JSX文件中写虚拟Dom，React在内存中会自动拿现在的虚拟Dom和旧的虚拟Dom进行Diff操作，如果发现有Diff的部分，就拿出来形成新的Patch部分，加入到现在的Dom树上。</p>
-<p>也就是因为这个原因，虚拟Dom使得在操作Dom上更加高效，每次更新数据不会进行O(n^3)复杂的操作。</p>
-<p>你可能会问，什么是JSX？</p>
-<h1 id="JSX"><a href="#JSX" class="headerlink" title="JSX"></a>JSX</h1><p>其实JSX只是一种未编译的JavaScript，可以方便的对HTML进行书写，先上代码：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">import</span> React <span class="keyword">from</span> <span class="string">'react'</span>;</div><div class="line"><span class="keyword">import</span> &#123; Button &#125; <span class="keyword">from</span> <span class="string">'semantic-ui-react'</span>;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">ButtonComponent</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</div><div class="line">    render() &#123;</div><div class="line">        <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">span</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">Button</span> <span class="attr">color</span>=<span class="string">'blue'</span> &gt;</span>分钟<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">Button</span> <span class="attr">color</span>=<span class="string">'violet'</span>&gt;</span>小时<span class="tag">&lt;/<span class="name">Button</span>&gt;</span></div><div class="line">            <span class="tag">&lt;/<span class="name">span</span>&gt;</span></div><div class="line">        );</div><div class="line">    &#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">export</span> <span class="keyword">default</span> ButtonComponent;</div></pre></td></tr></table></figure>
-<p>代码部分用<code>ES6</code>书写，你可能会问什么是ES6？其实还有ES7(ECMAScript 2016)呢~</p>
-<p>那么，你可能看到了很变态的写法，就是HTML和JS混写，没错，这就是EJS，但请注意，这不是HTML，写着写着很有可能会掉入<a href="http://www.css88.com/react/docs/jsx-gotchas.html" target="_blank" rel="external">JSX陷阱</a>。</p>
-<p>经过<code>babel</code>等工具的编译后，JSX在运行的时候会被编译为真实的JavaScript语言，之所以这样写，只是为了方便程序员更方便的写代码。</p>
-<p>比如上面的代码“HTML部分”会被编译为：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">React.createElement(<span class="string">'button'</span>, &#123;<span class="attr">class</span>: <span class="string">'ui blue button'</span>&#125;, <span class="string">'分钟'</span>);</div><div class="line">React.createElement(<span class="string">'button'</span>, &#123;<span class="attr">class</span>: <span class="string">'ui violet button'</span>&#125;, <span class="string">'小时'</span>);</div></pre></td></tr></table></figure>
-<p>当然，JSX也有很多坑，比如：</p>
-<p><code>Module build failed: SyntaxError: Adjacent JSX elements must be wrapped in an enclosing tag</code></p>
-<p>作为新手，这个问题，我经常遇到，因为你在写每一个JSX模块的时候，你需要用类似于<code>&lt;div&gt;&lt;/div&gt;</code>作为开始与结尾，不规范的代码不会被编译成功。</p>
-<h1 id="ECMAScript-ES"><a href="#ECMAScript-ES" class="headerlink" title="ECMAScript(ES)"></a>ECMAScript(ES)</h1><p>ES无疑是这几年最火的前端语言，没错，他是JavaScript的改进版，我知道，其实还有很多其他类似的比如CoffeeScript，但是ES会被各大浏览器所兼容支持，但是你可能会问到兼容性问题，没事，我们有<code>babel</code>工具。</p>
-<ul>
-<li>ECMAScript：一个由 ECMA International 进行标准化，TC39 委员会进行监督的语言。通常用于指代标准本身。</li>
-<li>JavaScript：ECMAScript 标准的各种实现的最常用称呼。这个术语并不局限于某个特定版本的 ECMAScript 规范，并且可能被用于任何不同程度的任意版本的 ECMAScript 的实现。</li>
-<li>ECMAScript 5 (ES5)：ECMAScript 的第五版修订，于 2009 年完成标准化。这个规范在所有现代浏览器中都相当完全的实现了。</li>
-<li>ECMAScript 6 (ES6) / ECMAScript 2015 (ES2015)：ECMAScript 的第六版修订，于 2015 年完成标准化。这个标准被部分实现于大部分现代浏览器。可以查阅这张兼容性表来查看不同浏览器和工具的实现情况。</li>
-<li>ECMAScript Proposals：被考虑加入未来版本 ECMAScript 标准的特性与语法提案，他们需要经历五个阶段：Strawman（稻草人），Proposal（提议），Draft（草案），Candidate（候选）以及 Finished （完成）。</li>
-<li>ECMAScript 2016：第七版 ECMAScript 修订，增加了两个新特性。</li>
-</ul>
-<p>以上，都是我们常说的ES，在网上看到的代码目前以ES5和ES6居多，写法各异，我建议用最新版的写法写代码。</p>
-<p>说白了，就是Javascript并不是一个优秀的语言，但是经过不断的填补，修正，已经让Javascript支持了很多新特性，新的语法，更多的书写方式，以及拥有了更严谨的编程思想。比如<code>let</code>,arrow function(就是这个：<code>(i) =&gt; i + 1</code> )在ES中的运用等。</p>
-<p>所以，在认识React之前，最好学习ES的新特性以及<a href="http://blog.csdn.net/zhangjjie0110/article/details/53782537" target="_blank" rel="external">常用的新特性</a>。</p>
-<h1 id="组件化"><a href="#组件化" class="headerlink" title="组件化"></a>组件化</h1><p>我觉得这是React的重量级思想，组件化前端，从此，前端再也不是东拼西凑，而是像积木一样，拼起来。</p>
-<p><img src="/content/images/react/2.png" alt=""></p>
-<p>React把单一的用户界面，拆成了各种各样的组件，形成“组件树”，采用分而治之的思想，有一个好处，就是维护起来极其方便，对于组件的修改也显得很容易。</p>
-<h1 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h1><p>众所周知，Angular是双向数据绑定的，并且引以为豪，因为更容易维护与理解。</p>
-<p>但是双向数据绑定也带来了许多问题，会在些其他功能的时候莫名其妙出现很多bug。</p>
-<p>React是单向数据绑定的，是非常稳定的做法，但是也存在一些问题，就是在操作其他组件的时候，对于数据流的处理，显得异常困难。</p>
-<p>在React中，数据绑定仅仅需要在<code>render</code>中写<code>{数据绑定}</code>，而非像Angular一样，两边都要设置，一定情况下讲，这是比较方便的。</p>
-<h1 id="数据模型"><a href="#数据模型" class="headerlink" title="数据模型"></a>数据模型</h1><h2 id="state"><a href="#state" class="headerlink" title="state"></a>state</h2><p>话说回来，React的每一个组件的实质是什么？状态机（State Machines），在React的每一个组件里，通过更新<code>this.state</code>，再通过<code>render()</code>进行渲染，React会自动把最新的状态渲染到网页上。</p>
-<p>举个栗子🌰<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">DateSelectorComponent</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line"></div><div class="line">    <span class="keyword">constructor</span>(props) &#123;</div><div class="line">    <span class="keyword">super</span>(props);</div><div class="line">    <span class="keyword">let</span> todaydate = <span class="keyword">this</span>.showLocale(<span class="keyword">new</span> <span class="built_in">Date</span>());</div><div class="line">     <span class="keyword">this</span>.state = &#123;</div><div class="line">         <span class="attr">timenow</span>: todaydate,</div><div class="line">         <span class="attr">showCalendar</span>: <span class="literal">false</span></div><div class="line">    &#125;</div><div class="line">            <span class="keyword">return</span>(</div><div class="line">            <span class="xml"><span class="tag">&lt;<span class="name">div</span>&gt;</span></span></div><div class="line">            <span class="tag">&lt;<span class="name">Input</span> <span class="attr">icon</span>=<span class="string">'calendar'</span> <span class="attr">iconPosition</span>=<span class="string">'left'</span> <span class="attr">readOnly</span> <span class="attr">onClick</span>=<span class="string">&#123;this.showCalendar&#125;</span> <span class="attr">value</span>=<span class="string">&#123;this.state.timenow&#125;</span> <span class="attr">ref</span>=<span class="string">"inputbox"</span>/&gt;</span></div><div class="line">            <span class="tag">&lt;<span class="name">ButtonComponent</span> /&gt;</span></div><div class="line">            &#123;CalendarComponent&#125;</div><div class="line">            <span class="tag">&lt;/<span class="name">div</span>&gt;</span></div><div class="line">        )</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<p>通过这样的方式，我就设置了state的默认初始值，默认日历选择器是不出现的，而今天的日期是今天日期，这很正常。然后在将所谓的值渲染到Dom上。</p>
-<h2 id="props"><a href="#props" class="headerlink" title="props"></a>props</h2><p>React的数据流是单向的，是自上向下的层级传递的，props可以对固定的数据进行传递。</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloMessage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">  render( </div><div class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</div><div class="line">    )</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="class"><span class="keyword">class</span> <span class="title">MainPage</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</div><div class="line">render()&#123;</div><div class="line"> <span class="keyword">return</span>(</div><div class="line">  <span class="xml"><span class="tag">&lt;<span class="name">HelloMessage</span> <span class="attr">name</span>=<span class="string">"John"</span> /&gt;</span></span></div><div class="line">  )</div><div class="line"> &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>在这种情况下，子组件会自动读取出父组件传递过来的<code>props</code>值John，并快速的渲染在页面上。</p>
-<h2 id="到底谁是谁"><a href="#到底谁是谁" class="headerlink" title="到底谁是谁"></a>到底谁是谁</h2><p><code>state</code>和<code>props</code>看起来很相似，其实是完全不同的东西。</p>
-<table>
-<thead>
-<tr>
-<th>问题</th>
-<th><em>props</em></th>
-<th><em>state</em></th>
-<th></th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>可以从父组件得到初始值吗？</td>
-<td>可以</td>
-<td>可以</td>
-<td></td>
-</tr>
-<tr>
-<td>可以被父组件改变值吗？</td>
-<td>可以</td>
-<td>不可以</td>
-<td></td>
-</tr>
-<tr>
-<td>可以设置组件内部的初始值吗？</td>
-<td>可以</td>
-<td>可以</td>
-<td></td>
-</tr>
-<tr>
-<td>可以改变组件内部的初始值吗？</td>
-<td>不可以</td>
-<td>可以</td>
-<td></td>
-</tr>
-<tr>
-<td>可以设置子组件的初始值吗？</td>
-<td>可以</td>
-<td>可以</td>
-<td></td>
-</tr>
-<tr>
-<td>可以改变子组件的初始值吗？</td>
-<td>可以</td>
-<td>不可以</td>
-</tr>
-</tbody>
-</table>
-<p>按照我的个人理解，<code>props</code>是静态的，存入不变量，比如 购物车里的 商品名称、价格；<code>state</code>是动态的，存入随时变化的量，比如 用户购买商品的总价，购买数目。</p>
-<p>从操作的角度上讲，<code>props</code>是单向传递的，会一直被传递到子组件，而<code>state</code>更倾向于自身，只能改变自身的值。</p>
-<h1 id="获取Dom"><a href="#获取Dom" class="headerlink" title="获取Dom"></a>获取Dom</h1><p><code>this.refs</code>是react的重要组成之一，通过该方法可以快速高效的获取Dom。</p>
-<p>例如，在JSX代码中这样写道<br><figure class="highlight html"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">ref</span>=<span class="string">"myInput"</span> /&gt;</span></div></pre></td></tr></table></figure></p>
-<p>便可以通过<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">this</span>.refs.myInput.value</div></pre></td></tr></table></figure></p>
-<p>命令获取该Input下的dom属性的value值，非常方便。</p>
-<h1 id="生命周期"><a href="#生命周期" class="headerlink" title="生命周期"></a>生命周期</h1><p>组件都是有生命周期的，生命周期内，<code>props</code>和<code>state</code>改变会导致React自动用Diff算法重新渲染页面。那么生命周期到底都有哪些呢？</p>
-<p>大体上分为三类：</p>
-<ul>
-<li>挂载： 组件被插入到DOM中。</li>
-<li>更新： 组件被重新渲染，查明DOM是否应该刷新。</li>
-<li>移除： 组件从DOM中移除。</li>
-</ul>
-<p>从流程上讲，是这样的：</p>
-<p><strong>挂载期：</strong></p>
-<p>getInitialState() –&gt;&gt; componentWillMount() –&gt;&gt; render() –&gt;&gt; componentDidMount()</p>
-<p><strong>更新期：</strong></p>
-<p>componentWillReceiveProps() –&gt;&gt; shouldComponentUpdate() –&gt;&gt; componentWillUpdate render() –&gt;&gt; componentDidUpdate()</p>
-<p><strong>移除期：</strong></p>
-<p>componentWillUnmount()</p>
-<h2 id="挂载"><a href="#挂载" class="headerlink" title="挂载"></a>挂载</h2><p><strong>componentWillMount()</strong>： 在初次渲染之前执行一次，最早的执行点</p>
-<p><strong>componentDidMount()</strong>： 在初次渲染之后执行，比较常用，比如持续执行某事件：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">componentDidMount()&#123;</div><div class="line"> setInterval(<span class="keyword">this</span>.loadData(<span class="keyword">this</span>.state.date),<span class="number">1000</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h2 id="更新"><a href="#更新" class="headerlink" title="更新"></a>更新</h2><p><strong>componentWillReceiveProps()</strong>： 在组件接收到新的 <code>props</code> 的时候调用。在初始化渲染的时候，该方法不会调用。</p>
-<p><strong>shouldComponentUpdate()</strong>： 在接收到新的 <code>props</code> 或者 <code>state</code>，将要渲染之前调用。</p>
-<p><strong>componentWillUpdate()</strong>： 在接收到新的 props 或者 state 之前立刻调用。</p>
-<p><strong>componentDidUpdate()</strong>： 在组件的更新已经同步到 DOM 中之后立刻被调用。</p>
-<h2 id="移除"><a href="#移除" class="headerlink" title="移除"></a>移除</h2><p><strong>componentWillUnmount()</strong>： 在组件从 DOM 中移除的时候立刻被调用。</p>
-<h1 id="Flux"><a href="#Flux" class="headerlink" title="Flux"></a>Flux</h1><p>React是MVC中V的一部分，而Flux则是M和C的部分，Flux是单向数据流，符合React的核心思想，不过，Flux并不完善，是一个很松散的架构。</p>
-<ul>
-<li>Dispatcher： 处理动作分发，维护 Store 之间的依赖关系</li>
-<li>Store： 数据和逻辑部分</li>
-<li>View： React 组件，这一层可以看作 controller-views，作为视图同时响应用户交互</li>
-<li>Action： 提供给 Dispatcher 传递数据给 Store</li>
-</ul>
-<p><img src="/content/images/react/3.png" alt=""></p>
-<h1 id="Redux"><a href="#Redux" class="headerlink" title="Redux"></a>Redux</h1><p><img src="/content/images/react/5.jpeg" alt=""></p>
-<p>Flux把总架构都搭好了，可是实现起来并不容易，因为Flux并没有强大的API，只是一种纯粹的思想实现，而Redux是Flux的“升级版”，把各个部分更加方便的实现起来。</p>
-<p>此部分未完待续</p>
-<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我觉得React给前端开发带来了一种全新的思想，那就是以JS为中心，一种全新的世界。</p>
-<p>网页不再是网页，而是像工程一样，一块块搭建起来的，拆下来，搬上去都很容易，似的前端再也不是那个凌乱拼凑的年代。</p>
-<p>我想任何一种编程语言，无论是解释性、脚本、编译语言都逃离不了这个全新的年代，就是组件化，大家似乎都在不同方向发展，但实际上，确实一样的。</p>
-<h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><p><a href="http://www.infoq.com/cn/articles/react-dom-diff" target="_blank" rel="external">深入浅出React（四）：虚拟DOM Diff算法解析</a></p>
-<p><a href="http://bbs.reactnative.cn/topic/15/react-react-native-%E7%9A%84es5-es6%E5%86%99%E6%B3%95%E5%AF%B9%E7%85%A7%E8%A1%A8/2" target="_blank" rel="external">React/React Native 的ES5 ES6写法对照表</a></p>
-<p><a href="https://www.cllgeek.com/archives/544" target="_blank" rel="external">React组件声明周期过程说明</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;前两天，用React把 之前的 &lt;a href=&quot;https://github.com/yfgeek/rpi-TempRuntime&quot; target=&quot;_blank&quot; rel=&quot;external&quot;&gt;基于树莓派3B,DHT11/DHT22,LCD1602的一个实时温度湿度检测
-    
-    </summary>
-    
-      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
-    
-    
-      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>用Raspberry Pi Zero打造“即插即用”的Web服务器</title>
-    <link href="http://www.yfgeek.com/2017/01/12/network-zero-web/"/>
-    <id>http://www.yfgeek.com/2017/01/12/network-zero-web/</id>
-    <published>2017-01-11T18:04:44.000Z</published>
-    <updated>2017-10-26T12:59:55.527Z</updated>
-    
-    <content type="html"><![CDATA[<p>虽然Raspberry Pi Zero只有4.5英镑，非常便宜，但确实具有局限性，由于缺少网口、WiFi，功能比较单一，可曾设想，用Raspberry Pi Zero打造一个完美的“即插即用”的Web服务器？</p>
-<p><img src="/content/images/zeroweb/0.jpg" alt=""></p>
-<p>何为即插即用？</p>
-<p>类似于优盘一样，插上电脑，等待几秒，直接识别为网卡，直接输入树莓派的网址，连接就是自己的网站。</p>
-<p>有什么用？</p>
-<p>实现本地web本地化，随着前端、后端技术的发展，web应用越来越多，但是web应用受制于网络的限制，一旦没有网络，就没有用武之地。</p>
-<p>那么为什么不把web本地化呢？以后拿着“即插即用”的服务器，到任何电脑上，都能随时办公。</p>
-<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><p>我们可以把树莓派虚拟为网卡，然后在内网连接它。</p>
-<p>1.下载完整版 Raspbian Jessie 或 Raspbian Jessie Lite 系统，并且刷到你的SD Card里，Windows用Win32 Disk Imager， Mac/Linux 用命令，如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">diskutil list</div><div class="line">diskutil unmountDisk /dev/SD卡的标号 <span class="comment">#如disk2</span></div><div class="line"><span class="built_in">cd</span> /Users/ivan/Downloads/2016-11-25-raspbian-jessie <span class="comment">#进入目录</span></div><div class="line">sudo dd bs=1m <span class="keyword">if</span>=2016-11-25-raspbian-jessie.img of=/dev/rdisk2</div></pre></td></tr></table></figure>
-<p>2.刷好系统后编辑<code>config.txt</code>文件，在最后一行下，另起一行添加：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dtoverlay=dwc2</div></pre></td></tr></table></figure></p>
-<p>保存文件</p>
-<p>3.最后，打开<code>cmdline.txt</code>文件。<br>找到单词<code>rootwait</code>，在其之后添加：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">modules-load=dwc2,g_ether</div></pre></td></tr></table></figure>
-<p>4.添加一个文件名为<code>ssh</code>到根目录下，内容为空</p>
-<p>5.把SD Card放到树莓派Zero，用安卓数据线与电脑连接，USB口接OTG口，等待60-90s，电脑会发现网卡并且自动配置ip地址。</p>
-<p><img src="/content/images/raspizero/1.png" alt=""></p>
-<p>6.Ping 一下raspberrypi.local看是否能通</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">PING raspberrypi.local (169.254.70.245): 56 data bytes</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=0 ttl=64 time=0.570 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=1 ttl=64 time=0.338 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=2 ttl=64 time=0.316 ms</div><div class="line">64 bytes from 169.254.70.245: icmp_seq=3 ttl=64 time=0.344 ms</div></pre></td></tr></table></figure>
-<h1 id="配置"><a href="#配置" class="headerlink" title="配置"></a>配置</h1><p>1.ssh连接raspberrypi.local，默认密码为raspberry<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">pi@raspberrypi.local</div></pre></td></tr></table></figure></p>
-<p>2.通过直接运行<code>raspi-config</code>命令</p>
-<p>你需要做</p>
-<ul>
-<li>容量扩展</li>
-<li>更改系统时区</li>
-<li>更改系统密码</li>
-</ul>
-<p>3.同时你需要通过执行<code>sudo passwd root</code>更改root密码</p>
-<p>4.在本机设置代理</p>
-<p>首先，设置本机名为Mac，在本机搭建一个squid，为了使树莓派安装web server，以后日常使用不需要。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">brew update</div><div class="line">brew install squid</div></pre></td></tr></table></figure>
-<p>5.然后下载<a href="http://squidman.net/squidman/" target="_blank" rel="external">SquidMan</a>，安装。<br>在本机开启端口为8080的HTTP代理服务，并把本机名称更为Mac。</p>
-<p>6.进入树莓派的shell，输入：<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="built_in">cd</span> /etc/apt/apt.conf.d</div><div class="line">sudo vi 50raspi</div></pre></td></tr></table></figure></p>
-<p>最后一行加入一句话：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">Acquire::http::Proxy &quot;http://Mac.local:8080&quot;;</div></pre></td></tr></table></figure></p>
-<p>保存</p>
-<p>7.继续输入<code>apt-get update</code>查看是否有网络。</p>
-<p>8.安装<code>lighthttpd+mysql+php</code></p>
-<p>输入：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo apt-get install lighttpd mysql-server php5-cgi php5-mysql</div></pre></td></tr></table></figure>
-<p>等待安装完毕后，修改<code>php.ini</code>设置</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/php5/cgi/php.ini</div></pre></td></tr></table></figure>
-<p>去掉这一条注释的<code>;</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">;cgi.fix_pathinfo = 1</div></pre></td></tr></table></figure></p>
-<p>随后修改<code>lighttpd.conf</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo nano /etc/lighttpd/lighttpd.conf</div></pre></td></tr></table></figure></p>
-<p>在<code>server.modules</code>中增加<code>fastcgi</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div></pre></td><td class="code"><pre><div class="line">server.modules = (</div><div class="line">&quot;mod_access&quot;,</div><div class="line">&quot;mod_alias&quot;,</div><div class="line">&quot;mod_compress&quot;,</div><div class="line"># &quot;mod_redirect&quot;,</div><div class="line">&quot;mod_fastcgi&quot;,</div><div class="line"># &quot;mod_rewrite&quot;,</div><div class="line">)</div></pre></td></tr></table></figure></p>
-<p>最后添加<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line">fastcgi.server = ( &quot;.php&quot; =&gt; ((</div><div class="line">    &quot;bin-path&quot; =&gt; &quot;/usr/bin/php5-cgi&quot;,</div><div class="line">    &quot;socket&quot; =&gt; &quot;/tmp/php.socket&quot;</div><div class="line">)))</div></pre></td></tr></table></figure></p>
-<p>重启lighttpd服务<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo /etc/init.d/lighttpd restart</div></pre></td></tr></table></figure></p>
-<p>通过scp协议，上传一个<code>index.php</code>文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">&lt;?php</div><div class="line">phpinfo();</div><div class="line">?&gt;</div></pre></td></tr></table></figure></p>
-<p>删除默认的<code>index.htm</code>文件，打开网站<code>http://自己树莓派名字.local</code><br>查看是否成功。</p>
-<p><img src="/content/images/zeroweb/1.png" alt=""></p>
-<p>不错，接下来的事情，就是把自己的源代码传到树莓派上，不过多叙述。</p>
-<h1 id="多说一句"><a href="#多说一句" class="headerlink" title="多说一句"></a>多说一句</h1><p>从此以后，你只需要带上你的树莓派Zero就可以随时随地的打开自己的私有web服务。但是，树莓派Zero的性能，确实不行，建议跑一跑小型的程序，不要跑太大的程序。</p>
-<p><img src="/content/images/zeroweb/2.png" alt=""></p>
-<p>至于应用嘛，其实做什么都可以的。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;虽然Raspberry Pi Zero只有4.5英镑，非常便宜，但确实具有局限性，由于缺少网口、WiFi，功能比较单一，可曾设想，用Raspberry Pi Zero打造一个完美的“即插即用”的Web服务器？&lt;/p&gt;
-&lt;p&gt;&lt;img src=&quot;/content/images
-    
-    </summary>
-    
-      <category term="Rasberry" scheme="http://www.yfgeek.com/categories/Rasberry/"/>
-    
-    
-      <category term="Raspberry" scheme="http://www.yfgeek.com/tags/Raspberry/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Git 文件、文件夹区分大小写</title>
-    <link href="http://www.yfgeek.com/2017/01/07/gitcase/"/>
-    <id>http://www.yfgeek.com/2017/01/07/gitcase/</id>
-    <published>2017-01-06T18:25:32.000Z</published>
-    <updated>2017-10-26T12:59:55.517Z</updated>
-    
-    <content type="html"><![CDATA[<p>其实非常简单，只是提醒一个小常识，Git默认是不区分文件，文件夹大小写的。</p>
-<p>这会给很多人带来很多困扰，比如文件改了名，在严格区分大小写的系统下，实际上是两个不同名字的文件，但是Git不区分大小写机制导致无法正常的commit。</p>
-<p>开启Git区分大小写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">git config core.ignorecase false</div></pre></td></tr></table></figure>
-<p>最近爱上了给别人找bug，Pull Request，❤️Github。</p>
-<p>任何细节，都很重要。</p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;其实非常简单，只是提醒一个小常识，Git默认是不区分文件，文件夹大小写的。&lt;/p&gt;
-&lt;p&gt;这会给很多人带来很多困扰，比如文件改了名，在严格区分大小写的系统下，实际上是两个不同名字的文件，但是Git不区分大小写机制导致无法正常的commit。&lt;/p&gt;
-&lt;p&gt;开启Git区分大小
-    
-    </summary>
-    
-      <category term="Github" scheme="http://www.yfgeek.com/categories/Github/"/>
-    
-    
-      <category term="Github" scheme="http://www.yfgeek.com/tags/Github/"/>
     
   </entry>
   

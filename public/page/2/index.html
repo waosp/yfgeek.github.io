@@ -1,13 +1,117 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Thinking as a Geek"><meta name="keyword" content="Web前端,极客,渗透"><link rel="shortcut icon" href="/img/favicon.ico"><meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM"><title>Ivan&#39;s Blog</title><link rel="canonical" href="http://www.yfgeek.com/page/2/"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/hux-blog.min.css"><link rel="stylesheet" href="/css/highlight.css"><link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><!--[if lt IE 9]>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Thinking as a Geek">
+    <meta name="keyword"  content="Web前端,极客,渗透">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+<meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
+    <title>
+        
+          Ivan&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.yfgeek.com/page/2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]--><script>var _hmt = _hmt || [];
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+<script>
+var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script></head><body ontouchstart=""><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class="container-fluid"><div class="navbar-header page-scroll"><button type="button" class="navbar-toggle"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="/">Ivan&#39;s Blog</a></div><div id="huxblog_navbar"><div class="navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="/">主页</a></li><li><a href="/f2e.html">前端收藏夹</a></li><li><a href="/link.html">友情链接</a></li><li><a href="/about">关于我</a></li></ul></div></div></div></nav><script>// Drop Bootstarp low-performance Navbar
+})();
+</script>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ivan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    <li>
+                        <a href="/f2e.html">前端收藏夹</a>
+                    </li>
+                    <li>
+                        <a href="/link.html">友情链接</a>
+                    </li>
+                    <li>
+                        <a href="/about">关于我</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
     // in high-perf jank-free CSS3 implementation
     var $body   = document.body;
@@ -32,14 +136,488 @@
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
-    }</script><header class="intro-header" style="background-image: url('/content/images/2016/08/wall.jpg')"><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class="site-heading"><h1>Ivan&#39;s Blog</h1><span class="subheading">Web前端 &amp; 极客 &amp; 渗透</span></div></div></div></div></header><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-1 col-md-8 col-md-offset-1 col-sm-12 col-xs-12 post-container"><div class="post-preview"><a href="/2017/11/20/react-native-icon/"><h2 class="post-title">React Native 添加自定义图标库</h2><h3 class="post-subtitle"></h3><div class="post-content-preview">最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！ 本文讲述用react-native-vector-icons库，封装一个自己的图标库，也就是说添加自定义图标库，下面讲讲如何添加。 通俗易懂，而且本文只讲一种方式，方便各位网友学习，我讲的方式就是最简单的createIconSetFromIco......</div></a><p class="post-meta">Posted by Ivan on 2017-11-20</p></div><hr><div class="post-preview"><a href="/2017/11/19/react-persist/"><h2 class="post-title">轻松几步让Redux实现数据持久化</h2><h3 class="post-subtitle"></h3><div class="post-content-preview">在开发的过程中，数据用redux管理，觉得希望将数据持久化保存，也就是说当用户下一次打开app或网站的时候，我们希望浏览器/APP自动加载出上次的数据，怎么办？有没有一个🙆‍♂统一的方式？ 有的，这就是简单易用的redux-persist，事情比想象的简单太多了。 话不多说，上代码！官方示例代码： 1234567891011121314151617181920import &#123; P......</div></a><p class="post-meta">Posted by Ivan on 2017-11-19</p></div><hr><div class="post-preview"><a href="/2017/11/15/uob3/"><h2 class="post-title">“我是如何收集校友的”之利用基于HMM-Viterbi的HanLP进行人名提取</h2><h3 class="post-subtitle"></h3><div class="post-content-preview">最近在做一个小APP，一直没有来的及更新这个系列的文章，是为抱歉。按照上文讲到，我们已经将数据重复的内容用pandas库去掉了，接下来将干一件难度很大的事情，那就是对人名进行提取。 我们当前进度：3 爬虫程序——抓取全百度百科与“伯明翰大学”相关的数据 数据去重——用pandas去掉抓取相同的URL或相同的名称 提取人名——利用HMM-Viterbi进行人名筛选与提取 下载器——下载所有......</div></a><p class="post-meta">Posted by Ivan on 2017-11-15</p></div><hr><div class="post-preview"><a href="/2017/10/29/rasp-xp/"><h2 class="post-title">实战树莓派安装Windows XP</h2><h3 class="post-subtitle"></h3><div class="post-content-preview">序记得小时候，家里的电脑一直安装着Windows 98，天天骂windows难用，虽然没有别的最新的操作系统可以用，也看不出来Windows 98的设计风格有多么古朴，只是bug奇多，动不动就崩溃，系统级别的崩溃，蓝屏，甚至直接坏掉再也无法开机。 直到有一天，偶然的机会，姐姐家里新买来的电脑，过去一看，大不一样，蓝色的界面，巨好看的任务栏、窗体样式，却不知道什么系统，感觉像是windows ......</div></a><p class="post-meta">Posted by Ivan on 2017-10-29</p></div><hr><div class="post-preview"><a href="/2017/10/27/uob2/"><h2 class="post-title">“我是如何收集校友的”之数据去重</h2><h3 class="post-subtitle"></h3><div class="post-content-preview">按照上文讲到，我们已经抓取到了所有与“伯明翰大学”相关的数据，我们接下来要做的就是做数据清洗工作。 我们当前进度：2 爬虫程序——抓取全百度百科与“伯明翰大学”相关的数据 数据去重——用pandas去掉抓取相同的URL或相同的名称 提取人名——利用HMM-Viterbi进行人名筛选与提取 下载器——下载所有数据库中数据清洗过的URL，并存入数据库 人物Ranking——按照一定的排名方式......</div></a><p class="post-meta">Posted by Ivan on 2017-10-27</p></div><hr><ul class="pager"><li class="previous"><a href="/">&larr; 上一篇</a></li><li class="next"><a href="/page/3/">下一篇 &rarr;</a></li></ul></div><div class="col-lg-3 col-lg-offset-0 col-md-3 col-md-offset-0 col-sm-12 col-xs-12 sidebar-container"><section><h5><a href="/tags/">FEATURED TAGS</a></h5><div class="tags"><a href="/tags/#Hack" title="Hack" rel="11">Hack</a> <a href="/tags/#Docker" title="Docker" rel="2">Docker</a> <a href="/tags/#Linux" title="Linux" rel="4">Linux</a> <a href="/tags/#Web" title="Web" rel="10">Web</a> <a href="/tags/#Github" title="Github" rel="2">Github</a> <a href="/tags/#Brainfuck" title="Brainfuck" rel="2">Brainfuck</a> <a href="/tags/#Mac" title="Mac" rel="2">Mac</a> <a href="/tags/#Raspberry" title="Raspberry" rel="10">Raspberry</a> <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a> <a href="/tags/#笑话" title="笑话" rel="2">笑话</a> <a href="/tags/#数据" title="数据" rel="3">数据</a></div></section><section class="visible-md visible-lg"><hr><h5><a href="/about.html">ABOUT ME</a></h5><div class="short-about"><img src="/img/logo.jpg"><p>对任何技术永远充满敬畏之心</p><ul class="list-inline"><li><a href="/feed.xml"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-rss fa-stack-1x fa-inverse"></i></span></a></li><li><a target="_blank" href="https://www.zhihu.com/people/yfgeek"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse">知</i></span></a></li><li><a target="_blank" href="http://weibo.com/yfss"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-weibo fa-stack-1x fa-inverse"></i></span></a></li><li><a target="_blank" href="https://github.com/yfgeek"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul></div></section><hr><h5>STATEMENTS</h5><div class="widget"><p style="margin:0; color:#555">欢迎转载本博客</p><p style="margin:0; color:#555">如有转载，请加入文章地址</p><p style="margin:0; color:#555">如发现未加地址，一律举报</p><p style="margin:0; color:#555">文章免费，没有稿费</p></div><hr><h5>RECOMMENDATION</h5><div class="widget"><ul class="ds-recent-comments" data-num-items="5" data-excerpt-length="20" style="padding: 0 5px;margin: 0;"><li><a href="/2017/02/04/react/" target="_blank">我眼中的React</a></li><li><a href="/tags/#%E6%95%B0%E6%8D%AE" target="_blank">我是如何收集校友的</a></li><li><a href="/2016/12/18/poisontap/" target="_blank">30秒内盗取任意PC的Cookie神器</a></li><li><a href="/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/" target="_blank">OTR(Off-the-Record)技术探讨</a></li><li><a href="/2016/11/22/docker-SQLServer/" target="_blank">Docker下配置SQL Server for Linux</a></li><li><a href="/2017/01/12/network-zero-web/" target="_blank">用Raspberry Pi Zero打造“即插即用”的Web服务器</a></li><li><a href="/2016/12/21/network-zero/" target="_blank">Raspberry Pi Zero联网奇妙记</a></li><li><a href="/2016/11/27/badusb/" target="_blank">Arduino Leonardo 打造 Bad USB</a></li></ul></div></div></div><footer><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href="/feed.xml"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-rss fa-stack-1x fa-inverse"></i></span></a></li><li><a target="_blank" href="https://www.zhihu.com/people/yfgeek"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse">知</i></span></a></li><li><a target="_blank" href="http://weibo.com/yfss"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-weibo fa-stack-1x fa-inverse"></i></span></a></li><li><a target="_blank" href="https://github.com/yfgeek"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Ivan&#39;s Blog 2018<br>Theme inspired by Hux <span style="display: inline-block; margin: 0 5px;"><i class="fa fa-heart"></i> </span>Proudly powered by Hexo</p></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/hux-blog.min.js"></script><script>function async(u, c) {
+    }
+</script>
+
+
+    <!-- Main Content -->
+    <!-- Page Header -->
+<header class="intro-header" style="background-image: url('/content/images/2016/08/wall.jpg')">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 ">
+                <div class="site-heading">
+                    <h1>Ivan&#39;s Blog</h1>
+                    <!--<hr class="small">-->
+                    <span class="subheading">Web前端 &amp; 极客 &amp; 渗透</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+
+
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+        
+
+<!-- USE SIDEBAR -->
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-1
+                col-md-8 col-md-offset-1
+                col-sm-12
+                col-xs-12
+                post-container
+            ">
+
+                <!-- Main Content -->
+
+
+<div class="post-preview">
+
+    <a href="/2017/11/30/brainfuck/">
+        <h2 class="post-title">
+            快速撸出一个Brainfuck语言解释器
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            一直都知道一个很有趣的语言，Brainfuck，只是一直尚未研究，今天晚上看了一下，竟然不是那么难，而且还撸出来了一个解释器。这是一种极小化的计算机语言，它是由Urban Müller在1993年创建的。
+就象它的名字所暗示的，brainfuck程序很难读懂。尽管如此，brainfuck图灵机一样可以完成任何计算任务。虽然brainfuck的计算方式如此与众不同，但它确实能够正确运行。
+这种......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-11-30
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/30/brainfuck-web/">
+        <h2 class="post-title">
+            Brainfuck语言解释器Web版与移动客户端版 beta
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            其实不是多难的东西，有了上文快速撸出一个Brainfuck语言解释器的核心解释器源码做基础，做两个客户端版本并不难。
+用React+Redux撸了一个Web版，一个移动版。两者都尚未完成，但是在同时进行。
+用React persist使数据持久化，也就是说即使你关闭了浏览器，下次不清空缓存的话，程序依然会为你保存。
+开源开源地址如下：
+Beef(移动版): https://github.co......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-11-30
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/21/react-native-icon-2/">
+        <h2 class="post-title">
+            React Native 封装彩色自定义图标库
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            问题描述本文接上篇React Native 添加自定义图标库，上篇介绍的很基础，但是有没有发现一个问题，通过这种react-native-vector-icons方式封装下来的图标，都只有黑白图标，颜色需要自己手动设置，但是对于我这种彩色绚丽的图标，手动设置？不存在的…
+
+那么本文就在上文的基础上讲讲，我是如何办到的自动彩色图标。
+答题思路是创建一个色彩配置文件，等到加载的时候，按照标签去加......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-11-21
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/20/react-native-icon/">
+        <h2 class="post-title">
+            React Native 添加自定义图标库
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            最近在开发一个React Native小程序，遇到了很多问题，好在都解决了，近期将逐步增加一些解决问题式文章，方便各位网友学习，如有不对，请多指教！
+本文讲述用react-native-vector-icons库，封装一个自己的图标库，也就是说添加自定义图标库，下面讲讲如何添加。
+通俗易懂，而且本文只讲一种方式，方便各位网友学习，我讲的方式就是最简单的createIconSetFromIco......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-11-20
+
+    </p>
+
+</div>
+<hr>
+
+<div class="post-preview">
+
+    <a href="/2017/11/19/react-persist/">
+        <h2 class="post-title">
+            轻松几步让Redux实现数据持久化
+        </h2>
+        <h3 class="post-subtitle">
+            
+        </h3>
+        <div class="post-content-preview">
+            在开发的过程中，数据用redux管理，觉得希望将数据持久化保存，也就是说当用户下一次打开app或网站的时候，我们希望浏览器/APP自动加载出上次的数据，怎么办？有没有一个🙆‍♂统一的方式？
+有的，这就是简单易用的redux-persist，事情比想象的简单太多了。
+话不多说，上代码！官方示例代码：
+1234567891011121314151617181920import &#123; P......
+        </div>
+    </a>
+    <p class="post-meta">
+        Posted by Ivan on
+        2017-11-19
+
+    </p>
+
+</div>
+<hr>
+
+
+
+<!-- Pager -->
+
+<ul class="pager">
+    
+        <li class="previous">
+            <a href="/">&larr; 上一篇</a>
+        </li>
+    
+    
+        <li class="next">
+            <a href="/page/3/">下一篇 &rarr;</a>
+        </li>
+    
+</ul>
+
+
+                <!-- 如果开启评论功能 -->
+                
+
+            </div>
+    <!-- Sidebar Container -->
+            <div class="
+                col-lg-3 col-lg-offset-0
+                col-md-3 col-md-offset-0
+                col-sm-12
+                col-xs-12
+                sidebar-container
+            ">
+                <!-- Featured Tags -->
+                
+                <section>
+                    <!-- no hr -->
+                    <h5><a href="/tags/">FEATURED TAGS</a></h5>
+                    <div class="tags">
+                        
+                            
+                        
+                            
+                            <a href="/tags/#Hack" title="Hack" rel="12">Hack</a>
+                            
+                        
+                            
+                        
+                            
+                            <a href="/tags/#Brainfuck" title="Brainfuck" rel="2">Brainfuck</a>
+                            
+                        
+                            
+                            <a href="/tags/#Docker" title="Docker" rel="2">Docker</a>
+                            
+                        
+                            
+                            <a href="/tags/#Linux" title="Linux" rel="4">Linux</a>
+                            
+                        
+                            
+                            <a href="/tags/#Web" title="Web" rel="10">Web</a>
+                            
+                        
+                            
+                            <a href="/tags/#Github" title="Github" rel="2">Github</a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                            <a href="/tags/#Mac" title="Mac" rel="4">Mac</a>
+                            
+                        
+                            
+                            <a href="/tags/#Raspberry" title="Raspberry" rel="10">Raspberry</a>
+                            
+                        
+                            
+                            <a href="/tags/#React-Native" title="React-Native" rel="3">React-Native</a>
+                            
+                        
+                            
+                        
+                            
+                            <a href="/tags/#笑话" title="笑话" rel="2">笑话</a>
+                            
+                        
+                            
+                            <a href="/tags/#数据" title="数据" rel="3">数据</a>
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                            
+                        
+                    </div>
+                </section>
+                
+
+                <!-- Short About -->
+                <section class="visible-md visible-lg">
+                    <hr><h5><a href="/about.html">ABOUT ME</a></h5>
+                    <div class="short-about">
+
+                        
+                            <img src="/img/logo.jpg" />
+                        
+
+                        
+                            <p>对任何技术永远充满敬畏之心</p>
+                        
+
+                        <!-- SNS Link -->
+                        <ul class="list-inline">
+                            
+                                <li>
+                                    <a href="/feed.xml">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+                            
+                            
+                                <li>
+                                    <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa  fa-stack-1x fa-inverse">知</i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+
+                            
+                                <li>
+                                    <a target="_blank" href="http://weibo.com/yfss">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+
+                            
+
+                            
+                                <li>
+                                    <a target="_blank"  href="https://github.com/yfgeek">
+                                        <span class="fa-stack fa-lg">
+                                            <i class="fa fa-circle fa-stack-2x"></i>
+                                            <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                                        </span>
+                                    </a>
+                                </li>
+                            
+
+
+                            
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- Friends Blog -->
+                
+                <!-- statement List -->
+                <hr>
+                  <h5>STATEMENTS</h5>
+                    <div class="widget">
+                      <p style="margin:0; color:#555">欢迎转载本博客</p>
+                      <p style="margin:0; color:#555">如有转载，请加入文章地址</p>
+                      <p style="margin:0; color:#555">如发现未加地址，一律举报</p>
+                      <p style="margin:0; color:#555">文章免费，没有稿费</p>             
+                    </div>
+
+                <!-- Comments List -->
+                <hr>
+                  <h5>RECOMMENDATION</h5>
+                	<div class="widget">
+                        <ul class="ds-recent-comments" data-num-items="5" data-excerpt-length="20"style="padding: 0 5px;margin: 0;">
+                        <li><a href="/2017/02/04/react/" target="_blank">我眼中的React</a></li>
+                        <li><a href="/tags/#%E6%95%B0%E6%8D%AE" target="_blank">我是如何收集校友的</a></li>
+                        <li><a href="/2016/12/18/poisontap/" target="_blank">30秒内盗取任意PC的Cookie神器</a></li>
+                        <li><a href="/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/" target="_blank">OTR(Off-the-Record)技术探讨</a></li>
+                        <li><a href="/2016/11/22/docker-SQLServer/" target="_blank">Docker下配置SQL Server for Linux</a></li>
+                        <li><a href="/2017/01/12/network-zero-web/" target="_blank">用Raspberry Pi Zero打造“即插即用”的Web服务器</a></li>
+                        <li><a href="/2016/12/21/network-zero/" target="_blank">Raspberry Pi Zero联网奇妙记</a></li>
+                        <li><a href="/2016/11/27/badusb/" target="_blank">Arduino Leonardo 打造 Bad USB</a></li>
+                        </ul>
+                	</div>
+        
+    </div>
+</div>
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/yfss">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Ivan&#39;s Blog 2018
+                    <br>
+                    Theme inspired by Hux
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    Proudly powered by Hexo
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
       var d = document, t = 'script',
           o = d.createElement(t),
           s = d.getElementsByTagName(t)[0];
       o.src = u;
       if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
       s.parentNode.insertBefore(o, s);
-    }</script><script>// only load tagcloud.js in tag.html
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
         async("http://www.yfgeek.com/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
@@ -48,10 +626,29 @@
             };
             $('#tag_cloud a').tagcloud();
         })
-    }</script><script>async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
         var $nav = document.querySelector("nav");
         if($nav) FastClick.attach($nav);
-    })</script><script type="text/javascript">function generateCatalog (selector) {
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+<script type="text/javascript">
+    function generateCatalog (selector) {
         var P = $('div.post-container'),a,n,t,l,i,c;
         a = P.find('h1,h2,h3,h4,h5,h6');
         a.each(function () {
@@ -91,7 +688,11 @@
             scrollChange: null,
             padding: 80
         });
-    });</script><script>function addCount (Counter) {
+    });
+</script>
+<!--page counter part-->
+<script>
+function addCount (Counter) {
         url=$('.article-date').attr('href').trim();
         title = $('.article-title').text().trim();
         var query=new AV.Query(Counter);
@@ -156,4 +757,16 @@ $(function(){
             }
             }
         )
-        });</script><script></script></div></body></html>
+        });
+</script>
+
+
+<!--page counter part-->
+<script>
+</script>
+
+
+
+</body>
+
+</html>

@@ -1,13 +1,117 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="Thinking as a Geek"><meta name="keyword" content="Web前端,极客,渗透"><link rel="shortcut icon" href="/img/favicon.ico"><meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM"><title>浅谈函数式编程柯里化 - Ivan&#39;s Blog</title><link rel="canonical" href="http://www.yfgeek.com/2017/02/11/currying/"><link rel="stylesheet" href="/css/bootstrap.min.css"><link rel="stylesheet" href="/css/hux-blog.min.css"><link rel="stylesheet" href="/css/highlight.css"><link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"><!--[if lt IE 9]>
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Thinking as a Geek">
+    <meta name="keyword"  content="Web前端,极客,渗透">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+<meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
+    <title>
+        
+          浅谈函数式编程柯里化 - Ivan&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.yfgeek.com/2017/02/11/currying/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]--><script>var _hmt = _hmt || [];
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+<script>
+var _hmt = _hmt || [];
 (function() {
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
   var s = document.getElementsByTagName("script")[0];
   s.parentNode.insertBefore(hm, s);
-})();</script><link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css"><script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script></head><body ontouchstart=""><nav class="navbar navbar-default navbar-custom navbar-fixed-top"><div class="container-fluid"><div class="navbar-header page-scroll"><button type="button" class="navbar-toggle"><span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span> <span class="icon-bar"></span> <span class="icon-bar"></span></button> <a class="navbar-brand" href="/">Ivan&#39;s Blog</a></div><div id="huxblog_navbar"><div class="navbar-collapse"><ul class="nav navbar-nav navbar-right"><li><a href="/">主页</a></li><li><a href="/f2e.html">前端收藏夹</a></li><li><a href="/link.html">友情链接</a></li><li><a href="/about">关于我</a></li></ul></div></div></div></nav><script>// Drop Bootstarp low-performance Navbar
+})();
+</script>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Ivan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    <li>
+                        <a href="/f2e.html">前端收藏夹</a>
+                    </li>
+                    <li>
+                        <a href="/link.html">友情链接</a>
+                    </li>
+                    <li>
+                        <a href="/about">关于我</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
     // Use customize navbar with high-quality material design animation
     // in high-perf jank-free CSS3 implementation
     var $body   = document.body;
@@ -32,9 +136,157 @@
             $collapse.style.height = "auto"
             $navbar.className += " in";
         }
-    }</script><style type="text/css">header.intro-header{
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://www.yfgeek.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
         background-image: url('/content/images/f2e/post-bg-js-version.jpg')
-    }</style><header class="intro-header"><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class="post-heading"><div class="tags"><a class="tag" href="/tags/#Web" title="Web">Web</a></div><h1>浅谈函数式编程柯里化</h1><h2 class="subheading"></h2><span class="meta">Posted by Ivan on 2017-02-11</span></div></div></div></div></header><article><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 post-container"><p>百度百科里对柯里化的定义是</p><blockquote><p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家 Haskell Curry 命名的，尽管它是 Moses Schnfinkel 和 Gottlob Frege 发明的。</p></blockquote><p>简直看不懂哦，Talk is Cheap，我们拿一个简单的haskell程序说明什么叫</p><h2 id="自动柯里化"><a href="#自动柯里化" class="headerlink" title="自动柯里化"></a>自动柯里化</h2><p>两数相加，返回结果：</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fun add x y = x + y</div></pre></td></tr></table></figure><p>这是一个典型的柯里化的版本，当我输入 <code>(add 1) 2</code> 时与<code>add 1 2</code> 的返回结果一模一样，都是3</p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Prelude</span>&gt; (add <span class="number">1</span>) <span class="number">2</span></div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure><p>但是，换个角度上讲，我明明设置了两个“变量”，在haskell里却把它们的结果又封装成了一个函数，这就是haskell的强大特性：自动柯里化，haskell全部帮你自动处理了。</p><p>简单来说，柯里化指的是函数里只接收一个余下的参数，再调用原函数，返回出相应的结果。</p><p>而同样的，没有柯里化的普通版本却是这样的：</p><figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">fun</span> add(x, y) = x + y</div></pre></td></tr></table></figure><p>这个版本里，只能通过<code>add(1,2)</code>进行相加操作。</p><p>柯里化实际上是将高阶函数进行降阶处理，没理解？接着看~</p><h2 id="JavaScript的柯里化"><a href="#JavaScript的柯里化" class="headerlink" title="JavaScript的柯里化"></a>JavaScript的柯里化</h2><p>JavaScript存在<strong>闭包</strong>的特性，能够很好的为我们将函数柯里化，但是很可惜JavaScript不支持自动柯里化，这意味着，我们要自己写柯里化的过程，不过还好，这能有效的让我们理解，到底什么是柯里化。</p><p>同样的，还是那个add的简单函数，用JavaScript实现如下：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(y===<span class="literal">undefined</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="function">(<span class="params">z</span>) =&gt;</span> x + z;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">return</span> x+y;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>测试一下！通过执行<code>add(1)(2)</code>，果然返回了<code>3</code>，是的，这是一个手动构造柯里化函数的过程。对于大多数函数，我们有通用的柯里化方法：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> fixedArgs = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>);</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    args = fixedArgs.concat([].slice.call(<span class="built_in">arguments</span>))</div><div class="line">    <span class="keyword">return</span> func.apply(<span class="literal">null</span>, args);</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure><p>也就是说，对于<code>add</code>函数来说，我们用一个函数生成了另一个范围更小的函数，一层接一层的解决问题。这符合函数式编程的思想，就是我们更关注<strong>函数</strong>与<strong>函数</strong>之间的关系，而非状态本身，更在乎局部而非整体。</p><p>这个例子体现不出这种思想的精妙之处，那么我们再举一个例子🌰</p><p>如果，我们想让一个已知的数组每个值都做加1操作，传统的方法该怎么做？</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+<span class="number">1</span>);</div></pre></td></tr></table></figure><p>对吧？那么我们下面可以用柯里化的思想把这个问题实现：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">ar</span> =&gt;</span> ar.map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="number">1</span>);</div><div class="line">add([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</div></pre></td></tr></table></figure><p>首先我们在<code>add</code>里定义了一个函数，并且传入参数为<code>ar</code>，<code>ar</code>进行<code>Array.prototype.map()</code>操作，对每一个数进行遍历，并且返回这个数字+1后的值给<code>ar</code>，这看起来挺玄乎的，但确实可行，我们只关心局部，请试图把<code>add</code>当做数学里中的函数去思考理解，或许会好懂的多。可是这只是方便了我们理解，那么到底有什么好处呢？</p><p>再举一个例子🌰</p><p>如果我们想写一个函数，用来对已知数组的已知量进行相加n的操作，怎么写？传统方法</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar= [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addToArray</span>(<span class="params">ar,n</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+n)</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log(addToArray(ar,<span class="number">1</span>));</div></pre></td></tr></table></figure><p>但是，我们可以这样写：</p><figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">a</span> =&gt;</span> b =&gt; a+b;</div><div class="line"><span class="keyword">const</span> addToArray = <span class="function">(<span class="params">ar,n</span>) =&gt;</span> ar.map(add(n));</div><div class="line">addToArray([<span class="number">2</span>,<span class="number">3</span>],<span class="number">1</span>)</div></pre></td></tr></table></figure><p>结果都一样，其实过程是不一样的，你可能真的憋不住了，到底有什么用呢？</p><h1 id="柯里化的好处"><a href="#柯里化的好处" class="headerlink" title="柯里化的好处"></a>柯里化的好处</h1><p>就像上面的例子一样，你能看出不同吗？对，第一个的实质是新写了一个函数，对数组进行map操作，而第二个则是在直接在<code>map</code>里进行<code>add</code>操作，这很通用，一旦你写了很多类似于<code>add</code>的函数，就会方便起来，可以让我们方便的在<code>map</code>,<code>reduce</code>,<code>filter</code>里调用。</p><ul><li>能够进行延迟计算，就像add(1)(2)一样，1比2先传入，2就会被延迟计算，在特定的场景里，有一定的应用意义。</li><li>当你发现你要调用一个函数，并且调用参数都是一样的情况下，这个参数就可以被柯里化，以便更好的完成任务。</li><li>优雅的写法，允许你写出来的代码更干净、更有表达力。</li></ul><p>虽然柯里化在日常应用不多，但仍然是一个不可不了解的好概念。</p><h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><p><a href="https://cnodejs.org/topic/56261a249b48ca9448b776c4" target="_blank" rel="external">JavaScript柯里化</a></p><p><a href="http://codekirei.com/posts/currying-with-arrow-functions/" target="_blank" rel="external">Currying and ES6 Arrow Functions</a></p><p><a href="http://www.cnblogs.com/zztt/p/4142891.html" target="_blank" rel="external">浅析 JavaScript 中的 函数 currying 柯里化</a></p><p><a href="https://www.youtube.com/watch?v=iZLP4qOwY8I" target="_blank" rel="external">Currying - Part 6 of Functional Programming in JavaScript(需梯子)</a></p><hr><ul class="pager"><li class="previous"><a href="/2017/02/17/utf8true/" data-toggle="tooltip" data-placement="top" title="揭秘utf8=✓背后的小秘密">&larr; Previous Post</a></li><li class="next"><a href="/2017/02/08/awesome-code/" data-toggle="tooltip" data-placement="top" title="什么才是优秀的程序代码">Next Post &rarr;</a></li></ul><div id="gitcomments"></div></div><div class="col-lg-2 col-lg-offset-0 visible-lg-block sidebar-container catalog-container"><div class="side-catalog"><hr class="hidden-sm hidden-xs"><h5><a class="catalog-toggle" href="#">CATALOG</a></h5><ul class="catalog-body"></ul></div></div><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1 sidebar-container"></div></div></div></article><script>var md5 = function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){var I,d,F,H,x;F=(G&2147483648);H=(k&2147483648);I=(G&1073741824);d=(k&1073741824);x=(G&1073741823)+(k&1073741823);if(I&d){return(x^2147483648^F^H)}if(I|d){if(x&1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&F)|((~d)&k)}function q(d,F,k){return(d&k)|(F&(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)*16;var aa=Array(I-1);var d=0;var H=0;while(H<F){Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=(aa[Z]| (G.charCodeAt(H)<<d));H++}Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=aa[Z]|(128<<d);aa[I-2]=F<<3;aa[I-1]=F>>>29;return aa}function B(x){var k="",F="",G,d;for(d=0;d<=3;d++){G=(x>>>(d*8))&255;F="0"+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/rn/g,"n");var d="";for(var F=0;F<k.length;F++){var x=k.charCodeAt(F);if(x<128){d+=String.fromCharCode(x)}else{if((x>127)&&(x<2048)){d+=String.fromCharCode((x>>6)|192);d+=String.fromCharCode((x&63)|128)}else{d+=String.fromCharCode((x>>12)|224);d+=String.fromCharCode(((x>>6)&63)|128);d+=String.fromCharCode((x&63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P<C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Web" title="Web">Web</a>
+                        
+                    </div>
+                    <h1>浅谈函数式编程柯里化</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Ivan on
+                        2017-02-11
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>百度百科里对柯里化的定义是</p>
+<blockquote>
+<p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家 Haskell Curry 命名的，尽管它是 Moses Schnfinkel 和 Gottlob Frege 发明的。</p>
+</blockquote>
+<p>简直看不懂哦，Talk is Cheap，我们拿一个简单的haskell程序说明什么叫</p>
+<h2 id="自动柯里化"><a href="#自动柯里化" class="headerlink" title="自动柯里化"></a>自动柯里化</h2><p>两数相加，返回结果：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fun add x y = x + y</div></pre></td></tr></table></figure>
+<p>这是一个典型的柯里化的版本，当我输入 <code>(add 1) 2</code> 时与<code>add 1 2</code> 的返回结果一模一样，都是3</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Prelude</span>&gt; (add <span class="number">1</span>) <span class="number">2</span></div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure>
+<p>但是，换个角度上讲，我明明设置了两个“变量”，在haskell里却把它们的结果又封装成了一个函数，这就是haskell的强大特性：自动柯里化，haskell全部帮你自动处理了。</p>
+<p>简单来说，柯里化指的是函数里只接收一个余下的参数，再调用原函数，返回出相应的结果。</p>
+<p>而同样的，没有柯里化的普通版本却是这样的：</p>
+<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">fun</span> add(x, y) = x + y</div></pre></td></tr></table></figure>
+<p>这个版本里，只能通过<code>add(1,2)</code>进行相加操作。</p>
+<p>柯里化实际上是将高阶函数进行降阶处理，没理解？接着看~ </p>
+<h2 id="JavaScript的柯里化"><a href="#JavaScript的柯里化" class="headerlink" title="JavaScript的柯里化"></a>JavaScript的柯里化</h2><p>JavaScript存在<strong>闭包</strong>的特性，能够很好的为我们将函数柯里化，但是很可惜JavaScript不支持自动柯里化，这意味着，我们要自己写柯里化的过程，不过还好，这能有效的让我们理解，到底什么是柯里化。</p>
+<p>同样的，还是那个add的简单函数，用JavaScript实现如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(y===<span class="literal">undefined</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="function">(<span class="params">z</span>) =&gt;</span> x + z;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">return</span> x+y;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>测试一下！通过执行<code>add(1)(2)</code>，果然返回了<code>3</code>，是的，这是一个手动构造柯里化函数的过程。对于大多数函数，我们有通用的柯里化方法：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> fixedArgs = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>);</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    args = fixedArgs.concat([].slice.call(<span class="built_in">arguments</span>))</div><div class="line">    <span class="keyword">return</span> func.apply(<span class="literal">null</span>, args);</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>也就是说，对于<code>add</code>函数来说，我们用一个函数生成了另一个范围更小的函数，一层接一层的解决问题。这符合函数式编程的思想，就是我们更关注<strong>函数</strong>与<strong>函数</strong>之间的关系，而非状态本身，更在乎局部而非整体。</p>
+<p>这个例子体现不出这种思想的精妙之处，那么我们再举一个例子🌰</p>
+<p>如果，我们想让一个已知的数组每个值都做加1操作，传统的方法该怎么做？</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+<span class="number">1</span>);</div></pre></td></tr></table></figure>
+<p>对吧？那么我们下面可以用柯里化的思想把这个问题实现：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">ar</span> =&gt;</span> ar.map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="number">1</span>);</div><div class="line">add([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</div></pre></td></tr></table></figure>
+<p>首先我们在<code>add</code>里定义了一个函数，并且传入参数为<code>ar</code>，<code>ar</code>进行<code>Array.prototype.map()</code>操作，对每一个数进行遍历，并且返回这个数字+1后的值给<code>ar</code>，这看起来挺玄乎的，但确实可行，我们只关心局部，请试图把<code>add</code>当做数学里中的函数去思考理解，或许会好懂的多。可是这只是方便了我们理解，那么到底有什么好处呢？</p>
+<p>再举一个例子🌰</p>
+<p>如果我们想写一个函数，用来对已知数组的已知量进行相加n的操作，怎么写？传统方法</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar= [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addToArray</span>(<span class="params">ar,n</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+n)</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log(addToArray(ar,<span class="number">1</span>));</div></pre></td></tr></table></figure>
+<p>但是，我们可以这样写：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">a</span> =&gt;</span> b =&gt; a+b;</div><div class="line"><span class="keyword">const</span> addToArray = <span class="function">(<span class="params">ar,n</span>) =&gt;</span> ar.map(add(n));</div><div class="line">addToArray([<span class="number">2</span>,<span class="number">3</span>],<span class="number">1</span>)</div></pre></td></tr></table></figure>
+<p>结果都一样，其实过程是不一样的，你可能真的憋不住了，到底有什么用呢？</p>
+<h1 id="柯里化的好处"><a href="#柯里化的好处" class="headerlink" title="柯里化的好处"></a>柯里化的好处</h1><p>就像上面的例子一样，你能看出不同吗？对，第一个的实质是新写了一个函数，对数组进行map操作，而第二个则是在直接在<code>map</code>里进行<code>add</code>操作，这很通用，一旦你写了很多类似于<code>add</code>的函数，就会方便起来，可以让我们方便的在<code>map</code>,<code>reduce</code>,<code>filter</code>里调用。</p>
+<ul>
+<li>能够进行延迟计算，就像add(1)(2)一样，1比2先传入，2就会被延迟计算，在特定的场景里，有一定的应用意义。</li>
+<li>当你发现你要调用一个函数，并且调用参数都是一样的情况下，这个参数就可以被柯里化，以便更好的完成任务。</li>
+<li>优雅的写法，允许你写出来的代码更干净、更有表达力。</li>
+</ul>
+<p>虽然柯里化在日常应用不多，但仍然是一个不可不了解的好概念。</p>
+<h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><p><a href="https://cnodejs.org/topic/56261a249b48ca9448b776c4" target="_blank" rel="external"> JavaScript柯里化</a></p>
+<p><a href="http://codekirei.com/posts/currying-with-arrow-functions/" target="_blank" rel="external">Currying and ES6 Arrow Functions</a></p>
+<p><a href="http://www.cnblogs.com/zztt/p/4142891.html" target="_blank" rel="external">浅析 JavaScript 中的 函数 currying 柯里化</a></p>
+<p><a href="https://www.youtube.com/watch?v=iZLP4qOwY8I" target="_blank" rel="external">Currying - Part 6 of Functional Programming in JavaScript(需梯子)</a></p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/02/17/utf8true/" data-toggle="tooltip" data-placement="top" title="揭秘utf8=✓背后的小秘密">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/02/08/awesome-code/" data-toggle="tooltip" data-placement="top" title="什么才是优秀的程序代码">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                 <div id="gitcomments"></div>
+
+                
+
+               
+
+            </div>
+    <!-- Side Catalog Container -->
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+                <!-- Friends Blog -->
+                
+
+
+            </div>
+
+        </div>
+    </div>
+</article>
+<script>
+var md5 = function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){var I,d,F,H,x;F=(G&2147483648);H=(k&2147483648);I=(G&1073741824);d=(k&1073741824);x=(G&1073741823)+(k&1073741823);if(I&d){return(x^2147483648^F^H)}if(I|d){if(x&1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&F)|((~d)&k)}function q(d,F,k){return(d&k)|(F&(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)*16;var aa=Array(I-1);var d=0;var H=0;while(H<F){Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=(aa[Z]| (G.charCodeAt(H)<<d));H++}Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=aa[Z]|(128<<d);aa[I-2]=F<<3;aa[I-1]=F>>>29;return aa}function B(x){var k="",F="",G,d;for(d=0;d<=3;d++){G=(x>>>(d*8))&255;F="0"+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/rn/g,"n");var d="";for(var F=0;F<k.length;F++){var x=k.charCodeAt(F);if(x<128){d+=String.fromCharCode(x)}else{if((x>127)&&(x<2048)){d+=String.fromCharCode((x>>6)|192);d+=String.fromCharCode((x&63)|128)}else{d+=String.fromCharCode((x>>12)|224);d+=String.fromCharCode(((x>>6)&63)|128);d+=String.fromCharCode((x&63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P<C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};
 
 var gitment = new Gitment({
   id: md5(location.href),
@@ -45,21 +297,37 @@ var gitment = new Gitment({
     client_secret: '72d853a4534da2a5896129a9c9f4cb4c85cab387',
   },
 })
-gitment.render('gitcomments')</script><script>function async(u, c) {
+gitment.render('gitcomments')
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
       var d = document, t = 'script',
           o = d.createElement(t),
           s = d.getElementsByTagName(t)[0];
       o.src = u;
       if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
       s.parentNode.insertBefore(o, s);
-    }</script><script>async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
         anchors.options = {
           visible: 'always',
           placement: 'right',
           icon: '#'
         };
         anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
-    })</script><style>/* place left on bigger screen */
+    })
+</script>
+
+<style>
+    /* place left on bigger screen */
     @media all and (min-width: 800px) {
         .anchorjs-link{
             position: absolute;
@@ -67,14 +335,125 @@ gitment.render('gitcomments')</script><script>function async(u, c) {
             font-size: 1.1em;
             margin-top : -0.1em;
         }
-    }</style><footer><div class="container"><div class="row"><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><ul class="list-inline text-center"><li><a href="/feed.xml"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-rss fa-stack-1x fa-inverse"></i></span></a></li><li><a target="_blank" href="https://www.zhihu.com/people/yfgeek"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-stack-1x fa-inverse">知</i></span></a></li><li><a target="_blank" href="http://weibo.com/yfss"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-weibo fa-stack-1x fa-inverse"></i></span></a></li><li><a target="_blank" href="https://github.com/yfgeek"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i> <i class="fa fa-github fa-stack-1x fa-inverse"></i></span></a></li></ul><p class="copyright text-muted">Copyright &copy; Ivan&#39;s Blog 2018<br>Theme inspired by Hux <span style="display: inline-block; margin: 0 5px;"><i class="fa fa-heart"></i> </span>Proudly powered by Hexo</p></div></div></div></footer><script src="/js/jquery.min.js"></script><script src="/js/bootstrap.min.js"></script><script src="/js/hux-blog.min.js"></script><script>function async(u, c) {
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/yfss">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Ivan&#39;s Blog 2018
+                    <br>
+                    Theme inspired by Hux
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    Proudly powered by Hexo
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
       var d = document, t = 'script',
           o = d.createElement(t),
           s = d.getElementsByTagName(t)[0];
       o.src = u;
       if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
       s.parentNode.insertBefore(o, s);
-    }</script><script>// only load tagcloud.js in tag.html
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
     if($('#tag_cloud').length !== 0){
         async("http://www.yfgeek.com/js/jquery.tagcloud.js",function(){
             $.fn.tagcloud.defaults = {
@@ -83,10 +462,29 @@ gitment.render('gitcomments')</script><script>function async(u, c) {
             };
             $('#tag_cloud a').tagcloud();
         })
-    }</script><script>async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
         var $nav = document.querySelector("nav");
         if($nav) FastClick.attach($nav);
-    })</script><script type="text/javascript">function generateCatalog (selector) {
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+<script type="text/javascript">
+    function generateCatalog (selector) {
         var P = $('div.post-container'),a,n,t,l,i,c;
         a = P.find('h1,h2,h3,h4,h5,h6');
         a.each(function () {
@@ -126,7 +524,11 @@ gitment.render('gitcomments')</script><script>function async(u, c) {
             scrollChange: null,
             padding: 80
         });
-    });</script><script>function addCount (Counter) {
+    });
+</script>
+<!--page counter part-->
+<script>
+function addCount (Counter) {
         url=$('.article-date').attr('href').trim();
         title = $('.article-title').text().trim();
         var query=new AV.Query(Counter);
@@ -191,4 +593,16 @@ $(function(){
             }
             }
         )
-        });</script><script></script></body></html>
+        });
+</script>
+
+
+<!--page counter part-->
+<script>
+</script>
+
+
+
+</body>
+
+</html>

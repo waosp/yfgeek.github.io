@@ -8,7 +8,7 @@ permalink: ios-hook
 
 # 前言
 
-微信抢红包、修改定位、语音转发，很火，自己足不出户可以走遍天下，这很酷。最近研究了iOS的hook技术，发现门道不少，特意写个纪实blog，本文非教程，部分内容可能看不懂
+微信抢红包、修改定位、语音转发，很火，自己足不出户可以走遍天下，这很酷。最近研究了iOS的hook技术，发现门道不少，特意写个纪实blog，本文非教程，本文以``微信``为例，部分内容可能看不懂。
 
 # 下载APP
 
@@ -229,7 +229,7 @@ Tweak.xm
 ```objective-c
 #import <CoreLocation/CoreLocation.h>
 
-%hook LocationTracker
+%hook locationManager
 -(CLLocationCoordinate2D) coordinate{
   CLLocationCoordinate2D oldCoordinate = %orig;
   oldCoordinate.latitude = 39.0010750000; 

@@ -16,7 +16,7 @@ iOS 12 中，最大的更新莫过于**捷径**（Workflow）可以和Siri产生
 
 通过Hey Siri，实现实时重新构建Travis CI中的应用，如图。
 
-![](/content/images/ios-workflow-api/app/6.jpg)
+![](/content/images/ios-workflow-api/app/06.jpg)
 
 # Travis CI API
 
@@ -66,13 +66,13 @@ Travis CI API其实很简单，只需要拿着自己的`token`，就可以进行
 
 第二步，搜索部件进行创建
 
-![](/content/images/ios-workflow-api/app/1.jpg)
+![](/content/images/ios-workflow-api/app/01.jpg)
 
-![](/content/images/ios-workflow-api/app/2.jpg)
+![](/content/images/ios-workflow-api/app/02.jpg)
 
-![](/content/images/ios-workflow-api/app/3.jpg)
+![](/content/images/ios-workflow-api/app/03.jpg)
 
-![](/content/images/ios-workflow-api/app/4.jpg)
+![](/content/images/ios-workflow-api/app/04.jpg)
 
 最后点击执行，测试一下，就可以用手机发送包含http headers的POST请求了。
 
@@ -80,11 +80,11 @@ Travis CI API其实很简单，只需要拿着自己的`token`，就可以进行
 
 设置Siri很简单，点击右上角的按钮，点击“Siri指令”
 
-![](/content/images/ios-workflow-api/app/5.jpg)
+![](/content/images/ios-workflow-api/app/05.jpg)
 
 测试一下
 
-![](/content/images/ios-workflow-api/app/6.jpg)
+![](/content/images/ios-workflow-api/app/06.jpg)
 
 查看一下Travis CI，重新部署成功
 

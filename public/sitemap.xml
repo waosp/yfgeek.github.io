@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://www.yfgeek.com/2018/10/10/dokku/</loc>
+    
+    <lastmod>2018-10-10T07:20:12.551Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>http://www.yfgeek.com/2018/09/25/ios-workflow-api/</loc>
     
-    <lastmod>2018-09-25T07:20:33.959Z</lastmod>
+    <lastmod>2018-09-25T13:17:26.836Z</lastmod>
     
   </url>
   
@@ -163,7 +170,7 @@
   </url>
   
   <url>
-    <loc>http://www.yfgeek.com/2017/08/18/%E8%AE%B0%E4%B8%80%E6%AC%A1Mysql%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E5%8F%8A%E4%BF%AE%E5%A4%8D%E7%BB%8F%E5%8E%86/</loc>
+    <loc>http://www.yfgeek.com/about/scripts/main.js</loc>
     
     <lastmod>2017-10-26T12:59:55.528Z</lastmod>
     
@@ -184,7 +191,7 @@
   </url>
   
   <url>
-    <loc>http://www.yfgeek.com/about/scripts/main.js</loc>
+    <loc>http://www.yfgeek.com/2017/08/18/%E8%AE%B0%E4%B8%80%E6%AC%A1Mysql%E6%97%A0%E6%B3%95%E5%90%AF%E5%8A%A8%E5%8F%8A%E4%BF%AE%E5%A4%8D%E7%BB%8F%E5%8E%86/</loc>
     
     <lastmod>2017-10-26T12:59:55.528Z</lastmod>
     

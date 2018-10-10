@@ -5,7 +5,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://www.yfgeek.com/"/>
-  <updated>2018-09-25T07:20:33.959Z</updated>
+  <updated>2018-10-10T07:20:12.551Z</updated>
   <id>http://www.yfgeek.com/</id>
   
   <author>
@@ -16,17 +16,230 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>利用Dokku搭建自己的PaaS云服务</title>
+    <link href="http://www.yfgeek.com/2018/10/10/dokku/"/>
+    <id>http://www.yfgeek.com/2018/10/10/dokku/</id>
+    <published>2018-10-10T13:54:16.000Z</published>
+    <updated>2018-10-10T07:20:12.551Z</updated>
+    
+    <content type="html"><![CDATA[<p>自从几年前用过各种云平台的部署方式（App Engine，云应用引擎），就感觉再也回不去了。每次用到传统的部署方式，都感觉这是上个世纪的感觉，可是痛点就在于，不管是阿里云、百度云、腾讯云，各种云平台的云应用引擎，早就开始逐渐的由免费转向收费，虽然价格不高，但是总感觉受制于人， 而且不同平台不同标准，各种平台的云服务让你越来越上瘾。</p>
+<p>很早听<a href="https://blog.daohanchong.com/#blog" target="_blank" rel="external">@WildCat</a>大佬说过，可以自己搭建自己的PaaS平台（支持Java、Python、Ruby、PHP、Node、Go等），由于之前手上的服务器空间有限，一直没有试过，利用闲暇时间，买了台新的服务器，动手尝试了一下，果然不错。</p>
+<p><img src="https://avatars1.githubusercontent.com/u/13455795?s=400&amp;v=4" alt=""></p>
+<p>先简单说一下App Engine，各种App Engine最大的优点就是部署方便成本低，做为开发者，不需要管运行环境如何，只需要写好相关的配置文件，用git的方式，将代码上传到服务器上，服务器将代码放在docker容器内运行，服务器实现自动化部署。</p>
+<p>至于配置安装过程很简单，按照<a href="http://dokku.viewdocs.io/dokku/getting-started/installation/" target="_blank" rel="external">官网英文文档</a>，一步一步来，问题不大，下面描述一下过程。</p>
+<h1 id="环境"><a href="#环境" class="headerlink" title="环境"></a>环境</h1><p>官网中要求，要安装dokku，需要：</p>
+<ul>
+<li>全新安装的Ubuntu 16.04 x64, Ubuntu 14.04 x64, Debian 8.2 x64 or CentOS 7 x64 (不建议)</li>
+<li>至少1GB内存 （如果不足，官网也给出了解决方法）</li>
+</ul>
+<p>之前尝试使用过Ubuntu18版本安装，安装未遂，后来老老实实的走官网的版本要求，一次性成功。</p>
+<p>我是Centos的死粉，但是官网中声明，如果使用centos系统，将无法使用网页配置（可以使用cli进行配置）。</p>
+<p>我的安装环境：Ubuntu 16.04 x64，内存1GB。</p>
+<h1 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h1><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line">wget https://raw.githubusercontent.com/dokku/dokku/v0.12.13/bootstrap.sh;</div><div class="line">sudo DOKKU_TAG=v0.12.13 bash bootstrap.sh</div></pre></td></tr></table></figure>
+<p>在服务器上执行上述两句，服务器会用bash脚本自动安装，速度有点慢，如果没有任何报错，就操作完成了。</p>
+<h1 id="设置主域名-amp-子域名"><a href="#设置主域名-amp-子域名" class="headerlink" title="设置主域名&amp;子域名"></a>设置主域名&amp;子域名</h1><p>dokku支持子域名解析，这很帅气，我们可以用泛解析的方式，将IP都指向一个域名下。</p>
+<p>举个例子，如果有个web 1，命名为web1，我们可以在git push程序后，自动部署并解析到你的域名下</p>
+<p><code>web1.xxx.com</code>，这种思路很适合做小的prototype或者demo。当然，如果你想设置单独的域名，我们可以使用<code>dokku domains</code>命令进行设置，<a href="http://dokku.viewdocs.io/dokku~v0.7.2/configuration/domains/" target="_blank" rel="external">参考</a>。</p>
+<h2 id="设置DNS解析"><a href="#设置DNS解析" class="headerlink" title="设置DNS解析"></a>设置DNS解析</h2><p>进入你的域名DNS管理网站，如阿里云、腾讯云、dnspod、cloudflare。本文以cloudflare为例。</p>
+<p>添加A记录，Name 填写 *.lab IP 地址填写为你的服务器地址。</p>
+<p>添加A记录，Name 填写 lab IP 地址填写为你的服务器地址。</p>
+<h2 id="进入Dokku-Web配置页面设置"><a href="#进入Dokku-Web配置页面设置" class="headerlink" title="进入Dokku Web配置页面设置"></a>进入Dokku Web配置页面设置</h2><p>浏览器打开服务器IP地址，端口80，第一次配置会进入配置页面。</p>
+<p>Public Key填写为你要上传git的时提交的公钥，位置<code>~\.ssh\id_rsa.pub</code>，如果没有，就用<code>ssh-keygen</code>生成一个并且放到<code>~\.ssh</code>目录下即可。</p>
+<p>在配置页面中Hostname填写为服务器主地址，我的填写为 <code>lab.yfgeek.com</code></p>
+<p>同时勾选<code>Use virtualhost naming for apps</code>，允许使用子域名。</p>
+<p>点击完成安装，就完成配置了。</p>
+<h2 id="部署前准备"><a href="#部署前准备" class="headerlink" title="部署前准备"></a>部署前准备</h2><h2 id="语言支持"><a href="#语言支持" class="headerlink" title="语言支持"></a>语言支持</h2><p>实际上，dokku是heroku的最小化版本，他们之间的例子是互通的，因此可以访问：</p>
+<p><a href="https://github.com/heroku" target="_blank" rel="external">https://github.com/heroku</a></p>
+<p>官方给了很多例子，搜搜demo或者对应语言，如java，找到相应的例子</p>
+<p>node: <a href="https://github.com/heroku/node-js-sample" target="_blank" rel="external">node-js-sample</a></p>
+<p>ruby:<a href="https://github.com/heroku/ruby-sample" target="_blank" rel="external">ruby-sample</a></p>
+<p>rails:<a href="https://github.com/heroku/ruby-sample" target="_blank" rel="external">ruby-sample</a></p>
+<p>java:<a href="https://github.com/heroku/ruby-rails-sample" target="_blank" rel="external">ruby-rails-sample</a></p>
+<p>python:<a href="https://github.com/heroku/java-sample" target="_blank" rel="external">java-sample</a></p>
+<p>spring:<a href="https://github.com/heroku/java-spring-sample" target="_blank" rel="external">java-spring-sample</a></p>
+<p>django:<a href="https://github.com/heroku/python-django-sample" target="_blank" rel="external">python-django-sample</a></p>
+<p>scala:<a href="https://github.com/heroku/scala-sample" target="_blank" rel="external">scala-sample</a></p>
+<p>php:<a href="https://github.com/heroku/php-getting-started" target="_blank" rel="external">php-getting-started</a></p>
+<p>php:<a href="https://github.com/heroku/facebook-template-php" target="_blank" rel="external">facebook-template-php</a></p>
+<p>go-kafaka:<a href="https://github.com/heroku/heroku-kafka-demo-go" target="_blank" rel="external">heroku-kafka-demo-go</a></p>
+<p>。。。</p>
+<h2 id="数据库支持"><a href="#数据库支持" class="headerlink" title="数据库支持"></a>数据库支持</h2><p>根据<a href="http://dokku.viewdocs.io/dokku/community/plugins/#official-plugins-beta" target="_blank" rel="external">官网</a>写的支持的数据库，可以有以下列表，数据库以插件的形式安装。</p>
+<h2 id="关系型数据库"><a href="#关系型数据库" class="headerlink" title="关系型数据库"></a>关系型数据库</h2><table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Author</th>
+<th>Compatibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Kloadut/dokku-md-plugin" target="_blank" rel="external">MariaDB</a></td>
+<td><a href="https://github.com/Kloadut" target="_blank" rel="external">Kloadut</a></td>
+<td>0.3.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ohardy/dokku-mariadb" target="_blank" rel="external">MariaDB (single container)</a></td>
+<td><a href="https://github.com/ohardy" target="_blank" rel="external">ohardy</a></td>
+<td>0.3.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/krisrang/dokku-mariadb" target="_blank" rel="external">MariaDB (single container)</a></td>
+<td><a href="https://github.com/krisrang" target="_blank" rel="external">krisrang</a></td>
+<td>0.3.26+</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jlachowski/dokku-pg-plugin" target="_blank" rel="external">PostgreSQL</a></td>
+<td><a href="https://github.com/jlachowski" target="_blank" rel="external">jlachowski</a></td>
+<td>0.3.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ohardy/dokku-psql" target="_blank" rel="external">PostgreSQL (single container)</a></td>
+<td><a href="https://github.com/ohardy" target="_blank" rel="external">ohardy</a></td>
+<td>0.3.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Flink/dokku-psql-single-container" target="_blank" rel="external">PostgreSQL (single container)</a></td>
+<td><a href="https://github.com/Flink" target="_blank" rel="external">Flink</a></td>
+<td>0.3.26+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h2><table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Author</th>
+<th>Compatibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/Aluxian/dokku-nginx-cache" target="_blank" rel="external">Nginx Cache</a></td>
+<td><a href="https://github.com/Aluxian" target="_blank" rel="external">Aluxian</a></td>
+<td>0.5.0+</td>
+</tr>
+<tr>
+<td><a href="https://github.com/ohardy/dokku-redis" target="_blank" rel="external">Redis (single container)</a></td>
+<td><a href="https://github.com/ohardy" target="_blank" rel="external">ohardy</a></td>
+<td>0.3.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/Zenedith/dokku-varnish-plugin" target="_blank" rel="external">Varnish</a></td>
+<td><a href="https://github.com/Zenedith" target="_blank" rel="external">Zenedith</a></td>
+<td>Varnish cache between nginx and application with base configuration</td>
+</tr>
+</tbody>
+</table>
+<h2 id="队列"><a href="#队列" class="headerlink" title="队列"></a>队列</h2><table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Author</th>
+<th>Compatibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/jlachowski/dokku-rabbitmq-plugin" target="_blank" rel="external">RabbitMQ</a></td>
+<td><a href="https://github.com/jlachowski" target="_blank" rel="external">jlachowski</a></td>
+<td>0.3.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/jlachowski/dokku-rabbitmq-single-plugin" target="_blank" rel="external">RabbitMQ (single container)</a></td>
+<td><a href="https://github.com/jlachowski" target="_blank" rel="external">jlachowski</a></td>
+<td>0.3.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/cu12/dokku-elasticmq" target="_blank" rel="external">ElasticMQ (SQS compatible)</a></td>
+<td><a href="https://github.com/cu12" target="_blank" rel="external">cu12</a></td>
+<td>0.5.0+</td>
+</tr>
+<tr>
+<td><a href="https://github.com/SpinifexGroup/dokku-vernemq" target="_blank" rel="external">VerneMQ (MQTT Broker)</a></td>
+<td><a href="https://github.com/mrname" target="_blank" rel="external">mrname</a></td>
+<td>0.4.0+</td>
+</tr>
+</tbody>
+</table>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><table>
+<thead>
+<tr>
+<th>Plugin</th>
+<th>Author</th>
+<th>Compatibility</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://github.com/basgys/dokku-etcd" target="_blank" rel="external">etcd</a></td>
+<td><a href="https://github.com/basgys" target="_blank" rel="external">basgys</a></td>
+<td>0.4.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/cu12/dokku-fake_sns" target="_blank" rel="external">FakeSNS</a></td>
+<td><a href="https://github.com/cu12" target="_blank" rel="external">cu12</a></td>
+<td>0.5.0+</td>
+</tr>
+<tr>
+<td><a href="https://github.com/basgys/dokku-influxdb" target="_blank" rel="external">InfluxDB</a></td>
+<td><a href="https://github.com/basgys" target="_blank" rel="external">basgys</a></td>
+<td>0.4.x</td>
+</tr>
+<tr>
+<td><a href="https://github.com/stuartpb/dokku-rethinkdb-plugin" target="_blank" rel="external">RethinkDB</a></td>
+<td><a href="https://github.com/stuartpb" target="_blank" rel="external">stuartpb</a></td>
+<td>0.3.x</td>
+</tr>
+</tbody>
+</table>
+<h1 id="部署第一个测试应用"><a href="#部署第一个测试应用" class="headerlink" title="部署第一个测试应用"></a>部署第一个测试应用</h1><h2 id="创建APP"><a href="#创建APP" class="headerlink" title="创建APP"></a>创建APP</h2><p>登录服务器，执行dokku apps:create [name]创建应用</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dokku apps:create ruby-rails-sample</div></pre></td></tr></table></figure>
+<h2 id="安装数据库插件"><a href="#安装数据库插件" class="headerlink" title="安装数据库插件"></a>安装数据库插件</h2><p>本文以安装PostgreSQL为例</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">sudo dokku plugin:install https://github.com/dokku/dokku-postgres.git</div></pre></td></tr></table></figure>
+<h2 id="创建应用的数据库"><a href="#创建应用的数据库" class="headerlink" title="创建应用的数据库"></a>创建应用的数据库</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dokku postgres:create rails-database</div></pre></td></tr></table></figure>
+<h2 id="关联数据库与APP"><a href="#关联数据库与APP" class="headerlink" title="关联数据库与APP"></a>关联数据库与APP</h2><p>通过在代码后端设置读取<code>POSTGRES_URL</code>环境变量，连接数据库。</p>
+<p>与此同时，我们需要将APP与数据库关联。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">dokku postgres:link rails-database ruby-rails-sample</div></pre></td></tr></table></figure>
+<h2 id="部署App"><a href="#部署App" class="headerlink" title="部署App"></a>部署App</h2><p>下载Sample代码，后将代码传到服务器上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">git clone git@github.com:heroku/ruby-rails-sample.git</div><div class="line">git remote add dokku dokku@lab.yfgeek.com:ruby-rails-sample</div><div class="line">git push dokku master</div></pre></td></tr></table></figure>
+<p>值得一提的是，用户名必须是dokku，否则会出现问题。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div><div class="line">71</div><div class="line">72</div><div class="line">73</div><div class="line">74</div><div class="line">75</div><div class="line">76</div><div class="line">77</div><div class="line">78</div><div class="line">79</div><div class="line">80</div><div class="line">81</div><div class="line">82</div><div class="line">83</div><div class="line">84</div><div class="line">85</div><div class="line">86</div><div class="line">87</div><div class="line">88</div><div class="line">89</div><div class="line">90</div><div class="line">91</div><div class="line">92</div><div class="line">93</div><div class="line">94</div><div class="line">95</div><div class="line">96</div><div class="line">97</div><div class="line">98</div><div class="line">99</div><div class="line">100</div><div class="line">101</div><div class="line">102</div><div class="line">103</div><div class="line">104</div><div class="line">105</div><div class="line">106</div><div class="line">107</div><div class="line">108</div><div class="line">109</div><div class="line">110</div><div class="line">111</div><div class="line">112</div><div class="line">113</div><div class="line">114</div><div class="line">115</div><div class="line">116</div><div class="line">117</div><div class="line">118</div><div class="line">119</div><div class="line">120</div><div class="line">121</div><div class="line">122</div><div class="line">123</div><div class="line">124</div><div class="line">125</div><div class="line">126</div><div class="line">127</div><div class="line">128</div><div class="line">129</div><div class="line">130</div><div class="line">131</div><div class="line">132</div><div class="line">133</div><div class="line">134</div><div class="line">135</div><div class="line">136</div><div class="line">137</div><div class="line">138</div><div class="line">139</div><div class="line">140</div><div class="line">141</div><div class="line">142</div><div class="line">143</div><div class="line">144</div><div class="line">145</div><div class="line">146</div><div class="line">147</div><div class="line">148</div><div class="line">149</div><div class="line">150</div><div class="line">151</div><div class="line">152</div><div class="line">153</div><div class="line">154</div><div class="line">155</div><div class="line">156</div><div class="line">157</div><div class="line">158</div><div class="line">159</div><div class="line">160</div><div class="line">161</div><div class="line">162</div><div class="line">163</div><div class="line">164</div><div class="line">165</div><div class="line">166</div><div class="line">167</div><div class="line">168</div><div class="line">169</div><div class="line">170</div><div class="line">171</div></pre></td><td class="code"><pre><div class="line">Counting objects: 236, done.</div><div class="line">Delta compression using up to 4 threads.</div><div class="line">Compressing objects: 100% (135/135), done.</div><div class="line">Writing objects: 100% (236/236), 41.85 KiB | 10.46 MiB/s, done.</div><div class="line">Total 236 (delta 85), reused 236 (delta 85)</div><div class="line">-----&gt; Cleaning up...</div><div class="line">-----&gt; Building ruby-rails-sample from herokuish...</div><div class="line">-----&gt; Setting config vars</div><div class="line">       CURL_CONNECT_TIMEOUT:  90</div><div class="line">-----&gt; Setting config vars</div><div class="line">       CURL_TIMEOUT:  600</div><div class="line">-----&gt; Adding BUILD_ENV to build environment...</div><div class="line">-----&gt; Ruby app detected</div><div class="line">-----&gt; Compiling Ruby/Rails</div><div class="line">-----&gt; Using Ruby version: ruby-2.2.1</div><div class="line">-----&gt; Installing dependencies using bundler 1.15.2</div><div class="line">       Running: bundle install --without development:<span class="built_in">test</span> --path vendor/bundle --binstubs vendor/bundle/bin -j4 --deployment</div><div class="line">       Fetching gem metadata from https://rubygems.org/..........</div><div class="line">       Fetching version metadata from https://rubygems.org/..</div><div class="line">       Fetching dependency metadata from https://rubygems.org/.</div><div class="line">       Using rake 10.4.2</div><div class="line">       Fetching i18n 0.7.0</div><div class="line">       Fetching json 1.8.2</div><div class="line">       Fetching minitest 5.5.1</div><div class="line">       Installing i18n 0.7.0</div><div class="line">       Installing minitest 5.5.1</div><div class="line">       Installing json 1.8.2 with native extensions</div><div class="line">       Fetching thread_safe 0.3.5</div><div class="line">       Installing thread_safe 0.3.5</div><div class="line">       Fetching builder 3.2.2</div><div class="line">       Installing builder 3.2.2</div><div class="line">       Fetching erubis 2.7.0</div><div class="line">       Fetching mini_portile 0.6.2</div><div class="line">       Installing mini_portile 0.6.2</div><div class="line">       Fetching rack 1.6.0</div><div class="line">       Installing erubis 2.7.0</div><div class="line">       Fetching mime-types 2.4.3</div><div class="line">       Installing mime-types 2.4.3</div><div class="line">       Fetching arel 6.0.0</div><div class="line">       Installing rack 1.6.0</div><div class="line">       Installing arel 6.0.0</div><div class="line">       Using bundler 1.15.2</div><div class="line">       Fetching coffee-script-source 1.9.1</div><div class="line">       Fetching execjs 2.5.2</div><div class="line">       Installing execjs 2.5.2</div><div class="line">       Installing coffee-script-source 1.9.1</div><div class="line">       Fetching thor 0.19.1</div><div class="line">       Fetching hike 1.2.3</div><div class="line">       Installing thor 0.19.1</div><div class="line">       Installing hike 1.2.3</div><div class="line">       Fetching multi_json 1.11.0</div><div class="line">       Installing multi_json 1.11.0</div><div class="line">       Fetching pg 0.18.1</div><div class="line">       Fetching tilt 1.4.1</div><div class="line">       Installing tilt 1.4.1</div><div class="line">       Fetching rails_serve_static_assets 0.0.4</div><div class="line">       Installing pg 0.18.1 with native extensions</div><div class="line">       Installing rails_serve_static_assets 0.0.4</div><div class="line">       Fetching rails_stdout_logging 0.0.3</div><div class="line">       Installing rails_stdout_logging 0.0.3</div><div class="line">       Using rdoc 4.2.0</div><div class="line">       Fetching sass 3.4.13</div><div class="line">       Installing sass 3.4.13</div><div class="line">       Fetching tzinfo 1.2.2</div><div class="line">       Installing tzinfo 1.2.2</div><div class="line">       Fetching nokogiri 1.6.6.2</div><div class="line">       Installing nokogiri 1.6.6.2 with native extensions</div><div class="line">       Fetching mail 2.6.3</div><div class="line">       Installing mail 2.6.3</div><div class="line">       Fetching rack-test 0.6.3</div><div class="line">       Installing rack-test 0.6.3</div><div class="line">       Fetching puma 2.11.1</div><div class="line">       Installing puma 2.11.1 with native extensions</div><div class="line">       Fetching coffee-script 2.4.1</div><div class="line">       Installing coffee-script 2.4.1</div><div class="line">       Fetching sprockets 2.12.3</div><div class="line">       Installing sprockets 2.12.3</div><div class="line">       Fetching rails_12factor 0.0.3</div><div class="line">       Installing rails_12factor 0.0.3</div><div class="line">       Fetching loofah 2.0.1</div><div class="line">       Installing loofah 2.0.1</div><div class="line">       Fetching rails-html-sanitizer 1.0.2</div><div class="line">       Installing rails-html-sanitizer 1.0.2</div><div class="line">       Fetching activesupport 4.2.1</div><div class="line">       Fetching sdoc 0.4.1</div><div class="line">       Fetching uglifier 2.7.1</div><div class="line">       Installing uglifier 2.7.1</div><div class="line">       Installing sdoc 0.4.1</div><div class="line">       Installing activesupport 4.2.1</div><div class="line">       Fetching rails-deprecated_sanitizer 1.0.3</div><div class="line">       Fetching globalid 0.3.5</div><div class="line">       Fetching activemodel 4.2.1</div><div class="line">       Installing rails-deprecated_sanitizer 1.0.3</div><div class="line">       Installing activemodel 4.2.1</div><div class="line">       Fetching jbuilder 2.2.12</div><div class="line">       Fetching rails-dom-testing 1.0.6</div><div class="line">       Installing globalid 0.3.5</div><div class="line">       Fetching activerecord 4.2.1</div><div class="line">       Installing jbuilder 2.2.12</div><div class="line">       Installing rails-dom-testing 1.0.6</div><div class="line">       Fetching activejob 4.2.1</div><div class="line">       Fetching actionview 4.2.1</div><div class="line">       Installing activejob 4.2.1</div><div class="line">       Installing actionview 4.2.1</div><div class="line">       Fetching actionpack 4.2.1</div><div class="line">       Installing activerecord 4.2.1</div><div class="line">       Installing actionpack 4.2.1</div><div class="line">       Fetching actionmailer 4.2.1</div><div class="line">       Fetching railties 4.2.1</div><div class="line">       Fetching sprockets-rails 2.2.4</div><div class="line">       Installing actionmailer 4.2.1</div><div class="line">       Installing sprockets-rails 2.2.4</div><div class="line">       Installing railties 4.2.1</div><div class="line">       Fetching coffee-rails 4.1.0</div><div class="line">       Fetching jquery-rails 4.0.3</div><div class="line">       Fetching rails 4.2.1</div><div class="line">       Installing coffee-rails 4.1.0</div><div class="line">       Fetching sass-rails 5.0.3</div><div class="line">       Installing jquery-rails 4.0.3</div><div class="line">       Fetching turbolinks 2.5.3</div><div class="line">       Installing sass-rails 5.0.3</div><div class="line">       Installing turbolinks 2.5.3</div><div class="line">       Installing rails 4.2.1</div><div class="line">       Bundle complete! 13 Gemfile dependencies, 53 gems now installed.</div><div class="line">       Gems <span class="keyword">in</span> the groups development and <span class="built_in">test</span> were not installed.</div><div class="line">       Bundled gems are installed into ./vendor/bundle.</div><div class="line">       Bundle completed (47.15s)</div><div class="line">       Cleaning up the bundler cache.</div><div class="line">       The latest bundler is 1.17.0.pre.1, but you are currently running 1.15.2.</div><div class="line">       To update, run `gem install bundler --pre`</div><div class="line">-----&gt; Installing node-v8.10.0-linux-x64</div><div class="line">-----&gt; Detecting rake tasks</div><div class="line">-----&gt; Preparing app <span class="keyword">for</span> Rails asset pipeline</div><div class="line">       Running: rake assets:precompile</div><div class="line">       I, [2018-10-10T05:36:01.119423 <span class="comment">#1214]  INFO -- : Writing /tmp/build/public/assets/application-47fe71a3b34a93e1929c175b1755d405.js</span></div><div class="line">       I, [2018-10-10T05:36:01.144742 <span class="comment">#1214]  INFO -- : Writing /tmp/build/public/assets/application-c06dd6a542ea15147e6794e03643f87c.css</span></div><div class="line">       Asset precompilation completed (7.21s)</div><div class="line">       Cleaning assets</div><div class="line">       Running: rake assets:clean</div><div class="line">-----&gt; Detecting rails configuration</div><div class="line">-----&gt; Discovering process types</div><div class="line">       Procfile declares types -&gt; web</div><div class="line">-----&gt; Releasing ruby-rails-sample (dokku/ruby-rails-sample:latest)...</div><div class="line">-----&gt; Deploying ruby-rails-sample (dokku/ruby-rails-sample:latest)...</div><div class="line">-----&gt; Attempting to run scripts.dokku.predeploy from app.json (<span class="keyword">if</span> defined)</div><div class="line">-----&gt; App Procfile file found (/home/dokku/ruby-rails-sample/DOKKU_PROCFILE)</div><div class="line">-----&gt; DOKKU_SCALE file not found <span class="keyword">in</span> app image. Generating one based on Procfile...</div><div class="line">-----&gt; New DOKKU_SCALE file generated</div><div class="line">=====&gt; web=1</div><div class="line">-----&gt; Attempting pre-flight checks</div><div class="line">       For more efficient zero downtime deployments, create a file CHECKS.</div><div class="line">       See http://dokku.viewdocs.io/dokku/deployment/zero-downtime-deploys/ <span class="keyword">for</span> examples</div><div class="line">       CHECKS file not found <span class="keyword">in</span> container: Running simple container check...</div><div class="line">-----&gt; Waiting <span class="keyword">for</span> 10 seconds ...</div><div class="line">-----&gt; Default container check successful!</div><div class="line">-----&gt; Running post-deploy</div><div class="line">-----&gt; Creating new /home/dokku/ruby-rails-sample/VHOST...</div><div class="line">-----&gt; Setting config vars</div><div class="line">       DOKKU_PROXY_PORT:  80</div><div class="line">-----&gt; Setting config vars</div><div class="line">       DOKKU_PROXY_PORT_MAP:  http:80:5000</div><div class="line">-----&gt; Configuring ruby-rails-sample.lab.yfgeek.com...(using built-in template)</div><div class="line">-----&gt; Creating http nginx.conf</div><div class="line">-----&gt; Running nginx-pre-reload</div><div class="line">       Reloading nginx</div><div class="line">-----&gt; Setting config vars</div><div class="line">       DOKKU_APP_RESTORE:  1</div><div class="line">=====&gt; Renaming container (e38662846bcf) cranky_colden to ruby-rails-sample.web.1</div><div class="line">-----&gt; Attempting to run scripts.dokku.postdeploy from app.json (<span class="keyword">if</span> defined)</div><div class="line">=====&gt; Application deployed:</div><div class="line">       http://ruby-rails-sample.lab.yfgeek.com</div></pre></td></tr></table></figure>
+<p>如果代码有更新，只需要重新push，应用就会自动重新部署，一步到位。</p>
+<h2 id="结语"><a href="#结语" class="headerlink" title="结语"></a>结语</h2><p>既然回不去了，就不要回去了，使用Dokku这样的PaaS的部署方式，简单快捷，仿若又回到了几年前。</p>
+<p>Dokku美中不足的就是，没有Web界面，所有操作都需要用Cli来实现，这样的门槛，会让很多小白望而却步。很多云服务厂商都提供这样的方式，但是也会提供界面，不过没有web服务带来的好处就是，能最大限度的节省云服务器的资源，让低内存低配置的电脑也能勉强跑起来。</p>
+<p>以此类推，我们可以用这样的方法自动化部署更多的APP，同时也支持很多关系型、非关系型数据库，如Python、PHP、Java，轻松Git命令，后面的运维相关操作，根本不用你管，docker的方式，让我们更加便利的部署各种应用，更加安全，更加便捷可靠。</p>
+<p>本文demo地址：<a href="http://ruby-rails-sample.lab.yfgeek.com" target="_blank" rel="external">http://ruby-rails-sample.lab.yfgeek.com</a></p>
+<p>最后值得一提的是，官网的文档十分简明，提供了各种配置，本文介绍的比较具有局限性，建议到官网文档仔细拜读。</p>
+<p><img src="/content/images/dokku/1.png" alt=""></p>
+<p><a href="http://dokku.viewdocs.io/dokku~v0.7.2/getting-started/installation/" target="_blank" rel="external">http://dokku.viewdocs.io/dokku~v0.7.2/getting-started/installation/</a></p>
+]]></content>
+    
+    <summary type="html">
+    
+      &lt;p&gt;自从几年前用过各种云平台的部署方式（App Engine，云应用引擎），就感觉再也回不去了。每次用到传统的部署方式，都感觉这是上个世纪的感觉，可是痛点就在于，不管是阿里云、百度云、腾讯云，各种云平台的云应用引擎，早就开始逐渐的由免费转向收费，虽然价格不高，但是总感觉受制于人
+    
+    </summary>
+    
+      <category term="PaaS" scheme="http://www.yfgeek.com/categories/PaaS/"/>
+    
+    
+      <category term="PaaS" scheme="http://www.yfgeek.com/tags/PaaS/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Siri+Workflow(捷径)利用API实战——远程构建Travis CI</title>
     <link href="http://www.yfgeek.com/2018/09/25/ios-workflow-api/"/>
     <id>http://www.yfgeek.com/2018/09/25/ios-workflow-api/</id>
     <published>2018-09-25T05:00:53.000Z</published>
-    <updated>2018-09-25T07:20:33.959Z</updated>
+    <updated>2018-09-25T13:17:26.836Z</updated>
     
     <content type="html"><![CDATA[<p>iOS 12 中，最大的更新莫过于<strong>捷径</strong>（Workflow）可以和Siri产生互动。普通用户可能根本没有察觉到这个十分有用的自动化工具，实际上，早在iOS11时期，苹果收购了Workflow，很多用户就开始自行创建出很多有用的自动化脚本，很多用户都在<strong>闷声发大财</strong>（比如百度云链接提取、利用VIP视频网站免费看、修改微信运动步数、网易云音乐下载）。</p>
 <p>本文以“重新构建Travis CI中的项目”为例，介绍如何举一反三，利用开发者API创造自己的<strong>捷径工作流</strong>，同时利用Hey Siri，让生活更加科技感、酷酷的、便利化。</p>
 <p>鸣谢：@Echowxsy好友的Docker构建脚本及“删库跑路”脚本，对本文章的创作启发。</p>
 <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>通过Hey Siri，实现实时重新构建Travis CI中的应用，如图。</p>
-<p><img src="/content/images/ios-workflow-api/app/6.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/06.jpg" alt=""></p>
 <h1 id="Travis-CI-API"><a href="#Travis-CI-API" class="headerlink" title="Travis CI API"></a>Travis CI API</h1><p>其实Travis CI本身就是一个自动化构建工具，有很多种方法可以让他自动取构建，比如在设置中开启<code>Build pushed branches</code>，本文只是举个例子，利用Siri手动构建。</p>
 <p>首先，检查你使用的是org还是com版本的Travis CI。</p>
 <p>travis.org API:<a href="https://developer.travis-ci.org" target="_blank" rel="external">https://developer.travis-ci.org</a></p>
@@ -46,15 +259,15 @@
 <h1 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h1><p>创建Workflow的过程，需要自行研究，截图中每一个模块，都可以在下方搜索中搜索到。</p>
 <p>第一步，打开捷径</p>
 <p>第二步，搜索部件进行创建</p>
-<p><img src="/content/images/ios-workflow-api/app/1.jpg" alt=""></p>
-<p><img src="/content/images/ios-workflow-api/app/2.jpg" alt=""></p>
-<p><img src="/content/images/ios-workflow-api/app/3.jpg" alt=""></p>
-<p><img src="/content/images/ios-workflow-api/app/4.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/01.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/02.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/03.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/04.jpg" alt=""></p>
 <p>最后点击执行，测试一下，就可以用手机发送包含http headers的POST请求了。</p>
 <h1 id="Siri"><a href="#Siri" class="headerlink" title="Siri"></a>Siri</h1><p>设置Siri很简单，点击右上角的按钮，点击“Siri指令”</p>
-<p><img src="/content/images/ios-workflow-api/app/5.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/05.jpg" alt=""></p>
 <p>测试一下</p>
-<p><img src="/content/images/ios-workflow-api/app/6.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/06.jpg" alt=""></p>
 <p>查看一下Travis CI，重新部署成功</p>
 <p><img src="/content/images/ios-workflow-api/1.png" alt=""></p>
 <p>从此，我们就可以愉快的用Siri部(zhuang)署(bi)啦～</p>
@@ -1167,74 +1380,6 @@
     
       &lt;p&gt;你可能和我一样疑惑，为什么github等网站，在POST数据的时候，经常带有&lt;code&gt;utf8=✓&lt;/code&gt;字符，显然这种方式看起来很难以接受，因为Unicode编码错误的话会导致很多问题，毕竟用户的浏览器是不一样的。&lt;/p&gt;
 &lt;p&gt;为什么不用&lt;code&gt;utf8=t
-    
-    </summary>
-    
-      <category term="Web" scheme="http://www.yfgeek.com/categories/Web/"/>
-    
-    
-      <category term="Web" scheme="http://www.yfgeek.com/tags/Web/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>浅谈函数式编程柯里化</title>
-    <link href="http://www.yfgeek.com/2017/02/11/currying/"/>
-    <id>http://www.yfgeek.com/2017/02/11/currying/</id>
-    <published>2017-02-11T10:27:57.000Z</published>
-    <updated>2017-10-26T12:59:55.524Z</updated>
-    
-    <content type="html"><![CDATA[<p>百度百科里对柯里化的定义是</p>
-<blockquote>
-<p>在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher Strachey 以逻辑学家 Haskell Curry 命名的，尽管它是 Moses Schnfinkel 和 Gottlob Frege 发明的。</p>
-</blockquote>
-<p>简直看不懂哦，Talk is Cheap，我们拿一个简单的haskell程序说明什么叫</p>
-<h2 id="自动柯里化"><a href="#自动柯里化" class="headerlink" title="自动柯里化"></a>自动柯里化</h2><p>两数相加，返回结果：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">fun add x y = x + y</div></pre></td></tr></table></figure>
-<p>这是一个典型的柯里化的版本，当我输入 <code>(add 1) 2</code> 时与<code>add 1 2</code> 的返回结果一模一样，都是3</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="type">Prelude</span>&gt; (add <span class="number">1</span>) <span class="number">2</span></div><div class="line"><span class="number">3</span></div></pre></td></tr></table></figure>
-<p>但是，换个角度上讲，我明明设置了两个“变量”，在haskell里却把它们的结果又封装成了一个函数，这就是haskell的强大特性：自动柯里化，haskell全部帮你自动处理了。</p>
-<p>简单来说，柯里化指的是函数里只接收一个余下的参数，再调用原函数，返回出相应的结果。</p>
-<p>而同样的，没有柯里化的普通版本却是这样的：</p>
-<figure class="highlight haskell"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line"><span class="title">fun</span> add(x, y) = x + y</div></pre></td></tr></table></figure>
-<p>这个版本里，只能通过<code>add(1,2)</code>进行相加操作。</p>
-<p>柯里化实际上是将高阶函数进行降阶处理，没理解？接着看~ </p>
-<h2 id="JavaScript的柯里化"><a href="#JavaScript的柯里化" class="headerlink" title="JavaScript的柯里化"></a>JavaScript的柯里化</h2><p>JavaScript存在<strong>闭包</strong>的特性，能够很好的为我们将函数柯里化，但是很可惜JavaScript不支持自动柯里化，这意味着，我们要自己写柯里化的过程，不过还好，这能有效的让我们理解，到底什么是柯里化。</p>
-<p>同样的，还是那个add的简单函数，用JavaScript实现如下：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">add</span>(<span class="params">x, y</span>)</span>&#123;</div><div class="line">	<span class="keyword">if</span>(y===<span class="literal">undefined</span>)&#123;</div><div class="line">		<span class="keyword">return</span> <span class="function">(<span class="params">z</span>) =&gt;</span> x + z;</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		<span class="keyword">return</span> x+y;</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>测试一下！通过执行<code>add(1)(2)</code>，果然返回了<code>3</code>，是的，这是一个手动构造柯里化函数的过程。对于大多数函数，我们有通用的柯里化方法：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">curry</span>(<span class="params">func</span>) </span>&#123;</div><div class="line">  <span class="keyword">var</span> fixedArgs = [].slice.call(<span class="built_in">arguments</span>,<span class="number">1</span>);</div><div class="line">  <span class="keyword">return</span> <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    args = fixedArgs.concat([].slice.call(<span class="built_in">arguments</span>))</div><div class="line">    <span class="keyword">return</span> func.apply(<span class="literal">null</span>, args);</div><div class="line">  &#125;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>也就是说，对于<code>add</code>函数来说，我们用一个函数生成了另一个范围更小的函数，一层接一层的解决问题。这符合函数式编程的思想，就是我们更关注<strong>函数</strong>与<strong>函数</strong>之间的关系，而非状态本身，更在乎局部而非整体。</p>
-<p>这个例子体现不出这种思想的精妙之处，那么我们再举一个例子🌰</p>
-<p>如果，我们想让一个已知的数组每个值都做加1操作，传统的方法该怎么做？</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line">ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+<span class="number">1</span>);</div></pre></td></tr></table></figure>
-<p>对吧？那么我们下面可以用柯里化的思想把这个问题实现：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">ar</span> =&gt;</span> ar.map(<span class="function"><span class="params">x</span> =&gt;</span> x + <span class="number">1</span>);</div><div class="line">add([<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>]);</div></pre></td></tr></table></figure>
-<p>首先我们在<code>add</code>里定义了一个函数，并且传入参数为<code>ar</code>，<code>ar</code>进行<code>Array.prototype.map()</code>操作，对每一个数进行遍历，并且返回这个数字+1后的值给<code>ar</code>，这看起来挺玄乎的，但确实可行，我们只关心局部，请试图把<code>add</code>当做数学里中的函数去思考理解，或许会好懂的多。可是这只是方便了我们理解，那么到底有什么好处呢？</p>
-<p>再举一个例子🌰</p>
-<p>如果我们想写一个函数，用来对已知数组的已知量进行相加n的操作，怎么写？传统方法</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> ar= [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</div><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">addToArray</span>(<span class="params">ar,n</span>)</span>&#123;</div><div class="line">  <span class="keyword">return</span> ar.map(<span class="function">(<span class="params">x</span>)=&gt;</span> x+n)</div><div class="line">&#125;;</div><div class="line"><span class="built_in">console</span>.log(addToArray(ar,<span class="number">1</span>));</div></pre></td></tr></table></figure>
-<p>但是，我们可以这样写：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">const</span> add = <span class="function"><span class="params">a</span> =&gt;</span> b =&gt; a+b;</div><div class="line"><span class="keyword">const</span> addToArray = <span class="function">(<span class="params">ar,n</span>) =&gt;</span> ar.map(add(n));</div><div class="line">addToArray([<span class="number">2</span>,<span class="number">3</span>],<span class="number">1</span>)</div></pre></td></tr></table></figure>
-<p>结果都一样，其实过程是不一样的，你可能真的憋不住了，到底有什么用呢？</p>
-<h1 id="柯里化的好处"><a href="#柯里化的好处" class="headerlink" title="柯里化的好处"></a>柯里化的好处</h1><p>就像上面的例子一样，你能看出不同吗？对，第一个的实质是新写了一个函数，对数组进行map操作，而第二个则是在直接在<code>map</code>里进行<code>add</code>操作，这很通用，一旦你写了很多类似于<code>add</code>的函数，就会方便起来，可以让我们方便的在<code>map</code>,<code>reduce</code>,<code>filter</code>里调用。</p>
-<ul>
-<li>能够进行延迟计算，就像add(1)(2)一样，1比2先传入，2就会被延迟计算，在特定的场景里，有一定的应用意义。</li>
-<li>当你发现你要调用一个函数，并且调用参数都是一样的情况下，这个参数就可以被柯里化，以便更好的完成任务。</li>
-<li>优雅的写法，允许你写出来的代码更干净、更有表达力。</li>
-</ul>
-<p>虽然柯里化在日常应用不多，但仍然是一个不可不了解的好概念。</p>
-<h1 id="相关阅读"><a href="#相关阅读" class="headerlink" title="相关阅读"></a>相关阅读</h1><p><a href="https://cnodejs.org/topic/56261a249b48ca9448b776c4" target="_blank" rel="external"> JavaScript柯里化</a></p>
-<p><a href="http://codekirei.com/posts/currying-with-arrow-functions/" target="_blank" rel="external">Currying and ES6 Arrow Functions</a></p>
-<p><a href="http://www.cnblogs.com/zztt/p/4142891.html" target="_blank" rel="external">浅析 JavaScript 中的 函数 currying 柯里化</a></p>
-<p><a href="https://www.youtube.com/watch?v=iZLP4qOwY8I" target="_blank" rel="external">Currying - Part 6 of Functional Programming in JavaScript(需梯子)</a></p>
-]]></content>
-    
-    <summary type="html">
-    
-      &lt;p&gt;百度百科里对柯里化的定义是&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;在计算机科学中，柯里化（Currying）是把接受多个参数的函数变换成接受一个单一参数(最初函数的第一个参数)的函数，并且返回接受余下的参数且返回结果的新函数的技术。这个技术由 Christopher St
     
     </summary>
     

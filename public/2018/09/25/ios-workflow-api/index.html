@@ -189,7 +189,7 @@ var _hmt = _hmt || [];
 <p>本文以“重新构建Travis CI中的项目”为例，介绍如何举一反三，利用开发者API创造自己的<strong>捷径工作流</strong>，同时利用Hey Siri，让生活更加科技感、酷酷的、便利化。</p>
 <p>鸣谢：@Echowxsy好友的Docker构建脚本及“删库跑路”脚本，对本文章的创作启发。</p>
 <h1 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h1><p>通过Hey Siri，实现实时重新构建Travis CI中的应用，如图。</p>
-<p><img src="/content/images/ios-workflow-api/app/6.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/06.jpg" alt=""></p>
 <h1 id="Travis-CI-API"><a href="#Travis-CI-API" class="headerlink" title="Travis CI API"></a>Travis CI API</h1><p>其实Travis CI本身就是一个自动化构建工具，有很多种方法可以让他自动取构建，比如在设置中开启<code>Build pushed branches</code>，本文只是举个例子，利用Siri手动构建。</p>
 <p>首先，检查你使用的是org还是com版本的Travis CI。</p>
 <p>travis.org API:<a href="https://developer.travis-ci.org" target="_blank" rel="external">https://developer.travis-ci.org</a></p>
@@ -209,15 +209,15 @@ var _hmt = _hmt || [];
 <h1 id="Workflow"><a href="#Workflow" class="headerlink" title="Workflow"></a>Workflow</h1><p>创建Workflow的过程，需要自行研究，截图中每一个模块，都可以在下方搜索中搜索到。</p>
 <p>第一步，打开捷径</p>
 <p>第二步，搜索部件进行创建</p>
-<p><img src="/content/images/ios-workflow-api/app/1.jpg" alt=""></p>
-<p><img src="/content/images/ios-workflow-api/app/2.jpg" alt=""></p>
-<p><img src="/content/images/ios-workflow-api/app/3.jpg" alt=""></p>
-<p><img src="/content/images/ios-workflow-api/app/4.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/01.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/02.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/03.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/04.jpg" alt=""></p>
 <p>最后点击执行，测试一下，就可以用手机发送包含http headers的POST请求了。</p>
 <h1 id="Siri"><a href="#Siri" class="headerlink" title="Siri"></a>Siri</h1><p>设置Siri很简单，点击右上角的按钮，点击“Siri指令”</p>
-<p><img src="/content/images/ios-workflow-api/app/5.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/05.jpg" alt=""></p>
 <p>测试一下</p>
-<p><img src="/content/images/ios-workflow-api/app/6.jpg" alt=""></p>
+<p><img src="/content/images/ios-workflow-api/app/06.jpg" alt=""></p>
 <p>查看一下Travis CI，重新部署成功</p>
 <p><img src="/content/images/ios-workflow-api/1.png" alt=""></p>
 <p>从此，我们就可以愉快的用Siri部(zhuang)署(bi)啦～</p>
@@ -228,6 +228,10 @@ var _hmt = _hmt || [];
                 
 
                 <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/10/10/dokku/" data-toggle="tooltip" data-placement="top" title="利用Dokku搭建自己的PaaS云服务">&larr; Previous Post</a>
+                        </li>
                     
                     
                         <li class="next">

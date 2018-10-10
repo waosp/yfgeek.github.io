@@ -4,8 +4,28 @@
 
     
   <url>
+    <loc>http://www.yfgeek.com/2018/10/10/dokku/</loc>
+    <lastmod>2018-10-10T07:20:12.551Z</lastmod>
+    <data>
+        <display>
+        <title>利用Dokku搭建自己的PaaS云服务</title>
+        <pubTime>2018-10-10T13:54:16.000Z</pubTime>
+        
+        <tag>PaaS</tag>
+         
+         
+           
+             
+              <breadCrumb title="PaaS" url="http://www.yfgeek.com/categories/PaaS/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.yfgeek.com/2018/09/25/ios-workflow-api/</loc>
-    <lastmod>2018-09-25T07:20:33.959Z</lastmod>
+    <lastmod>2018-09-25T13:17:26.836Z</lastmod>
     <data>
         <display>
         <title>Siri+Workflow(捷径)利用API实战——远程构建Travis CI</title>
@@ -325,6 +345,25 @@
     
     
     
+  <url>
+    <loc>http://www.yfgeek.com/2016/09/11/hacktool/</loc>
+    <lastmod>2017-10-26T12:59:55.528Z</lastmod>
+    <data>
+        <display>
+        <title>那些Hack神器及奇技淫巧</title>
+        <pubTime>2016-09-11T15:07:28.000Z</pubTime>
+        
+        <tag>Hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hack" url="http://www.yfgeek.com/categories/Hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
     
   <url>
     <loc>http://www.yfgeek.com/2016/10/12/%E7%A8%8B%E5%BA%8F%E5%91%98%E9%84%99%E8%A7%86%E9%93%BE/</loc>
@@ -366,20 +405,38 @@
     </url>
 
     
+    
   <url>
-    <loc>http://www.yfgeek.com/2016/09/11/hacktool/</loc>
-    <lastmod>2017-10-26T12:59:55.528Z</lastmod>
+    <loc>http://www.yfgeek.com/2016/08/26/runtimelcd/</loc>
+    <lastmod>2017-10-26T12:59:55.527Z</lastmod>
     <data>
         <display>
-        <title>那些Hack神器及奇技淫巧</title>
-        <pubTime>2016-09-11T15:07:28.000Z</pubTime>
+        <title>树莓派实时温度湿度监测进阶</title>
+        <pubTime>2016-08-26T07:19:14.000Z</pubTime>
         
-        <tag>Hack</tag>
+        <tag>Raspberry</tag>
+         
+         
+           
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yfgeek.com/2016/09/13/ss-server/</loc>
+    <lastmod>2017-10-26T12:59:55.527Z</lastmod>
+    <data>
+        <display>
+        <title>树莓派搭建ss服务器</title>
+        <pubTime>2016-09-13T15:38:35.000Z</pubTime>
+        
+        <tag>Raspberry</tag>
          
          
            
              
-              <breadCrumb title="Hack" url="http://www.yfgeek.com/categories/Hack/"/>
+              <breadCrumb title="Linux" url="http://www.yfgeek.com/categories/Linux/"/>
           
         </display>
     </data>
@@ -427,63 +484,6 @@
 
     
   <url>
-    <loc>http://www.yfgeek.com/2016/08/26/runtimelcd/</loc>
-    <lastmod>2017-10-26T12:59:55.527Z</lastmod>
-    <data>
-        <display>
-        <title>树莓派实时温度湿度监测进阶</title>
-        <pubTime>2016-08-26T07:19:14.000Z</pubTime>
-        
-        <tag>Raspberry</tag>
-         
-         
-           
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yfgeek.com/2016/09/13/ss-server/</loc>
-    <lastmod>2017-10-26T12:59:55.527Z</lastmod>
-    <data>
-        <display>
-        <title>树莓派搭建ss服务器</title>
-        <pubTime>2016-09-13T15:38:35.000Z</pubTime>
-        
-        <tag>Raspberry</tag>
-         
-         
-           
-             
-              <breadCrumb title="Linux" url="http://www.yfgeek.com/categories/Linux/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yfgeek.com/2017/02/04/react/</loc>
-    <lastmod>2017-10-26T12:59:55.526Z</lastmod>
-    <data>
-        <display>
-        <title>我眼中的React</title>
-        <pubTime>2017-02-04T06:35:03.000Z</pubTime>
-        
-        <tag>Web</tag>
-         
-         
-           
-             
-              <breadCrumb title="Web" url="http://www.yfgeek.com/categories/Web/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yfgeek.com/2017/06/26/ppd/</loc>
     <lastmod>2017-10-26T12:59:55.526Z</lastmod>
     <data>
@@ -510,6 +510,26 @@
         <display>
         <title>揭秘utf8=✓背后的小秘密</title>
         <pubTime>2017-02-17T08:51:18.000Z</pubTime>
+        
+        <tag>Web</tag>
+         
+         
+           
+             
+              <breadCrumb title="Web" url="http://www.yfgeek.com/categories/Web/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yfgeek.com/2017/02/04/react/</loc>
+    <lastmod>2017-10-26T12:59:55.526Z</lastmod>
+    <data>
+        <display>
+        <title>我眼中的React</title>
+        <pubTime>2017-02-04T06:35:03.000Z</pubTime>
         
         <tag>Web</tag>
          
@@ -564,28 +584,6 @@
 
     
   <url>
-    <loc>http://www.yfgeek.com/2016/11/22/docker-SQLServer/</loc>
-    <lastmod>2017-10-26T12:59:55.524Z</lastmod>
-    <data>
-        <display>
-        <title>Docker下配置SQL Server for Linux</title>
-        <pubTime>2016-11-22T06:44:06.000Z</pubTime>
-        
-        <tag>Docker</tag>
-         
-        <tag>SQLserver</tag>
-         
-         
-           
-             
-              <breadCrumb title="Docker" url="http://www.yfgeek.com/categories/Docker/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
     <loc>http://www.yfgeek.com/2016/11/23/%E5%86%8D%E7%8E%A9Monyer%E7%9A%84Hack-Game/</loc>
     <lastmod>2017-10-26T12:59:55.524Z</lastmod>
     <data>
@@ -626,39 +624,21 @@
 
     
   <url>
-    <loc>http://www.yfgeek.com/2017/01/02/iOS-10-iMessage%E5%AD%97%E7%AC%A6%E5%B4%A9%E6%BA%83Bug%E5%8F%88%E6%9D%A5%E4%BA%86/</loc>
-    <lastmod>2017-10-26T12:59:55.523Z</lastmod>
+    <loc>http://www.yfgeek.com/2016/11/22/docker-SQLServer/</loc>
+    <lastmod>2017-10-26T12:59:55.524Z</lastmod>
     <data>
         <display>
-        <title>iOS 10 iMessage字符崩溃Bug又来了</title>
-        <pubTime>2017-01-01T19:49:54.000Z</pubTime>
+        <title>Docker下配置SQL Server for Linux</title>
+        <pubTime>2016-11-22T06:44:06.000Z</pubTime>
         
-        <tag>Hack</tag>
+        <tag>Docker</tag>
+         
+        <tag>SQLserver</tag>
          
          
            
              
-              <breadCrumb title="Hack" url="http://www.yfgeek.com/categories/Hack/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yfgeek.com/2017/02/08/awesome-code/</loc>
-    <lastmod>2017-10-26T12:59:55.523Z</lastmod>
-    <data>
-        <display>
-        <title>什么才是优秀的程序代码</title>
-        <pubTime>2017-02-08T09:35:13.000Z</pubTime>
-        
-        <tag>CodeStyle</tag>
-         
-         
-           
-             
-              <breadCrumb title="CodeStyle" url="http://www.yfgeek.com/categories/CodeStyle/"/>
+              <breadCrumb title="Docker" url="http://www.yfgeek.com/categories/Docker/"/>
           
         </display>
     </data>
@@ -701,6 +681,46 @@
            
              
               <breadCrumb title="笑话" url="http://www.yfgeek.com/categories/%E7%AC%91%E8%AF%9D/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yfgeek.com/2017/01/02/iOS-10-iMessage%E5%AD%97%E7%AC%A6%E5%B4%A9%E6%BA%83Bug%E5%8F%88%E6%9D%A5%E4%BA%86/</loc>
+    <lastmod>2017-10-26T12:59:55.523Z</lastmod>
+    <data>
+        <display>
+        <title>iOS 10 iMessage字符崩溃Bug又来了</title>
+        <pubTime>2017-01-01T19:49:54.000Z</pubTime>
+        
+        <tag>Hack</tag>
+         
+         
+           
+             
+              <breadCrumb title="Hack" url="http://www.yfgeek.com/categories/Hack/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
+    <loc>http://www.yfgeek.com/2017/02/08/awesome-code/</loc>
+    <lastmod>2017-10-26T12:59:55.523Z</lastmod>
+    <data>
+        <display>
+        <title>什么才是优秀的程序代码</title>
+        <pubTime>2017-02-08T09:35:13.000Z</pubTime>
+        
+        <tag>CodeStyle</tag>
+         
+         
+           
+             
+              <breadCrumb title="CodeStyle" url="http://www.yfgeek.com/categories/CodeStyle/"/>
           
         </display>
     </data>
@@ -848,6 +868,26 @@
 
     
   <url>
+    <loc>http://www.yfgeek.com/2017/01/07/gitcase/</loc>
+    <lastmod>2017-10-26T12:59:55.518Z</lastmod>
+    <data>
+        <display>
+        <title>Git 文件、文件夹区分大小写</title>
+        <pubTime>2017-01-06T18:25:32.000Z</pubTime>
+        
+        <tag>Github</tag>
+         
+         
+           
+             
+              <breadCrumb title="Github" url="http://www.yfgeek.com/categories/Github/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.yfgeek.com/2016/12/11/Google%E9%95%9C%E5%83%8F%E7%AB%99%E7%9A%84%E6%90%AD%E5%BB%BA/</loc>
     <lastmod>2017-10-26T12:59:55.518Z</lastmod>
     <data>
@@ -881,26 +921,6 @@
            
              
               <breadCrumb title="github" url="http://www.yfgeek.com/categories/github/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yfgeek.com/2017/01/07/gitcase/</loc>
-    <lastmod>2017-10-26T12:59:55.518Z</lastmod>
-    <data>
-        <display>
-        <title>Git 文件、文件夹区分大小写</title>
-        <pubTime>2017-01-06T18:25:32.000Z</pubTime>
-        
-        <tag>Github</tag>
-         
-         
-           
-             
-              <breadCrumb title="Github" url="http://www.yfgeek.com/categories/Github/"/>
           
         </display>
     </data>
@@ -988,6 +1008,26 @@
 
     
   <url>
+    <loc>http://www.yfgeek.com/2016/12/31/2017/</loc>
+    <lastmod>2017-10-26T12:59:55.515Z</lastmod>
+    <data>
+        <display>
+        <title>2016，2017</title>
+        <pubTime>2016-12-31T06:51:23.000Z</pubTime>
+        
+        <tag>心情</tag>
+         
+         
+           
+             
+              <breadCrumb title="心情" url="http://www.yfgeek.com/categories/%E5%BF%83%E6%83%85/"/>
+          
+        </display>
+    </data>
+    </url>
+
+    
+  <url>
     <loc>http://www.yfgeek.com/2016/12/18/poisontap/</loc>
     <lastmod>2017-10-26T12:59:55.515Z</lastmod>
     <data>
@@ -1021,26 +1061,6 @@
            
              
               <breadCrumb title="Hack" url="http://www.yfgeek.com/categories/Hack/"/>
-          
-        </display>
-    </data>
-    </url>
-
-    
-  <url>
-    <loc>http://www.yfgeek.com/2016/12/31/2017/</loc>
-    <lastmod>2017-10-26T12:59:55.515Z</lastmod>
-    <data>
-        <display>
-        <title>2016，2017</title>
-        <pubTime>2016-12-31T06:51:23.000Z</pubTime>
-        
-        <tag>心情</tag>
-         
-         
-           
-             
-              <breadCrumb title="心情" url="http://www.yfgeek.com/categories/%E5%BF%83%E6%83%85/"/>
           
         </display>
     </data>

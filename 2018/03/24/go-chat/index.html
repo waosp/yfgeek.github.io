@@ -1,0 +1,601 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Thinking as a Geek">
+    <meta name="keyword"  content="喜欢一切有趣的事物">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+<meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
+    <title>
+        
+          两个加密聊天项目 - Evan&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.yfgeek.com/2018/03/24/go-chat/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Evan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    <li>
+                        <a href="/f2e.html">前端收藏夹</a>
+                    </li>
+                    <li>
+                        <a href="/link.html">友情链接</a>
+                    </li>
+                    <li>
+                        <a href="/about">关于我</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://www.yfgeek.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/content/images/2016/08/wall.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Golang" title="Golang">Golang</a>
+                        
+                    </div>
+                    <h1>两个加密聊天项目</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Evan on
+                        2018-03-24
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>许多小伙伴看到我的GitHub最近动态关注了很多Golang的项目，不禁私信问我，是不是在学Go语言，没错，确实在学。本文探讨这两个项目是什么，并且解释一下如何使用<code>golang.org/x/crypto/otr</code>包。</p>
+<h1 id="为什么学Golang？"><a href="#为什么学Golang？" class="headerlink" title="为什么学Golang？"></a>为什么学Golang？</h1><p> <img src="http://i.imgur.com/UEdZpr4.png" alt="golang"></p>
+<p>因为Golang十分优秀呀，能够轻而易举的写很多服务端程序，并发能力十足且简单，不禁引起了我的注意。</p>
+<p>作为初学者，撸了两个项目，作为学习经验，代码很渣，只为实现功能，做一个小demo。</p>
+<h1 id="第一周-UDP加密聊天室"><a href="#第一周-UDP加密聊天室" class="headerlink" title="第一周 UDP加密聊天室"></a>第一周 UDP加密聊天室</h1><p><strong><a href="https://github.com/yfgeek/chatroom" target="_blank" rel="external">chatroom</a> - UDP加密聊天室</strong></p>
+<p>众所周知，做聊天室是作为学习服务端/客户端的最佳例子，但是单纯的撸一个聊天室未必太无聊了。</p>
+<p>这个项目的特色在于：</p>
+<ol>
+<li>能够自行生成配置文件，类似于某影的方式，客户端和服务端分别导入配置文件，就可以启动了。</li>
+<li>服务端自动生成AES-256的key，客户端记住base64形式的KEY文件就可以进行加密通信。</li>
+</ol>
+<p>强调安全性，是我一直的目的。</p>
+<p>配置文件</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">	<span class="attr">"listen"</span>: <span class="string">":52915"</span>,</div><div class="line">	<span class="attr">"remote"</span>: <span class="string">"127.0.0.1"</span>,</div><div class="line">	<span class="attr">"key"</span>: <span class="string">"AzonXhdbWCYoAA52GTE9FnldZEN4KhEsInFJe1oHYAgzQTRsCyEdUlBOPzd3HxgFbTAudDZobiU8TQYbURBFWVdvMisNSn5UIw8kei0gcjl1cGkeFTV9U0tEY2YaCkdPYl9nZRQSBGsMQgFzVlxhL0hGAlV/O0A+OGoJfBwpE0w="</span></div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="第二周-OTR-端对端加密聊天"><a href="#第二周-OTR-端对端加密聊天" class="headerlink" title="第二周 OTR 端对端加密聊天"></a>第二周 OTR 端对端加密聊天</h1><p><strong><a href="https://github.com/yfgeek/otrchat" target="_blank" rel="external">otrchat</a> - OTR 端对端加密聊天</strong></p>
+<p>不要认为第一周和第二周的内容大同小异，其实区别大了。</p>
+<p>聊天室和聊天的区别在于：</p>
+<ol>
+<li>服务器要端对端的将消息传递给不同的客户端，不能单纯的广播给所有人</li>
+<li>要有查询所有在线用户并且选择性聊天功能</li>
+</ol>
+<p>此外，在这一周内还增加了：<strong>OTR协议</strong></p>
+<p>简单的说OTR协议有点类似于Telegram的“secret chat”功能，可以对聊天内容进行加密，任何第三方包括服务器都无法查看两者聊天的内容，在此前我也写过<a href="http://blog.yfgeek.com/2016/12/06/OTR%E6%8A%80%E6%9C%AF%E6%8E%A2%E8%AE%A8/" target="_blank" rel="external">一篇文章</a>专门用于解释该协议。</p>
+<p>关于<code>golang.org/x/crypto/otr</code>包的使用经验，可以概括如下：</p>
+<p>首先，发起聊天者A需要向被聊者发送数据包</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">c.sendMessages &lt;- otr.QueryMessage</div></pre></td></tr></table></figure>
+<p>此后，<code>golang.org/x/crypto/otr</code>包会自动处理所有通信，包括互相发送公钥、签名、验证消息可靠性。</p>
+<p>发送</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">msgToPeer, err := otrConv.Send([]<span class="keyword">byte</span>(msg))</div><div class="line">			checkError(err,<span class="string">"otr conv sending"</span>)</div><div class="line">			<span class="keyword">for</span> _, m := <span class="keyword">range</span> msgToPeer &#123;</div><div class="line">				c.sendMessages &lt;- <span class="keyword">string</span>(m)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>接手及显示</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> err error</div><div class="line">out, encrypted, _, msgToPeer, err := otrConv.Receive(bytes)</div><div class="line">checkError(err,<span class="string">"new chat"</span>)</div><div class="line"><span class="keyword">if</span> <span class="built_in">len</span>(out) &gt; <span class="number">0</span> &#123;</div><div class="line">	<span class="keyword">if</span> !encrypted &#123;</div><div class="line">		color.Red(<span class="string">"&lt;OTR&gt; Conversation not yet encrypted!"</span>)</div><div class="line">		color.Red(<span class="string">"%s [%s] : %s"</span>, m.UserName, m.Time, <span class="keyword">string</span>(out))</div><div class="line">	&#125;<span class="keyword">else</span>&#123;</div><div class="line">		color.Blue(<span class="string">"%s [%s] : %s"</span>, m.UserName, m.Time, <span class="keyword">string</span>(out))</div><div class="line">	&#125;</div><div class="line">	&#125;</div><div class="line"><span class="keyword">if</span> <span class="built_in">len</span>(msgToPeer) &gt; <span class="number">0</span> &#123;</div><div class="line">	<span class="keyword">for</span> _, msg := <span class="keyword">range</span> msgToPeer &#123;</div><div class="line">	c.sendMessages &lt;-<span class="keyword">string</span>(msg)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p><code>msgToPeer</code> 表示OTR协议中需要完成额外的消息交换，所以需要单独的发送一遍。</p>
+<p>由于<code>otr</code>包的相关帮助甚少，坑很多，不明白为什么这个世界不大力推广端对端加密聊天。</p>
+<p>OTR协议下服务端所看到的通信内容如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line">From 1 To 2 Message： ?OTRv2?</div><div class="line">From 2 To 1 Message： ?OTR:AAICAAAAxB+Iywuwg8aZG0gPZxY6anFes2KW4YT/rRrBZK50CC7kr+0p+jLXeU3VirUQMTW/eJkA8gKz9y2xYSxRRwLga0ATOx2AkOlENYT1MyXJFkAjgMD6SF6uPDy+apIIJkOiopW5T7vpON9Ogsh3XmV8i4T1yui9gs6mAuMT7PsLQ7b8rvd1WulRtquJtO9LKA1flDU7XsCAn4h4pobpCjOS7qQ6aZstlhFtNXD1ylLXrpJos3vBG7LZsH3zvouvG9FR94YlYuMAAAAg5t62vP0C+/LxRI7OJTWC5pMbv2yZqHE/yDQGclCsz0Q=.</div><div class="line">From 1 To 2 Message： ?OTR:AAIKAAAAwDem/luw0prZM/Nv23/7Q+6/HrpQ199BVm+hcA2YMSHm85MJhS+ym24EAy4lg45O2e8LX5BylK1CM+w55VqUIJ7QOBwN3WazIWuiYKXXTuIdSBLi52P4dulhaGydKPfqFFqRM3hL2etO5p9xdJ8LbF/4+8PEK8//R56gIZLPLZNTPD8onxLKF5UnWJS3A8OfvJFykKQtXLc6573Y3BsGZ1ywfs0jyMukE/szOV5goTqLOaAhQfpw7gRuaMMqmHYXoA==.</div><div class="line">From 2 To 1 Message： ?OTR:AAIRAAAAELaWJ2vpiHI8fmmdLgdFJ/0AAAHS43l5bWsQarN0F8UEWtJjgr/lxOT01s6PmNsY+WFAio3kzOBQnzleaqemtbmQMwfczDm9fLH2h1+qlf4q8b4SLco/MpLKjvNEjDNbrQ1d1hXRwiyTtcz7zGYxCcFc3xdHLuueL/zcTpcwcq8J1HSmLv+F2aoEzCywOW9sWtLzbikeUjA2mUSWr79krG9rkAHz2KVGL++rX1LWC/PQOVTzzmFKz1o4aK1qpna/9ef9ju6zxd9wvoOuXGJJi3NWGlkHUxXov8689j8HNJWkkl/YXxwit8Bk49WPvH/AKnhTwqBkfblguaEsHTPTli36yqNm3YKp+oP2IjrVzue9BWieT93c7BbpJUO8Fej1EBGGWxtPu+YE/ZlH+PwawUcjWCck16GbHr4fFPTYh4tVX3c2tJSEqVkpttRf7r70ucu1fqB+qrK95rcbkVIABRPg4xSuslRCQxhz/BwiN3ECmfRAI19jLBp/MO9FkqaqYc3Bws/50n13slet7mk7IVGt1xjZgdfuZEYGXDZzmUomraKp4Wnt6YsLI10zoEBUw4U0Vug4OJ+EY2gdpNTYYhJFLAUH6B+ktCO8c18pKglxtJJnSiBBNRpaAVwsldwWD77/vLekToFQRZeG6H7x0cuH23ZBqonHHHJX.</div><div class="line">From 1 To 2 Message： ?OTR:AAISAAAB0qTCp5GMIr0w9szym5OPRrrk5/DSuaO1xuwnLp9ic+JUsO0//k9Ju7qVdpNFValQOvdePheZsp1fbaRoa8dCjJWeZDQF9Rik0tjz+5xgepzmaUXxDtKH2kiYWvBMp+AI0BosDGXRsupMZNGTon7G08wEaSbi8UYLouPrylrswC09PYwiN6+yTxwOE4dv/4vnIXo2k4868I4Ag9kRQ56grPlWpa3jG1Hrgwvm8510MtvBD+UwGTFHXFz8MieimBtIdI/Do/9svh9LhNrvAlQCqxaf5b6Eaoz0mRI0XU3PSPi6Qu8ivsti0LbIho75uvqZYk6xo/nX0UQrs48vsAVmZzXyRYMZ4M9JC+VumnEtxl92oQ4SQzetfEusQ76<span class="built_in">cap</span>BH9YJVfjej6xvC8n4k0I4rGKi9WSWgd4pYi6JOfRI2Nl9xh22PO+g5PdxKyGMzjpqkj9jm4yyc5l6ukfA/FpPSdNJjd6AbAu8HI3Zmw6fHhx+t+znAvnaMbw2gQG9gxe0WlmhM4ySOOvAGTG7wf1Md7AcRfxxNWeyInHmf+JJ1T3O74cPh1a6H0QQxh2UkXjS03adQMwGXng4pejRZhcSAEIY/cMfdAFYohfsdlDhOiv9E3NdbDU1sBIMPMKkD<span class="keyword">fi</span>5vPUJEoecarQ==.</div><div class="line">From 1 To 2 Message： ?OTR:AAIDAAAAAAEAAAABAAAAwO0jWIHSjaPxrZ7MtjgPYEbl9DGrA9idRzJA4vmdS6Lcc+JZbEdBqRH036j4Ie85mXLCWvqlPjYwKZNlQFbX5Rg+MMbqGl1Qcdk+Hfmd93pZf6Feg/yjlyBJOaCBWpTTpWzDyh+E2XZ3lZvlJxw1ogwatQn1VhicUXZzfDBSg1Dhw/jcAcXTn2wI+mmZ98rR9taBwgv41FN4mO7HhTkzUMQnJKPL9/zqtV6kWfwVYzXhaPoTnnbKa8L9hbYEMzy/OQAAAAAAAAABAAABADfvoGL7+tXt8VKqBj4JMwOsfhuH6PMlq47YQGf7l/5Dmszn2yVv+lemLj+YrcVxLOYO5WU0CGBjmr+52g+x/w3Dj0b+ak25y6H8bX3sPmcX/ZSgqTi+zt+IHqn207autlQVzvpt37g1grzWZvbn68a0obQqQp32jIXfOlYUFUv6cJDOvHk+3+1lRJdFFLjeP40OehnZ3AeOvT2wo6gNdEMFM4zgPtiskQtRxTFtFqs+KW/rkzefThdYhWpbMY/Nvpcf1S0Sy6HKLIqGwa7bkMa1coDfNma5fQzw856VWDFhQSq/PXT5aV4dDmXtYuBUs3YJoyWFGft03GDtZfdMQiqMDkTIJC2mB3O16CoDJBgXeM/0AQAAAAA=.</div><div class="line">From 2 To 1 Message： ?OTR:AAIDAAAAAAEAAAACAAAAwMpbV5DJJNyJODVA4cZmMXf76Ra+UJ0RtBqzbIbaWFfVoMWQwFypi+qktOnwFmYhuQr4O30Yy76xReJi1DRP72uWUudiyrFSJzSHPGLUqZ2RqVB+ovSifkuW8nQnq6UAbxQuWtYuKLOiaoK7EZ9+2RMcXOLx+h57Sd1x4IL2aZ+1y+X+vco1<span class="built_in">fc</span>HTW79qcz1TCT0qfn7+cI9O1HaKt/O15C51Btemu0rthK5W+mId5ueTIKcove1Ao6BRxy0GvMewMwAAAAAAAAABAAABAH78/obuj6XrBlIb55u2fDpmu93ILP8pI9f2ozxwKpfi20f6sL<span class="keyword">if</span>3cKPVN4of7i0iivtGcXBKf4g4Bo4hLx3nD33E9/aAeuxpy9Dr+uuHak9mUQA7HC07Yg2PrVUiNhV4QVj/XPg6A0xE040NRvNs5Ww9cZjHSOMg998zsGjaz528HkNQw9n06tF8uCRLh+XXkQnuV9Ln/JLd1wbWybJGMlQh82SYhgW+B/GONUG2nBo0ClBRU8aAWEGEsYVa6K6PQJzWBUjDInLdiYYauP7uo0nmkYxsTJNPbhA00RXER4LXpJq87lN4gihq+7cxr77plQEPi3Z/HwIWKmzgLlfi3W85bNg8E4gH8w1DEBMjZIgzADE/AAAAAA=.</div></pre></td></tr></table></figure>
+<p><img src="https://raw.githubusercontent.com/yfgeek/otrchat/master/img/otr-1.png" alt=""></p>
+<p>安全的无可匹敌！</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2018/07/18/mac-optimization/" data-toggle="tooltip" data-placement="top" title="优化Mac OS速度 解决tailspind、spindump、kernel_task问题">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2018/02/23/rasp-home/" data-toggle="tooltip" data-placement="top" title="用HomeAssistant + HomeBridge树莓派构建智能家居中枢">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                 <div id="gitcomments"></div>
+
+                
+
+               
+
+            </div>
+    <!-- Side Catalog Container -->
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+                <!-- Friends Blog -->
+                
+
+
+            </div>
+
+        </div>
+    </div>
+</article>
+<script>
+var md5 = function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){var I,d,F,H,x;F=(G&2147483648);H=(k&2147483648);I=(G&1073741824);d=(k&1073741824);x=(G&1073741823)+(k&1073741823);if(I&d){return(x^2147483648^F^H)}if(I|d){if(x&1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&F)|((~d)&k)}function q(d,F,k){return(d&k)|(F&(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)*16;var aa=Array(I-1);var d=0;var H=0;while(H<F){Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=(aa[Z]| (G.charCodeAt(H)<<d));H++}Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=aa[Z]|(128<<d);aa[I-2]=F<<3;aa[I-1]=F>>>29;return aa}function B(x){var k="",F="",G,d;for(d=0;d<=3;d++){G=(x>>>(d*8))&255;F="0"+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/rn/g,"n");var d="";for(var F=0;F<k.length;F++){var x=k.charCodeAt(F);if(x<128){d+=String.fromCharCode(x)}else{if((x>127)&&(x<2048)){d+=String.fromCharCode((x>>6)|192);d+=String.fromCharCode((x&63)|128)}else{d+=String.fromCharCode((x>>12)|224);d+=String.fromCharCode(((x>>6)&63)|128);d+=String.fromCharCode((x&63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P<C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};
+
+var gitment = new Gitment({
+  id: md5(location.href),
+  owner: 'yfgeek',
+  repo: 'yfgeek.github.io',
+  oauth: {
+    client_id: '62ad5643d4dd88174261',
+    client_secret: '72d853a4534da2a5896129a9c9f4cb4c85cab387',
+  },
+})
+gitment.render('gitcomments')
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/yfss">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Evan&#39;s Blog 2019
+                    <br>
+                    Theme inspired by Hux
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    Proudly powered by Hexo
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.yfgeek.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //console.log('New object created');
+                        },
+                        error: function(newcounter,error){
+                        console.log('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                console.log('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10);
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                console.log("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+
+
+<!--page counter part-->
+<script>
+</script>
+
+
+
+</body>
+
+</html>

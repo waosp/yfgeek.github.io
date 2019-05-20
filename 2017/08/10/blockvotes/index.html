@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Thinking as a Geek">
+    <meta name="keyword"  content="喜欢一切有趣的事物">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+<meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
+    <title>
+        
+          BlockVotes 一个基于区块链的环签名投票系统 - Evan&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.yfgeek.com/2017/08/10/blockvotes/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Evan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    <li>
+                        <a href="/f2e.html">前端收藏夹</a>
+                    </li>
+                    <li>
+                        <a href="/link.html">友情链接</a>
+                    </li>
+                    <li>
+                        <a href="/about">关于我</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://www.yfgeek.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/content/images/blockvotes/background.jpg')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#Blockchain" title="Blockchain">Blockchain</a>
+                        
+                    </div>
+                    <h1>BlockVotes 一个基于区块链的环签名投票系统</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Evan on
+                        2017-08-10
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <p>好久好久没有写Blog了，最近在忙我的论文，题目是一个基于区块链的环签名投票系统。</p>
+<p>听着名字挺绕的，实际上也是挺绕的，我做这个题目实际上是将三个学术领域的东西放在了一起：</p>
+<ul>
+<li>电子投票 (e-voting) 属于密码学</li>
+<li>区块链(blockchain) 属于密码学的应用</li>
+<li>环签名(ring-signature) 属于密码学</li>
+</ul>
+<p>如果对以上三个概念无任何了解，基本上就告别理解我做的东西了。这个项目目前处于私有项目状态之中，由于存在毕业设计可能会代码查重的问题，在九月初，将会对本项目彻底开源。</p>
+<h1 id="理念"><a href="#理念" class="headerlink" title="理念"></a>理念</h1><p><img src="/content/images/blockvotes/logo.png" width="300" style="margin: 0;"></p>
+<h2 id="电子投票？"><a href="#电子投票？" class="headerlink" title="电子投票？"></a>电子投票？</h2><p>实际上，这个学术命题属于电子投票方向的，在电子投票学术方向上属于创新型，在区块链上属于应用型，在谈及这些问题之前，得先说说学术上的电子投票的一些概念：</p>
+<p><img src="/content/images/blockvotes/security.png" alt=""></p>
+<p><strong>隐私性:</strong></p>
+<ul>
+<li>选票保密性 (BP): 任何攻击者都无法把用户所投的票和投票者的身份联系起来。</li>
+<li>无收据性 (RF): 投票者在投票后不能证明他是怎么投票的。系统不允许投票者在投票后证明这些。</li>
+<li>不可强制性 (CR): 任何攻击者都无法强制用户生成自己不想投的票据。 攻击者不会强迫选民得到相应的收据以供强迫者检查。</li>
+</ul>
+<p><strong>可验证性:</strong></p>
+<ul>
+<li>个体可验证性：每个投票者可以验证自己的投票是不是倍正确计入所有投票。</li>
+<li>全局验证性：任何投票者都可以验证其他投票者所投票的合法性。</li>
+</ul>
+<p><strong>不可重投性:</strong></p>
+<p>不可重投性指的是，任何投票者无法对相同的消息进行两次投票。</p>
+<p><strong>公平性:</strong></p>
+<p>公平性指的是，任何人都无法提前知道选票的结果，以及无法影响选票的结果。</p>
+<p>其实还有很多很多概念，具体可以参考引用中的第一个论文。</p>
+<p>实际上，隐私性和可验证性在一定程度上是互相矛盾的，保障可验证性的情况下就可能无法保证隐私，我们在电子投票的方面的目标是尽可能的保障以上的目标。</p>
+<p>所以，设计一个系统是从隐私性和可验证性的角度上出发的，这也就解释了，为什么用区块链，为什么用环签名。</p>
+<h2 id="为什么用区块链"><a href="#为什么用区块链" class="headerlink" title="为什么用区块链"></a>为什么用区块链</h2><p>区块链是什么？区块链可以理解为“分布式公共账本”，按照计算机的角度上，如果你对区块链一窍不通，<strong>你可以理解为一个可 增加、查找 却不能修改、删除的 分布式实时数据库</strong>。而比特币中的交易信息就是存在这个数据库之中的。</p>
+<p>如果你还是不理解，请<strong>千万不要到互联网上搜索什么是比特币、比特币挖矿原理、什么是区块链，只会让你更加疑惑</strong>，他们试图把区块链描述的非常高大上，迷惑你，并且告诉外人，这是很高大上的东西，其实不是，如果你真正研究过区块链的协议，你会觉得其实不是那么回事。在此，对于那些故作玄虚的文章，我想引用《LaTeX新人教程，30分钟从完全陌生到基本入门》文章所说的一句话表达我的心情：</p>
+<blockquote>
+<p>我要严厉警告和强烈声讨那些自以为是advanced LaTeX user的人。请你们不要为了自己那一点可怜可悲的虚荣心，去刻意渲染LaTeX有多么高端多么不容易学习，这和孔乙己炫耀茴香豆的茴字有四种写法有什么区别么？混账！LaTeX到底有多“难”你们自己清楚好么？</p>
+</blockquote>
+<p>所以，我附了一篇论文[3]，不过是英文版的，但是都是纯白话口语讲述到底什么是区块链，比特币的挖矿原理，实际上是非常浅显易懂的。如果有时间，恰当的时候，我也可以翻译成中文。</p>
+<hr>
+<p>世界上第一个区块链是比特币创造的，比特币需要区块链才能够叫做区块链，为什么？</p>
+<p>因为作为“货币“，最根本的存在的意义是什么？</p>
+<p>证明资产？自己是富二代？不不不，不是的。</p>
+<p>根本意义实际上是交易，人类社会，有了交易，才有了货币，货币是一般等价物，这个我们在中学都学过。</p>
+<p>那么作为一种货币，货币是要流通的，如果顾客买了商家的东西，是不是要顾客给商家付款呀？天经地义的。</p>
+<p>这个过程就是交易，那么，如何证明顾客已经把钱付给了商家？</p>
+<p>在现实生活中，太简单了，根本不用证明，顾客直接把钱给商家就行了。</p>
+<p>但是，如果顾客用银行卡或者支付宝呢？</p>
+<p>好！我们的概念来了，这个概念叫 账本。</p>
+<p>什么是账本？实际上就是银行的这笔交易的流水，在你用银行卡划卡支付的过程中，实际上是顾客和商家都信任银行，认为银行记下来的这个账是正确无误的，并且银行也把顾客的钱减少了，把商家的钱增加了。那么这个记账的媒介，该笔账单，可以说是账本的一部分。</p>
+<p>如果你的银行账户消费的内容足够多，那么这就是一个账本，上面记录着你的所有的交易信息，交易信息和你的账户余额的值一一对应，在这种情况下，你相信银行，你相信账本，银行作为第三方支付方式，你也就自然就信任了。</p>
+<p>可是我为什么要提出账本的概念呢？</p>
+<p>区块链就是一个分布式的公共记账账本。凡是下载了比特币(或XX币，我这里用比特币举例)的客户端的人，都会自动下载这个账本，这个账本储存着全球所有人的通过比特币交易信息。这个信息只能增加，不可以删除、修改，否则就无法解决同步的问题。</p>
+<p>那么我们就可以理解区块链，就是一个分布式的不可删改的数据库，现在理解了吧？</p>
+<p>回归正题，为什么要用区块链，因为区块链的广播机制是通过比特币进行交易而储存的，每个交易中都会有一个东西叫做附言(OP_RETURN)，在附言位置可以留自己的转账信息比如：</p>
+<blockquote>
+<p>哈，这笔交易你收好！是小明转给你的</p>
+</blockquote>
+<p>这个信息是随意的，可以写任何东西。</p>
+<p><a href="https://www.blocktrail.com/tBTC/tx/cb83c02e94d41851d75cfaa31b5318250267cbc043e72740562fdaf8c612b0cf" target="_blank" rel="external">真实的例子</a> 附言内容是 haha</p>
+<p>那么聪明的人来了，这段信息是不是可以用来储存东西，虽然有容量限制，但是储存的东西就是永久的不会被更改的。</p>
+<p>不错，我创建一个公共的计票的比特币的账户，并且公开地址，每个投票者对这个地址进行转账，并且附上自己的投票信息，比如候选人什么的作为附言，然后进行转账，内容就是相当于“发布到了区块链”上了。</p>
+<blockquote>
+<p>区块链技术基于去中心化的对等网络，用开源软件把密码学原理、时序数据和共识机制相结合，来保障分布式数据库中各节点的连贯和持续，使信息能即时验证、可追溯、但难以篡改和无法屏蔽，从而创造了一套隐私、高效、安全的共享价值体系。</p>
+</blockquote>
+<p>高判立下，这样每个投票者的投票信息就是公开的可以验证的，但是又由于比特币地址本身具有匿名性，谁也不知道发布投票信息的人是谁，这又符合了隐私性。</p>
+<p>你看，是不是完美了？</p>
+<h2 id="为什么用环签名"><a href="#为什么用环签名" class="headerlink" title="为什么用环签名"></a>为什么用环签名</h2><p>不是，并不完美。</p>
+<p>为什么？</p>
+<p>那在这种情况下，岂不是任何人都可以投票了，不经过投票中心认证的人，都可以瞎投，扰乱视听，而且投票者无法验证整体性。</p>
+<p>没错，这个时候伟大的环签名来了。</p>
+<p>在理解环签名之前，你需要对密码学的签名机制有所了解，如果不了解，请<a href="http://www.ruanyifeng.com/blog/2011/08/what_is_a_digital_signature.html" target="_blank" rel="external">点击这里</a>。</p>
+<p>环签名，实际上是一种特殊的群签名。你不用理解什么是群签名，只需要听我继续往下讲什么是环签名。</p>
+<p><img src="/content/images/blockvotes/ring1.png" alt=""></p>
+<p><img src="/content/images/blockvotes/ring2.png" alt=""></p>
+<p>你看，我附了一个山东大学一个优秀的博士<a href="https://wenku.baidu.com/view/5e43126f25c52cc58bd6be40.html" target="_blank" rel="external">论文</a>截图，是不是瞬间就显得高大上？</p>
+<p>其实也没有什么的。</p>
+<p>环签名是对一个特定的内容进行签名。</p>
+<p>在签名之前，所有人围城一个环，每个人生成一个自己的私钥Si，并且告诉其他人自己的公钥(P1,P2,P3…Pn)。</p>
+<p>接下来就是开始签名，每个人用自己的私钥Si和所有人的公钥(P1,P2,P3…Pn)对内容m进行签名，可以得到签名s。</p>
+<p>注意：</p>
+<ul>
+<li>每个人的得到的签名都是不一样的</li>
+<li>签名的长度取决于公钥的个数</li>
+</ul>
+<p>这样，我们把m替换为我们的投票内容，这样就可以在组织投票之前，对能够投票的人进行圈定，只有在这个圈子里的人才能投票。</p>
+<p>环签名具有天然的可验证性，任何人都可以验证自己，只需要根据得到的签名和所有人的公钥就可以得出自己是不是真正的投票了。</p>
+<p>如果把签名信息s也随着信息m一起广播到区块链上，那是不是就能够保障整体验证性与个体验证性？</p>
+<p>好了，我们投票的主要矛盾解决了！现在，真的解决了！</p>
+<p>你可能一句都没看懂我上面在说什么，也可能看懂了一点，没事，摸摸头，是我表达能力太差了，其实都是非常简单的东西。</p>
+<h2 id="具体投票协议"><a href="#具体投票协议" class="headerlink" title="具体投票协议"></a>具体投票协议</h2><p>我不告诉你哈哈哈哈哈哈，会在九月份公开。</p>
+<p>都是一些数学表达，发了也得花大量篇幅去解释，费劲。</p>
+<p>因为内容可能会查重，即使是中文版本现在我也不想发。</p>
+<h1 id="技术栈"><a href="#技术栈" class="headerlink" title="技术栈"></a>技术栈</h1><p><img src="/content/images/blockvotes/stack.png" alt=""></p>
+<p>后端语言：PHP</p>
+<p>后端数据库：MySQL</p>
+<p>区块链：比特币BTC/比特币测试网络TESTNET</p>
+<p>PHP MVC 框架：Slim</p>
+<p>PHP DAO 框架：Illuminate Database</p>
+<p>PHP 依赖管理： Composer</p>
+<p>PHP 模板引擎：TWIG</p>
+<p>前端包管理：NPM</p>
+<p>前端CSS预处理器：Sass</p>
+<p>前端代码打包工具：Gulp</p>
+<p>前端预编译器：browserify</p>
+<p>版本控制：Git</p>
+<p>说句实话，技术挺复杂的，用到了很多第三方类库、框架、工具，感谢很多第三方类库的帮助，在我写代码的时候，也发现了一个第三方类库的Bug，并随手修复了，也算是对开源社区的回馈吧。</p>
+<p><img src="/content/images/blockvotes/fixedbug.png" alt=""></p>
+<h1 id="关于开源"><a href="#关于开源" class="headerlink" title="关于开源"></a>关于开源</h1><p>项目会开源的，我知道，区块链最近创业很多，我的这个项目也可以用来创业，但是我根本不在乎这些金钱的东西，<strong>我更享受开源所带来的快感</strong>。</p>
+<p>但是如果拿去用来做商业用途，我还是很不爽的，所以我的这个项目禁止用于商业用途，但是非营利用途都是可以的。</p>
+<h1 id="截图"><a href="#截图" class="headerlink" title="截图"></a>截图</h1><p>可能不是最终版，先尝鲜一下</p>
+<p><img src="/content/images/blockvotes/1.png" alt=""></p>
+<p><img src="/content/images/blockvotes/2.png" alt=""></p>
+<p><img src="/content/images/blockvotes/3.png" alt=""></p>
+<p><img src="/content/images/blockvotes/4.png" alt=""></p>
+<p><img src="/content/images/blockvotes/5.png" alt=""></p>
+<p><img src="/content/images/blockvotes/6.png" alt=""></p>
+<p><img src="/content/images/blockvotes/7.png" alt=""></p>
+<p><img src="/content/images/blockvotes/8.png" alt=""></p>
+<p><img src="/content/images/blockvotes/9.png" alt=""></p>
+<p><img src="/content/images/blockvotes/10.png" alt=""></p>
+<h1 id="本文参考文献"><a href="#本文参考文献" class="headerlink" title="本文参考文献"></a>本文参考文献</h1><p>[1] Jonker H, Mauw S, Pang J. Privacy and verifiability in voting systems: Methods, developments and trends[J]. Computer Science Review, 2013, 10:1-30.</p>
+<p>[2] 张江霄, 李舟军, 刘霞,等. 基于群盲签名的多授权电子投票系统[J]. 中国科技论文, 2015(8):980-983.</p>
+<p>[3] Mercer R. Privacy on the Blockchain: Unique Ring Signatures[J]. 2016.</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/08/18/记一次Mysql无法启动及修复经历/" data-toggle="tooltip" data-placement="top" title="记一次MySQL无法启动及修复经历">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/06/26/ppd/" data-toggle="tooltip" data-placement="top" title="拍拍哒投资平台">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                 <div id="gitcomments"></div>
+
+                
+
+               
+
+            </div>
+    <!-- Side Catalog Container -->
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+                <!-- Friends Blog -->
+                
+
+
+            </div>
+
+        </div>
+    </div>
+</article>
+<script>
+var md5 = function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){var I,d,F,H,x;F=(G&2147483648);H=(k&2147483648);I=(G&1073741824);d=(k&1073741824);x=(G&1073741823)+(k&1073741823);if(I&d){return(x^2147483648^F^H)}if(I|d){if(x&1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&F)|((~d)&k)}function q(d,F,k){return(d&k)|(F&(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)*16;var aa=Array(I-1);var d=0;var H=0;while(H<F){Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=(aa[Z]| (G.charCodeAt(H)<<d));H++}Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=aa[Z]|(128<<d);aa[I-2]=F<<3;aa[I-1]=F>>>29;return aa}function B(x){var k="",F="",G,d;for(d=0;d<=3;d++){G=(x>>>(d*8))&255;F="0"+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/rn/g,"n");var d="";for(var F=0;F<k.length;F++){var x=k.charCodeAt(F);if(x<128){d+=String.fromCharCode(x)}else{if((x>127)&&(x<2048)){d+=String.fromCharCode((x>>6)|192);d+=String.fromCharCode((x&63)|128)}else{d+=String.fromCharCode((x>>12)|224);d+=String.fromCharCode(((x>>6)&63)|128);d+=String.fromCharCode((x&63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P<C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};
+
+var gitment = new Gitment({
+  id: md5(location.href),
+  owner: 'yfgeek',
+  repo: 'yfgeek.github.io',
+  oauth: {
+    client_id: '62ad5643d4dd88174261',
+    client_secret: '72d853a4534da2a5896129a9c9f4cb4c85cab387',
+  },
+})
+gitment.render('gitcomments')
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/yfss">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Evan&#39;s Blog 2019
+                    <br>
+                    Theme inspired by Hux
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    Proudly powered by Hexo
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.yfgeek.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //console.log('New object created');
+                        },
+                        error: function(newcounter,error){
+                        console.log('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                console.log('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10);
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                console.log("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+
+
+<!--page counter part-->
+<script>
+</script>
+
+
+
+</body>
+
+</html>

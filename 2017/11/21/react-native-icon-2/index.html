@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Head tag -->
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Thinking as a Geek">
+    <meta name="keyword"  content="喜欢一切有趣的事物">
+    <link rel="shortcut icon" href="/img/favicon.ico">
+<meta name="google-site-verification" content="K6nuLvgROuB_oIpgkseNkgFg8N6bT4UqCIRB2Fct_sM" />
+    <title>
+        
+          React Native 封装彩色自定义图标库 - Evan&#39;s Blog
+        
+    </title>
+
+    <link rel="canonical" href="http://www.yfgeek.com/2017/11/21/react-native-icon-2/">
+
+    <!-- Bootstrap Core CSS -->
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/css/hux-blog.min.css">
+
+    <!-- Pygments Highlight CSS -->
+    <link rel="stylesheet" href="/css/highlight.css">
+
+    <!-- Custom Fonts -->
+    <!-- <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"> -->
+    <!-- Hux change font-awesome CDN to qiniu -->
+    <link href="http://cdn.staticfile.org/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+
+    <!-- Hux Delete, sad but pending in China
+    <link href='http://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/
+    css'>
+    -->
+
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- ga & ba script hoook -->
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?836c90ea33f1c26a31b3e44674e242ae";
+  var s = document.getElementsByTagName("script")[0];
+  s.parentNode.insertBefore(hm, s);
+})();
+</script>
+<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+</head>
+
+
+<!-- hack iOS CSS :active style -->
+<body ontouchstart="">
+
+    <!-- Navigation -->
+<nav class="navbar navbar-default navbar-custom navbar-fixed-top">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header page-scroll">
+            <button type="button" class="navbar-toggle">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/">Evan&#39;s Blog</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!-- Known Issue, found by Hux:
+            <nav>'s height woule be hold on by its content.
+            so, when navbar scale out, the <nav> will cover tags.
+            also mask any touch event of tags, unfortunately.
+        -->
+        <div id="huxblog_navbar">
+            <div class="navbar-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="/">主页</a>
+                    </li>
+                    <li>
+                        <a href="/f2e.html">前端收藏夹</a>
+                    </li>
+                    <li>
+                        <a href="/link.html">友情链接</a>
+                    </li>
+                    <li>
+                        <a href="/about">关于我</a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container -->
+</nav>
+<script>
+    // Drop Bootstarp low-performance Navbar
+    // Use customize navbar with high-quality material design animation
+    // in high-perf jank-free CSS3 implementation
+    var $body   = document.body;
+    var $toggle = document.querySelector('.navbar-toggle');
+    var $navbar = document.querySelector('#huxblog_navbar');
+    var $collapse = document.querySelector('.navbar-collapse');
+
+    $toggle.addEventListener('click', handleMagic)
+    function handleMagic(e){
+        if ($navbar.className.indexOf('in') > 0) {
+        // CLOSE
+            $navbar.className = " ";
+            // wait until animation end.
+            setTimeout(function(){
+                // prevent frequently toggle
+                if($navbar.className.indexOf('in') < 0) {
+                    $collapse.style.height = "0px"
+                }
+            },400)
+        }else{
+        // OPEN
+            $collapse.style.height = "auto"
+            $navbar.className += " in";
+        }
+    }
+</script>
+
+
+    <!-- Main Content -->
+    
+<!-- Image to hack wechat -->
+<!-- <img src="http://www.yfgeek.com/img/icon_wechat.png" width="0" height="0"> -->
+<!-- <img src="{{ site.baseurl }}/{% if page.header-img %}{{ page.header-img }}{% else %}{{ site.header-img }}{% endif %}" width="0" height="0"> -->
+
+<!-- Post Header -->
+<style type="text/css">
+    header.intro-header{
+        background-image: url('/content/images/react/wall.png')
+    }
+</style>
+<header class="intro-header" >
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <div class="post-heading">
+                    <div class="tags">
+                        
+                          <a class="tag" href="/tags/#React-Native" title="React-Native">React-Native</a>
+                        
+                    </div>
+                    <h1>React Native 封装彩色自定义图标库</h1>
+                    <h2 class="subheading"></h2>
+                    <span class="meta">
+                        Posted by Evan on
+                        2017-11-21
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+</header>
+
+<!-- Post Content -->
+<article>
+    <div class="container">
+        <div class="row">
+
+    <!-- Post Container -->
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                post-container">
+
+                <h1 id="问题描述"><a href="#问题描述" class="headerlink" title="问题描述"></a>问题描述</h1><p>本文接上篇<a href="http://blog.yfgeek.com/2017/11/19/react-native-icon/" target="_blank" rel="external">React Native 添加自定义图标库</a>，上篇介绍的很基础，但是有没有发现一个问题，通过这种<code>react-native-vector-icons</code>方式封装下来的图标，都只有黑白图标，颜色需要自己<strong>手动设置</strong>，但是对于我这种彩色绚丽的图标，手动设置？不存在的…</p>
+<p><img src="/content/images/react-icon/1.png" alt=""></p>
+<p>那么本文就在上文的基础上讲讲，我是如何办到的自动彩色图标。</p>
+<p>答题思路是创建一个色彩配置文件，等到加载的时候，按照标签去加载。</p>
+<p>我Google了一圈，都找不到怎么让他自动加载色彩，可能是我搜索的姿势不对吧。</p>
+<p><img src="/content/images/react-icon/2-0.png" alt=""></p>
+<h1 id="文件处理"><a href="#文件处理" class="headerlink" title="文件处理"></a>文件处理</h1><p>首先，我们在<code>IcoMoon</code>先上传并下载一份黑色底色的图标文件，再上传并下载一份彩色底色图标文件。</p>
+<p>我们提取出黑色底色图标文件中的<code>icomoon.ttf</code>替换掉Xcode中的文件。</p>
+<p>与此同时，找到下载的彩色压缩包中找到<code>selection.json</code>这个神奇的文件，如果你上传的是彩色图标，实际上，里面内置了所有图标的色彩。</p>
+<p>短暂的例子如下：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div></pre></td><td class="code"><pre><div class="line">&#123;</div><div class="line">  <span class="string">"IcoMoonType"</span>: <span class="string">"selection"</span>,</div><div class="line">  <span class="string">"icons"</span>: [</div><div class="line">    &#123;</div><div class="line">      <span class="string">"icon"</span>: &#123;</div><div class="line">        <span class="string">"paths"</span>: [</div><div class="line">          <span class="string">"M1024 512c0 282.77-229.23 512-512 512s-512-229.23-512-512c0-282.77 229.23-512 512-512s512 229.23 512 512z"</span>,</div><div class="line">          <span class="string">"M495.864 864c-8.635-0.904-17.283-1.694-25.902-2.735-46.907-5.658-90.865-20.248-131.905-43.628-0.617-0.351-1.173-0.807-2.359-1.631 70.607-52.759 140.878-105.267 211.541-158.068 7.173 6.99 14.228 13.852 21.267 20.732 11.824 11.554 23.75 23.006 35.372 34.761 2.857 2.888 4.938 2.843 8.321 1.13 35.662-18.047 64.813-43.452 87.298-76.484 1.076-1.581 2.141-3.168 3.409-5.046 1.007 1.154 1.922 2.078 2.695 3.109 24.557 32.675 49.065 65.386 73.707 97.999 2.131 2.82 1.861 4.498-0.394 7.058-57.072 64.811-127.961 104.761-213.416 118.423-10.764 1.721-21.699 2.371-32.551 3.556-1.443 0.158-2.861 0.543-4.29 0.823h-32.795zM526.886 160c5.987 0.602 11.972 1.234 17.963 1.801 50.406 4.768 97.579 19.719 141.532 44.82 0.618 0.352 1.171 0.814 2.239 1.567-71.758 51.465-143.179 102.689-215 154.198-2.819-2.673-5.592-5.243-8.299-7.879-15.124-14.723-30.288-29.405-45.288-44.253-2.404-2.379-4.231-2.644-7.231-1.144-36.318 18.15-65.87 43.969-88.618 77.568-0.824 1.217-1.649 2.433-3.243 4.784-26.391-35.161-52.444-69.873-78.959-105.2 7.959-8.447 15.318-16.848 23.29-24.622 51.948-50.658 113.581-82.88 185.050-95.845 13.759-2.496 27.819-3.324 41.737-4.951 1.575-0.184 3.129-0.559 4.692-0.845h30.136zM206.697 337.1c53.619 70.288 106.656 139.809 159.841 209.528-10.847 11.122-21.55 22.105-32.261 33.079-8.040 8.239-16.003 16.557-24.194 24.644-2.32 2.291-2.398 4.063-0.994 6.878 18.102 36.324 43.942 65.848 77.544 88.614 1.099 0.745 2.21 1.473 3.287 2.248 0.204 0.146 0.275 0.477 0.859 1.567-34.561 25.915-69.228 51.909-104.355 78.248-62.384-53.699-102.894-119.92-119.15-200.203-17.409-85.972-3.298-167.187 39.424-244.603zM660.291 476.931c9.953-10.34 19.655-20.426 29.366-30.502 8.192-8.501 16.277-17.112 24.668-25.413 2.611-2.584 2.571-4.525 1.042-7.607-18.248-36.766-44.326-66.643-78.406-89.551-1.189-0.8-2.338-1.656-4.339-3.078 35.118-26.354 69.777-52.362 104.912-78.728 59.438 50.901 98.889 113.583 117.002 189.265 22.608 94.462 2.47 187.911-36.701 253.699-52.442-69.266-104.8-138.42-157.545-208.086z"</span></div><div class="line">        ],</div><div class="line">        <span class="string">"attrs"</span>: [</div><div class="line">          &#123;</div><div class="line">            <span class="string">"fill"</span>: <span class="string">"rgb(48, 44, 44)"</span></div><div class="line">          &#125;,</div><div class="line">          &#123;</div><div class="line">            <span class="string">"fill"</span>: <span class="string">"rgb(255, 255, 255)"</span></div><div class="line">          &#125;</div><div class="line">        ],</div><div class="line">        <span class="string">"isMulticolor"</span>: <span class="literal">true</span>,</div><div class="line">        <span class="string">"isMulticolor2"</span>: <span class="literal">false</span>,</div><div class="line">        <span class="string">"grid"</span>: <span class="number">0</span>,</div><div class="line">        <span class="string">"tags"</span>: [</div><div class="line">          <span class="string">"x"</span></div><div class="line">        ]</div><div class="line">      &#125;,</div><div class="line">      <span class="string">"attrs"</span>: [</div><div class="line">        &#123;</div><div class="line">          <span class="string">"fill"</span>: <span class="string">"rgb(48, 44, 44)"</span></div><div class="line">        &#125;,</div><div class="line">        &#123;</div><div class="line">          <span class="string">"fill"</span>: <span class="string">"rgb(255, 255, 255)"</span></div><div class="line">        &#125;</div><div class="line">      ],</div><div class="line">      <span class="string">"properties"</span>: &#123;</div><div class="line">        <span class="string">"order"</span>: <span class="number">3</span>,</div><div class="line">        <span class="string">"id"</span>: <span class="number">66</span>,</div><div class="line">        <span class="string">"name"</span>: <span class="string">"x"</span>,</div><div class="line">        <span class="string">"prevSize"</span>: <span class="number">32</span>,</div><div class="line">        <span class="string">"code"</span>: <span class="number">59648</span>,</div><div class="line">        <span class="string">"codes"</span>: [</div><div class="line">          <span class="number">59648</span>,</div><div class="line">          <span class="number">59649</span></div><div class="line">        ]</div><div class="line">      &#125;,</div><div class="line">      <span class="string">"setIdx"</span>: <span class="number">0</span>,</div><div class="line">      <span class="string">"setId"</span>: <span class="number">2</span>,</div><div class="line">      <span class="string">"iconIdx"</span>: <span class="number">0</span></div><div class="line">    &#125;,</div><div class="line">    &#123;...&#125;,</div><div class="line">   &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>我们分析一下这个文件，不难看出，icons下包含一个数组，每个数组代表每一个图标，每一个数组下都包含属性<code>tags[0]</code>,<code>attrs[0].fill</code>分别代表对应的标签及色彩。</p>
+<p>这个时候，我们需要构建一个自己的色彩配置文件，把刚刚的有用的信息提取出来，具体的按照自己需求，定义标签名字和颜色。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> data = <span class="built_in">require</span>(<span class="string">'./selection.json'</span>);</div><div class="line"><span class="keyword">let</span> arr = [];</div><div class="line">data.icons.forEach(<span class="function">(<span class="params">item</span>)=&gt;</span>&#123;</div><div class="line">	arr.push(</div><div class="line">	&#123;</div><div class="line">		<span class="string">'cuy'</span> : item.icon.tags[<span class="number">0</span>],</div><div class="line">		<span class="string">'color'</span> :item.icon.attrs[<span class="number">0</span>].fill,</div><div class="line">	&#125;)</div><div class="line">&#125;);</div><div class="line"><span class="built_in">console</span>.log(arr);</div></pre></td></tr></table></figure>
+<p>把输出的信息复制到新的文件，并将其命名<code>config.js</code></p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">export</span> <span class="keyword">const</span> ColorConfig = [</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'x'</span>, <span class="attr">color</span>: <span class="string">'rgb(48, 44, 44)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'ada'</span>, <span class="attr">color</span>: <span class="string">'rgb(60, 200, 200)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'amp'</span>, <span class="attr">color</span>: <span class="string">'rgb(45, 174, 228)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'ant'</span>, <span class="attr">color</span>: <span class="string">'rgb(44, 211, 225)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'ardr'</span>, <span class="attr">color</span>: <span class="string">'rgb(60, 135, 199)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'ark'</span>, <span class="attr">color</span>: <span class="string">'rgb(247, 0, 0)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'bat'</span>, <span class="attr">color</span>: <span class="string">'rgb(255, 80, 0)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'bcc'</span>, <span class="attr">color</span>: <span class="string">'rgb(247, 147, 28)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'bch'</span>, <span class="attr">color</span>: <span class="string">'rgb(247, 147, 26)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'bcn'</span>, <span class="attr">color</span>: <span class="string">'rgb(240, 64, 134)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'bnb'</span>, <span class="attr">color</span>: <span class="string">'rgb(243, 186, 47)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'btc'</span>, <span class="attr">color</span>: <span class="string">'rgb(247, 147, 26)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'btcd'</span>, <span class="attr">color</span>: <span class="string">'rgb(255, 102, 0)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'bts'</span>, <span class="attr">color</span>: <span class="string">'rgb(53, 186, 235)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'dash'</span>, <span class="attr">color</span>: <span class="string">'rgb(28, 117, 188)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'dcr'</span>, <span class="attr">color</span>: <span class="string">'rgb(46, 214, 161)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'dgb'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 106, 210)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'dgd'</span>, <span class="attr">color</span>: <span class="string">'rgb(244, 208, 41)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'doge'</span>, <span class="attr">color</span>: <span class="string">'rgb(195, 166, 52)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'emc'</span>, <span class="attr">color</span>: <span class="string">'rgb(180, 159, 252)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'eos'</span>, <span class="attr">color</span>: <span class="string">'rgb(180, 159, 252)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'etc'</span>, <span class="attr">color</span>: <span class="string">'rgb(102, 144, 115)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'eth'</span>, <span class="attr">color</span>: <span class="string">'rgb(98, 126, 234)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'fct'</span>, <span class="attr">color</span>: <span class="string">'rgb(65, 123, 164)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'game'</span>, <span class="attr">color</span>: <span class="string">'rgb(152, 192, 31)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'gbyte'</span>, <span class="attr">color</span>: <span class="string">'rgb(48, 44, 44)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'gno'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 166, 196)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'gnt'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 29, 87)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'hsr'</span>, <span class="attr">color</span>: <span class="string">'rgb(86, 66, 142)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'icn'</span>, <span class="attr">color</span>: <span class="string">'rgb(76, 111, 140)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'kmd'</span>, <span class="attr">color</span>: <span class="string">'rgb(50, 100, 100)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'knc'</span>, <span class="attr">color</span>: <span class="string">'rgb(24, 140, 146)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'lkk'</span>, <span class="attr">color</span>: <span class="string">'rgb(157, 1, 235)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'lsk'</span>, <span class="attr">color</span>: <span class="string">'rgb(2, 136, 209)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'ltc'</span>, <span class="attr">color</span>: <span class="string">'rgb(203, 198, 198)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'maid'</span>, <span class="attr">color</span>: <span class="string">'rgb(85, 146, 215)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'miota'</span>, <span class="attr">color</span>: <span class="string">'rgb(36, 36, 36)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'mln'</span>, <span class="attr">color</span>: <span class="string">'rgb(11, 21, 41)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'mona'</span>, <span class="attr">color</span>: <span class="string">'rgb(240, 219, 176)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'neo'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 0, 0)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'nlg'</span>, <span class="attr">color</span>: <span class="string">'rgb(42, 176, 253)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'nmc'</span>, <span class="attr">color</span>: <span class="string">'rgb(24, 108, 157)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'nxt'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 143, 187)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'omg'</span>, <span class="attr">color</span>: <span class="string">'rgb(26, 83, 240)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'pay'</span>, <span class="attr">color</span>: <span class="string">'rgb(48, 44, 44)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'pivx'</span>, <span class="attr">color</span>: <span class="string">'rgb(94, 71, 120)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'pot'</span>, <span class="attr">color</span>: <span class="string">'rgb(16, 91, 47)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'ppc'</span>, <span class="attr">color</span>: <span class="string">'rgb(60, 176, 84)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'ppt'</span>, <span class="attr">color</span>: <span class="string">'rgb(21, 39, 67)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'qtum'</span>, <span class="attr">color</span>: <span class="string">'rgb(46, 154, 208)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'rep'</span>, <span class="attr">color</span>: <span class="string">'rgb(96, 42, 82)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'salt'</span>, <span class="attr">color</span>: <span class="string">'rgb(27, 238, 244)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'sc'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 203, 160)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'sngls'</span>, <span class="attr">color</span>: <span class="string">'rgb(179, 13, 35)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'steem'</span>, <span class="attr">color</span>: <span class="string">'rgb(75, 162, 242)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'strat'</span>, <span class="attr">color</span>: <span class="string">'rgb(19, 135, 201)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'trx'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 0, 0)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'usdt'</span>, <span class="attr">color</span>: <span class="string">'rgb(38, 161, 123)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'vtc'</span>, <span class="attr">color</span>: <span class="string">'rgb(53, 99, 62)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'waves'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 150, 220)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'xcp'</span>, <span class="attr">color</span>: <span class="string">'rgb(237, 22, 80)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'xem'</span>, <span class="attr">color</span>: <span class="string">'rgb(103, 178, 232)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'xlm'</span>, <span class="attr">color</span>: <span class="string">'rgb(20, 182, 231)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'xmr'</span>, <span class="attr">color</span>: <span class="string">'rgb(255, 102, 0)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'xrp'</span>, <span class="attr">color</span>: <span class="string">'rgb(0, 170, 228)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'xtz'</span>, <span class="attr">color</span>: <span class="string">'rgb(166, 224, 0)'</span> &#125;,</div><div class="line">    &#123; <span class="attr">cuy</span>: <span class="string">'zec'</span>, <span class="attr">color</span>: <span class="string">'rgb(236, 178, 68)'</span> &#125;</div><div class="line">    ];</div></pre></td></tr></table></figure>
+<p>这样，色彩配置文件封装好了。</p>
+<h1 id="加载色彩"><a href="#加载色彩" class="headerlink" title="加载色彩"></a>加载色彩</h1><p>按照上文所做，我们封装出自己的图标库，当调用到图标组建的时候，我们这么加载它：</p>
+ <figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line">import &#123;ColorConfig&#125; from '../icon/config';</div><div class="line">render()&#123;</div><div class="line">let color = '#f5922f';</div><div class="line">ColorConfig.forEach((item,index)=&gt;&#123;if(item.cuy === cuy)  color = item.color&#125;);</div><div class="line">  return &lt;Icon name=&#123;cuy&#125; size=&#123;48&#125; color=&#123;color&#125;/&gt;;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h1 id="补全镂空"><a href="#补全镂空" class="headerlink" title="补全镂空"></a>补全镂空</h1><p>理论上现在就结束了，但是我发现了这样做的一个问题，如图所示</p>
+<p><img src="/content/images/react-icon/2-1.png" alt=""></p>
+<p>其实解决这个问题相当简单，只需要多加一层View，并将其底色设置为白色，切角设置为50%的圆（web端思路）</p>
+<p>但是，在实际运用的时候，发现<code>borderRadius</code>无法设置为<code>50%</code>，其实也不难，代码如下</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line">import &#123;ColorConfig&#125; from '../icon/config';</div><div class="line">render()&#123;</div><div class="line">let color = '#f5922f';</div><div class="line">let w = this.props.width || 48;</div><div class="line">ColorConfig.forEach((item,index)=&gt;&#123;if(item.cuy === cuy)  color = item.color&#125;);</div><div class="line">  return (</div><div class="line">                &lt;View style=&#123;&#123;</div><div class="line">                    alignItems:'center',</div><div class="line">                    justifyContent:'center',</div><div class="line">                    borderRadius: w/2,</div><div class="line">                    overflow: 'hidden',</div><div class="line">                    backgroundColor : '#ffffff',</div><div class="line">                &#125;&#125;&gt;</div><div class="line">                   &lt;Icon name=&#123;cuy&#125; size=&#123;w&#125; color=&#123;color&#125;/&gt;;</div><div class="line">                &lt;/View&gt;</div><div class="line">        )</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>再看看效果，完美！</p>
+<p><img src="/content/images/react-icon/2-2.png" alt=""></p>
+<p><img src="/content/images/react-icon/2-3.png" alt=""></p>
+<h1 id="效率问题"><a href="#效率问题" class="headerlink" title="效率问题"></a>效率问题</h1><p>这样手动封装的库，实际上会引发一些效率问题，比如在加载众多组建的时候，每一个组件都会重新读取一边色彩配置文件，并将其放入内存，实际上意义不大，浪费时间。</p>
+<p>实际上，我们可以把色彩配置文件和<code>selection.json</code>一并放在<code>store</code>中，或者放在最顶层的组件的<code>state</code>中，或者存成hashmap形式，内存只需要加载一次配置文件就够了。</p>
+<p>Anyway，这种方法有待优化，但是对于图标数量比较小的APP来说，优化的意义不大。</p>
+
+
+                <hr>
+
+                
+
+                <ul class="pager">
+                    
+                        <li class="previous">
+                            <a href="/2017/11/30/brainfuck/" data-toggle="tooltip" data-placement="top" title="快速撸出一个Brainfuck语言解释器">&larr; Previous Post</a>
+                        </li>
+                    
+                    
+                        <li class="next">
+                            <a href="/2017/11/20/react-native-icon/" data-toggle="tooltip" data-placement="top" title="React Native 添加自定义图标库">Next Post &rarr;</a>
+                        </li>
+                    
+                </ul>
+
+                 <div id="gitcomments"></div>
+
+                
+
+               
+
+            </div>
+    <!-- Side Catalog Container -->
+            <div class="
+                col-lg-2 col-lg-offset-0
+                visible-lg-block
+                sidebar-container
+                catalog-container">
+                <div class="side-catalog">
+                    <hr class="hidden-sm hidden-xs">
+                    <h5>
+                        <a class="catalog-toggle" href="#">CATALOG</a>
+                    </h5>
+                    <ul class="catalog-body"></ul>
+                </div>
+            </div>
+
+    <!-- Sidebar Container -->
+
+            <div class="
+                col-lg-8 col-lg-offset-2
+                col-md-10 col-md-offset-1
+                sidebar-container">
+                <!-- Friends Blog -->
+                
+
+
+            </div>
+
+        </div>
+    </div>
+</article>
+<script>
+var md5 = function(s){function L(k,d){return(k<<d)|(k>>>(32-d))}function K(G,k){var I,d,F,H,x;F=(G&2147483648);H=(k&2147483648);I=(G&1073741824);d=(k&1073741824);x=(G&1073741823)+(k&1073741823);if(I&d){return(x^2147483648^F^H)}if(I|d){if(x&1073741824){return(x^3221225472^F^H)}else{return(x^1073741824^F^H)}}else{return(x^F^H)}}function r(d,F,k){return(d&F)|((~d)&k)}function q(d,F,k){return(d&k)|(F&(~k))}function p(d,F,k){return(d^F^k)}function n(d,F,k){return(F^(d|(~k)))}function u(G,F,aa,Z,k,H,I){G=K(G,K(K(r(F,aa,Z),k),I));return K(L(G,H),F)}function f(G,F,aa,Z,k,H,I){G=K(G,K(K(q(F,aa,Z),k),I));return K(L(G,H),F)}function D(G,F,aa,Z,k,H,I){G=K(G,K(K(p(F,aa,Z),k),I));return K(L(G,H),F)}function t(G,F,aa,Z,k,H,I){G=K(G,K(K(n(F,aa,Z),k),I));return K(L(G,H),F)}function e(G){var Z;var F=G.length;var x=F+8;var k=(x-(x%64))/64;var I=(k+1)*16;var aa=Array(I-1);var d=0;var H=0;while(H<F){Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=(aa[Z]| (G.charCodeAt(H)<<d));H++}Z=(H-(H%4))/4;d=(H%4)*8;aa[Z]=aa[Z]|(128<<d);aa[I-2]=F<<3;aa[I-1]=F>>>29;return aa}function B(x){var k="",F="",G,d;for(d=0;d<=3;d++){G=(x>>>(d*8))&255;F="0"+G.toString(16);k=k+F.substr(F.length-2,2)}return k}function J(k){k=k.replace(/rn/g,"n");var d="";for(var F=0;F<k.length;F++){var x=k.charCodeAt(F);if(x<128){d+=String.fromCharCode(x)}else{if((x>127)&&(x<2048)){d+=String.fromCharCode((x>>6)|192);d+=String.fromCharCode((x&63)|128)}else{d+=String.fromCharCode((x>>12)|224);d+=String.fromCharCode(((x>>6)&63)|128);d+=String.fromCharCode((x&63)|128)}}}return d}var C=Array();var P,h,E,v,g,Y,X,W,V;var S=7,Q=12,N=17,M=22;var A=5,z=9,y=14,w=20;var o=4,m=11,l=16,j=23;var U=6,T=10,R=15,O=21;s=J(s);C=e(s);Y=1732584193;X=4023233417;W=2562383102;V=271733878;for(P=0;P<C.length;P+=16){h=Y;E=X;v=W;g=V;Y=u(Y,X,W,V,C[P+0],S,3614090360);V=u(V,Y,X,W,C[P+1],Q,3905402710);W=u(W,V,Y,X,C[P+2],N,606105819);X=u(X,W,V,Y,C[P+3],M,3250441966);Y=u(Y,X,W,V,C[P+4],S,4118548399);V=u(V,Y,X,W,C[P+5],Q,1200080426);W=u(W,V,Y,X,C[P+6],N,2821735955);X=u(X,W,V,Y,C[P+7],M,4249261313);Y=u(Y,X,W,V,C[P+8],S,1770035416);V=u(V,Y,X,W,C[P+9],Q,2336552879);W=u(W,V,Y,X,C[P+10],N,4294925233);X=u(X,W,V,Y,C[P+11],M,2304563134);Y=u(Y,X,W,V,C[P+12],S,1804603682);V=u(V,Y,X,W,C[P+13],Q,4254626195);W=u(W,V,Y,X,C[P+14],N,2792965006);X=u(X,W,V,Y,C[P+15],M,1236535329);Y=f(Y,X,W,V,C[P+1],A,4129170786);V=f(V,Y,X,W,C[P+6],z,3225465664);W=f(W,V,Y,X,C[P+11],y,643717713);X=f(X,W,V,Y,C[P+0],w,3921069994);Y=f(Y,X,W,V,C[P+5],A,3593408605);V=f(V,Y,X,W,C[P+10],z,38016083);W=f(W,V,Y,X,C[P+15],y,3634488961);X=f(X,W,V,Y,C[P+4],w,3889429448);Y=f(Y,X,W,V,C[P+9],A,568446438);V=f(V,Y,X,W,C[P+14],z,3275163606);W=f(W,V,Y,X,C[P+3],y,4107603335);X=f(X,W,V,Y,C[P+8],w,1163531501);Y=f(Y,X,W,V,C[P+13],A,2850285829);V=f(V,Y,X,W,C[P+2],z,4243563512);W=f(W,V,Y,X,C[P+7],y,1735328473);X=f(X,W,V,Y,C[P+12],w,2368359562);Y=D(Y,X,W,V,C[P+5],o,4294588738);V=D(V,Y,X,W,C[P+8],m,2272392833);W=D(W,V,Y,X,C[P+11],l,1839030562);X=D(X,W,V,Y,C[P+14],j,4259657740);Y=D(Y,X,W,V,C[P+1],o,2763975236);V=D(V,Y,X,W,C[P+4],m,1272893353);W=D(W,V,Y,X,C[P+7],l,4139469664);X=D(X,W,V,Y,C[P+10],j,3200236656);Y=D(Y,X,W,V,C[P+13],o,681279174);V=D(V,Y,X,W,C[P+0],m,3936430074);W=D(W,V,Y,X,C[P+3],l,3572445317);X=D(X,W,V,Y,C[P+6],j,76029189);Y=D(Y,X,W,V,C[P+9],o,3654602809);V=D(V,Y,X,W,C[P+12],m,3873151461);W=D(W,V,Y,X,C[P+15],l,530742520);X=D(X,W,V,Y,C[P+2],j,3299628645);Y=t(Y,X,W,V,C[P+0],U,4096336452);V=t(V,Y,X,W,C[P+7],T,1126891415);W=t(W,V,Y,X,C[P+14],R,2878612391);X=t(X,W,V,Y,C[P+5],O,4237533241);Y=t(Y,X,W,V,C[P+12],U,1700485571);V=t(V,Y,X,W,C[P+3],T,2399980690);W=t(W,V,Y,X,C[P+10],R,4293915773);X=t(X,W,V,Y,C[P+1],O,2240044497);Y=t(Y,X,W,V,C[P+8],U,1873313359);V=t(V,Y,X,W,C[P+15],T,4264355552);W=t(W,V,Y,X,C[P+6],R,2734768916);X=t(X,W,V,Y,C[P+13],O,1309151649);Y=t(Y,X,W,V,C[P+4],U,4149444226);V=t(V,Y,X,W,C[P+11],T,3174756917);W=t(W,V,Y,X,C[P+2],R,718787259);X=t(X,W,V,Y,C[P+9],O,3951481745);Y=K(Y,h);X=K(X,E);W=K(W,v);V=K(V,g)}var i=B(Y)+B(X)+B(W)+B(V);return i.toLowerCase()};
+
+var gitment = new Gitment({
+  id: md5(location.href),
+  owner: 'yfgeek',
+  repo: 'yfgeek.github.io',
+  oauth: {
+    client_id: '62ad5643d4dd88174261',
+    client_secret: '72d853a4534da2a5896129a9c9f4cb4c85cab387',
+  },
+})
+gitment.render('gitcomments')
+</script>
+
+
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+<!-- anchor-js, Doc:http://bryanbraun.github.io/anchorjs/ -->
+<script>
+    async("http://cdn.bootcss.com/anchor-js/1.1.1/anchor.min.js",function(){
+        anchors.options = {
+          visible: 'always',
+          placement: 'right',
+          icon: '#'
+        };
+        anchors.add().remove('.intro-header h1').remove('.subheading').remove('.sidebar-container h5');
+    })
+</script>
+
+<style>
+    /* place left on bigger screen */
+    @media all and (min-width: 800px) {
+        .anchorjs-link{
+            position: absolute;
+            left: -0.75em;
+            font-size: 1.1em;
+            margin-top : -0.1em;
+        }
+    }
+</style>
+
+
+
+    <!-- Footer -->
+    <!-- Footer -->
+<footer>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+                <ul class="list-inline text-center">
+                
+                    <li>
+                        <a href="/feed.xml">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-rss fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+                
+                
+                    <li>
+                        <a target="_blank" href="https://www.zhihu.com/people/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa  fa-stack-1x fa-inverse">知</i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+                    <li>
+                        <a target="_blank" href="http://weibo.com/yfss">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-weibo fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                
+                    <li>
+                        <a target="_blank"  href="https://github.com/yfgeek">
+                            <span class="fa-stack fa-lg">
+                                <i class="fa fa-circle fa-stack-2x"></i>
+                                <i class="fa fa-github fa-stack-1x fa-inverse"></i>
+                            </span>
+                        </a>
+                    </li>
+                
+
+                
+
+                </ul>
+                <p class="copyright text-muted">
+                    Copyright &copy; Evan&#39;s Blog 2019
+                    <br>
+                    Theme inspired by Hux
+                    <span style="display: inline-block; margin: 0 5px;">
+                        <i class="fa fa-heart"></i>
+                    </span>
+                    Proudly powered by Hexo
+                </p>
+            </div>
+        </div>
+    </div>
+</footer>
+
+<!-- jQuery -->
+<script src="/js/jquery.min.js"></script>
+
+<!-- Bootstrap Core JavaScript -->
+<script src="/js/bootstrap.min.js"></script>
+
+<!-- Custom Theme JavaScript -->
+<script src="/js/hux-blog.min.js"></script>
+
+
+<!-- async load function -->
+<script>
+    function async(u, c) {
+      var d = document, t = 'script',
+          o = d.createElement(t),
+          s = d.getElementsByTagName(t)[0];
+      o.src = u;
+      if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+      s.parentNode.insertBefore(o, s);
+    }
+</script>
+
+<!--
+     Because of the native support for backtick-style fenced code blocks
+     right within the Markdown is landed in Github Pages,
+     From V1.6, There is no need for Highlight.js,
+     so Huxblog drops it officially.
+
+     - https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0
+     - https://help.github.com/articles/creating-and-highlighting-code-blocks/
+-->
+<!--
+    <script>
+        async("http://cdn.bootcss.com/highlight.js/8.6/highlight.min.js", function(){
+            hljs.initHighlightingOnLoad();
+        })
+    </script>
+    <link href="http://cdn.bootcss.com/highlight.js/8.6/styles/github.min.css" rel="stylesheet">
+-->
+
+
+<!-- jquery.tagcloud.js -->
+<script>
+    // only load tagcloud.js in tag.html
+    if($('#tag_cloud').length !== 0){
+        async("http://www.yfgeek.com/js/jquery.tagcloud.js",function(){
+            $.fn.tagcloud.defaults = {
+                //size: {start: 1, end: 1, unit: 'em'},
+                color: {start: '#bbbbee', end: '#0085a1'},
+            };
+            $('#tag_cloud a').tagcloud();
+        })
+    }
+</script>
+
+<!--fastClick.js -->
+<script>
+    async("http://cdn.bootcss.com/fastclick/1.0.6/fastclick.min.js", function(){
+        var $nav = document.querySelector("nav");
+        if($nav) FastClick.attach($nav);
+    })
+</script>
+
+
+<!-- Google Analytics -->
+
+
+
+
+<!-- Baidu Tongji -->
+
+
+<!-- Side Catalog -->
+<script type="text/javascript">
+    function generateCatalog (selector) {
+        var P = $('div.post-container'),a,n,t,l,i,c;
+        a = P.find('h1,h2,h3,h4,h5,h6');
+        a.each(function () {
+            n = $(this).prop('tagName').toLowerCase();
+            i = "#"+$(this).prop('id');
+            t = $(this).text();
+            c = $('<a href="'+i+'" rel="nofollow">'+t+'</a>');
+            l = $('<li class="'+n+'_nav"></li>').append(c);
+            $(selector).append(l);
+        });
+        return true;
+    }
+
+    generateCatalog(".catalog-body");
+
+    // toggle side catalog
+    $(".catalog-toggle").click((function(e){
+        e.preventDefault();
+        $('.side-catalog').toggleClass("fold")
+    }))
+
+    /*
+     * Doc: https://github.com/davist11/jQuery-One-Page-Nav
+     * Fork by Hux to support padding
+     */
+    async("/js/jquery.nav.js", function () {
+        $('.catalog-body').onePageNav({
+            currentClass: "active",
+            changeHash: !1,
+            easing: "swing",
+            filter: "",
+            scrollSpeed: 700,
+            scrollOffset: 0,
+            scrollThreshold: .2,
+            begin: null,
+            end: null,
+            scrollChange: null,
+            padding: 80
+        });
+    });
+</script>
+<!--page counter part-->
+<script>
+function addCount (Counter) {
+        url=$('.article-date').attr('href').trim();
+        title = $('.article-title').text().trim();
+        var query=new AV.Query(Counter);
+        //use url as unique idnetfication
+        query.equalTo("url",url);
+        query.find({
+            success: function(results){
+                if(results.length>0)
+                {
+                    var counter=results[0];
+                    counter.fetchWhenSave(true); //get recent result
+                    counter.increment("time");
+                    counter.save();
+                }
+                else
+                {
+                    var newcounter=new Counter();
+                    newcounter.set("title",title);
+                    newcounter.set("url",url);
+                    newcounter.set("time",1);
+                    newcounter.save(null,{
+                        success: function(newcounter){
+                        //console.log('New object created');
+                        },
+                        error: function(newcounter,error){
+                        console.log('Failed to create');
+                        }
+                        });
+                }
+            },
+            error: function(error){
+                //find null is not a error
+                console.log('Error:'+error.code+" "+error.message);
+            }
+        });
+}
+$(function(){
+        var Counter=AV.Object.extend("Counter");
+        //only increse visit counting when intering a page
+        if ($('.article-title').length == 1)
+           addCount(Counter);
+        var query=new AV.Query(Counter);
+        query.descending("time");
+        // the sum of popular posts
+        query.limit(10);
+        query.find({
+            success: function(results){
+                    for(var i=0;i<results.length;i++)
+                    {
+                        var counter=results[i];
+                        title=counter.get("title");
+                        url=counter.get("url");
+                        time=counter.get("time");
+                        // add to the popularlist widget
+                        showcontent=title+" ("+time+")";
+                        //notice the "" in href
+                        $('.popularlist').append('<li><a href="'+url+'">'+showcontent+'</a></li>');
+                    }
+                },
+            error: function(error){
+                console.log("Error:"+error.code+" "+error.message);
+            }
+            }
+        )
+        });
+</script>
+
+
+<!--page counter part-->
+<script>
+</script>
+
+
+
+</body>
+
+</html>

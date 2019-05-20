@@ -3,17 +3,17 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Ivan's Blog
-subtitle: Web前端 & 极客 & 渗透
+title: Evan's Blog
+subtitle: 喜欢一切有趣的事物
 description: Thinking as a Geek
-author: Ivan
+author: Evan
 language: zh-CN
 timezone:
 
-SEOTitle: Ivan's Blog
+SEOTitle: Evan's Blog
 header-img: content/images/2016/08/wall.jpg
 email: yifanb@gmail.com
-keyword: "Web前端,极客,渗透"
+keyword: "喜欢一切有趣的事物"
 
 # URL
 ## If your site is put in a subdirectory, set url as 'http://yoursite.com/child' and root as '/child/'
